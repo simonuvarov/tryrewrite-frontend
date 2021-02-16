@@ -1,0 +1,30 @@
+{
+  "name": "allnines-landing",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": "https://github.com/allnines/next-landing",
+  "author": "Simon <2471506+simonuvarov@users.noreply.github.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.28",
+    "@types/react": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.15.0",
+    "@typescript-eslint/parser": "^4.15.0",
+    "eslint": "^7.20.0",
+    "tailwindcss": "^2.0.3",
+    "typescript": "^4.1.5"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.2.4",
+    "next": "^10.0.6",
+    "postcss": "^8.2.6",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}

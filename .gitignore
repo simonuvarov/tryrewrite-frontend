@@ -1,0 +1,15 @@
+# Dependency directories
+node_modules/
+
+# Build directory
+.dist
+
+# Environment variables
+.env
+
+# MacOS specific files
+.DS_Store
+
+# nextjs files
+.next
+.env.local
