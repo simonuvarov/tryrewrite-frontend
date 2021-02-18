@@ -1,12 +1,31 @@
-import App from 'next/app';
-import React from 'react';
+import { load, trackPageview } from 'fathom-client';
+import type { AppProps /*, AppContext */ } from 'next/app';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import '../css/tailwind.css';
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props;
-    return <Component {...pageProps} />;
-  }
+function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    // Initialize Fathom when the app loads
+    load('FTQRLWBI', {
+      includedDomains: ['wriby.com']
+    });
+
+    function onRouteChangeComplete() {
+      trackPageview();
+    }
+    // Record a pageview when route changes
+    router.events.on('routeChangeComplete', onRouteChangeComplete);
+
+    // Unassign event listener
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChangeComplete);
+    };
+  }, []);
+
+  return <Component {...pageProps} />;
 }
 
-export default MyApp;
+export default App;
