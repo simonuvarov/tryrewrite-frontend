@@ -5,7 +5,7 @@ import { ReactElement } from 'react';
 export function Header(): ReactElement {
   return (
     <section className="w-full">
-      <div className="max-w-3xl my-4 mx-auto">
+      <div className="max-w-3xl mt-8 mb-4 mx-auto">
         <nav>
           <Link href="/">
             <a>
