@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Container } from '../components/Container';
 import { Section } from '../components/Section';
@@ -21,17 +22,17 @@ export function Home() {
       <div className="p-4 flex flex-col item-center">
         <Section>
           <Container>
-            <h1 className="mt-12 md:mt-40 text-5xl md:text-7xl font-bold text-gray-900 max-w-lg md:max-w-2xl w-full">
+            <h1 className="mt-12 md:mt-24 text-5xl md:text-7xl font-bold text-gray-900 max-w-lg md:max-w-2xl w-full">
               Improve your&nbsp;writing in&nbsp;a&nbsp;smart way
             </h1>
-            <p className="text-2xl mt-4 text-gray-600 max-w-3xl">
+            <p className="text-lg mt-4 text-gray-600 max-w-3xl">
               Find new topics, generate new ideas, keep track of time, check
               grammar, and get instanant feedback – all in one place.
             </p>
             <Link href="#/signup">
-              <a className="inline-flex bg-orange-600 px-6 py-3 rounded mt-8">
-                <span className="text-semibold text-xl text-orange-50">
-                  Try for Free
+              <a className="inline-flex bg-indigo-500 hover:bg-indigo-600 px-8 py-3 rounded mt-6">
+                <span className="text-bold text-md text-indigo-50">
+                  Get started for free
                 </span>
               </a>
             </Link>
@@ -39,23 +40,9 @@ export function Home() {
         </Section>
         <Section>
           <Container>
-            <div className="flex flex-col md:flex-row mt-8 md:mt-24 justify-between gap-10">
+            <div className="mt-8 md:mt-24 grid grid-cols-1 md:grid-cols-2 gap-y-10">
               <div className="max-w-xs">
-                <div className="h-8 w-8 text-gray-900">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
-                    />
-                  </svg>
-                </div>
+                <Image src="/images/explore.png" width={128} height={128} />
                 <h2 className="text-2xl mt-3 font-semibold text-gray-900">
                   Explore new ideas
                 </h2>
@@ -66,21 +53,11 @@ export function Home() {
                 </p>
               </div>
               <div className="max-w-xs">
-                <div className="h-8 w-8 text-gray-900">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                    />
-                  </svg>
-                </div>
+                <Image
+                  src="/images/check-grammar.png"
+                  width={128}
+                  height={128}
+                />
                 <h2 className="text-2xl mt-3 font-semibold text-gray-900">
                   Check grammar
                 </h2>
@@ -90,23 +67,27 @@ export function Home() {
                 </p>
               </div>
               <div className="max-w-xs">
-                <div className="h-8 w-8 text-gray-900">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
-                    />
-                  </svg>
-                </div>
+                <Image
+                  src="/images/keep-history.png"
+                  width={128}
+                  height={128}
+                />
                 <h2 className="text-2xl mt-3 font-semibold text-gray-900">
-                  Calculate score
+                  Keep history
+                </h2>
+                <p className="max-w-xs text-gray-500 mt-2">
+                  Forget about writing essays in your notepad and trying to find
+                  it days later.
+                </p>
+              </div>
+              <div className="max-w-xs">
+                <Image
+                  src="/images/get-feedback.png"
+                  width={128}
+                  height={128}
+                />
+                <h2 className="text-2xl mt-3 font-semibold text-gray-900">
+                  Get instant feedback
                 </h2>
                 <p className="max-w-xs text-gray-500 mt-2">
                   We use machine learning to analyze essays and give you score
@@ -116,6 +97,7 @@ export function Home() {
             </div>
           </Container>
         </Section>
+        <div className="h-24"></div>
       </div>
 
       <style jsx global>{`

@@ -6,10 +6,6 @@ module.exports = {
     './src/components/**/*.{ts,tsx,js,jsx}'
   ],
   theme: {
-    extend: {},
-    colors: {
-      gray: colors.warmGray,
-      orange: colors.orange
-    }
+    extend: {}
   }
 };
