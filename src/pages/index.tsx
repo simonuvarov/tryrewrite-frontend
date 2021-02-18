@@ -8,7 +8,7 @@ export function Home() {
   return (
     <>
       <Head>
-        <title>Wriby: Improve your IELTS writing</title>
+        <title>Writempt: Improve your IELTS writing</title>
         <meta
           name="description"
           content="Find new topics, generate new ideas, keep track of time, check
