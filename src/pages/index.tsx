@@ -7,10 +7,11 @@ export function Home() {
   return (
     <>
       <Head>
-        <title>All Nines</title>
+        <title>Wriby: Improve your IELTS writing</title>
         <meta
           name="description"
-          content="All Nines – The first step to successful IELTS exam"
+          content="Find new topics, generate new ideas, keep track of time, check
+              grammar, and get instanant feedback – all in one place."
         />
         <meta
           name="keywords"
@@ -25,13 +26,12 @@ export function Home() {
             </h1>
             <p className="text-2xl mt-4 text-gray-600 max-w-3xl">
               Find new topics, generate new ideas, keep track of time, check
-              grammar, and get instanant feedback – in one place trusted by
-              other learners.
+              grammar, and get instanant feedback – all in one place.
             </p>
             <Link href="#/signup">
               <a className="inline-flex bg-orange-600 px-6 py-3 rounded mt-8">
                 <span className="text-semibold text-xl text-orange-50">
-                  Sign up
+                  Try for Free
                 </span>
               </a>
             </Link>
