@@ -1,9 +1,16 @@
-import { FunctionComponent } from 'react';
+import Feature from '../types/Feature';
+import FeatureCard from './FeatureCard';
 
-const FeatureGrid: FunctionComponent = props => {
+interface FeatureGridProps {
+  features: Feature[];
+}
+
+const FeatureGrid = (props: FeatureGridProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10">
-      {props.children}
+      {props.features.map(feature => (
+        <FeatureCard feature={feature} />
+      ))}
     </div>
   );
 };

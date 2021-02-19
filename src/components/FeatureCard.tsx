@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { ReactElement } from 'react';
-import { Feature } from '../types/Feature';
+import Feature from '../types/Feature';
 
 interface FeatureProps {
   feature: Feature;
@@ -8,7 +8,7 @@ interface FeatureProps {
 
 function FeatureCard(props: FeatureProps): ReactElement {
   return (
-    <div>
+    <div key={props.feature.header}>
       <Image
         src={props.feature.imageSrc}
         width={props.feature.imageSize}
