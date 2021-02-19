@@ -3,15 +3,10 @@ import Link from 'next/link';
 import Container from '../../components/Container';
 import Section from '../../components/Section';
 import { getPosts } from '../../lib/posts';
+import Post from '../../types/Post';
 
-interface IndexPageProps {
+interface BlogProps {
   posts: Post[];
-}
-
-interface Post {
-  id: string;
-  title: string;
-  slug: string;
 }
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -29,7 +24,7 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-const IndexPage = (props: IndexPageProps) => (
+const Blog = (props: BlogProps) => (
   <Section>
     <Container>
       {props.posts.map(post => (
@@ -43,4 +38,4 @@ const IndexPage = (props: IndexPageProps) => (
   </Section>
 );
 
-export default IndexPage;
+export default Blog;

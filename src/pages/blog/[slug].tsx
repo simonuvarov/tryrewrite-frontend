@@ -2,15 +2,10 @@ import { GetStaticPaths } from 'next';
 import Container from '../../components/Container';
 import Section from '../../components/Section';
 import { getPosts, getSinglePost } from '../../lib/posts';
+import Post from '../../types/Post';
 
 interface PageProps {
   post: Post;
-}
-
-interface Post {
-  id: string;
-  title: string;
-  html: string;
 }
 
 type Params = {
