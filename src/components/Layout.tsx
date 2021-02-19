@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 const Layout: FunctionComponent = props => {
   return (
     <>
-      <div className="px-4 flex flex-col item-center">{props.children}</div>
+      <main className="px-4 max-w-3xl mx-auto">{props.children}</main>
       <style jsx global>
         {`
           body {

@@ -1,12 +1,11 @@
 import { GetStaticProps } from 'next';
-import Container from '../../components/Container';
+import { PostCard } from '../../components/blog/PostCard';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
 import Section from '../../components/Section';
 import { getPosts } from '../../lib/posts';
 import Post from '../../types/Post';
-import { PostCard } from '../../components/blog/PostCard';
 
 interface BlogProps {
   posts: Post[];
@@ -31,13 +30,11 @@ const Blog = (props: BlogProps) => (
   <Layout>
     <Header />
     <Section>
-      <Container>
-        <div className="grid grid-cols-2 gap-x-8 gap-y-12">
-          {props.posts.map(post => (
-            <PostCard post={post} />
-          ))}
-        </div>
-      </Container>
+      <div className="grid grid-cols-2 gap-x-8 gap-y-12">
+        {props.posts.map(post => (
+          <PostCard post={post} />
+        ))}
+      </div>
     </Section>
     <Footer />
   </Layout>

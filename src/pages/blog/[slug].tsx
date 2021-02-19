@@ -1,7 +1,6 @@
 import { GetStaticPaths } from 'next';
 import React from 'react';
 import Markdown from '../../components/blog/Markdown';
-import Container from '../../components/Container';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
@@ -52,12 +51,10 @@ const PostPage = (props: PageProps) => {
     <Layout>
       <Header />
       <Section>
-        <Container>
-          <article className="prose ">
-            <h1>{props.post.title}</h1>
-            <Markdown>{htmlToMarkdown(props.post.html)}</Markdown>
-          </article>
-        </Container>
+        <article className="prose">
+          <h1>{props.post.title}</h1>
+          <Markdown>{htmlToMarkdown(props.post.html)}</Markdown>
+        </article>
       </Section>
       <Footer />
     </Layout>

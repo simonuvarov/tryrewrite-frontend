@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 const Section: FunctionComponent = props => {
-  return <section className="w-full mt-12 md:mt-24">{props.children}</section>;
+  return <article className="w-full mb-24">{props.children}</article>;
 };
 
 export default Section;
