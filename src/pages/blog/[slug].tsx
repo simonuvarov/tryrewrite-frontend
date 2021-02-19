@@ -1,4 +1,6 @@
 import { GetStaticPaths } from 'next';
+import { Container } from '../../components/Container';
+import { Section } from '../../components/Section';
 import { getPosts, getSinglePost } from '../../lib/posts';
 
 interface PageProps {
@@ -46,10 +48,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const PostPage = (props: PageProps) => {
   return (
-    <div>
-      <h1>{props.post.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: props.post.html }} />
-    </div>
+    <Section>
+      <Container>
+        <h1>{props.post.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: props.post.html }} />
+      </Container>
+    </Section>
   );
 };
 

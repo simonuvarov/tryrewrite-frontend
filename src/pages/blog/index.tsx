@@ -1,5 +1,7 @@
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
+import { Container } from '../../components/Container';
+import { Section } from '../../components/Section';
 import { getPosts } from '../../lib/posts';
 
 interface IndexPageProps {
@@ -28,15 +30,17 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const IndexPage = (props: IndexPageProps) => (
-  <ul>
-    {props.posts.map(post => (
-      <Link href={`/blog/${post.slug}`}>
-        <a key={post.id}>
-          <li>{post.title}</li>
-        </a>
-      </Link>
-    ))}
-  </ul>
+  <Section>
+    <Container>
+      {props.posts.map(post => (
+        <Link href={`/blog/${post.slug}`}>
+          <a key={post.id}>
+            <li>{post.title}</li>
+          </a>
+        </Link>
+      ))}
+    </Container>
+  </Section>
 );
 
 export default IndexPage;
