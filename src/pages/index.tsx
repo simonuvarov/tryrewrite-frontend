@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Container from '../components/Container';
-import Feature from '../components/Feature';
+import FeatureCard from '../components/FeatureCard';
 import FeatureGrid from '../components/FeatureGrid';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
@@ -45,34 +45,41 @@ export function Home() {
         <Section>
           <Container>
             <FeatureGrid>
-              <Feature
-                imageSrc="/images/explore.png"
-                imageSize={128}
-                header="Explore new ideas"
-                body="If you don’t have any clue or idea on what to write about in
-                  your esssay, you can simply search essays of others to find
-                  new ideas."
+              <FeatureCard
+                feature={{
+                  imageSrc: '/images/explore.png',
+                  imageSize: 128,
+                  header: 'Explore new ideas',
+                  body:
+                    'If you don’t have any clue or idea on what to write about in your esssay, you can simply search essays of others to find new ideas.'
+                }}
               />
-              <Feature
-                imageSrc="/images/check-grammar.png"
-                imageSize={128}
-                header="Check grammar"
-                body="Grammar is crucial for getting a good score on exam, so
-                grammar check are the core functonality of our service."
+              <FeatureCard
+                feature={{
+                  imageSrc: '/images/check-grammar.png',
+                  imageSize: 128,
+                  header: 'Check grammar',
+                  body:
+                    'Grammar is crucial for getting a good score on exam, so grammar check are the core functonality of our service.'
+                }}
               />
-              <Feature
-                imageSrc="/images/keep-history.png"
-                imageSize={128}
-                header="Keep history"
-                body="Forget about writing essays in your notepad and trying to find
-                it days later."
+              <FeatureCard
+                feature={{
+                  imageSrc: '/images/keep-history.png',
+                  imageSize: 128,
+                  header: 'Keep history',
+                  body:
+                    'Forget about writing essays in your notepad and trying to find it days later.'
+                }}
               />
-              <Feature
-                imageSrc="/images/get-feedback.png"
-                imageSize={128}
-                header="Get instant feedback"
-                body="We use machine learning to analyze essays and give you score
-                instantly."
+              <FeatureCard
+                feature={{
+                  imageSrc: '/images/get-feedback.png',
+                  imageSize: 128,
+                  header: 'Get instant feedback',
+                  body:
+                    'We use machine learning to analyze essays and give you score instantly.'
+                }}
               />
             </FeatureGrid>
           </Container>
