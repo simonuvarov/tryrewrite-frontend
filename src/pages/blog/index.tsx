@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
 import { getPosts } from '../../lib/posts';
 
 interface IndexPageProps {
@@ -21,16 +22,19 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
   return {
-    props: { posts }
+    props: { posts },
+    revalidate: 600
   };
 };
 
 const IndexPage = (props: IndexPageProps) => (
   <ul>
     {props.posts.map(post => (
-      <a href={`/blog/${post.slug}`}>
-        <li key={post.id}>{post.title}</li>
-      </a>
+      <Link href={`/blog/${post.slug}`}>
+        <a key={post.id}>
+          <li>{post.title}</li>
+        </a>
+      </Link>
     ))}
   </ul>
 );
