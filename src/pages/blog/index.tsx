@@ -1,6 +1,4 @@
-import moment from 'moment';
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
 import Container from '../../components/Container';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -8,6 +6,7 @@ import Layout from '../../components/Layout';
 import Section from '../../components/Section';
 import { getPosts } from '../../lib/posts';
 import Post from '../../types/Post';
+import { PostCard } from '../../components/blog/PostCard';
 
 interface BlogProps {
   posts: Post[];
@@ -35,20 +34,7 @@ const Blog = (props: BlogProps) => (
       <Container>
         <div className="grid grid-cols-2 gap-x-8 gap-y-12">
           {props.posts.map(post => (
-            <div className="rounded hover:bg-gray-100">
-              <Link href={`/blog/${post.slug}`}>
-                <a key={post.id}>
-                  <img src={post.feature_image} />
-                  <h2 className="text-lg font-medium mt-4 text-gray-800">
-                    {post.title}
-                  </h2>
-                  <p className="text-gray-500">{post.excerpt}</p>
-                  <p className="text-sm pt-2 text-gray-400">
-                    {`Updated ${moment(post.updated_at).fromNow()}`}
-                  </p>
-                </a>
-              </Link>
-            </div>
+            <PostCard post={post} />
           ))}
         </div>
       </Container>
