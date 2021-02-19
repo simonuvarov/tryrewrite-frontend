@@ -1,6 +1,6 @@
 import { GetStaticPaths } from 'next';
-import { Container } from '../../components/Container';
-import { Section } from '../../components/Section';
+import Container from '../../components/Container';
+import Section from '../../components/Section';
 import { getPosts, getSinglePost } from '../../lib/posts';
 
 interface PageProps {

@@ -8,7 +8,7 @@ interface FeatureProps {
   body: string;
 }
 
-export function Feature(props: FeatureProps): ReactElement {
+function Feature(props: FeatureProps): ReactElement {
   return (
     <div>
       <Image
@@ -24,3 +24,5 @@ export function Feature(props: FeatureProps): ReactElement {
     </div>
   );
 }
+
+export default Feature;

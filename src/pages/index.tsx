@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { Container } from '../components/Container';
-import { Feature } from '../components/Feature';
-import { FeatureGrid } from '../components/FeatureGrid';
-import { Header } from '../components/Header';
-import { Layout } from '../components/Layout';
-import { Section } from '../components/Section';
+import Container from '../components/Container';
+import Feature from '../components/Feature';
+import FeatureGrid from '../components/FeatureGrid';
+import Header from '../components/Header';
+import Layout from '../components/Layout';
+import Section from '../components/Section';
 
 export function Home() {
   return (

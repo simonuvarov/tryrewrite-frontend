@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
-import { Container } from '../../components/Container';
-import { Section } from '../../components/Section';
+import Container from '../../components/Container';
+import Section from '../../components/Section';
 import { getPosts } from '../../lib/posts';
 
 interface IndexPageProps {
