@@ -1,6 +1,9 @@
 import { GetStaticPaths } from 'next';
+import React from 'react';
+import Markdown from '../../components/blog/Markdown';
 import Container from '../../components/Container';
 import Section from '../../components/Section';
+import htmlToMarkdown from '../../lib/htmlToMarkdown';
 import { getPosts, getSinglePost } from '../../lib/posts';
 import Post from '../../types/Post';
 
@@ -45,8 +48,10 @@ const PostPage = (props: PageProps) => {
   return (
     <Section>
       <Container>
-        <h1>{props.post.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: props.post.html }} />
+        <article className="prose ">
+          <h1>{props.post.title}</h1>
+          <Markdown>{htmlToMarkdown(props.post.html)}</Markdown>
+        </article>
       </Container>
     </Section>
   );
