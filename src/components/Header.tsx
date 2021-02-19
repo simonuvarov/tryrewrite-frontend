@@ -20,9 +20,20 @@ export default function Header(): ReactElement {
               </a>
             </Link>
           </div>
-          <div className="flex justify-end items-center">
+          <div className="flex justify-end items-center gap-4">
+            <Link href="/blog">
+              <a className="inline-flex justify-center items-center px-3 py-1 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
+                Blog
+              </a>
+            </Link>
+            <Link href="#/about">
+              <a className="inline-flex justify-center items-center px-3 py-1 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
+                About
+              </a>
+            </Link>
+            <div className="h-4 border border-l rounded border-gray-200"></div>
             <Link href="#/signin">
-              <a className="inline-flex justify-center items-center bg-gray-100 hover:bg-gray-200 px-6 py-2 leading-4 rounded-full text-gray-500 hover:text-gray-600 text-center text-sm font-medium ">
+              <a className="inline-flex justify-center items-center px-3 py-1 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
                 Sign in
               </a>
             </Link>
