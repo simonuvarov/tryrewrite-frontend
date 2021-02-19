@@ -3,6 +3,7 @@ import React from 'react';
 import Markdown from '../../components/blog/Markdown';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
+import Layout from '../../components/Layout';
 import Section from '../../components/Section';
 import htmlToMarkdown from '../../lib/htmlToMarkdown';
 import { getPosts, getSinglePost } from '../../lib/posts';
@@ -47,7 +48,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const PostPage = (props: PageProps) => {
   return (
-    <>
+    <Layout>
       <Header />
       <Section>
         <Container>
@@ -57,7 +58,7 @@ const PostPage = (props: PageProps) => {
           </article>
         </Container>
       </Section>
-    </>
+    </Layout>
   );
 };
 

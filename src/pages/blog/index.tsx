@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
+import Layout from '../../components/Layout';
 import Section from '../../components/Section';
 import { getPosts } from '../../lib/posts';
 import Post from '../../types/Post';
@@ -27,7 +28,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Blog = (props: BlogProps) => (
-  <>
+  <Layout>
     <Header />
     <Section>
       <Container>
@@ -51,7 +52,7 @@ const Blog = (props: BlogProps) => (
         </div>
       </Container>
     </Section>
-  </>
+  </Layout>
 );
 
 export default Blog;
