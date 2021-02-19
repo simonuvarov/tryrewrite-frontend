@@ -2,6 +2,7 @@ import { GetStaticPaths } from 'next';
 import React from 'react';
 import Markdown from '../../components/blog/Markdown';
 import Container from '../../components/Container';
+import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
 import Section from '../../components/Section';
@@ -58,6 +59,7 @@ const PostPage = (props: PageProps) => {
           </article>
         </Container>
       </Section>
+      <Footer />
     </Layout>
   );
 };

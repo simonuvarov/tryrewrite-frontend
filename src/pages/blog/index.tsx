@@ -2,6 +2,7 @@ import moment from 'moment';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
 import Container from '../../components/Container';
+import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
 import Section from '../../components/Section';
@@ -52,6 +53,7 @@ const Blog = (props: BlogProps) => (
         </div>
       </Container>
     </Section>
+    <Footer />
   </Layout>
 );
 

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Container from '../components/Container';
 import FeatureGrid from '../components/FeatureGrid';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Layout from '../components/Layout';
 import Section from '../components/Section';
@@ -77,7 +78,7 @@ export function Home() {
             ></FeatureGrid>
           </Container>
         </Section>
-        <div className="h-24"></div>
+        <Footer />
       </Layout>
     </>
   );
