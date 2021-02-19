@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { ReactElement } from 'react';
 
@@ -9,15 +8,11 @@ export default function Header(): ReactElement {
         <nav className="grid grid-cols-2">
           <div className="flex justify-start">
             <Link href="/">
-              <a>
-                <Image
-                  src="/images/logo.png"
-                  width={32}
-                  height={32}
-                  alt="logo"
-                  quality={100}
-                />
-              </a>
+              <img
+                src="/images/logo.png"
+                alt="App Logo"
+                className="w-8 h-8 cursor-pointer"
+              />
             </Link>
           </div>
           <div className="flex justify-end items-center gap-4">
