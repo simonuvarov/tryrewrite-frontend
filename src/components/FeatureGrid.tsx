@@ -9,7 +9,7 @@ const FeatureGrid = (props: FeatureGridProps) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10">
       {props.features.map(feature => (
-        <FeatureCard feature={feature} />
+        <FeatureCard feature={feature} key={feature.header} />
       ))}
     </div>
   );

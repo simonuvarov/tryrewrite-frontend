@@ -8,7 +8,7 @@ interface FeatureProps {
 
 function FeatureCard(props: FeatureProps): ReactElement {
   return (
-    <div key={props.feature.header}>
+    <div>
       <Image
         src={props.feature.imageSrc}
         width={props.feature.imageSize}
