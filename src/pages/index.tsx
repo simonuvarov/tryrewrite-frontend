@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import Link from 'next/link';
 import FeatureGrid from '../components/FeatureGrid';
 import Footer from '../components/Footer';
@@ -9,18 +8,6 @@ import Section from '../components/Section';
 export function Home() {
   return (
     <>
-      <Head>
-        <title>Wriby: Improve your IELTS writing</title>
-        <meta
-          name="description"
-          content="Find new topics, generate new ideas, keep track of time, check
-              grammar, and get instanant feedback – all in one place."
-        />
-        <meta
-          name="keywords"
-          content="IELTS exam essay check online proofread score band clb express entry"
-        />
-      </Head>
       <Layout>
         <Header />
         <Section>

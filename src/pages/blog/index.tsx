@@ -27,17 +27,19 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Blog = (props: BlogProps) => (
-  <Layout>
-    <Header />
-    <Section>
-      <div className="grid grid-cols-2 gap-x-8 gap-y-12">
-        {props.posts.map(post => (
-          <PostCard post={post} />
-        ))}
-      </div>
-    </Section>
-    <Footer />
-  </Layout>
+  <>
+    <Layout>
+      <Header />
+      <Section>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-12">
+          {props.posts.map(post => (
+            <PostCard post={post} />
+          ))}
+        </div>
+      </Section>
+      <Footer />
+    </Layout>
+  </>
 );
 
 export default Blog;

@@ -2,6 +2,7 @@ import { load, trackPageview } from 'fathom-client';
 import type { AppProps /*, AppContext */ } from 'next/app';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import DefaultSeo from '../components/DefaultSeo';
 import '../css/tailwind.css';
 
 function App({ Component, pageProps }: AppProps) {
@@ -25,7 +26,12 @@ function App({ Component, pageProps }: AppProps) {
     };
   }, []);
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <DefaultSeo />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default App;

@@ -1,6 +1,7 @@
 import { GetStaticPaths } from 'next';
 import React from 'react';
 import Markdown from '../../components/blog/Markdown';
+import PostSeo from '../../components/blog/PostSeo';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
@@ -48,16 +49,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const PostPage = (props: PageProps) => {
   return (
-    <Layout>
-      <Header />
-      <Section>
-        <article className="prose">
-          <h1>{props.post.title}</h1>
-          <Markdown>{htmlToMarkdown(props.post.html)}</Markdown>
-        </article>
-      </Section>
-      <Footer />
-    </Layout>
+    <>
+      <PostSeo post={props.post} />
+      <Layout>
+        <Header />
+        <Section>
+          <article className="prose">
+            <h1>{props.post.title}</h1>
+            <Markdown>{htmlToMarkdown(props.post.html)}</Markdown>
+          </article>
+        </Section>
+        <Footer />
+      </Layout>
+    </>
   );
 };
 
