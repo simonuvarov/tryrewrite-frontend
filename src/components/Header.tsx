@@ -4,8 +4,8 @@ import { ReactElement } from 'react';
 export default function Header(): ReactElement {
   return (
     <header className="w-full mb-24 mt-8">
-      <nav className="grid grid-cols-2">
-        <div className="flex justify-start">
+      <nav className="flex justify-between">
+        <div className="flex justify-start flex-shrink-0">
           <Link href="/">
             <img
               src="/images/logo.png"
