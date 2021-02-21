@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors');
+const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   purge: [
@@ -6,7 +7,11 @@ module.exports = {
     './src/components/**/*.{ts,tsx,js,jsx}'
   ],
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+      }
+    }
   },
   plugins: [
     require('@tailwindcss/typography')
