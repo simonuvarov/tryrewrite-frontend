@@ -23,7 +23,7 @@ const WaitListForm = () => {
   return (
     <div className="flex flex-col items-center bg-gradient-to-br bg-indigo-600 py-14 px-32 rounded-2xl shadow-xl">
       <div>
-        <h2 className="text-indigo-50 text-3xl font-bold text-center">
+        <h2 className="text-white text-3xl font-bold text-center">
           Get notified when we’re launching
         </h2>
         <p className="text-indigo-200 mt-2 text-center">

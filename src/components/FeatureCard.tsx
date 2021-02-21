@@ -8,17 +8,19 @@ interface FeatureProps {
 
 function FeatureCard(props: FeatureProps): ReactElement {
   return (
-    <div>
+    <div className="flex flex-col items-center">
       <Image
         src={props.feature.imageSrc}
         width={props.feature.imageSize}
         height={props.feature.imageSize}
         alt={props.feature.header}
       />
-      <h2 className="text-2xl mt-3 font-semibold text-gray-900">
+      <h2 className="text-2xl mt-4 font-semibold text-gray-800 text-center max-w-sm">
         {props.feature.header}
       </h2>
-      <p className="max-w-xs text-gray-500 mt-2">{props.feature.body}</p>
+      <p className="text-gray-500 mt-2 text-center max-w-sm">
+        {props.feature.body}
+      </p>
     </div>
   );
 }

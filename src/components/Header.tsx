@@ -3,8 +3,8 @@ import { ReactElement } from 'react';
 
 export default function Header(): ReactElement {
   return (
-    <header className="w-full mb-24 mt-8">
-      <nav className="flex justify-between">
+    <header className="w-full pt-8 pb-4 bg-gray-100">
+      <nav className="flex justify-between mx-auto max-w-3xl">
         <div className="flex justify-start flex-shrink-0">
           <Link href="/">
             <img
@@ -16,18 +16,18 @@ export default function Header(): ReactElement {
         </div>
         <div className="flex justify-end items-center">
           <Link href="/blog">
-            <a className="inline-flex justify-center items-center px-3 py-1 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
+            <a className="inline-flex justify-center items-center px-4 py-2 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
               Blog
             </a>
           </Link>
           <Link href="#/about">
-            <a className="ml-2 inline-flex justify-center items-center px-3 py-1 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
+            <a className="ml-2 inline-flex justify-center items-center px-4 py-2 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
               About
             </a>
           </Link>
           <div className="ml-2 h-4 border border-l rounded border-gray-200"></div>
           <Link href="#/signin">
-            <a className="ml-2 inline-flex justify-center items-center px-3 py-1 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
+            <a className="ml-2 inline-flex justify-center items-center px-4 py-2 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
               Sign in
             </a>
           </Link>
