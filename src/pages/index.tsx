@@ -16,7 +16,7 @@ export function Home() {
           </h1>
           <p className="text-lg mt-4 text-gray-600 max-w-3xl">
             Find new topics, generate new ideas, keep track of time, check
-            grammar, and get instanant feedback – all in one place.
+            grammar, and get instant feedback – all in one place.
           </p>
           <Link href="#/signup">
             <a className="inline-flex bg-indigo-500 hover:bg-indigo-600 px-8 py-3 rounded mt-6">
@@ -34,14 +34,14 @@ export function Home() {
                 imageSize: 128,
                 header: 'Explore new ideas',
                 body:
-                  'If you don’t have any clue or idea on what to write about in your esssay, you can simply search essays of others to find new ideas.'
+                  'If you don’t have any clue or idea on what to write about in your essay, you can simply search essays of others to find new ideas.'
               },
               {
                 imageSrc: '/images/check-grammar.png',
                 imageSize: 128,
                 header: 'Check grammar',
                 body:
-                  'Grammar is crucial for getting a good score on exam, so grammar check are the core functonality of our service.'
+                  'Grammar is crucial for getting a good score on the exam, so grammar checks are the core functionality of our service.'
               },
               {
                 imageSrc: '/images/keep-history.png',
@@ -55,7 +55,7 @@ export function Home() {
                 imageSize: 128,
                 header: 'Get instant feedback',
                 body:
-                  'We use machine learning to analyze essays and give you score instantly.'
+                  'We use machine learning to analyze essays and give you a score instantly.'
               }
             ]}
           ></FeatureGrid>
