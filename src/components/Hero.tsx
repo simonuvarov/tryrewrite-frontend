@@ -1,6 +1,6 @@
 export default function HeroSection() {
   return (
-    <div className="bg-gray-100 w-full pt-20 pb-44">
+    <div className="bg-gray-100 w-full pt-20 pb-44 px-2">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-800 w-full">
           Improve your&nbsp;writing in&nbsp;a&nbsp;smart way

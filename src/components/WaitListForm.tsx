@@ -21,7 +21,7 @@ const WaitListForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-gradient-to-br bg-indigo-600 py-14 px-32 rounded-2xl shadow-xl">
+    <div className="flex flex-col items-center bg-gradient-to-br bg-indigo-600 py-10 px-6 md:py-14 md:px-32 rounded-2xl shadow-xl">
       <div>
         <h2 className="text-white text-3xl font-bold text-center">
           Get notified when we’re launching
@@ -32,7 +32,7 @@ const WaitListForm = () => {
         </p>
       </div>
       <form
-        className="flex w-full mt-8 justify-between"
+        className="flex flex-col md:flex-row w-full mt-8 justify-between"
         onSubmit={e => {
           e.preventDefault();
         }}
@@ -44,7 +44,7 @@ const WaitListForm = () => {
         />
         <button
           onClick={() => addToWaitList(email)}
-          className="flex bg-indigo-500 focus:outline-none hover:bg-indigo-400 font-semibold py-3 px-8 rounded text-indigo-50 ml-2 shadow"
+          className="flex bg-indigo-500 focus:outline-none hover:bg-indigo-400 font-semibold py-3 px-8 rounded text-indigo-50 mt-2 md:ml-2 md:mt-0 justify-center md:justify-start shadow"
         >
           Notify me
         </button>
