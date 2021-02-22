@@ -7,7 +7,7 @@ import WaitListForm from '../components/WaitListForm';
 export function Home() {
   return (
     <>
-      <Header />
+      <Header className="bg-gray-100" />
       <Hero />
       <div className="md:px-4">
         <FeatureGrid className="w-full md:max-w-5xl mx-auto -mt-20" />
