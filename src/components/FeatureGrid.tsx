@@ -1,6 +1,10 @@
 import FeatureCard from './FeatureCard';
 
-const FeatureGrid = () => {
+interface FeatureGridProps {
+  className?: string;
+}
+
+const FeatureGrid = ({ className = '' }: FeatureGridProps) => {
   const features = [
     {
       imageSrc: '/images/explore.png',
@@ -33,7 +37,9 @@ const FeatureGrid = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-24 gap-x-20">
+    <div
+      className={`grid grid-cols-1 md:grid-cols-2 gap-24 gap-x-20 md:shadow-lg pt-20 pb-28 px-6 md:px-36 md:rounded-2xl  bg-white ${className}`}
+    >
       {features.map(feature => (
         <FeatureCard feature={feature} key={feature.header} />
       ))}
