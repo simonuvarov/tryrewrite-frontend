@@ -11,9 +11,13 @@ const WaitListForm = ({ className = '' }: WaitListFormProps) => {
   const isError = success === false;
   const isSuccess = success === true;
 
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useInput('');
 
+  const disabled = loading || email.length === 0;
+
   const addToWaitList = (email: string) => {
+    setLoading(true);
     axios
       .post('/api/waitlist', { email })
       .then(() => {
@@ -21,6 +25,9 @@ const WaitListForm = ({ className = '' }: WaitListFormProps) => {
       })
       .catch(() => {
         setSuccess(false);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -51,6 +58,7 @@ const WaitListForm = ({ className = '' }: WaitListFormProps) => {
         <button
           onClick={() => addToWaitList(email)}
           className="flex bg-indigo-500 focus:outline-none hover:bg-indigo-400 font-semibold py-3 px-8 rounded text-indigo-50 mt-2 md:ml-2 md:mt-0 justify-center md:justify-start shadow"
+          disabled={disabled}
         >
           Notify me
         </button>
