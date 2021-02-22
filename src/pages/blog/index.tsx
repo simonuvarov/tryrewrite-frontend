@@ -33,7 +33,7 @@ const Blog = (props: BlogProps) => (
       <Section>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12 mt-8">
           {props.posts.map(post => (
-            <PostCard post={post} />
+            <PostCard key={post.slug} post={post} />
           ))}
         </div>
       </Section>
