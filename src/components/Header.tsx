@@ -25,12 +25,6 @@ export default function Header(): ReactElement {
               About
             </a>
           </Link>
-          <div className="ml-2 h-4 border border-l rounded border-gray-200"></div>
-          <Link href="#/signin">
-            <a className="ml-2 inline-flex justify-center items-center px-4 py-2 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
-              Sign in
-            </a>
-          </Link>
         </div>
       </nav>
     </header>
