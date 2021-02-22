@@ -2,7 +2,11 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useInput } from '../hooks/useInput';
 
-const WaitListForm = () => {
+interface WaitListFormProps {
+  className?: string;
+}
+
+const WaitListForm = ({ className = '' }: WaitListFormProps) => {
   const [success, setSuccess] = useState<boolean>();
   const isError = success === false;
   const isSuccess = success === true;
@@ -21,7 +25,9 @@ const WaitListForm = () => {
   };
 
   return (
-    <div className="flex flex-col items-center bg-gradient-to-br bg-indigo-600 py-10 px-6 md:py-14 md:px-32 rounded-2xl shadow-xl">
+    <div
+      className={`flex flex-col items-center bg-gradient-to-br bg-indigo-600 py-10 px-6 md:py-14 md:px-32 rounded-2xl shadow-xl ${className}`}
+    >
       <div>
         <h2 className="text-white text-3xl font-bold text-center">
           Get notified when we’re launching

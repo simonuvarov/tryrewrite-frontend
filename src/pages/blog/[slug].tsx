@@ -5,6 +5,7 @@ import PostSeo from '../../components/blog/PostSeo';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
+import WaitListForm from '../../components/WaitListForm';
 import htmlToMarkdown from '../../lib/htmlToMarkdown';
 import { getPosts, getSinglePost } from '../../lib/posts';
 import Post from '../../types/Post';
@@ -56,6 +57,7 @@ const PostPage = (props: PageProps) => {
           <h1>{props.post.title}</h1>
           <Markdown>{htmlToMarkdown(props.post.html)}</Markdown>
         </article>
+        <WaitListForm className="mt-20" />
         <Footer />
       </Layout>
     </>
