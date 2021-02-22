@@ -3,8 +3,8 @@ import { ReactElement } from 'react';
 
 export default function Header(): ReactElement {
   return (
-    <header className="w-full pt-8 pb-4 bg-gray-100">
-      <nav className="flex justify-between mx-auto max-w-3xl">
+    <header className="w-full pt-8 pb-4 px-4 bg-gray-100">
+      <nav className="flex justify-between md:mx-auto max-w-3xl">
         <div className="flex justify-start flex-shrink-0">
           <Link href="/">
             <img
