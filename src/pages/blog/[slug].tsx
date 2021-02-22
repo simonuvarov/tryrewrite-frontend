@@ -44,7 +44,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       }))
     : [];
 
-  return { paths, fallback: false };
+  return { paths, fallback: 'blocking' };
 };
 
 const PostPage = (props: PageProps) => {
