@@ -7,7 +7,7 @@ export default function HeroSection() {
         </h1>
         <p className="text-lg md:text-2xl mt-6 text-gray-600 max-w-3xl">
           Find new topics, generate new ideas, keep track of time, check
-          grammar, and get instant feedback – all in one place.
+          grammar, and get instant feedback – all in one place
         </p>
       </div>
     </div>

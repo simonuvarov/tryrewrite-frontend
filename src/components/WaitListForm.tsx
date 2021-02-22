@@ -28,7 +28,7 @@ const WaitListForm = () => {
         </h2>
         <p className="text-indigo-200 mt-2 text-center">
           There’s some work left to do. If you want to get a notification when
-          we go live, add your email below.
+          we go live, add your email below
         </p>
       </div>
       <form
@@ -53,7 +53,7 @@ const WaitListForm = () => {
       {isError && (
         <p className="flex text-sm w-full text-left text-yellow-500 mt-2 pl-1 text-shadow">
           Hmm, couldn’t add you to the newsletter - ping us directly at
-          team@wriby.com and we'll add you to this list.
+          team@wriby.com and we'll add you to this list
         </p>
       )}
       {isSuccess && (
