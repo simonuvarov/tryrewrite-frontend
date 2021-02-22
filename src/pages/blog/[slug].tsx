@@ -5,7 +5,6 @@ import PostSeo from '../../components/blog/PostSeo';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import Layout from '../../components/Layout';
-import Section from '../../components/Section';
 import htmlToMarkdown from '../../lib/htmlToMarkdown';
 import { getPosts, getSinglePost } from '../../lib/posts';
 import Post from '../../types/Post';
@@ -51,14 +50,12 @@ const PostPage = (props: PageProps) => {
   return (
     <>
       <PostSeo post={props.post} />
+      <Header />
       <Layout>
-        <Header />
-        <Section>
-          <article className="prose">
-            <h1>{props.post.title}</h1>
-            <Markdown>{htmlToMarkdown(props.post.html)}</Markdown>
-          </article>
-        </Section>
+        <article className="prose lg:prose-lg mt-12">
+          <h1>{props.post.title}</h1>
+          <Markdown>{htmlToMarkdown(props.post.html)}</Markdown>
+        </article>
         <Footer />
       </Layout>
     </>
