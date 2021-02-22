@@ -9,8 +9,8 @@ export function Home() {
     <>
       <Header />
       <Hero />
-      <div className="md:p-4">
-        <FeatureGrid className="w-full md:max-w-5xl md:mx-auto -mt-20" />
+      <div className="md:px-4">
+        <FeatureGrid className="w-full md:max-w-5xl mx-auto -mt-20" />
       </div>
       <div className="w-full px-2 mt-8 md:mt-32 md:mb-10">
         <div className="max-w-3xl mx-auto">
