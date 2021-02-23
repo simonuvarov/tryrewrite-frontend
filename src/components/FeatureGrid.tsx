@@ -9,9 +9,9 @@ const FeatureGrid = ({ className = '' }: FeatureGridProps) => {
     {
       imageSrc: '/images/explore.png',
       imageSize: 128,
-      header: 'Explore new ideas',
+      header: 'Explore ideas',
       body:
-        'If you don’t have any clue or idea on what to write about in your essay, you can simply search essays of others'
+        'If you don’t know what to write about in your IELTS essay, we have ideas for most topics prepared for you'
     },
     {
       imageSrc: '/images/check-grammar.png',
@@ -21,18 +21,18 @@ const FeatureGrid = ({ className = '' }: FeatureGridProps) => {
         'Grammar is crucial for getting a good score on the exam, so grammar checks are the core functionality of our service'
     },
     {
-      imageSrc: '/images/keep-history.png',
+      imageSrc: '/images/progress.png',
       imageSize: 128,
-      header: 'Keep history',
+      header: 'Track progress',
       body:
-        'Forget about writing essays in your notepad and trying to find it days later'
+        'Noticing how you get better at writing essays is the best thing to stay motivated, and we have tools for that, too'
     },
     {
       imageSrc: '/images/get-feedback.png',
       imageSize: 128,
       header: 'Get instant feedback',
       body:
-        'We use machine learning to analyze essays and give you a score instantly'
+        'Our algorithms analyze your essay to give you the most accurate feedback on what can be improved'
     }
   ];
 
