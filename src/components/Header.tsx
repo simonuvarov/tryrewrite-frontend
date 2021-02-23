@@ -24,6 +24,11 @@ export default function Header({ className = '' }: HeaderProps): ReactElement {
               Blog
             </a>
           </Link>
+          <Link href="/about">
+            <a className="inline-flex justify-center items-center ml-2 px-4 py-2 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
+              About
+            </a>
+          </Link>
         </div>
       </nav>
     </header>
