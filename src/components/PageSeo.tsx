@@ -12,7 +12,7 @@ export default function PageSeo(props: PageSeoProps) {
     openGraph: {
       title: props.title,
       description: props.description,
-      site_name: 'wriby.com',
+      site_name: 'tryrewrite.com',
       locale: 'en_US'
     }
   };

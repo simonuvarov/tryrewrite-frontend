@@ -1,7 +1,7 @@
 import { DefaultSeo as DefaultNextSeo, NextSeoProps } from 'next-seo';
 
 export default function DefaultSeo() {
-  const TITLE = 'Wriby – The Essay Writing Toolkit';
+  const TITLE = 'Rewrite: The essay writing toolkit';
   const DESCRIPTON =
     'Find topics, check grammar, and see your progress – all in one place.';
 
@@ -12,7 +12,7 @@ export default function DefaultSeo() {
       title: TITLE,
       description: DESCRIPTON,
       images: [],
-      site_name: 'Wriby',
+      site_name: 'Rewrite',
       locale: 'en_US'
     }
   };
