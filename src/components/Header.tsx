@@ -14,22 +14,11 @@ export default function Header({ className = '' }: HeaderProps): ReactElement {
             <img
               src="/images/logo.png"
               alt="App Logo"
-              className="w-8 h-8 cursor-pointer"
+              className="h-8 w-auto cursor-pointer"
             />
           </Link>
         </div>
-        <div className="flex justify-end items-center">
-          <Link href="/blog">
-            <a className="inline-flex justify-center items-center px-4 py-2 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
-              Blog
-            </a>
-          </Link>
-          <Link href="/about">
-            <a className="inline-flex justify-center items-center ml-2 px-4 py-2 rounded text-gray-500 hover:bg-gray-200 text-center font-medium ">
-              About
-            </a>
-          </Link>
-        </div>
+        <div className="flex justify-end items-center"></div>
       </nav>
     </header>
   );

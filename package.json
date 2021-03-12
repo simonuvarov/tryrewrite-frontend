@@ -26,7 +26,6 @@
     "@tryghost/content-api": "^1.4.14",
     "autoprefixer": "^10.2.4",
     "axios": "^0.21.1",
-    "deep-email-validator": "^0.1.18",
     "fathom-client": "^3.0.0",
     "moment": "^2.29.1",
     "next": "^10.0.6",
