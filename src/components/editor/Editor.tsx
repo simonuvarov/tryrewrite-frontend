@@ -2,9 +2,9 @@ import axios from 'axios';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createEditor, Descendant, Element, Node, Range, Text } from 'slate';
 import { withHistory } from 'slate-history';
-import { Editable, Slate, withReact } from 'slate-react';
+import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 import useDebounce from '../../hooks/useDebounce';
-import { renderLeaf } from './renderLeaf';
+import { Leaf } from './Leaf';
 
 export enum ISSUE_TYPE {
   GRAMMAR = 'grammar',
@@ -75,6 +75,13 @@ const PlainTextExample = () => {
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
+  const renderLeaf = useCallback(
+    (props: RenderLeafProps) => {
+      return <Leaf {...props} />;
+    },
+    [grammar]
+  );
+
   // decorate function depends on the language selected
   const decorate = useCallback(
     ([node, path]) => {
@@ -95,7 +102,6 @@ const PlainTextExample = () => {
           focus: { path, offset: end }
         });
       }
-      console.log(ranges);
       return ranges;
     },
     [grammar]

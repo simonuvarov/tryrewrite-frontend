@@ -1,10 +1,6 @@
 import { RenderLeafProps } from 'slate-react';
 
-export const renderLeaf = (props: RenderLeafProps) => {
-  return <Leaf {...props} />;
-};
-
-const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
+export const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
   return (
     <span
       {...attributes}
