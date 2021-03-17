@@ -1,8 +1,26 @@
-// Import React dependencies.
-import React, { useEffect, useMemo, useState } from 'react';
-import { createEditor, Descendant, Element, Node } from 'slate';
+import axios from 'axios';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { createEditor, Descendant, Element, Node, Range, Text } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, Slate, withReact } from 'slate-react';
+import useDebounce from '../../hooks/useDebounce';
+import { renderLeaf } from './renderLeaf';
+
+export enum ISSUE_TYPE {
+  GRAMMAR = 'grammar',
+  SPELLING = 'spelling',
+  PUNCTUATION = 'punctuation',
+  STYLE = 'style'
+}
+
+export interface Issue {
+  type: ISSUE_TYPE;
+  shortMessage: string;
+  message: string;
+  offset: number;
+  length: number;
+  suggestions: Array<string>;
+}
 
 // Define a serializing function that takes a value and returns a string.
 const serialize = (value: any) => {
@@ -28,18 +46,69 @@ const deserialize = (string: string) => {
 const initialValue: Element[] = [
   {
     type: 'paragraph',
-    children: [{ text: 'This is editable plain text, just like a <textarea>!' }]
+    children: [
+      {
+        text:
+          'This is editable text that you can search. As you search, it looks for matching strings of text, and adds '
+      }
+    ]
+  },
+  {
+    type: 'paragraph',
+    children: [
+      { text: 'Try it out for yourself by typing in the search box above!' }
+    ]
   }
 ];
 
 const PlainTextExample = () => {
   const [hasMounted, setHasMounted] = useState(false);
+  const [grammar, setGrammar] = useState<{ issues: Array<Issue> }>({
+    issues: []
+  });
 
-  const [value, setValue] = useState<Descendant[]>(
+  const [editorValue, setEditorValue] = useState<Descendant[]>(
     deserialize(process.browser ? localStorage.getItem('content') || '' : '')
   );
 
+  const debouncedEditorValue = useDebounce(editorValue, 500);
+
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+
+  // decorate function depends on the language selected
+  const decorate = useCallback(
+    ([node, path]) => {
+      const ranges: Range[] = [];
+
+      if (!Text.isText(node)) {
+        return ranges;
+      }
+
+      for (const issue of grammar.issues) {
+        const length = issue.length;
+        const start = issue.offset;
+        const end = start + length;
+
+        ranges.push({
+          type: 'grammar',
+          anchor: { path, offset: start },
+          focus: { path, offset: end }
+        });
+      }
+      console.log(ranges);
+      return ranges;
+    },
+    [grammar]
+  );
+
+  useEffect(() => {
+    if (serialize(debouncedEditorValue) === '') return;
+    axios
+      .post('http://localhost:4000/papers/check', {
+        text: serialize(debouncedEditorValue)
+      })
+      .then(r => setGrammar(r.data));
+  }, [debouncedEditorValue]);
 
   useEffect(() => {
     setHasMounted(true);
@@ -50,16 +119,24 @@ const PlainTextExample = () => {
   }
 
   return (
-    <Slate
-      editor={editor}
-      value={value}
-      onChange={value => {
-        setValue(value);
-        localStorage.setItem('content', serialize(value));
-      }}
-    >
-      <Editable placeholder="Enter some plain text..." spellCheck={false} />
-    </Slate>
+    <>
+      <Slate
+        editor={editor}
+        value={editorValue}
+        onChange={value => {
+          setEditorValue(value);
+          localStorage.setItem('content', serialize(value));
+        }}
+      >
+        <Editable
+          placeholder="Enter some plain text..."
+          spellCheck={false}
+          decorate={decorate}
+          renderLeaf={renderLeaf}
+        />
+      </Slate>
+      <pre>{JSON.stringify(grammar, null, 2)}</pre>
+    </>
   );
 };
 
