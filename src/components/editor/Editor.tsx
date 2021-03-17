@@ -139,6 +139,25 @@ const PlainTextExample = () => {
           spellCheck={false}
           decorate={decorate}
           renderLeaf={renderLeaf}
+          onKeyDown={e => {
+            if (
+              e.code === 'ArrowLeft' ||
+              e.code === 'ArrowRight' ||
+              e.code === 'ArrowUp' ||
+              e.code === 'ArrowDown' ||
+              e.code === 'MetaLeft' ||
+              e.code === 'MetaRight' ||
+              e.code === 'AltLeft' ||
+              e.code === 'AltRight' ||
+              e.code === 'ShiftLeft' ||
+              e.code === 'ShiftRight' ||
+              e.code === 'Tab' ||
+              e.code === 'CapsLock'
+            )
+              return;
+
+            setGrammar({ issues: [] });
+          }}
         />
       </Slate>
       <pre>{JSON.stringify(grammar, null, 2)}</pre>
