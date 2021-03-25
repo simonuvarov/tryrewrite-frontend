@@ -13,6 +13,7 @@ import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 import useDebounce from '../../hooks/useDebounce';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
+import { Stats } from './Stats';
 
 export enum ISSUE_TYPE {
   GRAMMAR = 'grammar',
@@ -176,7 +177,7 @@ const PlainTextExample = () => {
           }}
         />
       </Slate>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <Stats data={data} />
     </>
   );
 };
