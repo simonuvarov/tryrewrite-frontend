@@ -67,6 +67,8 @@ const PlainTextExample = () => {
     issues: []
   });
 
+  const [data, setData] = useState();
+
   const [editorValue, setEditorValue] = useState<Descendant[]>(
     deserialize(process.browser ? localStorage.getItem('content') || '' : '')
   );
@@ -111,9 +113,12 @@ const PlainTextExample = () => {
     if (serialize(debouncedEditorValue) === '') return;
     axios
       .post('http://localhost:4000/papers/check', {
-        text: serialize(debouncedEditorValue)
+        question: 'foo',
+        body: serialize(debouncedEditorValue)
       })
-      .then(r => setGrammar(r.data));
+      .then(r => setData(r.data));
+
+    // .then(r => setGrammar(r.data.grammar));
   }, [debouncedEditorValue]);
 
   useEffect(() => {
@@ -160,7 +165,7 @@ const PlainTextExample = () => {
           }}
         />
       </Slate>
-      <pre>{JSON.stringify(grammar, null, 2)}</pre>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </>
   );
 };
