@@ -6,7 +6,7 @@ export const Stats = (props: StatsProps) => {
   if (!props.data) return <p>Loading...</p>;
 
   return (
-    <>
+    <div>
       <div>
         <h2 className="font-medium text-lg">Task Achivement</h2>
         {props.data.ta.map((ruleResult: any) => (
@@ -41,6 +41,6 @@ export const Stats = (props: StatsProps) => {
           </p>
         ))}
       </div>
-    </>
+    </div>
   );
 };

@@ -141,44 +141,46 @@ const PlainTextExample = () => {
   }
 
   return (
-    <>
-      <Slate
-        editor={editor}
-        value={editorValue}
-        onChange={value => {
-          setEditorValue(value);
-          localStorage.setItem('content', serialize(value));
-        }}
-      >
-        <Editable
-          placeholder="Enter some plain text..."
-          spellCheck={false}
-          decorate={decorate}
-          renderLeaf={renderLeaf}
-          renderElement={renderElement}
-          onKeyDown={e => {
-            if (
-              e.code === 'ArrowLeft' ||
-              e.code === 'ArrowRight' ||
-              e.code === 'ArrowUp' ||
-              e.code === 'ArrowDown' ||
-              e.code === 'MetaLeft' ||
-              e.code === 'MetaRight' ||
-              e.code === 'AltLeft' ||
-              e.code === 'AltRight' ||
-              e.code === 'ShiftLeft' ||
-              e.code === 'ShiftRight' ||
-              e.code === 'Tab' ||
-              e.code === 'CapsLock'
-            )
-              return;
-
-            setGrammar({ issues: [] });
+    <div className="grid grid-cols-3 gap-10">
+      <div className="col-span-2">
+        <Slate
+          editor={editor}
+          value={editorValue}
+          onChange={value => {
+            setEditorValue(value);
+            localStorage.setItem('content', serialize(value));
           }}
-        />
-      </Slate>
+        >
+          <Editable
+            placeholder="Enter some plain text..."
+            spellCheck={false}
+            decorate={decorate}
+            renderLeaf={renderLeaf}
+            renderElement={renderElement}
+            onKeyDown={e => {
+              if (
+                e.code === 'ArrowLeft' ||
+                e.code === 'ArrowRight' ||
+                e.code === 'ArrowUp' ||
+                e.code === 'ArrowDown' ||
+                e.code === 'MetaLeft' ||
+                e.code === 'MetaRight' ||
+                e.code === 'AltLeft' ||
+                e.code === 'AltRight' ||
+                e.code === 'ShiftLeft' ||
+                e.code === 'ShiftRight' ||
+                e.code === 'Tab' ||
+                e.code === 'CapsLock'
+              )
+                return;
+
+              setGrammar({ issues: [] });
+            }}
+          />
+        </Slate>
+      </div>
       <Stats data={data} />
-    </>
+    </div>
   );
 };
 

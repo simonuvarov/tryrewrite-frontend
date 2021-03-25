@@ -7,7 +7,7 @@ export function Home() {
   return (
     <>
       <div className="flex flex-col bg-white w-full">
-        <div className="w-full max-w-4xl mx-auto p-16 ">
+        <div className="w-full max-w-6xl mx-auto p-16 ">
           <Editor />
         </div>
       </div>
