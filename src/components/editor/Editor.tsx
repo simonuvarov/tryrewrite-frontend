@@ -1,9 +1,17 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { createEditor, Descendant, Element, Node, Range, Text } from 'slate';
+import {
+  createEditor,
+  Descendant,
+  Element as SlateElement,
+  Node,
+  Range,
+  Text
+} from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 import useDebounce from '../../hooks/useDebounce';
+import { Element } from './Element';
 import { Leaf } from './Leaf';
 
 export enum ISSUE_TYPE {
@@ -43,7 +51,7 @@ const deserialize = (string: string) => {
   });
 };
 
-const initialValue: Element[] = [
+const initialValue: SlateElement[] = [
   {
     type: 'paragraph',
     children: [
@@ -83,6 +91,8 @@ const PlainTextExample = () => {
     },
     [grammar]
   );
+
+  const renderElement = useCallback(props => <Element {...props} />, []);
 
   // decorate function depends on the language selected
   const decorate = useCallback(
@@ -144,6 +154,7 @@ const PlainTextExample = () => {
           spellCheck={false}
           decorate={decorate}
           renderLeaf={renderLeaf}
+          renderElement={renderElement}
           onKeyDown={e => {
             if (
               e.code === 'ArrowLeft' ||
