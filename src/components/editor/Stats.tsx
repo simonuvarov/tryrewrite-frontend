@@ -14,7 +14,7 @@ export const Stats = (props: StatsProps) => {
         </h2>
         {props.data.ta.results.map((ruleResult: any) => (
           <p className="mt-2" key={ruleResult.name}>
-            {ruleResult.message} – {ruleResult.band}
+            {ruleResult.message} – {ruleResult.score}
           </p>
         ))}
       </div>
@@ -24,7 +24,7 @@ export const Stats = (props: StatsProps) => {
         </h2>
         {props.data.cc.results.map((ruleResult: any) => (
           <p className="mt-2" key={ruleResult.name}>
-            {ruleResult.message} – {ruleResult.band}
+            {ruleResult.message} – {ruleResult.score}
           </p>
         ))}
       </div>
@@ -34,7 +34,7 @@ export const Stats = (props: StatsProps) => {
         </h2>
         {props.data.lr.results.map((ruleResult: any) => (
           <p className="mt-2" key={ruleResult.name}>
-            {ruleResult.message} – {ruleResult.band}
+            {ruleResult.message} – {ruleResult.score}
           </p>
         ))}
       </div>
@@ -44,7 +44,7 @@ export const Stats = (props: StatsProps) => {
         </h2>
         {props.data.gr.results.map((ruleResult: any) => (
           <p className="mt-2" key={ruleResult.name}>
-            {ruleResult.message} – {ruleResult.band}
+            {ruleResult.message} – {ruleResult.score}
           </p>
         ))}
       </div>

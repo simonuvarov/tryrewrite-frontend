@@ -72,9 +72,7 @@ const initialValue: SlateElement[] = [
 
 const PlainTextExample = () => {
   const [hasMounted, setHasMounted] = useState(false);
-  const [grammar, setGrammar] = useState<{ issues: Array<Issue> }>({
-    issues: []
-  });
+  const [highlights, setHighlights] = useState<Array<Issue>>([]);
 
   const [data, setData] = useState();
 
@@ -90,7 +88,7 @@ const PlainTextExample = () => {
     (props: RenderLeafProps) => {
       return <Leaf {...props} />;
     },
-    [grammar]
+    [highlights]
   );
 
   const renderElement = useCallback(props => <Element {...props} />, []);
@@ -104,9 +102,9 @@ const PlainTextExample = () => {
         return ranges;
       }
 
-      for (const issue of grammar.issues) {
-        const length = issue.length;
-        const start = issue.offset;
+      for (const highlight of highlights) {
+        const length = highlight.length;
+        const start = highlight.offset;
         const end = start + length;
 
         ranges.push({
@@ -115,9 +113,11 @@ const PlainTextExample = () => {
           focus: { path, offset: end }
         });
       }
+      console.log(ranges);
+
       return ranges;
     },
-    [grammar]
+    [highlights]
   );
 
   useEffect(() => {
@@ -127,7 +127,13 @@ const PlainTextExample = () => {
         question: 'foo',
         body: serialize(debouncedEditorValue)
       })
-      .then(r => setData(r.data));
+      .then(r => {
+        setData(r.data);
+
+        let highlights: Array<any> = [];
+        r.data.gr.results.forEach((r: any) => highlights.concat(r.highlights));
+        setHighlights(highlights);
+      });
 
     // .then(r => setGrammar(r.data.grammar));
   }, [debouncedEditorValue]);
@@ -174,7 +180,7 @@ const PlainTextExample = () => {
               )
                 return;
 
-              setGrammar({ issues: [] });
+              setHighlights([]);
             }}
           />
         </Slate>
