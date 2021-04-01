@@ -55,8 +55,6 @@ const PlainTextExample = () => {
     deserialize(process.browser ? localStorage.getItem('content') || '' : '')
   );
 
-  console.log(editorValue);
-
   const debouncedEditorValue = useDebounce(editorValue, 500);
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
@@ -96,8 +94,6 @@ const PlainTextExample = () => {
           h.offset < currentTextRange[1] && h.offset >= currentTextRange[0]
         );
       })) {
-        console.log(highlight.offset);
-
         const length = highlight.length;
         const start = highlight.offset - currentTextRange[0];
         const end = start + length;
