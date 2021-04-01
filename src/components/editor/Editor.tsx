@@ -103,7 +103,7 @@ const PlainTextExample = () => {
         const end = start + length;
 
         ranges.push({
-          type: 'grammar',
+          type: highlight.type,
           anchor: { path, offset: start },
           focus: { path, offset: end }
         });
