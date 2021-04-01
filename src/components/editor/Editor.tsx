@@ -1,13 +1,6 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import {
-  createEditor,
-  Descendant,
-  Element as SlateElement,
-  Node,
-  Range,
-  Text
-} from 'slate';
+import { createEditor, Descendant, Node, NodeEntry, Range, Text } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 import useDebounce from '../../hooks/useDebounce';
@@ -52,24 +45,6 @@ const deserialize = (string: string) => {
   });
 };
 
-const initialValue: SlateElement[] = [
-  {
-    type: 'paragraph',
-    children: [
-      {
-        text:
-          'This is editable text that you can search. As you search, it looks for matching strings of text, and adds '
-      }
-    ]
-  },
-  {
-    type: 'paragraph',
-    children: [
-      { text: 'Try it out for yourself by typing in the search box above!' }
-    ]
-  }
-];
-
 const PlainTextExample = () => {
   const [hasMounted, setHasMounted] = useState(false);
   const [highlights, setHighlights] = useState<Array<Issue>>([]);
@@ -79,6 +54,8 @@ const PlainTextExample = () => {
   const [editorValue, setEditorValue] = useState<Descendant[]>(
     deserialize(process.browser ? localStorage.getItem('content') || '' : '')
   );
+
+  console.log(editorValue);
 
   const debouncedEditorValue = useDebounce(editorValue, 500);
 
@@ -95,16 +72,34 @@ const PlainTextExample = () => {
 
   // decorate function depends on the language selected
   const decorate = useCallback(
-    ([node, path]) => {
+    ([node, path]: NodeEntry) => {
       const ranges: Range[] = [];
 
       if (!Text.isText(node)) {
         return ranges;
       }
 
-      for (const highlight of highlights) {
+      const paragraphRanges: Array<[number, number]> = [];
+      let offset = 0;
+      const splitText = serialize(editorValue)
+        .split('\n')
+        .map((p: string) => {
+          const start = offset;
+          const end = offset + p.length + '\n'.length;
+          paragraphRanges.push([start, end]);
+          offset = offset + p.length + '\n'.length;
+        });
+      const currentTextRange = paragraphRanges[path[0]];
+
+      for (const highlight of highlights.filter(h => {
+        return (
+          h.offset < currentTextRange[1] && h.offset >= currentTextRange[0]
+        );
+      })) {
+        console.log(highlight.offset);
+
         const length = highlight.length;
-        const start = highlight.offset;
+        const start = highlight.offset - currentTextRange[0];
         const end = start + length;
 
         ranges.push({
@@ -113,7 +108,6 @@ const PlainTextExample = () => {
           focus: { path, offset: end }
         });
       }
-      console.log(ranges);
 
       return ranges;
     },
@@ -129,10 +123,7 @@ const PlainTextExample = () => {
       })
       .then(r => {
         setData(r.data);
-
-        let highlights: Array<any> = [];
-        r.data.gr.results.forEach((r: any) => highlights.concat(r.highlights));
-        setHighlights(highlights);
+        setHighlights(r.data.issues);
       });
 
     // .then(r => setGrammar(r.data.grammar));

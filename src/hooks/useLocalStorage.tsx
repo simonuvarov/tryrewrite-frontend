@@ -13,7 +13,6 @@ function useLocalStorage<T>(
 
       return item ? JSON.parse(item) : defaultValue;
     } catch (error) {
-      console.log(error);
       return defaultValue;
     }
   });
