@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { EditorContext } from './EditorContext';
+import { PaperContext } from './PaperContext';
 
-export const useEditor = () => {
-  const { editorState, setEditorState } = useContext(EditorContext);
+export const usePaper = () => {
+  const { body, setBody } = useContext(PaperContext);
 
-  return { editorState, setEditorState };
+  return { body, setBody };
 };

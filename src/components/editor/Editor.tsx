@@ -4,11 +4,12 @@ import { createEditor, NodeEntry, Range, Text } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 import useDebounce from '../../hooks/useDebounce';
+import { deserialize } from './deserialize';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
 import { serialize } from './serialize';
 import { Stats } from './Stats';
-import { useEditor } from './useEditor';
+import { usePaper } from './useEditor';
 
 export enum ISSUE_TYPE {
   GRAMMAR = 'grammar',
@@ -32,9 +33,9 @@ const Editor = () => {
 
   const [data, setData] = useState();
 
-  const { editorState, setEditorState } = useEditor();
+  const { body, setBody } = usePaper();
 
-  const debouncedEditorValue = useDebounce(editorState, 500);
+  const debouncedEditorValue = useDebounce(body, 500);
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
@@ -58,14 +59,12 @@ const Editor = () => {
 
       const paragraphRanges: Array<[number, number]> = [];
       let offset = 0;
-      serialize(editorState)
-        .split('\n')
-        .map((p: string) => {
-          const start = offset;
-          const end = offset + p.length + '\n'.length;
-          paragraphRanges.push([start, end]);
-          offset = offset + p.length + '\n'.length;
-        });
+      body.split('\n').map((p: string) => {
+        const start = offset;
+        const end = offset + p.length + '\n'.length;
+        paragraphRanges.push([start, end]);
+        offset = offset + p.length + '\n'.length;
+      });
       const currentTextRange = paragraphRanges[path[0]];
 
       for (const highlight of highlights.filter(h => {
@@ -90,11 +89,11 @@ const Editor = () => {
   );
 
   useEffect(() => {
-    if (serialize(debouncedEditorValue) === '') return;
+    if (body === '') return;
     axios
       .post('http://localhost:4000/papers/check', {
         question: 'foo',
-        body: serialize(debouncedEditorValue)
+        body: debouncedEditorValue
       })
       .then(r => {
         setData(r.data);
@@ -117,9 +116,9 @@ const Editor = () => {
       <div className="col-span-2">
         <Slate
           editor={editor}
-          value={editorState}
+          value={deserialize(body)}
           onChange={value => {
-            setEditorState(value);
+            setBody(serialize(value));
             localStorage.setItem('content', serialize(value));
           }}
         >
