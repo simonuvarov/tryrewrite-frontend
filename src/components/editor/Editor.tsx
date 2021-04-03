@@ -1,41 +1,17 @@
-import axios from 'axios';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createEditor, NodeEntry, Range, Text } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
-import useDebounce from '../../hooks/useDebounce';
 import { deserialize } from './deserialize';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
 import { serialize } from './serialize';
-import { Stats } from './Stats';
-import { usePaper } from './useEditor';
-
-export enum ISSUE_TYPE {
-  GRAMMAR = 'grammar',
-  SPELLING = 'spelling',
-  PUNCTUATION = 'punctuation',
-  STYLE = 'style'
-}
-
-export interface Issue {
-  type: ISSUE_TYPE;
-  shortMessage: string;
-  message: string;
-  offset: number;
-  length: number;
-  suggestions: Array<string>;
-}
+import { usePaper } from '../../hooks/usePaper';
 
 const Editor = () => {
   const [hasMounted, setHasMounted] = useState(false);
-  const [highlights, setHighlights] = useState<Array<Issue>>([]);
 
-  const [data, setData] = useState();
-
-  const { body, setBody } = usePaper();
-
-  const debouncedEditorValue = useDebounce(body, 500);
+  const { body, setBody, issues, clearIssues } = usePaper();
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
@@ -43,7 +19,7 @@ const Editor = () => {
     (props: RenderLeafProps) => {
       return <Leaf {...props} />;
     },
-    [highlights]
+    [issues]
   );
 
   const renderElement = useCallback(props => <Element {...props} />, []);
@@ -67,7 +43,7 @@ const Editor = () => {
       });
       const currentTextRange = paragraphRanges[path[0]];
 
-      for (const highlight of highlights.filter(h => {
+      for (const highlight of issues.filter(h => {
         return (
           h.offset < currentTextRange[1] && h.offset >= currentTextRange[0]
         );
@@ -85,23 +61,8 @@ const Editor = () => {
 
       return ranges;
     },
-    [highlights]
+    [issues]
   );
-
-  useEffect(() => {
-    if (body === '') return;
-    axios
-      .post('http://localhost:4000/papers/check', {
-        question: 'foo',
-        body: debouncedEditorValue
-      })
-      .then(r => {
-        setData(r.data);
-        setHighlights(r.data.issues);
-      });
-
-    // .then(r => setGrammar(r.data.grammar));
-  }, [debouncedEditorValue]);
 
   useEffect(() => {
     setHasMounted(true);
@@ -112,46 +73,40 @@ const Editor = () => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-10">
-      <div className="col-span-2">
-        <Slate
-          editor={editor}
-          value={deserialize(body)}
-          onChange={value => {
-            setBody(serialize(value));
-            localStorage.setItem('content', serialize(value));
-          }}
-        >
-          <Editable
-            placeholder="Enter some plain text..."
-            spellCheck={false}
-            decorate={decorate}
-            renderLeaf={renderLeaf}
-            renderElement={renderElement}
-            onKeyDown={e => {
-              if (
-                e.code === 'ArrowLeft' ||
-                e.code === 'ArrowRight' ||
-                e.code === 'ArrowUp' ||
-                e.code === 'ArrowDown' ||
-                e.code === 'MetaLeft' ||
-                e.code === 'MetaRight' ||
-                e.code === 'AltLeft' ||
-                e.code === 'AltRight' ||
-                e.code === 'ShiftLeft' ||
-                e.code === 'ShiftRight' ||
-                e.code === 'Tab' ||
-                e.code === 'CapsLock'
-              )
-                return;
+    <Slate
+      editor={editor}
+      value={deserialize(body)}
+      onChange={value => {
+        setBody(serialize(value));
+      }}
+    >
+      <Editable
+        placeholder="Enter some plain text..."
+        spellCheck={false}
+        decorate={decorate}
+        renderLeaf={renderLeaf}
+        renderElement={renderElement}
+        onKeyDown={e => {
+          if (
+            e.code === 'ArrowLeft' ||
+            e.code === 'ArrowRight' ||
+            e.code === 'ArrowUp' ||
+            e.code === 'ArrowDown' ||
+            e.code === 'MetaLeft' ||
+            e.code === 'MetaRight' ||
+            e.code === 'AltLeft' ||
+            e.code === 'AltRight' ||
+            e.code === 'ShiftLeft' ||
+            e.code === 'ShiftRight' ||
+            e.code === 'Tab' ||
+            e.code === 'CapsLock'
+          )
+            return;
 
-              setHighlights([]);
-            }}
-          />
-        </Slate>
-      </div>
-      <Stats data={data} />
-    </div>
+          clearIssues();
+        }}
+      />
+    </Slate>
   );
 };
 
