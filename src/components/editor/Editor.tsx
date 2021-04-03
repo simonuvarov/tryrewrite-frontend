@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { createEditor, Descendant, Node, NodeEntry, Range, Text } from 'slate';
+import { createEditor, NodeEntry, Range, Text } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 import useDebounce from '../../hooks/useDebounce';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
+import { serialize } from './serialize';
 import { Stats } from './Stats';
+import { useEditor } from './useEditor';
 
 export enum ISSUE_TYPE {
   GRAMMAR = 'grammar',
@@ -24,38 +26,15 @@ export interface Issue {
   suggestions: Array<string>;
 }
 
-// Define a serializing function that takes a value and returns a string.
-const serialize = (value: any) => {
-  return (
-    value
-      // Return the string content of each paragraph in the value's children.
-      .map((n: any) => Node.string(n))
-      // Join them all with line breaks denoting paragraphs.
-      .join('\n')
-  );
-};
-
-// Define a deserializing function that takes a string and returns a value.
-const deserialize = (string: string) => {
-  // Return a value array of children derived by splitting the string.
-  return string.split('\n').map(line => {
-    return {
-      children: [{ text: line }]
-    };
-  });
-};
-
-const PlainTextExample = () => {
+const Editor = () => {
   const [hasMounted, setHasMounted] = useState(false);
   const [highlights, setHighlights] = useState<Array<Issue>>([]);
 
   const [data, setData] = useState();
 
-  const [editorValue, setEditorValue] = useState<Descendant[]>(
-    deserialize(process.browser ? localStorage.getItem('content') || '' : '')
-  );
+  const { editorState, setEditorState } = useEditor();
 
-  const debouncedEditorValue = useDebounce(editorValue, 500);
+  const debouncedEditorValue = useDebounce(editorState, 500);
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
@@ -79,7 +58,7 @@ const PlainTextExample = () => {
 
       const paragraphRanges: Array<[number, number]> = [];
       let offset = 0;
-      const splitText = serialize(editorValue)
+      serialize(editorState)
         .split('\n')
         .map((p: string) => {
           const start = offset;
@@ -138,9 +117,9 @@ const PlainTextExample = () => {
       <div className="col-span-2">
         <Slate
           editor={editor}
-          value={editorValue}
+          value={editorState}
           onChange={value => {
-            setEditorValue(value);
+            setEditorState(value);
             localStorage.setItem('content', serialize(value));
           }}
         >
@@ -177,4 +156,4 @@ const PlainTextExample = () => {
   );
 };
 
-export default PlainTextExample;
+export default Editor;
