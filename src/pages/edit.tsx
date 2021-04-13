@@ -1,11 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Editor from '../components/editor/Editor';
-import { PaperContextProvider } from '../contexts/PaperContext';
 import Footer from '../components/Footer';
 import { Stats } from '../components/Stats';
+import { PaperContextProvider } from '../contexts/PaperContext';
+import { useForceAuth } from '../hooks/useForceAuth';
 
-export function Home() {
-  const [state, setstate] = useState('<b>Hello <i>World</i></b>');
+export function Edit() {
+  const { loading } = useForceAuth({
+    redirectTo: '/signin'
+  });
+
+  if (loading) return <p>Loading...</p>;
   return (
     <>
       <div className="flex flex-col bg-white w-full">
@@ -25,4 +30,4 @@ export function Home() {
   );
 }
 
-export default Home;
+export default Edit;

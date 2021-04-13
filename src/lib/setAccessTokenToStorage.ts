@@ -1,3 +1,4 @@
 export const setAccessTokenToStorage = (accessToken: string) => {
-  return localStorage.setItem('accessToken', accessToken);
+  const item = JSON.stringify(accessToken);
+  localStorage.setItem('accessToken', item);
 };

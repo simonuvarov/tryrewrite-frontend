@@ -3,8 +3,8 @@ import isBrowser from '../lib/isBrowser';
 
 function useLocalStorage<T>(
   key: string,
-  defaultValue: T
-): [T, Dispatch<SetStateAction<T>>] {
+  defaultValue?: T
+): [T | undefined, Dispatch<SetStateAction<T>>] {
   if (!isBrowser) return [defaultValue, () => {}];
 
   const [storedValue, setStoredValue] = useState(() => {
