@@ -18,7 +18,7 @@ const SigninForm = () => {
         signin({
           email,
           password
-        }).then(() => router.push('/edit'));
+        }).then(() => router.push('/dashboard'));
       }}
     >
       <input
