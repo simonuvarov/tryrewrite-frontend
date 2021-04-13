@@ -11,12 +11,10 @@ export interface Tokens {
   accessToken: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 export const signup = (credentials: Credentials): Promise<Tokens> => {
   return new Promise((resolve, reject) => {
     axios
-      .post<Tokens>(`${API_URL}${'/auth/signup'}`, credentials)
+      .post<Tokens>('/api/auth/signup', credentials)
       .then(r => {
         setAccessTokenToStorage(r.data.accessToken);
         resolve(r.data);
@@ -28,7 +26,7 @@ export const signup = (credentials: Credentials): Promise<Tokens> => {
 export const signin = (credentials: Credentials): Promise<Tokens> => {
   return new Promise((resolve, reject) => {
     axios
-      .post<Tokens>(`${API_URL}${'/auth/signin'}`, credentials)
+      .post<Tokens>('/api/auth/signin', credentials)
       .then(r => {
         setAccessTokenToStorage(r.data.accessToken);
         resolve(r.data);
@@ -43,7 +41,7 @@ export const isValidSession = (): Promise<boolean> => {
     if (!accessToken) return resolve(false);
 
     axios
-      .get(`${API_URL}${'/auth/session'}`, {
+      .get('/api/auth/session', {
         headers: { Authorization: `Bearer ${accessToken}` }
       })
       .then(() => resolve(true))
