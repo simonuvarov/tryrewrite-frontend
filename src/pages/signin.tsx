@@ -1,9 +1,12 @@
+import { useRouter } from 'next/dist/client/router';
 import { useInput } from '../hooks/useInput';
 import { signin } from '../services/auth.service';
 
 const SigninForm = () => {
   const [email, setEmail] = useInput();
   const [password, setPassword] = useInput();
+
+  const router = useRouter();
 
   return (
     <form
@@ -15,7 +18,7 @@ const SigninForm = () => {
         signin({
           email,
           password
-        }).then(r => alert(r.accessToken));
+        }).then(() => router.push('/edit'));
       }}
     >
       <input
