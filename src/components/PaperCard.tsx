@@ -6,7 +6,7 @@ interface PaperCardProps {
 
 export const PaperCard = (props: PaperCardProps) => {
   return (
-    <Link href={`/paper/${props.paper.id}`}>
+    <Link href={`/paper/${props.paper.id}/view`}>
       <div
         id={props.paper.id}
         className="bg-white p-12 border rounded-lg mt-4 cursor-pointer"
