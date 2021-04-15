@@ -17,7 +17,7 @@ export function Edit() {
   const { id } = router.query;
   const { data } = useSWR(id ? `/api/papers/${id}` : null, fetcher);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading || !id) return <p>Loading...</p>;
   return (
     <>
       <div className="flex flex-col bg-white w-full">
