@@ -44,7 +44,7 @@ export const Stats = (props: StatsProps) => {
     <div>
       <OverallBand score={bands.overall} />
       {issues.map(i => (
-        <IssueCard issue={i} />
+        <IssueCard issue={i} id={i.shortMessage} />
       ))}
     </div>
   );

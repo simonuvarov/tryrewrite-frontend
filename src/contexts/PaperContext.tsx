@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import useDebounce from '../hooks/useDebounce';
+import { getAccessTokenFromStorage } from '../lib/getAccessTokenFromStorage';
 
 export enum ISSUE_TYPE {
   GRAMMAR = 'grammar',
@@ -59,27 +60,36 @@ export const PaperContextProvider: React.FC = ({ children }) => {
     gr: 0,
     overall: 0
   });
-  const [body, setBody] = useState(
-    process.browser ? localStorage.getItem('content') || '' : ''
-  );
+  const [body, setBody] = useState('');
+
+  useEffect(() => {
+    axios
+      .get('/api/papers/1593f697-2903-4473-bb1b-0c612d9ca38b', {
+        headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
+      })
+      .then(r => setBody(r.data.body));
+  }, []);
 
   const debouncedEditorValue = useDebounce(body, 500);
 
   useEffect(() => {
-    localStorage.setItem('content', body);
     if (body === '') return;
     axios
-      .post('http://localhost:4000/papers/check', {
-        question: 'foo',
-        body: debouncedEditorValue
-      })
+      .put(
+        '/api/papers/1593f697-2903-4473-bb1b-0c612d9ca38b',
+        {
+          question: 'foo',
+          body: debouncedEditorValue
+        },
+        { headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` } }
+      )
       .then(r => {
         setBands({
-          ta: r.data.ta.band,
-          cc: r.data.cc.band,
-          lr: r.data.lr.band,
-          gr: r.data.gr.band,
-          overall: r.data.band
+          ta: r.data.bands.ta,
+          cc: r.data.bands.cc,
+          lr: r.data.bands.lr,
+          gr: r.data.bands.gr,
+          overall: r.data.overall
         });
         setIssues(r.data.issues);
       });
