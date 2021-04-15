@@ -21,7 +21,6 @@ export function Edit() {
   return (
     <>
       <div className="flex flex-col bg-white w-full">
-        <pre>{JSON.stringify(data, null, 2)}</pre>
         <div className="w-full max-w-6xl mx-auto p-16 ">
           <PaperContextProvider>
             <div className="grid grid-cols-3 gap-10">
