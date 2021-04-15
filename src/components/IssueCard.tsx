@@ -8,7 +8,7 @@ export interface Issue {
   offset: number;
   length: number;
   replacements?: Array<string>;
-  affects: string;
+  affects: CRITERIA_TYPE;
   isInline: boolean;
 }
 
@@ -52,7 +52,11 @@ export const IssueCard = (props: IssueCardProps) => {
 
       {open && (
         <div className="flex justify-start items-center mb-2">
-          <span className="h-2 w-2 bg-green-600 rounded-full" />
+          <span
+            className={`h-2 w-2 bg-${mapCriteriaToTWColor(
+              props.issue.affects
+            )} rounded-full`}
+          />
           <span className="ml-3 text-xs leading-4 text-gray-400 font-medium uppercase">
             {props.issue.affects}
           </span>
