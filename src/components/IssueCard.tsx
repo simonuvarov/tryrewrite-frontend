@@ -1,5 +1,6 @@
 import { Transition } from '@headlessui/react';
 import { useState } from 'react';
+import { CRITERIA_TYPE } from '../services/paper.service';
 
 export interface Issue {
   message: string;
@@ -15,6 +16,19 @@ interface IssueCardProps {
   issue: Issue;
 }
 
+const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
+  switch (criteria) {
+    case CRITERIA_TYPE.TA:
+      return `green-600`;
+    case CRITERIA_TYPE.CC:
+      return `blue-600`;
+    case CRITERIA_TYPE.LR:
+      return `indigo-600`;
+    case CRITERIA_TYPE.GR:
+      return `yellow-600`;
+  }
+};
+
 export const IssueCard = (props: IssueCardProps) => {
   const [open, setOpen] = useState(false);
 
@@ -25,7 +39,11 @@ export const IssueCard = (props: IssueCardProps) => {
     >
       {!open && (
         <div className="flex justify-start items-center">
-          <span className="h-2 w-2 bg-green-600 rounded-full" />
+          <span
+            className={`h-2 w-2 bg-${mapCriteriaToTWColor(
+              props.issue.affects
+            )} rounded-full`}
+          />
           <span className="ml-3 text-sm leading-5 text-gray-800">
             {props.issue.shortMessage}
           </span>
