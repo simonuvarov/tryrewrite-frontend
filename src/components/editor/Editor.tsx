@@ -2,16 +2,22 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createEditor, NodeEntry, Range, Text } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
+import { useIssuesStore } from '../../stores/useIssuesStore';
+import { usePaperStore } from '../../stores/usePaperStore';
 import { deserialize } from './deserialize';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
 import { serialize } from './serialize';
-import { usePaper } from '../../hooks/usePaper';
 
 const Editor = () => {
   const [hasMounted, setHasMounted] = useState(false);
 
-  const { body, setBody, issues, clearIssues } = usePaper();
+  const { issues, clearIssues } = useIssuesStore();
+
+  const { body, setBody } = usePaperStore(state => ({
+    body: state.body,
+    setBody: state.setBody
+  }));
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 
@@ -53,7 +59,6 @@ const Editor = () => {
         const end = start + length;
 
         ranges.push({
-          type: highlight.type,
           anchor: { path, offset: start },
           focus: { path, offset: end }
         });

@@ -1,4 +1,4 @@
-import { usePaper } from '../hooks/usePaper';
+import { useBandsStore } from '../stores/useBandScore';
 import { OverallBand } from './Band';
 import { IssueCard } from './IssueCard';
 
@@ -38,7 +38,7 @@ const issues = [
 ];
 
 export const Sidebar = (props: StatsProps) => {
-  const { bands } = usePaper();
+  const { bands } = useBandsStore();
 
   return (
     <div>

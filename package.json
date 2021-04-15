@@ -45,6 +45,7 @@
     "slate-history": "^0.59.0",
     "slate-react": "^0.59.0",
     "swr": "^0.5.5",
-    "unified": "^9.2.0"
+    "unified": "^9.2.0",
+    "zustand": "^3.4.1"
   }
 }
