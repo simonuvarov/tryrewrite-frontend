@@ -1,12 +1,10 @@
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
-import useSWR from 'swr';
 import Editor from '../../components/editor/Editor';
 import Footer from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
-import { fetcher } from '../../lib/fetcher';
 import paperService from '../../services/paper.service';
 import { useBandsStore } from '../../stores/useBandScore';
 import { useIssuesStore } from '../../stores/useIssuesStore';
@@ -19,15 +17,13 @@ export function Edit() {
 
   const router = useRouter();
   const { id } = router.query;
-  const { data } = useSWR(id ? `/api/papers/${id}` : null, fetcher);
-
   const { body, setBody } = usePaperStore(state => ({
     body: state.body,
     setBody: state.setBody
   }));
 
-  const { issues, setIssues } = useIssuesStore();
-  const { bands, setBands } = useBandsStore();
+  const { setIssues } = useIssuesStore();
+  const { setBands } = useBandsStore();
 
   const debouncedEditorValue = useDebounce(body, 500);
 
