@@ -1,28 +1,6 @@
-import axios from 'axios';
 import React, { createContext, useEffect, useState } from 'react';
 import useDebounce from '../hooks/useDebounce';
-import { getAccessTokenFromStorage } from '../lib/getAccessTokenFromStorage';
-
-export enum ISSUE_TYPE {
-  GRAMMAR = 'grammar',
-  SPELLING = 'spelling',
-  PUNCTUATION = 'punctuation',
-  STYLE = 'style'
-}
-
-export interface Issue {
-  type: ISSUE_TYPE;
-  shortMessage: string;
-  message: string;
-  offset: number;
-  length: number;
-  suggestions: Array<string>;
-}
-
-interface Paper {
-  question: string;
-  body: string;
-}
+import paperService, { Issue } from '../services/paper.service';
 
 interface EditorContextProps {
   body: string;
@@ -52,7 +30,7 @@ export const PaperContext = createContext<EditorContextProps>({
 });
 
 export const PaperContextProvider: React.FC = ({ children }) => {
-  const [issues, setIssues] = useState([]);
+  const [issues, setIssues] = useState<Array<Issue>>([]);
   const [bands, setBands] = useState({
     ta: 0,
     cc: 0,
@@ -63,10 +41,8 @@ export const PaperContextProvider: React.FC = ({ children }) => {
   const [body, setBody] = useState('');
 
   useEffect(() => {
-    axios
-      .get('/api/papers/1593f697-2903-4473-bb1b-0c612d9ca38b', {
-        headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
-      })
+    paperService
+      .getPaper('1593f697-2903-4473-bb1b-0c612d9ca38b')
       .then(r => setBody(r.data.body));
   }, []);
 
@@ -74,22 +50,18 @@ export const PaperContextProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     if (body === '') return;
-    axios
-      .put(
-        '/api/papers/1593f697-2903-4473-bb1b-0c612d9ca38b',
-        {
-          question: 'foo',
-          body: debouncedEditorValue
-        },
-        { headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` } }
-      )
+    paperService
+      .gradePaper('1593f697-2903-4473-bb1b-0c612d9ca38b', {
+        question: 'foo',
+        body: debouncedEditorValue
+      })
       .then(r => {
         setBands({
           ta: r.data.bands.ta,
           cc: r.data.bands.cc,
           lr: r.data.bands.lr,
           gr: r.data.bands.gr,
-          overall: r.data.overall
+          overall: r.data.bands.overall
         });
         setIssues(r.data.issues);
       });
