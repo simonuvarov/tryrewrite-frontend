@@ -3,7 +3,7 @@ import React from 'react';
 import useSWR from 'swr';
 import Editor from '../../components/editor/Editor';
 import Footer from '../../components/Footer';
-import { Stats } from '../../components/Stats';
+import { Sidebar } from '../../components/Sidebar';
 import { PaperContextProvider } from '../../contexts/PaperContext';
 import { useForceAuth } from '../../hooks/useForceAuth';
 import { fetcher } from '../../lib/fetcher';
@@ -27,7 +27,7 @@ export function Edit() {
               <div className="col-span-2">
                 <Editor />
               </div>
-              <Stats />
+              <Sidebar />
             </div>
           </PaperContextProvider>
         </div>

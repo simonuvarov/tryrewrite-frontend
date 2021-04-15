@@ -37,7 +37,7 @@ const issues = [
   }
 ];
 
-export const Stats = (props: StatsProps) => {
+export const Sidebar = (props: StatsProps) => {
   const { bands } = usePaper();
 
   return (
