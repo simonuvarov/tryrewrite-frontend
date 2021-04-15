@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import useDebounce from '../hooks/useDebounce';
 import paperService, { Issue } from '../services/paper.service';
 
@@ -15,6 +15,12 @@ interface EditorContextProps {
     overall: number;
   };
 }
+
+interface PaperContextProviderProps {
+  children: ReactNode;
+  paperId: string;
+}
+
 export const PaperContext = createContext<EditorContextProps>({
   body: '',
   setBody: () => undefined,
@@ -29,7 +35,10 @@ export const PaperContext = createContext<EditorContextProps>({
   }
 });
 
-export const PaperContextProvider: React.FC = ({ children }) => {
+export const PaperContextProvider = ({
+  children,
+  paperId
+}: PaperContextProviderProps) => {
   const [issues, setIssues] = useState<Array<Issue>>([]);
   const [bands, setBands] = useState({
     ta: 0,
@@ -41,9 +50,7 @@ export const PaperContextProvider: React.FC = ({ children }) => {
   const [body, setBody] = useState('');
 
   useEffect(() => {
-    paperService
-      .getPaper('1593f697-2903-4473-bb1b-0c612d9ca38b')
-      .then(r => setBody(r.data.body));
+    paperService.getPaper(paperId).then(r => setBody(r.data.body));
   }, []);
 
   const debouncedEditorValue = useDebounce(body, 500);
@@ -51,7 +58,7 @@ export const PaperContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     if (body === '') return;
     paperService
-      .gradePaper('1593f697-2903-4473-bb1b-0c612d9ca38b', {
+      .gradePaper(paperId, {
         question: 'foo',
         body: debouncedEditorValue
       })
