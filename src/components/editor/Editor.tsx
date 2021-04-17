@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createEditor, NodeEntry, Range, Text } from 'slate';
-import { withHistory } from 'slate-history';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 import { useIssuesStore } from '../../stores/useIssuesStore';
 import { usePaperStore } from '../../stores/usePaperStore';
@@ -19,7 +18,7 @@ const Editor = () => {
     setBody: state.setBody
   }));
 
-  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  const editor = useMemo(() => withReact(createEditor()), []);
 
   const renderLeaf = useCallback(
     (props: RenderLeafProps) => {
