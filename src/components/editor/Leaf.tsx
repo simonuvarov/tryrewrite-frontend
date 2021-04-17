@@ -1,48 +1,44 @@
 import { RenderLeafProps } from 'slate-react';
+import { CRITERIA_TYPE } from '../../services/paper.service';
 
 export const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
-  switch (leaf.type) {
-    case 'spelling':
+  switch (leaf.affects) {
+    case CRITERIA_TYPE.LR:
+      return (
+        <span {...attributes} className="bg-red-100 border-b-2 border-red-400 ">
+          {children}
+        </span>
+      );
+    case CRITERIA_TYPE.CC:
       return (
         <span
           {...attributes}
-          className={`${
-            leaf.type ? 'bg-red-100 border-b-2 border-red-400' : ''
-          }`}
+          className="bg-blue-100 border-b-2  border-blue-400"
         >
           {children}
         </span>
       );
-    case 'punctuation':
+    case CRITERIA_TYPE.TA:
       return (
         <span
           {...attributes}
-          className={`${
-            leaf.type ? 'bg-blue-100 border-b-2  border-blue-400' : ''
-          }`}
+          className="bg-green-100 border-b-2  border-green-400"
         >
           {children}
         </span>
       );
-    case 'grammar':
+    case CRITERIA_TYPE.GR:
       return (
         <span
           {...attributes}
-          className={`${
-            leaf.type ? 'bg-yellow-100 border-b-2  border-yellow-400' : ''
-          }`}
+          className="bg-yellow-100 border-b-2  border-yellow-400"
         >
           {children}
         </span>
       );
     default:
       return (
-        <span
-          {...attributes}
-          className={`${
-            leaf.type ? 'bg-gray-100 border-b-2 border-gray-400' : ''
-          }`}
-        >
+        <span {...attributes} className="">
           {children}
         </span>
       );

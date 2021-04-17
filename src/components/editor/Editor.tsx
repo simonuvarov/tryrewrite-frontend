@@ -68,23 +68,25 @@ const Editor = () => {
       });
       const currentTextRange = paragraphRanges[path[0]];
 
-      for (const highlight of issues.filter(h => {
+      for (const issue of issues.filter(h => {
         return (
           h.offset < currentTextRange[1] && h.offset >= currentTextRange[0]
         );
       })) {
-        const length = highlight.length;
-        const start = highlight.offset - currentTextRange[0];
+        const length = issue.length;
+        const start = issue.offset - currentTextRange[0];
         const end = start + length;
 
         ranges.push({
           anchor: { path, offset: start },
-          focus: { path, offset: end }
+          focus: { path, offset: end },
+          affects: issue.affects
         });
       }
 
       return ranges;
     },
+
     [issues]
   );
 
