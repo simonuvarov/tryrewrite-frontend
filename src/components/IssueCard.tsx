@@ -34,7 +34,7 @@ export const IssueCard = (props: IssueCardProps) => {
 
   return (
     <div
-      className="flex flex-col justify-start  py-4 px-6 border rounded-lg shadow-sm mt-5 cursor-pointer"
+      className="flex flex-col justify-start py-4 px-6 border rounded-lg shadow-sm mt-5 cursor-pointer"
       onClick={() => setOpen(!open)}
     >
       {!open && (
@@ -45,7 +45,9 @@ export const IssueCard = (props: IssueCardProps) => {
             )} rounded-full`}
           />
           <span className="ml-3 text-sm leading-5 text-gray-800">
-            {props.issue.shortMessage}
+            {props.issue.shortMessage.length === 0
+              ? 'Some temp message'
+              : props.issue.shortMessage}
           </span>
         </div>
       )}

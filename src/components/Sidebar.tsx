@@ -7,7 +7,7 @@ export const Sidebar = () => {
   const { bands } = useBandsStore();
   const { issues } = useIssuesStore();
   return (
-    <div>
+    <div className="w-full">
       <OverallBand score={bands.overall} />
       {issues.map(i => (
         <IssueCard issue={i} />

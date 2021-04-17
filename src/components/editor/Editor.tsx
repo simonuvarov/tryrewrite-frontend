@@ -88,6 +88,7 @@ const Editor = () => {
       <Editable
         placeholder="Enter some plain text..."
         spellCheck={false}
+        className="min-h-full"
         decorate={decorate}
         renderLeaf={renderLeaf}
         renderElement={renderElement}

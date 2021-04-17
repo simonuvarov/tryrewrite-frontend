@@ -1,7 +1,6 @@
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
 import Editor from '../../components/editor/Editor';
-import Footer from '../../components/Footer';
 import { Sidebar } from '../../components/Sidebar';
 import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
@@ -48,19 +47,31 @@ export function Edit() {
 
   if (loading || !id) return <p>Loading...</p>;
   return (
-    <>
-      <div className="flex flex-col bg-white w-full">
-        <div className="w-full max-w-6xl mx-auto p-16 ">
-          <div className="grid grid-cols-3 gap-10">
-            <div className="col-span-2">
-              <Editor />
-            </div>
+    <div className="flex min-h-full">
+      <div className="flex w-full justify-center overflow-y-scroll no-scrollbar h-screen">
+        <div className="max-w-xl w-full mt-20">
+          <Editor />
+        </div>
+      </div>
+      <aside className="flex max-w-lg w-full">
+        <div className="overflow-y-scroll h-screen sticky w-full no-scrollbar">
+          <div className="mr-6 mt-20">
             <Sidebar />
           </div>
         </div>
-      </div>
-      <Footer />
-    </>
+      </aside>
+      <style jsx>{`
+        /* Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+
+        .no-scrollbar {
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+        }
+      `}</style>
+    </div>
   );
 }
 
