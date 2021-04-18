@@ -2,6 +2,7 @@ const colors = require('tailwindcss/colors');
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  mode: 'jit',
   purge: [
     './src/pages/**/*.{ts,tsx,js,jsx}',
     './src/components/**/*.{ts,tsx,js,jsx}'
@@ -15,7 +16,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
-    require('@tailwindcss/line-clamp')  
+    require('@tailwindcss/line-clamp')
     // ...
   ]
 };
