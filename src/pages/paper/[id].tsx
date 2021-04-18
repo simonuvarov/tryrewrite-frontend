@@ -16,10 +16,7 @@ export function Edit() {
 
   const router = useRouter();
   const { id } = router.query;
-  const { body, setBody } = usePaperStore(state => ({
-    body: state.body,
-    setBody: state.setBody
-  }));
+  const { body, setBody, question, setQuestion } = usePaperStore();
 
   const { setIssues } = useIssuesStore();
   const { setBands } = useBandsStore();
@@ -36,7 +33,7 @@ export function Edit() {
     if (body === '') return;
     paperService
       .gradePaper(id as string, {
-        question: 'foo',
+        question: question,
         body: debouncedEditorValue
       })
       .then(r => {
@@ -50,7 +47,19 @@ export function Edit() {
     <div className="flex min-h-full">
       <div className="flex w-full justify-center overflow-y-scroll no-scrollbar h-screen">
         <div className="max-w-xl w-full mt-20">
-          <Editor />
+          <div>
+            <input
+              placeholder="Question..."
+              className="focus:outline-none h-8 text-lg font-medium text-gray-900"
+              onChange={e => {
+                setQuestion(e.target.value);
+              }}
+              value={question}
+            />
+          </div>
+          <div className="mt-5 text-gray-800">
+            <Editor />
+          </div>
         </div>
       </div>
       <aside className="flex max-w-lg w-full">
