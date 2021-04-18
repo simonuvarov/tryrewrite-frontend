@@ -22,11 +22,15 @@ export function Edit() {
   const { setIssues } = useIssuesStore();
   const { setBands } = useBandsStore();
 
-  const debouncedEditorValue = useDebounce(body, 500);
+  const debouncedQuestionValue = useDebounce(question, 500);
+  const debouncedBodyValue = useDebounce(body, 500);
 
   useEffect(() => {
     if (!id) return;
-    paperService.getPaper(id as string).then(r => setBody(r.data.body));
+    paperService.getPaper(id as string).then(r => {
+      setQuestion(r.data.question);
+      setBody(r.data.body);
+    });
   }, [id]);
 
   useEffect(() => {
@@ -34,14 +38,14 @@ export function Edit() {
     if (body === '') return;
     paperService
       .gradePaper(id as string, {
-        question: question,
-        body: debouncedEditorValue
+        question: debouncedQuestionValue,
+        body: debouncedBodyValue
       })
       .then(r => {
         setIssues(r.data.issues);
         setBands(r.data.bands);
       });
-  }, [debouncedEditorValue]);
+  }, [debouncedBodyValue, debouncedQuestionValue]);
 
   if (loading || !id) return <p>Loading...</p>;
   return (
