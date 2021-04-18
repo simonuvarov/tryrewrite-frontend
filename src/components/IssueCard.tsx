@@ -1,15 +1,6 @@
+import { ExternalLinkIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
-import { CRITERIA_TYPE } from '../services/paper.service';
-
-export interface Issue {
-  message: string;
-  shortMessage: string;
-  offset: number;
-  length: number;
-  replacements?: Array<string>;
-  affects: CRITERIA_TYPE;
-  isInline: boolean;
-}
+import { CRITERIA_TYPE, Issue } from '../services/paper.service';
 
 interface IssueCardProps {
   issue: Issue;
@@ -59,9 +50,17 @@ export const IssueCard = (props: IssueCardProps) => {
       </div>
       {open && (
         <div className="mt-2">
-          <span className="ml-5 block text-sm leading-6 text-gray-700">
+          <div className="ml-5 block text-sm leading-6 text-gray-700">
             {props.issue.message}
-          </span>
+          </div>
+          {props.issue.link && (
+            <div className="ml-5 block text-sm leading-6 text-gray-500 hover:text-gray-700 mt-3">
+              <a href={props.issue.link} className="flex items-center">
+                <span>More information</span>
+                <ExternalLinkIcon className="h-4 ml-1" />
+              </a>
+            </div>
+          )}
         </div>
       )}
     </div>
