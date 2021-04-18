@@ -13,13 +13,13 @@ interface IssueCardProps {
 const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
   switch (criteria) {
     case CRITERIA_TYPE.TA:
-      return `green-600`;
+      return `bg-green-600`;
     case CRITERIA_TYPE.CC:
-      return `blue-600`;
+      return `bg-blue-600`;
     case CRITERIA_TYPE.LR:
-      return `indigo-600`;
+      return `bg-indigo-600`;
     case CRITERIA_TYPE.GR:
-      return `yellow-600`;
+      return `bg-yellow-600`;
   }
 };
 
@@ -34,7 +34,7 @@ export const IssueCard = (props: IssueCardProps) => {
       >
         <div className="flex items-center">
           <span
-            className={`h-2 w-2 bg-${mapCriteriaToTWColor(
+            className={`h-2 w-2 ${mapCriteriaToTWColor(
               props.issue.affects
             )} rounded-full`}
           />
