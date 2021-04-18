@@ -65,8 +65,13 @@ export const IssueCard = (props: IssueCardProps) => {
             {props.issue.message}
           </div>
           {props.issue.link && (
-            <div className="ml-5 block text-sm leading-6 text-gray-500 hover:text-gray-700 mt-3">
-              <a href={props.issue.link} className="flex items-center">
+            <div className="ml-5 block text-sm font-medium leading-6 text-gray-500 hover:text-gray-700 mt-3">
+              <a
+                href={props.issue.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center"
+              >
                 <span>More information</span>
                 <ExternalLinkIcon className="h-4 ml-1" />
               </a>
