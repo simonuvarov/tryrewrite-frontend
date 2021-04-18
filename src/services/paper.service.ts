@@ -38,6 +38,12 @@ const getPaper = (id: string) => {
   });
 };
 
+const createNewPaper = (paper?: Partial<Paper>) => {
+  return axios.post<Paper>(`/api/papers/`, paper, {
+    headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
+  });
+};
+
 const gradePaper = (id: string, input: { question: string; body: string }) => {
   return axios.put<{
     issues: Array<Issue>;
@@ -52,4 +58,4 @@ const gradePaper = (id: string, input: { question: string; body: string }) => {
   );
 };
 
-export default { getPaper, gradePaper };
+export default { createNewPaper, getPaper, gradePaper };
