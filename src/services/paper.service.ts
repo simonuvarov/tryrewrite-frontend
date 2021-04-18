@@ -1,15 +1,26 @@
 import axios from 'axios';
 import { getAccessTokenFromStorage } from '../lib/getAccessTokenFromStorage';
 
-export interface Issue {
+export interface InlineIssue {
   message: string;
   shortMessage: string;
   offset: number;
   length: number;
   replacements?: Array<string>;
   affects: CRITERIA_TYPE;
-  isInline: boolean;
+  isInline: true;
+  link?: string;
 }
+
+export interface NotInlineIssue {
+  message: string;
+  shortMessage: string;
+  affects: CRITERIA_TYPE;
+  isInline: false;
+  link?: string;
+}
+
+export type Issue = InlineIssue | NotInlineIssue;
 
 interface Paper {
   id: string;

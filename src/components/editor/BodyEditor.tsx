@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createEditor, NodeEntry, Range, Text } from 'slate';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
+import { InlineIssue } from '../../services/paper.service';
 import { useIssuesStore } from '../../stores/useIssuesStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 import { deserialize } from './deserialize';
@@ -70,9 +71,11 @@ const BodyEditor = () => {
 
       for (const issue of issues.filter(h => {
         return (
-          h.offset < currentTextRange[1] && h.offset >= currentTextRange[0]
+          h.isInline &&
+          h.offset < currentTextRange[1] &&
+          h.offset >= currentTextRange[0]
         );
-      })) {
+      }) as Array<InlineIssue>) {
         const length = issue.length;
         const start = issue.offset - currentTextRange[0];
         const end = start + length;
