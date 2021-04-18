@@ -1,4 +1,8 @@
-import { ExternalLinkIcon } from '@heroicons/react/solid';
+import {
+  ExternalLinkIcon,
+  MinusIcon,
+  SelectorIcon
+} from '@heroicons/react/solid';
 import { useState } from 'react';
 import { CRITERIA_TYPE, Issue } from '../services/paper.service';
 
@@ -23,19 +27,26 @@ export const IssueCard = (props: IssueCardProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div
-      className="flex flex-col justify-start py-4 px-6 border rounded-lg shadow-sm mt-5 cursor-pointer"
-      onClick={() => setOpen(!open)}
-    >
-      <div className="flex justify-start items-center mb-2">
-        <span
-          className={`h-2 w-2 bg-${mapCriteriaToTWColor(
-            props.issue.affects
-          )} rounded-full`}
-        />
-        <span className="ml-3 text-xs leading-5 text-gray-400 font-medium uppercase">
-          {props.issue.affects}
-        </span>
+    <div className="flex flex-col justify-start py-4 px-6 border rounded-lg shadow-sm mt-5">
+      <div
+        className="flex justify-between items-center mb-2 cursor-pointer "
+        onClick={() => setOpen(!open)}
+      >
+        <div className="flex items-center">
+          <span
+            className={`h-2 w-2 bg-${mapCriteriaToTWColor(
+              props.issue.affects
+            )} rounded-full`}
+          />
+          <span className="ml-3 text-xs leading-5 text-gray-400 font-medium uppercase">
+            {props.issue.affects}
+          </span>
+        </div>
+        {open ? (
+          <MinusIcon className="h-5 text-gray-400" />
+        ) : (
+          <SelectorIcon className="h-5 text-gray-400" />
+        )}
       </div>
       <div>
         <span
