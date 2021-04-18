@@ -22,7 +22,7 @@ export interface NotInlineIssue {
 
 export type Issue = InlineIssue | NotInlineIssue;
 
-interface Paper {
+export interface Paper {
   id: string;
   question: string;
   body: string;
@@ -49,6 +49,12 @@ const getPaper = (id: string) => {
   });
 };
 
+const getAllPapers = () => {
+  return axios.get<Array<Paper>>(`/api/papers`, {
+    headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
+  });
+};
+
 const createNewPaper = (paper?: Partial<Paper>) => {
   return axios.post<Paper>(`/api/papers/`, paper, {
     headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
@@ -69,4 +75,4 @@ const gradePaper = (id: string, input: { question: string; body: string }) => {
   );
 };
 
-export default { createNewPaper, getPaper, gradePaper };
+export default { createNewPaper, getPaper, getAllPapers, gradePaper };

@@ -1,12 +1,10 @@
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
-import React from 'react';
-import useSWR from 'swr';
+import React, { useEffect, useState } from 'react';
 import { PaperCard } from '../components/PaperCard';
 import { useForceAuth } from '../hooks/useForceAuth';
-import { fetcher } from '../lib/fetcher';
-import paperService from '../services/paper.service';
+import paperService, { Paper } from '../services/paper.service';
 
 export function Edit() {
   const { loading } = useForceAuth({
@@ -15,7 +13,7 @@ export function Edit() {
 
   const router = useRouter();
 
-  const { data } = useSWR('/api/papers', fetcher);
+  const [papers, setPapers] = useState<Array<Paper> | undefined>();
 
   const handleNewPaperClick = () => {
     paperService
@@ -23,7 +21,11 @@ export function Edit() {
       .then(res => router.push(`/paper/${res.data.id}`));
   };
 
-  if (loading) return <p>Loading...</p>;
+  useEffect(() => {
+    paperService.getAllPapers().then(res => setPapers(res.data));
+  }, []);
+
+  if (loading || !papers) return <p>Loading...</p>;
   return (
     <>
       <header className="flex border-b justify-center shadow-lg z-10">
@@ -67,7 +69,7 @@ export function Edit() {
             </div>
           </div>
           <div className="flex flex-col w-full max-w-2xl">
-            {data.map((paper: any) => (
+            {papers?.map((paper: any) => (
               <PaperCard paper={paper} />
             ))}
           </div>
