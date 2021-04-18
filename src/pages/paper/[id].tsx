@@ -48,14 +48,14 @@ export function Edit() {
     <div className="flex min-h-full">
       <div className="flex w-full justify-center overflow-y-scroll no-scrollbar h-screen">
         <div className="max-w-xl w-full mt-20">
-          <div className="focus:outline-none h-8 text-lg font-medium text-gray-900">
+          <div className="block focus:outline-none text-md  font-medium text-gray-700">
             <QuestionEditor
               placeholder="Question..."
               value={question}
               setValue={setQuestion}
             />
           </div>
-          <div className="mt-5 text-gray-800">
+          <div className="mt-8 text-gray-800">
             <BodyEditor />
           </div>
         </div>
