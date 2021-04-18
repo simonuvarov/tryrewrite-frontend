@@ -1,6 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
-import Editor from '../../components/editor/Editor';
+import BodyEditor from '../../components/editor/BodyEditor';
+import { QuestionEditor } from '../../components/editor/QuestionEditor';
 import { Sidebar } from '../../components/Sidebar';
 import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
@@ -47,18 +48,15 @@ export function Edit() {
     <div className="flex min-h-full">
       <div className="flex w-full justify-center overflow-y-scroll no-scrollbar h-screen">
         <div className="max-w-xl w-full mt-20">
-          <div>
-            <input
+          <div className="focus:outline-none h-8 text-lg font-medium text-gray-900">
+            <QuestionEditor
               placeholder="Question..."
-              className="focus:outline-none h-8 text-lg font-medium text-gray-900"
-              onChange={e => {
-                setQuestion(e.target.value);
-              }}
               value={question}
+              setValue={setQuestion}
             />
           </div>
           <div className="mt-5 text-gray-800">
-            <Editor />
+            <BodyEditor />
           </div>
         </div>
       </div>

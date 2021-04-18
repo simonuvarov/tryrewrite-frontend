@@ -28,7 +28,7 @@ const isSystemKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
   return false;
 };
 
-const Editor = () => {
+const BodyEditor = () => {
   const [hasMounted, setHasMounted] = useState(false);
 
   const { issues, clearIssues } = useIssuesStore();
@@ -122,4 +122,4 @@ const Editor = () => {
   );
 };
 
-export default Editor;
+export default BodyEditor;
