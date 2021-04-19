@@ -6,8 +6,7 @@ import { Sidebar } from '../../components/Sidebar';
 import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
 import paperService from '../../services/paper.service';
-import { useBandsStore } from '../../stores/useBandScore';
-import { useIssuesStore } from '../../stores/useIssuesStore';
+import { useGraderResultStore } from '../../stores/useGradeResultStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 
 export function Edit() {
@@ -19,8 +18,12 @@ export function Edit() {
   const { id } = router.query;
   const { paper, setPaper } = usePaperStore();
 
-  const { setIssues } = useIssuesStore();
-  const { setBands } = useBandsStore();
+  const {
+    setIssues,
+    setBands,
+    setIsChecking,
+    isChecking
+  } = useGraderResultStore();
 
   const debouncedPaperValue = useDebounce(paper, 500);
 
@@ -32,13 +35,19 @@ export function Edit() {
   }, [id]);
 
   useEffect(() => {
+    setIsChecking(true);
     if (!id) return;
     if (paper.body === '') return;
-    paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
-      setIssues(r.data.issues);
-      setBands(r.data.bands);
-    });
+    paperService
+      .gradePaper(id as string, debouncedPaperValue)
+      .then(r => {
+        setIssues(r.data.issues);
+        setBands(r.data.bands);
+      })
+      .finally(() => setIsChecking(false));
   }, [debouncedPaperValue]);
+
+  console.log(isChecking);
 
   if (loading || !id) return <p>Loading...</p>;
   return (

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { createEditor, NodeEntry, Range, Text } from 'slate';
 import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
 import { InlineIssue } from '../../services/paper.service';
-import { useIssuesStore } from '../../stores/useIssuesStore';
+import { useGraderResultStore } from '../../stores/useGradeResultStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 import { deserialize } from './deserialize';
 import { Element } from './Element';
@@ -32,7 +32,7 @@ const isSystemKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
 const BodyEditor = () => {
   const [hasMounted, setHasMounted] = useState(false);
 
-  const { issues, clearIssues } = useIssuesStore();
+  const { issues, clearIssues } = useGraderResultStore();
 
   const { paper, setPaper } = usePaperStore();
 

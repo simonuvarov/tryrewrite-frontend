@@ -1,11 +1,9 @@
-import { useBandsStore } from '../stores/useBandScore';
-import { useIssuesStore } from '../stores/useIssuesStore';
+import { useGraderResultStore } from '../stores/useGradeResultStore';
 import { OverallBand } from './Band';
 import { IssueCard } from './IssueCard';
 
 export const Sidebar = () => {
-  const { bands } = useBandsStore();
-  const { issues } = useIssuesStore();
+  const { issues, bands, isChecking } = useGraderResultStore();
   return (
     <div className="w-full">
       <OverallBand score={bands.overall} />
