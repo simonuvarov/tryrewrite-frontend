@@ -16,14 +16,9 @@ export function Edit() {
 
   const router = useRouter();
   const { id } = router.query;
-  const { paper, setPaper, isFetching, setIsFetching } = usePaperStore();
+  const { paper, setPaper } = usePaperStore();
 
-  const {
-    setIssues,
-    setBands,
-    setIsChecking,
-    isChecking
-  } = useGraderResultStore();
+  const { setIssues, setBands, setIsChecking } = useGraderResultStore();
 
   useEffect(() => {
     if (router.isReady) {
@@ -45,7 +40,7 @@ export function Edit() {
     }
   }, [debouncedPaperValue]);
 
-  if (loading || isFetching) return <p>Loading...</p>;
+  if (loading) return <p>Loading...</p>;
   return (
     <div className="flex min-h-full">
       <div className="flex w-full justify-center overflow-y-scroll no-scrollbar h-screen">
