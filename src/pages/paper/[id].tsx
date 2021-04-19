@@ -16,7 +16,7 @@ export function Edit() {
 
   const router = useRouter();
   const { id } = router.query;
-  const { paper, setPaper } = usePaperStore();
+  const { paper, setPaper, isFetching, setIsFetching } = usePaperStore();
 
   const {
     setIssues,
@@ -25,31 +25,27 @@ export function Edit() {
     isChecking
   } = useGraderResultStore();
 
+  useEffect(() => {
+    if (router.isReady) {
+      paperService.getPaper(id as string).then(r => {
+        setPaper(r.data);
+      });
+    }
+  }, [router.isReady]);
+
   const debouncedPaperValue = useDebounce(paper, 500);
 
   useEffect(() => {
-    if (!id) return;
-    paperService.getPaper(id as string).then(r => {
-      setPaper(r.data);
-    });
-  }, [id]);
-
-  useEffect(() => {
     setIsChecking(true);
-    if (!id) return;
-    if (paper.body === '') return;
-    paperService
-      .gradePaper(id as string, debouncedPaperValue)
-      .then(r => {
+    if (router.isReady) {
+      paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
         setIssues(r.data.issues);
         setBands(r.data.bands);
-      })
-      .finally(() => setIsChecking(false));
+      });
+    }
   }, [debouncedPaperValue]);
 
-  console.log(isChecking);
-
-  if (loading || !id) return <p>Loading...</p>;
+  if (loading || isFetching) return <p>Loading...</p>;
   return (
     <div className="flex min-h-full">
       <div className="flex w-full justify-center overflow-y-scroll no-scrollbar h-screen">
