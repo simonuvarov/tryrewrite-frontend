@@ -3,7 +3,10 @@ import { OverallBand } from './Band';
 import { IssueCard } from './IssueCard';
 
 export const Sidebar = () => {
-  const { issues, bands, isChecking } = useGraderResultStore();
+  const { issues, bands } = useGraderResultStore();
+
+  if (!issues || !bands) return <p>Loading...</p>;
+
   return (
     <div className="w-full">
       <OverallBand score={bands.overall} />

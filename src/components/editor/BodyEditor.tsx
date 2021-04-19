@@ -32,7 +32,7 @@ const isSystemKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
 const BodyEditor = () => {
   const [hasMounted, setHasMounted] = useState(false);
 
-  const { issues, clearIssues } = useGraderResultStore();
+  const { issues, setIssues } = useGraderResultStore();
 
   const { paper, setPaper } = usePaperStore();
 
@@ -52,13 +52,13 @@ const BodyEditor = () => {
     ([node, path]: NodeEntry) => {
       const ranges: Range[] = [];
 
-      if (!Text.isText(node)) {
+      if (!Text.isText(node) || !issues) {
         return ranges;
       }
 
       const paragraphRanges: Array<[number, number]> = [];
       let offset = 0;
-      paper.body.split('\n').map((p: string) => {
+      paper!.body.split('\n').map((p: string) => {
         const start = offset;
         const end = offset + p.length + '\n'.length;
         paragraphRanges.push([start, end]);
@@ -98,6 +98,8 @@ const BodyEditor = () => {
     return null;
   }
 
+  if (!paper) return null;
+
   return (
     <Slate
       editor={editor}
@@ -115,7 +117,7 @@ const BodyEditor = () => {
         renderElement={renderElement}
         onKeyDown={e => {
           if (isSystemKeyPress(e)) return;
-          clearIssues();
+          setIssues(null);
         }}
       />
     </Slate>

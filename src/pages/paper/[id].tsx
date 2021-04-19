@@ -16,9 +16,9 @@ export function Edit() {
 
   const router = useRouter();
   const { id } = router.query;
-  const { paper, setPaper } = usePaperStore();
+  const { paper, setPaper, undefinePaper } = usePaperStore();
 
-  const { setIssues, setBands, setIsChecking } = useGraderResultStore();
+  const { setIssues, setBands } = useGraderResultStore();
 
   useEffect(() => {
     if (router.isReady) {
@@ -26,17 +26,22 @@ export function Edit() {
         setPaper(r.data);
       });
     }
+    return () => {
+      undefinePaper();
+      setIssues(null);
+    }; // clear paper on editor exit
   }, [router.isReady]);
 
   const debouncedPaperValue = useDebounce(paper, 500);
 
   useEffect(() => {
-    setIsChecking(true);
-    if (router.isReady) {
-      paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
-        setIssues(r.data.issues);
-        setBands(r.data.bands);
-      });
+    if (debouncedPaperValue) {
+      if (router.isReady) {
+        paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
+          setIssues(r.data.issues);
+          setBands(r.data.bands);
+        });
+      }
     }
   }, [debouncedPaperValue]);
 
@@ -44,18 +49,22 @@ export function Edit() {
   return (
     <div className="flex min-h-full">
       <div className="flex w-full justify-center overflow-y-scroll no-scrollbar h-screen">
-        <div className="max-w-xl w-full mt-20">
-          <div className="block focus:outline-none text-md  font-medium text-gray-700">
-            <QuestionEditor
-              placeholder="Question..."
-              value={paper?.question}
-              setValue={q => setPaper({ question: q, body: paper.body })}
-            />
+        {paper ? (
+          <div className="max-w-xl w-full mt-20">
+            <div className="block focus:outline-none text-md  font-medium text-gray-700">
+              <QuestionEditor
+                placeholder="Question..."
+                value={paper?.question}
+                setValue={q => setPaper({ question: q, body: paper.body })}
+              />
+            </div>
+            <div className="mt-8 text-gray-800">
+              <BodyEditor />
+            </div>
           </div>
-          <div className="mt-8 text-gray-800">
-            <BodyEditor />
-          </div>
-        </div>
+        ) : (
+          <p>Loading paper...</p>
+        )}
       </div>
       <aside className="flex max-w-lg w-full">
         <div className="overflow-y-scroll h-screen sticky w-full no-scrollbar">
