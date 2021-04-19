@@ -17,7 +17,7 @@ const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
     case CRITERIA_TYPE.CC:
       return `bg-blue-600`;
     case CRITERIA_TYPE.LR:
-      return `bg-indigo-600`;
+      return `bg-red-600`;
     case CRITERIA_TYPE.GR:
       return `bg-yellow-600`;
   }
@@ -34,7 +34,7 @@ export const IssueCard = (props: IssueCardProps) => {
       >
         <div className="flex items-center">
           <span
-            className={`h-2 w-2 ${mapCriteriaToTWColor(
+            className={`h-2 w-2 shadow-sm ${mapCriteriaToTWColor(
               props.issue.affects
             )} rounded-full`}
           />
