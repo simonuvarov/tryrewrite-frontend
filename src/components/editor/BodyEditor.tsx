@@ -34,10 +34,7 @@ const BodyEditor = () => {
 
   const { issues, clearIssues } = useIssuesStore();
 
-  const { body, setBody } = usePaperStore(state => ({
-    body: state.body,
-    setBody: state.setBody
-  }));
+  const { paper, setPaper } = usePaperStore();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 
@@ -61,7 +58,7 @@ const BodyEditor = () => {
 
       const paragraphRanges: Array<[number, number]> = [];
       let offset = 0;
-      body.split('\n').map((p: string) => {
+      paper.body.split('\n').map((p: string) => {
         const start = offset;
         const end = offset + p.length + '\n'.length;
         paragraphRanges.push([start, end]);
@@ -104,9 +101,9 @@ const BodyEditor = () => {
   return (
     <Slate
       editor={editor}
-      value={deserialize(body)}
+      value={deserialize(paper.body)}
       onChange={value => {
-        setBody(serialize(value));
+        setPaper({ question: paper.question, body: serialize(value) });
       }}
     >
       <Editable

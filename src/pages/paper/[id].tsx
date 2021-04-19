@@ -17,35 +17,28 @@ export function Edit() {
 
   const router = useRouter();
   const { id } = router.query;
-  const { body, setBody, question, setQuestion } = usePaperStore();
+  const { paper, setPaper } = usePaperStore();
 
   const { setIssues } = useIssuesStore();
   const { setBands } = useBandsStore();
 
-  const debouncedQuestionValue = useDebounce(question, 500);
-  const debouncedBodyValue = useDebounce(body, 500);
+  const debouncedPaperValue = useDebounce(paper, 500);
 
   useEffect(() => {
     if (!id) return;
     paperService.getPaper(id as string).then(r => {
-      setQuestion(r.data.question);
-      setBody(r.data.body);
+      setPaper(r.data);
     });
   }, [id]);
 
   useEffect(() => {
     if (!id) return;
-    if (body === '') return;
-    paperService
-      .gradePaper(id as string, {
-        question: debouncedQuestionValue,
-        body: debouncedBodyValue
-      })
-      .then(r => {
-        setIssues(r.data.issues);
-        setBands(r.data.bands);
-      });
-  }, [debouncedBodyValue, debouncedQuestionValue]);
+    if (paper.body === '') return;
+    paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
+      setIssues(r.data.issues);
+      setBands(r.data.bands);
+    });
+  }, [debouncedPaperValue]);
 
   if (loading || !id) return <p>Loading...</p>;
   return (
@@ -55,8 +48,8 @@ export function Edit() {
           <div className="block focus:outline-none text-md  font-medium text-gray-700">
             <QuestionEditor
               placeholder="Question..."
-              value={question}
-              setValue={setQuestion}
+              value={paper?.question}
+              setValue={q => setPaper({ question: q, body: paper.body })}
             />
           </div>
           <div className="mt-8 text-gray-800">

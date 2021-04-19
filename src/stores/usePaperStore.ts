@@ -1,15 +1,11 @@
 import create, { State } from 'zustand';
 
 interface PaperStoreProps extends State {
-  question: string;
-  setQuestion: (q: string) => void;
-  body: string;
-  setBody: (b: string) => void;
+  paper: { question: string; body: string };
+  setPaper: (paper: { question: string; body: string }) => void;
 }
 
 export const usePaperStore = create<PaperStoreProps>(set => ({
-  question: '',
-  body: '',
-  setQuestion: (q: string) => set({ question: q }),
-  setBody: (b: string) => set({ body: b })
+  paper: { question: '', body: '' },
+  setPaper: (paper: { question: string; body: string }) => set({ paper: paper })
 }));
