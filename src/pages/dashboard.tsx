@@ -70,7 +70,7 @@ export function Edit() {
           </div>
           <div className="flex flex-col w-full max-w-2xl">
             {papers?.map((paper: any) => (
-              <PaperCard paper={paper} />
+              <PaperCard paper={paper} key={paper.id} />
             ))}
           </div>
         </div>

@@ -8,7 +8,7 @@ export const Sidebar = () => {
     <div className="w-full">
       <OverallBand score={bands.overall} />
       {issues.map(i => (
-        <IssueCard issue={i} />
+        <IssueCard issue={i} key={JSON.stringify(i.message)} />
       ))}
     </div>
   );
