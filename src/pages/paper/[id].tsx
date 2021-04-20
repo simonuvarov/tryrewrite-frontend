@@ -52,7 +52,7 @@ export function Edit() {
       <div className="flex w-full">
         <NoScrollbarContainer>
           {paper ? (
-            <div className="max-w-xl w-full mt-20 px-2 mx-auto">
+            <div className="max-w-2xl w-full mt-20 px-2 mx-auto">
               <QuestionEditor
                 placeholder="Question..."
                 value={paper?.question}
