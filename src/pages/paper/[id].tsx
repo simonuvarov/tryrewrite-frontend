@@ -2,6 +2,7 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
 import BodyEditor from '../../components/editor/BodyEditor';
 import { QuestionEditor } from '../../components/editor/QuestionEditor';
+import { NoScrollbarContainer } from '../../components/NoScrollbar';
 import { Sidebar } from '../../components/Sidebar';
 import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
@@ -48,42 +49,31 @@ export function Edit() {
   if (loading) return <p>Loading...</p>;
   return (
     <div className="flex min-h-full">
-      <div className="flex w-full justify-center overflow-y-scroll no-scrollbar h-screen">
-        {paper ? (
-          <div className="max-w-xl w-full mt-20">
-            <div className="block focus:outline-none text-md  font-medium text-gray-700">
+      <div className="flex w-full">
+        <NoScrollbarContainer>
+          {paper ? (
+            <div className="max-w-xl w-full mt-20 px-2 mx-auto">
               <QuestionEditor
                 placeholder="Question..."
                 value={paper?.question}
                 setValue={q => setPaper({ question: q, body: paper.body })}
               />
+              <div className="mt-8 text-gray-800 pb-32">
+                <BodyEditor />
+              </div>
             </div>
-            <div className="mt-8 text-gray-800">
-              <BodyEditor />
-            </div>
-          </div>
-        ) : (
-          <p>Loading paper...</p>
-        )}
+          ) : (
+            <p>Loading paper...</p>
+          )}
+        </NoScrollbarContainer>
       </div>
-      <aside className="flex max-w-lg w-full">
-        <div className="overflow-y-scroll h-screen sticky w-full no-scrollbar">
-          <div className="mr-6 mt-20">
+      <div className="flex max-w-lg w-full">
+        <NoScrollbarContainer>
+          <aside className="flex  mr-6 mt-20 pb-32">
             <Sidebar />
-          </div>
-        </div>
-      </aside>
-      <style jsx>{`
-        /* Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-
-        .no-scrollbar {
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
-        }
-      `}</style>
+          </aside>
+        </NoScrollbarContainer>
+      </div>
     </div>
   );
 }

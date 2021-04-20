@@ -34,7 +34,7 @@ export const Sidebar = () => {
     );
 
   return (
-    <div className="w-full pb-32">
+    <div className="w-full">
       <div className="flex justify-center items-center">
         <span className="text-lg text-medium text-gray-500">Overall Band:</span>
         <span className="ml-3 text-3xl font-bold text-gray-800">
