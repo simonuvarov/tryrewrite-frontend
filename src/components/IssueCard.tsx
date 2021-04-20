@@ -1,8 +1,4 @@
-import {
-  ExternalLinkIcon,
-  MinusIcon,
-  SelectorIcon
-} from '@heroicons/react/solid';
+import { ExternalLinkIcon } from '@heroicons/react/solid';
 import { useState } from 'react';
 import { CRITERIA_TYPE, Issue } from '../services/paper.service';
 
@@ -27,9 +23,9 @@ export const IssueCard = (props: IssueCardProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex flex-col justify-start py-4 px-6 border rounded-lg shadow-sm mt-5">
+    <div className="flex flex-col justify-start py-4 px-6 border border-gray-200 rounded-md mx-4 mt-5 bg-white">
       <div
-        className="flex justify-between items-center mb-2 cursor-pointer "
+        className="flex justify-between items-center cursor-pointer "
         onClick={() => setOpen(!open)}
       >
         <div className="flex items-center">
@@ -38,26 +34,12 @@ export const IssueCard = (props: IssueCardProps) => {
               props.issue.affects
             )} rounded-full`}
           />
-          <span className="ml-3 text-xs leading-5 text-gray-400 font-medium uppercase">
-            {props.issue.affects}
+          <span className={`ml-3 text-sm leading-5 text-medium text-gray-900`}>
+            {props.issue.shortMessage.length === 0
+              ? 'Some temp message'
+              : props.issue.shortMessage}
           </span>
         </div>
-        {open ? (
-          <MinusIcon className="h-5 text-gray-400" />
-        ) : (
-          <SelectorIcon className="h-5 text-gray-400" />
-        )}
-      </div>
-      <div>
-        <span
-          className={`ml-5 text-sm leading-5 text-gray-800 ${
-            open ? 'font-medium' : ''
-          }`}
-        >
-          {props.issue.shortMessage.length === 0
-            ? 'Some temp message'
-            : props.issue.shortMessage}
-        </span>
       </div>
       {open && (
         <div className="mt-2">
@@ -65,7 +47,7 @@ export const IssueCard = (props: IssueCardProps) => {
             {props.issue.message}
           </div>
           {props.issue.link && (
-            <div className="ml-5 block text-sm font-medium leading-6 text-gray-500 hover:text-gray-700 mt-3">
+            <div className="ml-5 block text-xs font-medium leading-6 text-gray-500 hover:text-gray-700 mt-3">
               <a
                 href={props.issue.link}
                 target="_blank"
