@@ -1,37 +1,35 @@
 import { RenderLeafProps } from 'slate-react';
 import { CRITERIA_TYPE } from '../../services/paper.service';
 
-export const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
-  switch (leaf.affects) {
-    case CRITERIA_TYPE.LR:
-      return (
-        <span {...attributes} className="border-b-2 border-red-500">
-          {children}
-        </span>
-      );
-    case CRITERIA_TYPE.CC:
-      return (
-        <span {...attributes} className="border-b-2  border-blue-500">
-          {children}
-        </span>
-      );
+const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
+  switch (criteria) {
     case CRITERIA_TYPE.TA:
-      return (
-        <span {...attributes} className="border-b-2  border-green-500">
-          {children}
-        </span>
-      );
+      return `border-green-600`;
+    case CRITERIA_TYPE.CC:
+      return `border-blue-500`;
+    case CRITERIA_TYPE.LR:
+      return `border-red-500`;
     case CRITERIA_TYPE.GR:
-      return (
-        <span {...attributes} className="border-b-2  border-yellow-500">
-          {children}
-        </span>
-      );
-    default:
-      return (
-        <span {...attributes} className="">
-          {children}
-        </span>
-      );
+      return `border-yellow-500`;
   }
+};
+
+export const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
+  if (leaf.affects)
+    return (
+      <span
+        {...attributes}
+        className={`border-b-2 ${mapCriteriaToTWColor(
+          leaf.affects! as CRITERIA_TYPE // TODO: fix types
+        )}`}
+      >
+        {children}
+      </span>
+    );
+
+  return (
+    <span {...attributes} className="">
+      {children}
+    </span>
+  );
 };
