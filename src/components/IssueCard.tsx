@@ -28,7 +28,9 @@ const Label = ({ type }: LabelProps) => {
   }
 
   return (
-    <div className={`inline w-full rounded text-xs py-1 px-2 ${colors}`}>
+    <div
+      className={`inline w-full rounded text-xs py-1 px-2 uppercase font-semibold tracking-wide ${colors}`}
+    >
       {type}
     </div>
   );
