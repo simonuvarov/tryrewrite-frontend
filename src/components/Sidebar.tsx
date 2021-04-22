@@ -34,16 +34,18 @@ export const Sidebar = () => {
     );
 
   return (
-    <div className="w-full">
+    <div className="">
       <div className="flex justify-center items-center">
         <span className="text-lg text-medium text-gray-500">Overall Band:</span>
         <span className="ml-3 text-3xl font-bold text-gray-800">
           {bands.overall}
         </span>
       </div>
-      {issues.map(i => (
-        <IssueCard issue={i} key={JSON.stringify(i.message)} />
-      ))}
+      <ul className="space-y-8">
+        {issues.map(i => (
+          <IssueCard issue={i} />
+        ))}
+      </ul>
     </div>
   );
 };

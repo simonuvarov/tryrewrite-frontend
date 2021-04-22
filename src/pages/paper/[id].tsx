@@ -67,9 +67,9 @@ export function Edit() {
           )}
         </NoScrollbarContainer>
       </div>
-      <div className="flex max-w-md w-full bg-white px-4">
+      <div className="flex bg-white px-4">
         <NoScrollbarContainer>
-          <aside className="flex mt-20 pb-32">
+          <aside className="flex mt-20 pb-32 justify-end">
             <Sidebar />
           </aside>
         </NoScrollbarContainer>
