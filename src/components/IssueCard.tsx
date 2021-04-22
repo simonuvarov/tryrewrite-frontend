@@ -17,7 +17,7 @@ const Label = ({ type }: LabelProps) => {
       colors = `bg-blue-100 text-blue-700`;
       break;
     case CRITERIA_TYPE.CC:
-      colors = `bg-indigo-100 text-indigo-700`;
+      colors = `bg-purple-100 text-purple-700`;
       break;
     case CRITERIA_TYPE.LR:
       colors = `bg-red-100 text-red-700`;
@@ -49,7 +49,7 @@ const SuggestionButton = ({ type }: SuggestionButtonProps) => {
       colors = `bg-blue-100 text-blue-700`;
       break;
     case CRITERIA_TYPE.CC:
-      colors = `bg-indigo-100 text-indigo-700`;
+      colors = `bg-purple-100 text-purple-700`;
       break;
     case CRITERIA_TYPE.LR:
       colors = `bg-red-100 text-red-700`;

@@ -6,7 +6,7 @@ const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
     case CRITERIA_TYPE.TA:
       return `border-blue-300`;
     case CRITERIA_TYPE.CC:
-      return `border-indigo-300`;
+      return `border-purple-300`;
     case CRITERIA_TYPE.LR:
       return `border-red-300`;
     case CRITERIA_TYPE.GR:
