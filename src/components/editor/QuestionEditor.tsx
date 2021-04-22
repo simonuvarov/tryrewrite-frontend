@@ -4,13 +4,16 @@ interface QuestionEditorProps {
   placeholder: string;
   value: string;
   setValue: (value: string) => void;
+  className?: string;
 }
 
 export const QuestionEditor = (props: QuestionEditorProps) => {
   return (
     <Textarea
       placeholder={props.placeholder}
-      className="focus:outline-none w-full resize-none font-medium leading-7 text-gray-800"
+      className={`focus:outline-none w-full resize-none ${
+        props.className ? props.className : ''
+      }`}
       onChange={e => {
         props.setValue(e.target.value);
       }}

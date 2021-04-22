@@ -9,6 +9,10 @@ import { Element } from './Element';
 import { Leaf } from './Leaf';
 import { serialize } from './serialize';
 
+interface BodyEditorProps {
+  className?: string;
+}
+
 const isSystemKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
   if (e.ctrlKey || e.altKey || e.metaKey) return true;
   if (
@@ -29,7 +33,7 @@ const isSystemKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
   return false;
 };
 
-const BodyEditor = () => {
+const BodyEditor = (props: BodyEditorProps) => {
   const [hasMounted, setHasMounted] = useState(false);
 
   const { issues, setIssues } = useGraderResultStore();
@@ -111,7 +115,7 @@ const BodyEditor = () => {
       <Editable
         placeholder="Enter some plain text..."
         spellCheck={false}
-        className="min-h-full"
+        className={props.className}
         decorate={decorate}
         renderLeaf={renderLeaf}
         renderElement={renderElement}

@@ -54,13 +54,12 @@ export function Edit() {
           {paper ? (
             <div className="max-w-2xl w-full mt-20 px-2 mx-auto">
               <QuestionEditor
+                className="text-lg leading-loose font-medium text-gray-800"
                 placeholder="Question..."
                 value={paper?.question}
                 setValue={q => setPaper({ question: q, body: paper.body })}
               />
-              <div className="mt-8 text-gray-800 pb-32">
-                <BodyEditor />
-              </div>
+              <BodyEditor className="min-h-full space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
             </div>
           ) : (
             <p>Loading paper...</p>
