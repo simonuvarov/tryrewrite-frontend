@@ -36,33 +36,35 @@ const Label = ({ type }: LabelProps) => {
   );
 };
 
-interface SuggestionButtonProps {
+interface ReplacementProps {
   type: CRITERIA_TYPE;
   value: string;
 }
 
-const SuggestionButton = ({ type }: SuggestionButtonProps) => {
+const Replacement = ({ type, value }: ReplacementProps) => {
   let colors: string;
 
   switch (type) {
     case CRITERIA_TYPE.TA:
-      colors = `bg-blue-100 text-blue-700`;
+      colors = `bg-blue-500 text-white`;
       break;
     case CRITERIA_TYPE.CC:
-      colors = `bg-purple-100 text-purple-700`;
+      colors = `bg-purple-500 text-white`;
       break;
     case CRITERIA_TYPE.LR:
-      colors = `bg-red-100 text-red-700`;
+      colors = `bg-red-500 text-white`;
       break;
     case CRITERIA_TYPE.GR:
-      colors = `bg-yellow-100 text-yellow-700`;
+      colors = `bg-yellow-500 text-white`;
       break;
   }
 
   return (
-    <div className={`inline w-full rounded text-xs py-1 px-2 ${colors}`}>
-      {type}
-    </div>
+    <li
+      className={`inline rounded py-2 px-3 cursor-pointer text-base lieading-6 font-medium transition-shadow duration-75 hover:shadow-md ${colors}`}
+    >
+      {value}
+    </li>
   );
 };
 
@@ -81,6 +83,13 @@ export const IssueCard = (props: IssueCardProps) => {
           {props.issue.message}
         </p>
       </div>
+      {props.issue.isInline && props.issue.replacements && (
+        <ul className=" space-x-2 mt-4">
+          {props.issue.replacements.map(r => (
+            <Replacement value={r} type={props.issue.affects} />
+          ))}
+        </ul>
+      )}
       {props.issue.link && (
         <a
           href={props.issue.link}
