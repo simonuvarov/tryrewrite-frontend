@@ -4,13 +4,13 @@ import { CRITERIA_TYPE } from '../../services/paper.service';
 const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
   switch (criteria) {
     case CRITERIA_TYPE.TA:
-      return `border-green-600`;
+      return `border-blue-300`;
     case CRITERIA_TYPE.CC:
-      return `border-blue-500`;
+      return `border-indigo-300`;
     case CRITERIA_TYPE.LR:
-      return `border-red-500`;
+      return `border-red-300`;
     case CRITERIA_TYPE.GR:
-      return `border-yellow-500`;
+      return `border-yellow-300`;
   }
 };
 
@@ -19,7 +19,7 @@ export const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
     return (
       <span
         {...attributes}
-        className={`border-b-2 ${mapCriteriaToTWColor(
+        className={`border-b-4 ${mapCriteriaToTWColor(
           leaf.affects! as CRITERIA_TYPE // TODO: fix types
         )}`}
       >
