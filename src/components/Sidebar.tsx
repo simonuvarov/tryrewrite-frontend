@@ -13,23 +13,35 @@ export const Sidebar = () => {
           </span>
           <span className="ml-3 text-3xl font-bold text-gray-800">0.0</span>
         </div>
-        <div className="animate-pulse flex flex-col space-y-8 mt-5">
-          <div className="flex-1 space-y-4 py-1">
-            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-            <div className="h-4 bg-gray-200 rounded"></div>
-            <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-          </div>
-          <div className="flex-1 space-y-4 py-1">
-            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-            <div className="h-4 bg-gray-200 rounded"></div>
-            <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-          </div>
-          <div className="flex-1 space-y-4 py-1">
-            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-            <div className="h-4 bg-gray-200 rounded"></div>
-            <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-          </div>
-        </div>
+        <ul className="animate-pulse flex flex-col space-y-8 mt-5">
+          <li className="px-12 py-8 border border-gray-100 shadow-sm rounded-lg">
+            <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+            <div className="mt-4 space-y-1">
+              <h3 className="h-5 bg-gray-200 rounded w-3/4"></h3>
+              <p className=" w-96 h-5 bg-gray-200 rounded"></p>
+              <p className=" w-96 h-5 bg-gray-200 rounded"></p>
+              <p className=" w-64 h-5 bg-gray-200 rounded"></p>
+            </div>
+          </li>
+          <li className="px-12 py-8 border border-gray-100 shadow-sm rounded-lg">
+            <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+            <div className="mt-4 space-y-1">
+              <h3 className="h-5 bg-gray-200 rounded w-3/4"></h3>
+              <p className=" w-96 h-5 bg-gray-200 rounded"></p>
+              <p className=" w-96 h-5 bg-gray-200 rounded"></p>
+              <p className=" w-64 h-5 bg-gray-200 rounded"></p>
+            </div>
+          </li>
+          <li className="px-12 py-8 border border-gray-100 shadow-sm rounded-lg">
+            <div className="h-5 bg-gray-200 rounded w-3/4"></div>
+            <div className="mt-4 space-y-1">
+              <h3 className="h-5 bg-gray-200 rounded w-3/4"></h3>
+              <p className=" w-96 h-5 bg-gray-200 rounded"></p>
+              <p className=" w-96 h-5 bg-gray-200 rounded"></p>
+              <p className=" w-64 h-5 bg-gray-200 rounded"></p>
+            </div>
+          </li>
+        </ul>
       </div>
     );
 
