@@ -1,5 +1,6 @@
 import { RenderLeafProps } from 'slate-react';
 import { CRITERIA_TYPE } from '../../services/paper.service';
+import { useAssistantStore } from '../../stores/useAssistantStore';
 
 const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
   switch (criteria) {
@@ -15,13 +16,20 @@ const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
 };
 
 export const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
+  const { isShowing } = useAssistantStore();
   if (leaf.affects)
     return (
       <span
         {...attributes}
-        className={`border-b-4 ${mapCriteriaToTWColor(
-          leaf.affects! as CRITERIA_TYPE // TODO: fix types
-        )}`}
+        className={`${
+          isShowing
+            ? 'border-b-4' +
+              ' ' +
+              mapCriteriaToTWColor(
+                leaf.affects! as CRITERIA_TYPE // TODO: fix types
+              )
+            : ''
+        }`}
       >
         {children}
       </span>
