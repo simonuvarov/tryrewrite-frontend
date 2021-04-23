@@ -71,7 +71,7 @@ export function Edit() {
         </NoScrollbarContainer>
       </div>
       <button
-        className="absolute right-4 top-4 hover:bg-gray-100 text-gray-500 px-4 py-2 rounded text-sm outline-none focus:outline-none"
+        className="absolute right-4 top-4 bg-white shadow-lg border border-gray-50 hover:bg-gray-50 text-gray-500 px-4 py-2 rounded-full text-sm outline-none focus:outline-none"
         onClick={toggleShowing}
       >
         Toggle Assistant
