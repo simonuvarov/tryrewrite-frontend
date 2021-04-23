@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react';
 import { useRouter } from 'next/dist/client/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import BodyEditor from '../../components/editor/BodyEditor';
 import { QuestionEditor } from '../../components/editor/QuestionEditor';
 import { NoScrollbarContainer } from '../../components/NoScrollbar';
@@ -8,6 +8,7 @@ import { Sidebar } from '../../components/Sidebar';
 import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
 import paperService from '../../services/paper.service';
+import { useAssistantStore } from '../../stores/useAssistantStore';
 import { useGraderResultStore } from '../../stores/useGradeResultStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 
@@ -16,7 +17,7 @@ export function Edit() {
     redirectTo: '/signin'
   });
 
-  const [showing, setShowing] = useState(true);
+  const { toggleShowing, isShowing } = useAssistantStore();
 
   const router = useRouter();
   const { id } = router.query;
@@ -71,12 +72,12 @@ export function Edit() {
       </div>
       <button
         className="absolute right-4 top-4 hover:bg-gray-100 text-gray-500 px-4 py-2 rounded text-sm outline-none focus:outline-none"
-        onClick={() => setShowing(isShowing => !isShowing)}
+        onClick={toggleShowing}
       >
         Toggle Assistant
       </button>
       <Transition
-        show={showing}
+        show={isShowing}
         enter="transition-transform duration-300"
         enterFrom="translate-x-full transform"
         enterTo="translate-x-0"
