@@ -1,5 +1,6 @@
+import { Transition } from '@headlessui/react';
 import { useRouter } from 'next/dist/client/router';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import BodyEditor from '../../components/editor/BodyEditor';
 import { QuestionEditor } from '../../components/editor/QuestionEditor';
 import { NoScrollbarContainer } from '../../components/NoScrollbar';
@@ -14,6 +15,8 @@ export function Edit() {
   const { loading } = useForceAuth({
     redirectTo: '/signin'
   });
+
+  const [showing, setShowing] = useState(true);
 
   const router = useRouter();
   const { id } = router.query;
@@ -49,7 +52,7 @@ export function Edit() {
   if (loading) return <p>Loading...</p>;
   return (
     <div className="flex min-h-full">
-      <div className="flex w-full">
+      <div className="w-full">
         <NoScrollbarContainer>
           {paper ? (
             <div className="max-w-2xl w-full mt-20 px-2 mx-auto">
@@ -66,13 +69,29 @@ export function Edit() {
           )}
         </NoScrollbarContainer>
       </div>
-      <div className="flex bg-white px-4">
-        <NoScrollbarContainer>
-          <aside className="flex mt-20 pb-32 justify-end">
-            <Sidebar />
-          </aside>
-        </NoScrollbarContainer>
-      </div>
+      <button
+        className="absolute right-4 top-4 hover:bg-gray-100 text-gray-500 px-4 py-2 rounded text-sm outline-none focus:outline-none"
+        onClick={() => setShowing(isShowing => !isShowing)}
+      >
+        Toggle Assistant
+      </button>
+      <Transition
+        show={showing}
+        enter="transition-transform duration-300"
+        enterFrom="translate-x-full transform"
+        enterTo="translate-x-0"
+        leave="transition-transform duration-300"
+        leaveFrom="translate-0"
+        leaveTo="translate-x-full transform"
+      >
+        <div className="">
+          <NoScrollbarContainer>
+            <aside className="flex mt-20 pb-32 justify-end">
+              <Sidebar />
+            </aside>
+          </NoScrollbarContainer>
+        </div>
+      </Transition>
     </div>
   );
 }
