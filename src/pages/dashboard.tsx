@@ -52,8 +52,8 @@ export function Edit() {
           </nav>
         </div>
       </header>
-      <div className="flex justify-center bg-gray-100 min-h-screen pt-10">
-        <div className="flex flex-col">
+      <div className="flex justify-center bg-gray-50 min-h-screen pt-10">
+        <div className="flex flex-col pb-20">
           <div className="flex justify-between items-center">
             <h3 className="text-xl leading-6 font-medium text-gray-900">
               Papers
@@ -68,8 +68,8 @@ export function Edit() {
               </button>
             </div>
           </div>
-          <div className="flex flex-col w-full max-w-4xl bg-white shadow rounded-md overflow-hidden mt-2">
-            <ul className="divide-y divide-gray-200">
+          <div className="flex flex-col w-full mt-6">
+            <ul className="space-y-6">
               {papers?.map((paper: any) => (
                 <PaperCard paper={paper} key={paper.id} />
               ))}

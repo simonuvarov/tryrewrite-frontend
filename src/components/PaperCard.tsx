@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import moment from 'moment';
 import Link from 'next/link';
 import { Paper } from '../services/paper.service';
 
@@ -10,20 +10,21 @@ export const PaperCard = (props: PaperCardProps) => {
   return (
     <Link href={`/paper/${props.paper.id}`}>
       <li key={props.paper.id}>
-        <div className="flex items-center justify-between px-5 py-5 transition-colors duration-75 hover:bg-gray-50 cursor-pointer">
-          <div>
-            <h2 className="text-gray-900 text-sm font-medium line-clamp-1">
-              {props.paper.question}
-            </h2>
-            <p className="text-gray-700 text-sm  mt-1 line-clamp-2">
-              {props.paper.body}
+        <div className="max-w-lg w-full bg-white rounded-lg shadow px-12 py-8 cursor-pointer">
+          <h2 className="w-auto font-semibold text-lg line-clamp-2 text-gray-900">
+            {props.paper.question}
+          </h2>
+          <p className="w-auto line-clamp-2 text-gray-700 leading-6 mt-1">
+            {props.paper.body}
+          </p>
+          <div className="flex space-x-2 items-center mt-6">
+            <p className="text-gray-400 text-xs">
+              You edited <time>{moment(props.paper.updatedAt).fromNow()}</time>
             </p>
-          </div>
-          <div>
-            <ChevronRightIcon
-              className="h-6 w-6 text-gray-400"
-              aria-hidden="true"
-            />
+            <p className="text-gray-400 text-xs">•</p>
+            <p className="text-gray-400 text-xs">
+              created <time>{moment(props.paper.updatedAt).fromNow()}</time>
+            </p>
           </div>
         </div>
       </li>
