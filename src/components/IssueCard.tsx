@@ -14,23 +14,21 @@ const Label = ({ type }: LabelProps) => {
 
   switch (type) {
     case CRITERIA_TYPE.TA:
-      colors = `bg-blue-100 text-blue-700`;
+      colors = `text-blue-600`;
       break;
     case CRITERIA_TYPE.CC:
-      colors = `bg-purple-100 text-purple-700`;
+      colors = `text-purple-600`;
       break;
     case CRITERIA_TYPE.LR:
-      colors = `bg-red-100 text-red-700`;
+      colors = `text-red-600`;
       break;
     case CRITERIA_TYPE.GR:
-      colors = `bg-yellow-100 text-yellow-700`;
+      colors = `text-yellow-600`;
       break;
   }
 
   return (
-    <div
-      className={`inline w-full rounded text-xs py-1 px-2 uppercase font-semibold tracking-wide ${colors}`}
-    >
+    <div className={`inline w-full rounded text-sm sfont-medium ${colors}`}>
       {type}
     </div>
   );
@@ -72,7 +70,7 @@ export const IssueCard = (props: IssueCardProps) => {
   return (
     <li
       key={props.issue.message + props.issue.shortMessage}
-      className="px-12 py-8 border border-gray-100 shadow-sm rounded-lg"
+      className="px-12 py-8 border border-gray-200 bg-white shadow-sm rounded-lg"
     >
       <Label type={props.issue.affects} />
       <div className="mt-4 space-y-1">
