@@ -52,7 +52,7 @@ export function Edit() {
 
   if (loading) return <p>Loading...</p>;
   return (
-    <div className="flex min-h-full">
+    <div className="flex min-h-full px-4">
       <div className="w-full">
         <NoScrollbarContainer>
           {paper ? (
