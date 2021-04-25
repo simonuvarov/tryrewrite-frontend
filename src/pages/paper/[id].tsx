@@ -56,9 +56,9 @@ export function Edit() {
       <div className="w-full">
         <NoScrollbarContainer>
           {paper ? (
-            <div className="max-w-2xl w-full mt-20 px-2 mx-auto">
+            <div className="max-w-3xl w-full mt-20 px-2 mx-auto">
               <QuestionEditor
-                className="text-lg leading-loose font-medium text-gray-800"
+                className="text-xl leading-loose font-medium text-gray-800"
                 placeholder="Question..."
                 value={paper?.question}
                 setValue={q => setPaper({ question: q, body: paper.body })}
