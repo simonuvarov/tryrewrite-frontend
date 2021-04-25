@@ -11,7 +11,7 @@ export const QuestionEditor = (props: QuestionEditorProps) => {
   return (
     <Textarea
       placeholder={props.placeholder}
-      className={`focus:outline-none w-full resize-none ${
+      className={`focus:outline-none w-full resize-none bg-transparent ${
         props.className ? props.className : ''
       }`}
       onChange={e => {
