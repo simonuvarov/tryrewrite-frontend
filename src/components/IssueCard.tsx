@@ -1,4 +1,5 @@
 import { ChevronRightIcon } from '@heroicons/react/solid';
+import { useState } from 'react';
 import { CRITERIA_TYPE, Issue } from '../services/paper.service';
 
 interface IssueCardProps {
@@ -67,6 +68,8 @@ const Replacement = ({ type, value }: ReplacementProps) => {
 };
 
 export const IssueCard = (props: IssueCardProps) => {
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <li
       key={props.issue.message + props.issue.shortMessage}
@@ -74,21 +77,28 @@ export const IssueCard = (props: IssueCardProps) => {
     >
       <Label type={props.issue.affects} />
       <div className="mt-4 space-y-1">
-        <h3 className="text-lg leading-6 font-medium text-gray-800">
+        <h3
+          className="text-lg leading-6 font-medium text-gray-800 cursor-pointer"
+          onClick={() => setExpanded(!expanded)}
+        >
           {props.issue.shortMessage}
         </h3>
-        <p className=" w-96 text-base leading-7 font-normal text-gray-700">
+        <p
+          className={`w-96 text-base leading-7 font-normal text-gray-700 ${
+            expanded ? '' : 'line-clamp-1'
+          }`}
+        >
           {props.issue.message}
         </p>
       </div>
-      {props.issue.isInline && props.issue.replacements && (
+      {props.issue.isInline && props.issue.replacements && expanded && (
         <ul className=" space-x-2 mt-4">
           {props.issue.replacements.map(r => (
             <Replacement value={r} type={props.issue.affects} />
           ))}
         </ul>
       )}
-      {props.issue.link && (
+      {props.issue.link && expanded && (
         <a
           href={props.issue.link}
           className="flex items-center mt-5"
