@@ -35,7 +35,7 @@ export const IssueCard = (props: IssueCardProps) => {
         </p>
       </div>
       {props.issue.isInline && props.issue.replacements && expanded && (
-        <ul className=" space-x-2 mt-4">
+        <ul className="flex space-x-2 mt-4">
           {props.issue.replacements.map(r => (
             <Replacement value={r} type={props.issue.affects} />
           ))}
