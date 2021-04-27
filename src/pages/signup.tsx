@@ -26,7 +26,9 @@ const SigninForm = (props: SigninFormProps) => {
         signup({
           email,
           password
-        }).then(() => router.push(props.redirectTo));
+        })
+          .then(() => router.push(props.redirectTo))
+          .catch(e => alert(e.response.data.message));
       }}
     >
       <div className="space-y-6">
