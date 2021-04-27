@@ -47,7 +47,7 @@ export const Sidebar = () => {
 
   return (
     <div className="">
-      <div className="flex flex-col justify-center items-center rounded-lg border border-gray-100 bg-gray-50 shadow-sm py-6">
+      <div className="flex flex-col justify-center items-center py-6">
         <span className="text-xl text-medium text-gray-500">Overall</span>
         <span className="ml-3 font-bold text-gray-600 text-7xl">
           {parseFloat(bands.overall.toString()).toFixed(1)}
