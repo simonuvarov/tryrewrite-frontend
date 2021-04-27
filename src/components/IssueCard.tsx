@@ -74,8 +74,10 @@ export const IssueCard = (props: IssueCardProps) => {
 
   return (
     <li
-      key={props.issue.message + props.issue.shortMessage}
-      className="px-12 py-8 border border-gray-200 bg-white shadow-sm rounded-lg"
+      key={props.issue.id}
+      className={`px-12 py-8 border border-gray-100 bg-white transition-shadow ${
+        expanded ? 'expanded-shadow' : 'collapsed-shadow'
+      } rounded-lg`}
       onClick={setExpanded}
     >
       <Label type={props.issue.affects} />
@@ -111,6 +113,15 @@ export const IssueCard = (props: IssueCardProps) => {
           <ChevronRightIcon className="h-5 w-5 text-gray-400" />
         </a>
       )}
+      <style jsx>{`
+        .expanded-shadow {
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px;
+        }
+
+        .collapsed-shadow {
+          box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+        }
+      `}</style>
     </li>
   );
 };

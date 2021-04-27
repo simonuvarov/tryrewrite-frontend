@@ -53,7 +53,7 @@ export const Sidebar = () => {
           {parseFloat(bands.overall.toString()).toFixed(1)}
         </span>
       </div>
-      <ul className="space-y-8 mt-8">
+      <ul className="space-y-8 mt-8 px-12">
         {issues.map(i => (
           <IssueCard issue={i} />
         ))}
