@@ -61,7 +61,7 @@ export const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
               )
             : ''
         } ${
-          expanded
+          expanded && isShowing
             ? getBackgroundColorFromCriteria(leaf.affects as CRITERIA_TYPE)
             : 'bg-white'
         }`}
