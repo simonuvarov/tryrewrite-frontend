@@ -1,5 +1,5 @@
 import { useGraderResultStore } from '../stores/useGradeResultStore';
-import { IssueCard } from './IssueCard';
+import { IssueCard } from './issue-card/IssueCard';
 
 export const Sidebar = () => {
   const { issues, bands } = useGraderResultStore();
