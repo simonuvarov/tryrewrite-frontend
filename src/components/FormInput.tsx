@@ -20,12 +20,13 @@ export const FormInput = (props: FormInputProps) => {
       </label>
       <input
         id={props.label.toLowerCase()}
-        className="block w-full px-4 py-2 border border-gray-200 rounded text-base leading-8 text-gray-700 outline-none focus:outline-none focus:ring transition-shadows transition mt-2"
+        className="block w-full px-4 py-2 border border-gray-200 rounded-md text-base leading-8 text-gray-700 outline-none focus:outline-none focus:ring transition-shadows transition mt-2"
         value={props.value}
         onChange={props.setValue}
         autoFocus={props.autofocus || false}
         type={props.type || 'text'}
-        spellCheck={props.spellcheck || false} />
+        spellCheck={props.spellcheck || false}
+      />
     </div>
   );
 };
