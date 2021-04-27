@@ -19,6 +19,6 @@ interface GradeResultStore extends State {
 export const useGraderResultStore = create<GradeResultStore>(set => ({
   issues: null,
   setIssues: (issues: Array<Issue> | null) => set({ issues: issues }),
-  bands: { ta: 0, cc: 0, lr: 0, gr: 0, overall: 0 },
+  bands: null,
   setBands: (bands: Bands | null) => set({ bands: bands })
 }));
