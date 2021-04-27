@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from '@heroicons/react/solid';
-import { useState } from 'react';
 import { CRITERIA_TYPE, Issue } from '../services/paper.service';
+import { useAssistantStore } from '../stores/useAssistantStore';
 
 interface IssueCardProps {
   issue: Issue;
@@ -68,19 +68,19 @@ const Replacement = ({ type, value }: ReplacementProps) => {
 };
 
 export const IssueCard = (props: IssueCardProps) => {
-  const [expanded, setExpanded] = useState(false);
+  const { select, selected } = useAssistantStore();
+  const expanded = selected === props.issue.id;
+  const setExpanded = () => select(props.issue.id);
 
   return (
     <li
       key={props.issue.message + props.issue.shortMessage}
       className="px-12 py-8 border border-gray-200 bg-white shadow-sm rounded-lg"
+      onClick={setExpanded}
     >
       <Label type={props.issue.affects} />
       <div className="mt-4 space-y-1">
-        <h3
-          className="text-lg leading-6 font-medium text-gray-800 cursor-pointer"
-          onClick={() => setExpanded(!expanded)}
-        >
+        <h3 className="text-lg leading-6 font-medium text-gray-800 cursor-pointer">
           {props.issue.shortMessage}
         </h3>
         <p

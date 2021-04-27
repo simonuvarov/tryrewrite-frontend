@@ -82,6 +82,7 @@ const BodyEditor = (props: BodyEditorProps) => {
         const end = start + length;
 
         ranges.push({
+          id: issue.id,
           anchor: { path, offset: start },
           focus: { path, offset: end },
           affects: issue.affects

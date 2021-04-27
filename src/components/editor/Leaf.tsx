@@ -1,8 +1,9 @@
+import React, { useEffect } from 'react';
 import { RenderLeafProps } from 'slate-react';
 import { CRITERIA_TYPE } from '../../services/paper.service';
 import { useAssistantStore } from '../../stores/useAssistantStore';
 
-const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
+const getBorderColorFromCriteria = (criteria: CRITERIA_TYPE): string => {
   switch (criteria) {
     case CRITERIA_TYPE.TA:
       return `border-blue-300`;
@@ -15,20 +16,54 @@ const mapCriteriaToTWColor = (criteria: CRITERIA_TYPE): string => {
   }
 };
 
+const getBackgroundColorFromCriteria = (criteria: CRITERIA_TYPE): string => {
+  switch (criteria) {
+    case CRITERIA_TYPE.TA:
+      return `bg-blue-100`;
+    case CRITERIA_TYPE.CC:
+      return `bg-purple-100`;
+    case CRITERIA_TYPE.LR:
+      return `bg-red-100`;
+    case CRITERIA_TYPE.GR:
+      return `bg-yellow-100`;
+  }
+};
+
 export const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
   const { isShowing } = useAssistantStore();
+  const { selected, select } = useAssistantStore();
+
+  const expanded = selected === leaf.id;
+
+  const ref = React.useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (expanded) {
+      console.log('should scroll');
+      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [expanded]);
+
   if (leaf.affects)
     return (
       <span
+        ref={ref}
+        onClick={() => {
+          select(leaf.id as string);
+        }}
         {...attributes}
-        className={`${
+        className={`transition-colors duration-500 ${
           isShowing
             ? 'border-b-4' +
               ' ' +
-              mapCriteriaToTWColor(
+              getBorderColorFromCriteria(
                 leaf.affects! as CRITERIA_TYPE // TODO: fix types
               )
             : ''
+        } ${
+          expanded
+            ? getBackgroundColorFromCriteria(leaf.affects as CRITERIA_TYPE)
+            : 'bg-white'
         }`}
       >
         {children}
