@@ -76,13 +76,13 @@ export const IssueCard = (props: IssueCardProps) => {
     <li
       key={props.issue.id}
       className={`px-12 py-8 border border-gray-100 bg-white transition-shadow ${
-        expanded ? 'expanded-shadow' : 'collapsed-shadow'
+        expanded ? 'expanded-shadow' : 'collapsed-shadow cursor-pointer'
       } rounded-lg`}
       onClick={setExpanded}
     >
       <Label type={props.issue.affects} />
       <div className="mt-4 space-y-1">
-        <h3 className="text-lg leading-6 font-medium text-gray-800 cursor-pointer">
+        <h3 className="text-lg leading-6 font-medium text-gray-800">
           {props.issue.shortMessage}
         </h3>
         <p
