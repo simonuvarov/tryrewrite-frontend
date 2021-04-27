@@ -110,7 +110,9 @@ const BodyEditor = (props: BodyEditorProps) => {
       editor={editor}
       value={deserialize(paper.body)}
       onChange={value => {
-        setPaper({ question: paper.question, body: serialize(value) });
+        if (paper.body != serialize(value)) {
+          setPaper({ question: paper.question, body: serialize(value) });
+        }
       }}
     >
       <Editable
