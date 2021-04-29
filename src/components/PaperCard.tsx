@@ -25,7 +25,7 @@ export const PaperCard = (props: PaperCardProps) => {
         className="hover:bg-gray-50 hover:cursor-pointer flex justify-between items-center"
       >
         <div className="flex flex-col flex-shrink-0 py-4 px-2 max-w-lg w-full">
-          <div className="font-bold truncate text-gray-800">
+          <div className="font-medium truncate text-gray-800">
             {props.paper.question}
           </div>
           <div className="truncate mt-2 text-gray-600">{props.paper.body}</div>
