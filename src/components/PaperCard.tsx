@@ -22,17 +22,15 @@ export const PaperCard = (props: PaperCardProps) => {
     <Link href={`/paper/${props.paper.id}`}>
       <li
         key={props.paper.id}
-        className="hover:bg-gray-50 hover:cursor-pointer flex justify-between items-center pr-4"
+        className="hover:bg-gray-50 hover:cursor-pointer flex justify-between items-center"
       >
-        <div className="py-3">
-          <div className="font-bold max-w-lg truncate text-gray-800">
+        <div className="flex flex-col flex-shrink-0 py-4 px-2 max-w-lg w-full">
+          <div className="font-bold truncate text-gray-800">
             {props.paper.question}
           </div>
-          <div className="max-w-lg truncate mt-2 text-gray-600">
-            {props.paper.body}
-          </div>
+          <div className="truncate mt-2 text-gray-600">{props.paper.body}</div>
         </div>
-        <div className="font-medium text-gray-800 text-lg">
+        <div className="flex font-medium text-gray-800 px-4">
           {parseFloat(props.paper.overallBand.toString()).toFixed(1)}
         </div>
       </li>
