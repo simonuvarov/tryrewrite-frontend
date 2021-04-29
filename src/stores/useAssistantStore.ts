@@ -10,7 +10,7 @@ interface AssistantStoreProps extends State {
 }
 
 export const useAssistantStore = create<AssistantStoreProps>((set, get) => ({
-  isShowing: true,
+  isShowing: false,
   selected: null,
   toggleShowing: () => set({ isShowing: !get().isShowing }),
   show: () => set({ isShowing: true }),
