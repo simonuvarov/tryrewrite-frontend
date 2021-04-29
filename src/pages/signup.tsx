@@ -69,7 +69,6 @@ const SignupForm = (props: SignupFormProps) => {
           onBlur={formik.handleBlur}
           touched={formik.touched.email}
           error={formik.errors.email}
-          autofocus
         />
         <FormInput
           label="Password"

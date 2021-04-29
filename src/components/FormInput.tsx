@@ -5,7 +5,6 @@ interface FormInputProps {
   label: string;
   value: string;
   onChange: OnChange;
-  autofocus?: boolean;
   type?: 'text' | 'email' | 'password';
   spellcheck?: boolean;
   error?: string;
@@ -31,7 +30,6 @@ export const FormInput = (props: FormInputProps) => {
         } transition-shadows transition mt-2`}
         value={props.value}
         onChange={props.onChange}
-        autoFocus={props.autofocus || false}
         onBlur={props.onBlur}
         type={props.type || 'text'}
         spellCheck={props.spellcheck || false}
