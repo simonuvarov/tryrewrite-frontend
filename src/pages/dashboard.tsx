@@ -28,33 +28,27 @@ export function Edit() {
   if (loading || !papers) return <p>Loading...</p>;
   return (
     <div className="flex h-screen overflow-hidden">
-      <aside className="w-60 flex flex-col border-r overflow-auto bg-gray-100 px-4">
+      <aside className="w-60 flex flex-col border-r overflow-auto bg-gray-50 px-4">
         <Logo className="mt-10 px-2" />
         <VerticalMenu className="mt-12" />
       </aside>
-      <main className="flex flex-grow bg-gray-50 p-10 overflow-y-auto">
-        <div className="flex flex-col">
-          <div className="flex justify-between items-baseline">
-            <h3 className="text-xl leading-6 font-medium text-gray-900">
-              Papers
-            </h3>
-            <div className="ml-4 mt-2 flex-shrink-0">
-              <button
-                onClick={handleNewPaperClick}
-                type="button"
-                className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-base rounded-md text-white bg-blue-600 hover:bg-blue-500 leading-4 focus:outline-none "
-              >
-                New paper
-              </button>
-            </div>
+      <main className="flex-1 bg-white p-10 overflow-y-auto">
+        <div className="flex flex-col flex-grow">
+          <div className="flex justify-between items-center">
+            <h1 className="text-2xl font-semibold text-gray-900">Papers</h1>
+            <button
+              onClick={handleNewPaperClick}
+              type="button"
+              className="relative inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-base rounded-md text-white bg-blue-600 hover:bg-blue-500 leading-4 focus:outline-none "
+            >
+              New paper
+            </button>
           </div>
-          <div className="flex flex-col w-full mt-6">
-            <ul className="space-y-6">
-              {papers?.map((paper: any) => (
-                <PaperCard paper={paper} key={paper.id} />
-              ))}
-            </ul>
-          </div>
+          <ul className="divide-y mt-8">
+            {papers?.map((paper: Paper) => (
+              <PaperCard paper={paper} />
+            ))}
+          </ul>
         </div>
       </main>
     </div>

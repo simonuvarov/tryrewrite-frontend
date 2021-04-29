@@ -1,4 +1,3 @@
-import moment from 'moment';
 import Link from 'next/link';
 import { Paper } from '../services/paper.service';
 
@@ -21,24 +20,20 @@ interface PaperCardProps {
 export const PaperCard = (props: PaperCardProps) => {
   return (
     <Link href={`/paper/${props.paper.id}`}>
-      <li key={props.paper.id}>
-        <div className="max-w-lg w-full bg-white rounded-lg shadow px-12 py-8 cursor-pointer">
-          <BandLabel score={props.paper.overallBand} />
-          <h2 className="w-auto font-semibold text-lg line-clamp-2 text-gray-900 mt-3">
+      <li
+        key={props.paper.id}
+        className="hover:bg-gray-50 hover:cursor-pointer flex justify-between items-center pr-4"
+      >
+        <div className="py-3">
+          <div className="font-bold max-w-lg truncate text-gray-800">
             {props.paper.question}
-          </h2>
-          <p className="w-auto line-clamp-2 text-gray-700 leading-6 mt-1">
-            {props.paper.body}
-          </p>
-          <div className="flex space-x-2 items-center mt-6">
-            <p className="text-gray-400 text-xs">
-              You edited <time>{moment(props.paper.updatedAt).fromNow()}</time>
-            </p>
-            <p className="text-gray-400 text-xs">•</p>
-            <p className="text-gray-400 text-xs">
-              created <time>{moment(props.paper.updatedAt).fromNow()}</time>
-            </p>
           </div>
+          <div className="max-w-lg truncate mt-2 text-gray-600">
+            {props.paper.body}
+          </div>
+        </div>
+        <div className="font-medium text-gray-800 text-lg">
+          {parseFloat(props.paper.overallBand.toString()).toFixed(1)}
         </div>
       </li>
     </Link>
