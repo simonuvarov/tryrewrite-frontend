@@ -1,18 +1,27 @@
+import { useFormik } from 'formik';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import React from 'react';
 import { FormButton } from '../components/FormButton';
 import { FormInput } from '../components/FormInput';
-import { useInput } from '../hooks/useInput';
 import { signup } from '../services/auth.service';
 
-interface SigninFormProps {
+interface SignupFormProps {
   redirectTo: string;
 }
 
-const SigninForm = (props: SigninFormProps) => {
-  const [email, setEmail] = useInput();
-  const [password, setPassword] = useInput();
+const SignupForm = (props: SignupFormProps) => {
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: values => {
+      signup(values)
+        .then(() => router.push(props.redirectTo))
+        .catch(e => alert(e.response.data.message));
+    }
+  });
 
   const router = useRouter();
 
@@ -21,22 +30,19 @@ const SigninForm = (props: SigninFormProps) => {
       className="flex flex-col"
       action="#"
       method="POST"
-      onSubmit={e => {
-        e.preventDefault();
-        signup({
-          email,
-          password
-        })
-          .then(() => router.push(props.redirectTo))
-          .catch(e => alert(e.response.data.message));
-      }}
+      onSubmit={formik.handleSubmit}
     >
       <div className="space-y-6">
-        <FormInput label="Email" value={email} setValue={setEmail} autofocus />
+        <FormInput
+          label="Email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          autofocus
+        />
         <FormInput
           label="Password"
-          value={password}
-          setValue={setPassword}
+          value={formik.values.password}
+          onChange={formik.handleChange}
           type="password"
         />
       </div>
@@ -55,7 +61,7 @@ function Signup() {
           </h2>
         </div>
         <div className="w-full flex flex-col mx-auto max-w-md mt-8">
-          <SigninForm redirectTo="/dashboard" />
+          <SignupForm redirectTo="/dashboard" />
         </div>
         <div className="mt-6 text-sm ">
           <span className="text-gray-500 ">Have an account?</span>

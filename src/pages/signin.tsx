@@ -1,9 +1,9 @@
+import { useFormik } from 'formik';
 import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import React from 'react';
 import { FormButton } from '../components/FormButton';
 import { FormInput } from '../components/FormInput';
-import { useInput } from '../hooks/useInput';
 import { signin } from '../services/auth.service';
 
 interface SigninFormProps {
@@ -11,8 +11,17 @@ interface SigninFormProps {
 }
 
 const SigninForm = (props: SigninFormProps) => {
-  const [email, setEmail] = useInput();
-  const [password, setPassword] = useInput();
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    onSubmit: values => {
+      signin(values)
+        .then(() => router.push(props.redirectTo))
+        .catch(e => alert(e.response.data.message));
+    }
+  });
 
   const router = useRouter();
 
@@ -21,22 +30,19 @@ const SigninForm = (props: SigninFormProps) => {
       className="flex flex-col"
       action="#"
       method="POST"
-      onSubmit={e => {
-        e.preventDefault();
-        signin({
-          email,
-          password
-        })
-          .then(() => router.push(props.redirectTo))
-          .catch(e => alert(e.response.data.message));
-      }}
+      onSubmit={formik.handleSubmit}
     >
       <div className="space-y-6">
-        <FormInput label="Email" value={email} setValue={setEmail} autofocus />
+        <FormInput
+          label="Email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          autofocus
+        />
         <FormInput
           label="Password"
-          value={password}
-          setValue={setPassword}
+          value={formik.values.password}
+          onChange={formik.handleChange}
           type="password"
         />
       </div>

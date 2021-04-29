@@ -4,7 +4,7 @@ import { OnChange } from '../hooks/useInput';
 interface FormInputProps {
   label: string;
   value: string;
-  setValue: OnChange;
+  onChange: OnChange;
   autofocus?: boolean;
   type?: 'text' | 'email' | 'password';
   spellcheck?: boolean;
@@ -22,7 +22,7 @@ export const FormInput = (props: FormInputProps) => {
         id={props.label.toLowerCase()}
         className="block w-full px-4 py-2 border border-gray-200 rounded-md text-base leading-8 text-gray-700 outline-none focus:outline-none focus:ring transition-shadows transition mt-2"
         value={props.value}
-        onChange={props.setValue}
+        onChange={props.onChange}
         autoFocus={props.autofocus || false}
         type={props.type || 'text'}
         spellCheck={props.spellcheck || false}
