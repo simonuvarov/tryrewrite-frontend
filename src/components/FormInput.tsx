@@ -8,6 +8,9 @@ interface FormInputProps {
   autofocus?: boolean;
   type?: 'text' | 'email' | 'password';
   spellcheck?: boolean;
+  error?: string;
+  touched?: boolean;
+  onBlur: (event: React.FormEvent) => void;
 }
 export const FormInput = (props: FormInputProps) => {
   return (
@@ -24,9 +27,18 @@ export const FormInput = (props: FormInputProps) => {
         value={props.value}
         onChange={props.onChange}
         autoFocus={props.autofocus || false}
+        onBlur={props.onBlur}
         type={props.type || 'text'}
         spellCheck={props.spellcheck || false}
       />
+      {props.error && props.touched && (
+        <label
+          htmlFor={props.label.toLowerCase()}
+          className="block text-red-600 text-sm ml-1 mt-1"
+        >
+          {props.error}
+        </label>
+      )}
     </div>
   );
 };

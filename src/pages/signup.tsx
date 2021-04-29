@@ -10,12 +10,41 @@ interface SignupFormProps {
   redirectTo: string;
 }
 
+interface FormProps {
+  email: string;
+  password: string;
+}
+
+interface FormErrors {
+  email?: string;
+  password?: string;
+}
+
+const validate = (values: FormProps) => {
+  const errors: FormErrors = {};
+
+  if (!values.email) {
+    errors.email = 'Email is required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+
+  if (!values.password) {
+    errors.password = 'Password is required';
+  } else if (values.password.length <= 6) {
+    errors.password = 'Password should be at least 6 characters';
+  }
+
+  return errors;
+};
+
 const SignupForm = (props: SignupFormProps) => {
   const formik = useFormik({
     initialValues: {
       email: '',
       password: ''
     },
+    validate,
     onSubmit: values => {
       signup(values)
         .then(() => router.push(props.redirectTo))
@@ -37,12 +66,18 @@ const SignupForm = (props: SignupFormProps) => {
           label="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          touched={formik.touched.email}
+          error={formik.errors.email}
           autofocus
         />
         <FormInput
           label="Password"
           value={formik.values.password}
           onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          touched={formik.touched.password}
+          error={formik.errors.password}
           type="password"
         />
       </div>
