@@ -29,7 +29,7 @@ export function Edit() {
   return (
     <div className="flex h-screen overflow-hidden">
       <aside className="w-60 flex flex-col border-r overflow-auto bg-gray-50 px-4">
-        <Logo className="mt-10 px-2" />
+        <Logo className="mt-10 px-2" href="/dashboard" />
         <VerticalMenu className="mt-12" />
       </aside>
       <main className="flex-1 bg-white p-10 overflow-y-auto">
