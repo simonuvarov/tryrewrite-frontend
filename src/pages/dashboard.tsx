@@ -1,7 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { Logo } from '../components/Logo';
-import { PaperCard } from '../components/PaperCard';
+import { PaperCardList } from '../components/PaperCardList';
 import { VerticalMenu } from '../components/VerticalMenu';
 import { useForceAuth } from '../hooks/useForceAuth';
 import paperService, { Paper } from '../services/paper.service';
@@ -44,11 +44,7 @@ export function Edit() {
               New paper
             </button>
           </div>
-          <ul className="divide-y mt-8">
-            {papers?.map((paper: Paper) => (
-              <PaperCard paper={paper} />
-            ))}
-          </ul>
+          <PaperCardList papers={papers} />
         </div>
       </main>
     </div>

@@ -5,7 +5,7 @@ interface BandLabelProps {
   score: number;
 }
 
-export const BandLabel = (props: BandLabelProps) => {
+const BandLabel = (props: BandLabelProps) => {
   return (
     <div className="inline px-2 py-1 text-xs font-semibold rounded bg-gray-100 text-gray-600">
       BAND {parseFloat(props.score.toString()).toFixed(1)}
@@ -17,7 +17,7 @@ interface PaperCardProps {
   paper: Paper;
 }
 
-export const PaperCard = (props: PaperCardProps) => {
+const PaperCard = (props: PaperCardProps) => {
   return (
     <Link href={`/paper/${props.paper.id}`}>
       <li
@@ -35,5 +35,19 @@ export const PaperCard = (props: PaperCardProps) => {
         </div>
       </li>
     </Link>
+  );
+};
+
+interface PaperCardListProps {
+  papers: Array<Paper>;
+}
+
+export const PaperCardList = ({ papers }: PaperCardListProps) => {
+  return (
+    <ul className="divide-y mt-8">
+      {papers.map((paper: Paper) => (
+        <PaperCard paper={paper} />
+      ))}
+    </ul>
   );
 };
