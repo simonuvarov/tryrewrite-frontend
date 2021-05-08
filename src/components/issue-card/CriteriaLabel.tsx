@@ -22,7 +22,7 @@ export const CriteriaLabel = ({ type }: CriteriaLabelProps) => {
   }
 
   return (
-    <div className={`inline w-full rounded text-sm sfont-medium ${colors}`}>
+    <div className={`inline w-full rounded text-sm font-medium ${colors}`}>
       {type}
     </div>
   );
