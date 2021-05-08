@@ -43,7 +43,7 @@
     "rehype-remark": "^8.0.0",
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
-    "slate": "^0.59.0",
+    "slate": "^0.62.1",
     "slate-history": "^0.59.0",
     "slate-react": "^0.59.0",
     "unified": "^9.2.0",
