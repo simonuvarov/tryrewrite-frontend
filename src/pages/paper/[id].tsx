@@ -3,7 +3,6 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
 import BodyEditor from '../../components/editor/BodyEditor';
 import { QuestionEditor } from '../../components/editor/QuestionEditor';
-import { NoScrollbarContainer } from '../../components/NoScrollbar';
 import { Sidebar } from '../../components/Sidebar';
 import { Spinner } from '../../components/Spinner';
 import useDebounce from '../../hooks/useDebounce';
@@ -51,7 +50,7 @@ export function Edit() {
     }
   }, [debouncedPaperValue]);
 
-  if (isAuthenticating)
+  if (isAuthenticating || !paper)
     return (
       <div className="flex h-screen items-center justify-center">
         <Spinner />
@@ -59,22 +58,16 @@ export function Edit() {
     );
   return (
     <div className="flex min-h-full px-4">
-      <div className="w-full">
-        <NoScrollbarContainer>
-          {paper ? (
-            <div className="max-w-3xl w-full mt-20 px-2 mx-auto">
-              <QuestionEditor
-                className="text-xl leading-loose font-medium text-gray-800"
-                placeholder="Question..."
-                value={paper?.question}
-                setValue={q => setPaper({ question: q, body: paper.body })}
-              />
-              <BodyEditor className="min-h-full space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
-            </div>
-          ) : (
-            <p>Loading paper...</p>
-          )}
-        </NoScrollbarContainer>
+      <div className="w-full overflow-y-scroll no-scrollbar h-screen">
+        <div className="max-w-3xl w-full mt-20 px-2 mx-auto">
+          <QuestionEditor
+            className="text-xl leading-loose font-medium text-gray-800"
+            placeholder="Question..."
+            value={paper?.question}
+            setValue={q => setPaper({ question: q, body: paper.body })}
+          />
+          <BodyEditor className="min-h-full space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
+        </div>
       </div>
       <button
         className="absolute right-4 top-4 bg-white shadow-lg border border-gray-50 hover:bg-gray-50 text-gray-500 px-4 py-2 rounded-full text-sm outline-none focus:outline-none"
@@ -91,14 +84,23 @@ export function Edit() {
         leaveFrom="translate-0"
         leaveTo="translate-x-full transform"
       >
-        <div className="">
-          <NoScrollbarContainer>
-            <aside className="flex mt-20 pb-32 justify-end">
-              <Sidebar />
-            </aside>
-          </NoScrollbarContainer>
+        <div className="w-full overflow-y-scroll no-scrollbar h-screen">
+          <aside className="flex mt-20 pb-32 justify-end">
+            <Sidebar />
+          </aside>
         </div>
       </Transition>
+      <style jsx>{`
+        /* Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+
+        .no-scrollbar {
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+        }
+      `}</style>
     </div>
   );
 }
