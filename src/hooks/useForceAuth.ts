@@ -1,20 +1,20 @@
 import { useRouter } from 'next/dist/client/router';
-import { useContext, useEffect } from 'react';
-import { AuthContext } from '../contexts/AuthContext';
+import { useEffect } from 'react';
+import { useUserStore } from '../stores/useUserStore';
 
 interface UseSessionProps {
   redirectTo: string;
 }
 
 export const useForceAuth = (props: UseSessionProps) => {
-  const { authenticated, authenticating } = useContext(AuthContext);
+  const { isAuthenticated, isAuthenticating } = useUserStore();
   const router = useRouter();
 
   useEffect(() => {
-    if (!authenticating && !authenticated) router.push(props.redirectTo);
-  }, [authenticating, authenticated]);
+    if (!isAuthenticating && !isAuthenticated) router.push(props.redirectTo);
+  }, [isAuthenticated, isAuthenticating]);
 
   // a little hack to ensure that we are not returning "authenticating"
   // when it's finished and we are redirecting
-  return { loading: authenticating || !authenticated };
+  return { loading: isAuthenticating || !isAuthenticated };
 };

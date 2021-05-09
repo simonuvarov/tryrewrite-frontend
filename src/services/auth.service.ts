@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { getAccessTokenFromStorage } from '../lib/getAccessTokenFromStorage';
-import { setAccessTokenToStorage } from '../lib/setAccessTokenToStorage';
 
 export interface Credentials {
   email: string;
@@ -16,7 +15,6 @@ export const signup = (credentials: Credentials): Promise<Tokens> => {
     axios
       .post<Tokens>('/api/auth/signup', credentials)
       .then(r => {
-        setAccessTokenToStorage(r.data.accessToken);
         resolve(r.data);
       })
       .catch(r => reject(r));
@@ -28,7 +26,6 @@ export const signin = (credentials: Credentials): Promise<Tokens> => {
     axios
       .post<Tokens>('/api/auth/signin', credentials)
       .then(r => {
-        setAccessTokenToStorage(r.data.accessToken);
         resolve(r.data);
       })
       .catch(r => reject(r));

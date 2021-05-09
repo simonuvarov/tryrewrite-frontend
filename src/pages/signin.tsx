@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React from 'react';
 import { FormButton } from '../components/FormButton';
 import { FormInput } from '../components/FormInput';
-import { signin } from '../services/auth.service';
+import { useUserStore } from '../stores/useUserStore';
 
 interface SigninFormProps {
   redirectTo: string;
@@ -39,6 +39,8 @@ const validate = (values: FormProps) => {
 };
 
 const SigninForm = (props: SigninFormProps) => {
+  const userStore = useUserStore();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -46,7 +48,8 @@ const SigninForm = (props: SigninFormProps) => {
     },
     validate,
     onSubmit: values => {
-      signin(values)
+      userStore
+        .signin(values)
         .then(() => router.push(props.redirectTo))
         .catch(e => alert(e.response.data.message));
     }
