@@ -32,16 +32,16 @@ export const signin = (credentials: Credentials): Promise<Tokens> => {
   });
 };
 
-export const isValidSession = (): Promise<boolean> => {
+export const isValidSession = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     const accessToken = getAccessTokenFromStorage();
-    if (!accessToken) return resolve(false);
+    if (!accessToken) return reject();
 
     axios
       .get('/api/auth/session', {
         headers: { Authorization: `Bearer ${accessToken}` }
       })
-      .then(() => resolve(true))
-      .catch(() => resolve(false));
+      .then(() => resolve())
+      .catch(() => reject());
   });
 };

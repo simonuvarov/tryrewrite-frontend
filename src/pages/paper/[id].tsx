@@ -14,7 +14,7 @@ import { useGraderResultStore } from '../../stores/useGradeResultStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 
 export function Edit() {
-  const { isAuthenticating } = useForceAuth({
+  const { isAuthenticating, isAuthenticated } = useForceAuth({
     redirectTo: '/signin'
   });
 
@@ -27,7 +27,7 @@ export function Edit() {
   const { setIssues, setBands } = useGraderResultStore();
 
   useEffect(() => {
-    if (router.isReady) {
+    if (router.isReady && isAuthenticated) {
       paperService.getPaper(id as string).then(r => {
         setPaper(r.data);
       });
@@ -36,7 +36,7 @@ export function Edit() {
       undefinePaper();
       setIssues(null);
     }; // clear paper on editor exit
-  }, [router.isReady]);
+  }, [router.isReady, isAuthenticated]);
 
   const debouncedPaperValue = useDebounce(paper, 500);
 

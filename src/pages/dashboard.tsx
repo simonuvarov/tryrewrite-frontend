@@ -8,7 +8,7 @@ import { useForceAuth } from '../hooks/useForceAuth';
 import paperService, { Paper } from '../services/paper.service';
 
 export function Edit() {
-  const { isAuthenticating } = useForceAuth({
+  const { isAuthenticating, isAuthenticated } = useForceAuth({
     redirectTo: '/signin'
   });
 
@@ -23,8 +23,9 @@ export function Edit() {
   };
 
   useEffect(() => {
-    paperService.getAllPapers().then(res => setPapers(res.data));
-  }, []);
+    if (isAuthenticated)
+      paperService.getAllPapers().then(res => setPapers(res.data));
+  }, [isAuthenticated]);
 
   if (isAuthenticating || !papers)
     return (

@@ -14,7 +14,5 @@ export const useForceAuth = (props: UseSessionProps) => {
     if (!isAuthenticating && !isAuthenticated) router.push(props.redirectTo);
   }, [isAuthenticated, isAuthenticating]);
 
-  // a little hack to ensure that we are not returning "authenticating"
-  // when it's finished and we are redirecting
-  return { isAuthenticating };
+  return { isAuthenticating, isAuthenticated };
 };
