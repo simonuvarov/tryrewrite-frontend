@@ -16,5 +16,5 @@ export const useForceAuth = (props: UseSessionProps) => {
 
   // a little hack to ensure that we are not returning "authenticating"
   // when it's finished and we are redirecting
-  return { loading: isAuthenticating || !isAuthenticated };
+  return { isAuthenticating };
 };

@@ -2,12 +2,13 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect, useState } from 'react';
 import { Logo } from '../components/Logo';
 import { PaperCardList } from '../components/PaperCardList';
+import { Spinner } from '../components/Spinner';
 import { VerticalMenu } from '../components/VerticalMenu';
 import { useForceAuth } from '../hooks/useForceAuth';
 import paperService, { Paper } from '../services/paper.service';
 
 export function Edit() {
-  const { loading } = useForceAuth({
+  const { isAuthenticating } = useForceAuth({
     redirectTo: '/signin'
   });
 
@@ -25,7 +26,13 @@ export function Edit() {
     paperService.getAllPapers().then(res => setPapers(res.data));
   }, []);
 
-  if (loading || !papers) return <p>Loading...</p>;
+  if (isAuthenticating || !papers)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Spinner />
+      </div>
+    );
+
   return (
     <div className="flex h-screen overflow-hidden">
       <aside className="w-60 flex flex-shrink-0 flex-col border-r overflow-auto bg-gray-50 px-4">

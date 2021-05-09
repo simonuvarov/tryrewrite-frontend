@@ -5,6 +5,7 @@ import BodyEditor from '../../components/editor/BodyEditor';
 import { QuestionEditor } from '../../components/editor/QuestionEditor';
 import { NoScrollbarContainer } from '../../components/NoScrollbar';
 import { Sidebar } from '../../components/Sidebar';
+import { Spinner } from '../../components/Spinner';
 import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
 import paperService from '../../services/paper.service';
@@ -13,7 +14,7 @@ import { useGraderResultStore } from '../../stores/useGradeResultStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 
 export function Edit() {
-  const { loading } = useForceAuth({
+  const { isAuthenticating } = useForceAuth({
     redirectTo: '/signin'
   });
 
@@ -50,7 +51,12 @@ export function Edit() {
     }
   }, [debouncedPaperValue]);
 
-  if (loading) return <p>Loading...</p>;
+  if (isAuthenticating)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Spinner />
+      </div>
+    );
   return (
     <div className="flex min-h-full px-4">
       <div className="w-full">
