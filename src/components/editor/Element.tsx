@@ -6,8 +6,5 @@ export const Element = ({
   children,
   element
 }: RenderElementProps) => {
-  switch (element.type) {
-    default:
-      return <p {...attributes}>{children}</p>;
-  }
+  return <p {...attributes}>{children}</p>;
 };

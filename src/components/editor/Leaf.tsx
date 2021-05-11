@@ -3,6 +3,10 @@ import { RenderLeafProps } from 'slate-react';
 import { CRITERIA_TYPE } from '../../services/paper.service';
 import { useAssistantStore } from '../../stores/useAssistantStore';
 
+export interface LeafProps extends RenderLeafProps {
+  leaf: { id: string; affects: CRITERIA_TYPE; text: string };
+}
+
 const getBorderColorFromCriteria = (criteria: CRITERIA_TYPE): string => {
   switch (criteria) {
     case CRITERIA_TYPE.TA:
@@ -29,7 +33,7 @@ const getBackgroundColorFromCriteria = (criteria: CRITERIA_TYPE): string => {
   }
 };
 
-export const Leaf = ({ children, leaf, attributes }: RenderLeafProps) => {
+export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
   const { isShowing } = useAssistantStore();
   const { selected, select } = useAssistantStore();
 

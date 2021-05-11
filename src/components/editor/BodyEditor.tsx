@@ -1,16 +1,21 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { createEditor, NodeEntry, Range, Text } from 'slate';
-import { Editable, RenderLeafProps, Slate, withReact } from 'slate-react';
-import { InlineIssue } from '../../services/paper.service';
+import { BaseRange, createEditor, NodeEntry, Text } from 'slate';
+import { Editable, Slate, withReact } from 'slate-react';
+import { CRITERIA_TYPE, InlineIssue } from '../../services/paper.service';
 import { useGraderResultStore } from '../../stores/useGradeResultStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 import { deserialize } from './deserialize';
 import { Element } from './Element';
-import { Leaf } from './Leaf';
+import { Leaf, LeafProps } from './Leaf';
 import { serialize } from './serialize';
 
 interface BodyEditorProps {
   className?: string;
+}
+
+export interface IssueRange extends BaseRange {
+  id: string;
+  affects: CRITERIA_TYPE;
 }
 
 const isSystemKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
@@ -43,7 +48,7 @@ const BodyEditor = (props: BodyEditorProps) => {
   const editor = useMemo(() => withReact(createEditor()), []);
 
   const renderLeaf = useCallback(
-    (props: RenderLeafProps) => {
+    (props: any) => {
       return <Leaf {...props} />;
     },
     [issues]
@@ -54,7 +59,7 @@ const BodyEditor = (props: BodyEditorProps) => {
   // decorate function depends on the language selected
   const decorate = useCallback(
     ([node, path]: NodeEntry) => {
-      const ranges: Range[] = [];
+      const ranges: IssueRange[] = [];
 
       if (!Text.isText(node) || !issues) {
         return ranges;
