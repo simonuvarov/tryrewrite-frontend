@@ -40,7 +40,7 @@ export function Edit() {
         <Logo className="mt-10 px-2" href="/dashboard" />
         <VerticalMenu className="mt-12" />
       </aside>
-      <main className="flex flex-shrink-0 flex-grow bg-white p-10 overflow-y-auto">
+      <main className="flex flex-col flex-shrink-0 flex-grow bg-white p-10 overflow-y-auto">
         <div className="flex flex-col flex-grow">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-semibold text-gray-900">Papers</h1>
