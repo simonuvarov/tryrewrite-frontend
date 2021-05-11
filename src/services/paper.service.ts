@@ -58,7 +58,7 @@ const getAllPapers = () => {
 };
 
 const createNewPaper = (paper?: Partial<Paper>) => {
-  return axios.post<Paper>(`/api/papers/`, paper, {
+  return axios.post<Paper>(`/api/papers`, paper || {}, {
     headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
   });
 };
