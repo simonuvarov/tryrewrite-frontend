@@ -20,10 +20,7 @@ interface PaperCardProps {
 const PaperCard = (props: PaperCardProps) => {
   return (
     <Link href={`/paper/${props.paper.id}`}>
-      <li
-        key={props.paper.id}
-        className="hover:bg-gray-50 hover:cursor-pointer flex justify-between items-center"
-      >
+      <li className="hover:bg-gray-50 hover:cursor-pointer flex justify-between items-center">
         <div className="flex flex-col flex-shrink-0 py-4 px-2 max-w-lg w-full">
           <div className="font-medium truncate text-gray-800">
             {props.paper.question}
@@ -46,7 +43,7 @@ export const PaperCardList = ({ papers }: PaperCardListProps) => {
   return (
     <ul className="divide-y mt-8">
       {papers.map((paper: Paper) => (
-        <PaperCard paper={paper} />
+        <PaperCard paper={paper} key={paper.id} />
       ))}
     </ul>
   );
