@@ -65,7 +65,10 @@ export const useUserStore = create<UserStoreProps>(set => ({
   keepalive: async () => {
     isValidSession()
       .then(() => set({ isAuthenticated: true }))
-      .catch(() => set({ isAuthenticated: false }))
+      .catch(() => {
+        set({ isAuthenticated: false });
+        removeAccessTokenFromStorage();
+      })
       .finally(() => set({ isAuthenticating: false }));
   }
 }));
