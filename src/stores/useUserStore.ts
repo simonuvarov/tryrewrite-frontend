@@ -27,23 +27,36 @@ export const useUserStore = create<UserStoreProps>(set => ({
   setAuthenticating: (value: boolean) => set({ isAuthenticating: value }),
   signup: async (credentials: Credentials) => {
     set({ isAuthenticating: true });
-    signup(credentials)
-      .then(res => {
-        setAccessTokenToStorage(res.accessToken);
-        set({ isAuthenticated: true });
-      })
-      .catch(() => set({ isAuthenticated: false }))
-      .finally(() => set({ isAuthenticating: false }));
+    return new Promise((resolve, reject) => {
+      signup(credentials)
+        .then(res => {
+          setAccessTokenToStorage(res.accessToken);
+          set({ isAuthenticated: true });
+          resolve();
+        })
+        .catch(e => {
+          set({ isAuthenticated: false });
+          reject(e);
+        })
+        .finally(() => set({ isAuthenticating: false }));
+    });
   },
   signin: async (credentials: Credentials) => {
     set({ isAuthenticating: true });
-    signin(credentials)
-      .then(res => {
-        setAccessTokenToStorage(res.accessToken);
-        set({ isAuthenticated: true });
-      })
-      .catch(() => set({ isAuthenticated: false }))
-      .finally(() => set({ isAuthenticating: false }));
+
+    return new Promise((resolve, reject) => {
+      signin(credentials)
+        .then(res => {
+          setAccessTokenToStorage(res.accessToken);
+          set({ isAuthenticated: true });
+          resolve();
+        })
+        .catch(e => {
+          set({ isAuthenticated: false });
+          reject(e);
+        })
+        .finally(() => set({ isAuthenticating: false }));
+    });
   },
   signout: async () => {
     removeAccessTokenFromStorage();
