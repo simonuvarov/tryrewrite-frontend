@@ -43,7 +43,6 @@ export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
 
   useEffect(() => {
     if (expanded) {
-      console.log('should scroll');
       ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }, [expanded]);

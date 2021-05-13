@@ -3,11 +3,11 @@ import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
 import { useAssistantStore } from '../../stores/useAssistantStore';
 import { usePaperStore } from '../../stores/usePaperStore';
-import { useDecorate } from './useDecorate';
 import { deserialize } from './deserialize';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
 import { serialize } from './serialize';
+import { useDecorate } from './useDecorate';
 
 interface BodyEditorProps {
   className?: string;
@@ -62,8 +62,6 @@ const BodyEditor = (props: BodyEditorProps) => {
     return null;
   }
 
-  if (!paper) return null;
-
   return (
     <Slate
       editor={editor}
@@ -83,7 +81,6 @@ const BodyEditor = (props: BodyEditorProps) => {
         renderElement={renderElement}
         onKeyDown={e => {
           if (isSystemKeyPress(e)) return;
-          console.log('should set fetching');
           setIsResultFetching(true);
         }}
       />
