@@ -1,4 +1,4 @@
-import { useGraderResultStore } from '../stores/useGradeResultStore';
+import { useAssistantStore } from '../stores/useAssistantStore';
 import { IssueCard, IssueCardSkeleton } from './issue-card/IssueCard';
 
 interface IssueListProps {
@@ -6,7 +6,7 @@ interface IssueListProps {
 }
 
 export const IssueList = (props: IssueListProps) => {
-  const { issues } = useGraderResultStore();
+  const { issues, isResultFetching } = useAssistantStore();
 
   const skeletons = new Array(10).fill(null).map((_, i) => {
     return <IssueCardSkeleton key={i} />;
@@ -14,7 +14,9 @@ export const IssueList = (props: IssueListProps) => {
 
   return (
     <ul className={`space-y-8 mt-8 ${props.className || ''}`}>
-      {issues ? issues.map(i => <IssueCard issue={i} />) : skeletons}
+      {isResultFetching
+        ? skeletons
+        : issues.map(i => <IssueCard issue={i} key={i.id} />)}
     </ul>
   );
 };

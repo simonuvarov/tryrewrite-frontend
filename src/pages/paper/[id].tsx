@@ -9,7 +9,6 @@ import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
 import paperService from '../../services/paper.service';
 import { useAssistantStore } from '../../stores/useAssistantStore';
-import { useGraderResultStore } from '../../stores/useGradeResultStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 
 export function Edit() {
@@ -17,24 +16,34 @@ export function Edit() {
     redirectTo: '/signin'
   });
 
-  const { toggleShowing, isShowing } = useAssistantStore();
+  const {
+    toggleShowing,
+    isShowing,
+    setIssues,
+    setBands,
+    bands,
+    setIsResultFetching
+  } = useAssistantStore();
 
   const router = useRouter();
   const { id } = router.query;
-  const { paper, setPaper, isFetching, setIsFetching } = usePaperStore();
-
-  const { setIssues, setBands, bands } = useGraderResultStore();
+  const {
+    paper,
+    setPaper,
+    isPaperFetching: isFetching,
+    setIsPaperFetching
+  } = usePaperStore();
 
   useEffect(() => {
     if (router.isReady && isAuthenticated) {
       paperService.getPaper(id as string).then(r => {
         setPaper(r.data);
-        setIsFetching(false);
+        setIsPaperFetching(false);
       });
     }
     return () => {
-      setIssues(null);
-      setIsFetching(true);
+      setIsPaperFetching(true);
+      setIsResultFetching(true);
     }; // clear paper on editor exit
   }, [router.isReady, isAuthenticated]);
 
@@ -46,6 +55,7 @@ export function Edit() {
         paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
           setIssues(r.data.issues);
           setBands(r.data.bands);
+          setIsResultFetching(false);
         });
       }
     }

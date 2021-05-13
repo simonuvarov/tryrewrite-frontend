@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { BaseRange, createEditor, NodeEntry, Text } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
 import { CRITERIA_TYPE, InlineIssue } from '../../services/paper.service';
-import { useGraderResultStore } from '../../stores/useGradeResultStore';
+import { useAssistantStore } from '../../stores/useAssistantStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 import { deserialize } from './deserialize';
 import { Element } from './Element';
-import { Leaf, LeafProps } from './Leaf';
+import { Leaf } from './Leaf';
 import { serialize } from './serialize';
 
 interface BodyEditorProps {
@@ -41,7 +41,7 @@ const isSystemKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
 const BodyEditor = (props: BodyEditorProps) => {
   const [hasMounted, setHasMounted] = useState(false);
 
-  const { issues, setIssues } = useGraderResultStore();
+  const { issues, setIssues, setIsResultFetching } = useAssistantStore();
 
   const { paper, setPaper } = usePaperStore();
 
@@ -129,7 +129,8 @@ const BodyEditor = (props: BodyEditorProps) => {
         renderElement={renderElement}
         onKeyDown={e => {
           if (isSystemKeyPress(e)) return;
-          setIssues(null);
+          console.log('should set fetching');
+          setIsResultFetching(true);
         }}
       />
     </Slate>
