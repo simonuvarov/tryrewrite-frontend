@@ -27,7 +27,7 @@ export function Edit() {
       paperService.getAllPapers().then(res => setPapers(res.data));
   }, [isAuthenticated]);
 
-  if (isAuthenticating || !papers)
+  if (isAuthenticating)
     return (
       <div className="flex h-screen items-center justify-center">
         <Spinner />
