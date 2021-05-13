@@ -3,6 +3,7 @@ export const deserialize = (string: string) => {
   // Return a value array of children derived by splitting the string.
   return string.split('\n').map(line => {
     return {
+      type: 'paragraph',
       children: [{ text: line }]
     };
   });
