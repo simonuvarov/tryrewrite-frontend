@@ -34,8 +34,10 @@ const getBackgroundColorFromCriteria = (criteria: CRITERIA_TYPE): string => {
 };
 
 export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
-  const { isShowing } = useAssistantStore();
+  const { isShowing, isResultFetching } = useAssistantStore();
   const { selected, select } = useAssistantStore();
+
+  const shouldBeHighlighted = isShowing && !isResultFetching;
 
   const expanded = selected === leaf.id;
 
@@ -56,7 +58,7 @@ export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
         }}
         {...attributes}
         className={`transition-colors duration-500 ${
-          isShowing
+          shouldBeHighlighted
             ? 'border-b-4' +
               ' ' +
               getBorderColorFromCriteria(
