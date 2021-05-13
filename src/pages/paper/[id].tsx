@@ -2,7 +2,7 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
 import { BandCard } from '../../components/BandCard';
 import BodyEditor from '../../components/editor/BodyEditor';
-import { QuestionEditor } from '../../components/editor/QuestionEditor';
+import QuestionEditor from '../../components/editor/QuestionEditor';
 import { IssueList } from '../../components/IssueList';
 import { Spinner } from '../../components/Spinner';
 import useDebounce from '../../hooks/useDebounce';
@@ -85,8 +85,6 @@ export function Edit() {
           <QuestionEditor
             className="text-xl leading-loose font-medium text-gray-800"
             placeholder="Question..."
-            value={paper?.question}
-            setValue={q => setPaper({ question: q, body: paper.body })}
           />
           <BodyEditor className="min-h-full space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
         </div>

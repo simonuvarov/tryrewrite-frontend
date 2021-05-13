@@ -1,24 +1,51 @@
-import Textarea from 'react-textarea-autosize';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { createEditor } from 'slate';
+import { Editable, Slate, withReact } from 'slate-react';
+import { usePaperStore } from '../../stores/usePaperStore';
+import { deserialize } from './deserialize';
+import { Element } from './Element';
+import { serialize } from './serialize';
 
-interface QuestionEditorProps {
-  placeholder: string;
-  value: string;
-  setValue: (value: string) => void;
+interface BodyEditorProps {
   className?: string;
+  placeholder: string;
 }
 
-export const QuestionEditor = (props: QuestionEditorProps) => {
+const QuestionEditor = (props: BodyEditorProps) => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  const { paper, setPaper } = usePaperStore();
+
+  const editor = useMemo(() => withReact(createEditor()), []);
+
+  const renderElement = useCallback(props => <Element {...props} />, []);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
+
   return (
-    <Textarea
-      placeholder={props.placeholder}
-      className={`focus:outline-none w-full resize-none bg-transparent ${
-        props.className ? props.className : ''
-      }`}
-      onChange={e => {
-        props.setValue(e.target.value);
+    <Slate
+      editor={editor}
+      value={deserialize(paper.question)}
+      onChange={value => {
+        if (paper.question != serialize(value)) {
+          setPaper({ question: serialize(value), body: paper.body });
+        }
       }}
-      value={props.value}
-      spellCheck={false}
-    />
+    >
+      <Editable
+        placeholder={props.placeholder}
+        spellCheck={false}
+        className={props.className}
+        renderElement={renderElement}
+      />
+    </Slate>
   );
 };
+
+export default QuestionEditor;
