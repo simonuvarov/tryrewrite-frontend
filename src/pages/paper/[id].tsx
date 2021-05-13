@@ -22,7 +22,8 @@ export function Edit() {
     setIssues,
     setBands,
     bands,
-    setIsResultFetching
+    setIsResultFetching,
+    hide
   } = useAssistantStore();
 
   const router = useRouter();
@@ -44,6 +45,7 @@ export function Edit() {
     return () => {
       setIsPaperFetching(true);
       setIsResultFetching(true);
+      hide();
     }; // clear paper on editor exit
   }, [router.isReady, isAuthenticated]);
 

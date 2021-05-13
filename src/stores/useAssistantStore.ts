@@ -20,6 +20,7 @@ interface AssistantStoreProps extends State {
   setBands: (bands: Bands) => void;
   isResultFetching: boolean;
   setIsResultFetching: (value: boolean) => void;
+  hide: () => void;
 }
 
 export const useAssistantStore = create<AssistantStoreProps>((set, get) => ({
@@ -38,5 +39,6 @@ export const useAssistantStore = create<AssistantStoreProps>((set, get) => ({
   },
   setBands: (bands: Bands) => set({ bands: bands }),
   isResultFetching: true,
-  setIsResultFetching: (value: boolean) => set({ isResultFetching: value })
+  setIsResultFetching: (value: boolean) => set({ isResultFetching: value }),
+  hide: () => set({ isShowing: false })
 }));
