@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
 import { useAssistantStore } from '../../stores/useAssistantStore';
@@ -14,11 +14,9 @@ interface BodyEditorProps {
 }
 
 const BodyEditor = (props: BodyEditorProps) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
   const { issues, setIsResultFetching } = useAssistantStore();
 
-  const { paper, setPaper } = usePaperStore();
+  const { paper, setPaper, isPaperFetching } = usePaperStore();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 
@@ -34,13 +32,15 @@ const BodyEditor = (props: BodyEditorProps) => {
   // decorate function depends on the language selected
   const decorate = useDecorate();
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return null;
-  }
+  if (isPaperFetching)
+    return (
+      <div className={`space-y-2 animate-pulse ${props.className || ''}`}>
+        <div className="h-5 bg-gray-100 rounded w-full"></div>
+        <div className="h-5 bg-gray-100 rounded w-full"></div>
+        <div className="h-5 bg-gray-100 rounded w-full"></div>
+        <div className="h-5 bg-gray-100 rounded w-1/2"></div>
+      </div>
+    );
 
   return (
     <Slate

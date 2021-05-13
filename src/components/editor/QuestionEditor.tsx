@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
 import { usePaperStore } from '../../stores/usePaperStore';
@@ -12,21 +12,19 @@ interface BodyEditorProps {
 }
 
 const QuestionEditor = (props: BodyEditorProps) => {
-  const [hasMounted, setHasMounted] = useState(false);
-
-  const { paper, setPaper } = usePaperStore();
+  const { paper, setPaper, isPaperFetching } = usePaperStore();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 
   const renderElement = useCallback(props => <Element {...props} />, []);
 
-  useEffect(() => {
-    setHasMounted(true);
-  }, []);
-
-  if (!hasMounted) {
-    return null;
-  }
+  if (isPaperFetching)
+    return (
+      <div className="space-y-2 animate-pulse">
+        <div className="h-5 bg-gray-100 rounded w-2/3"></div>
+        <div className="h-5 bg-gray-100 rounded w-1/2"></div>
+      </div>
+    );
 
   return (
     <Slate
