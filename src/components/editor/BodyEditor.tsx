@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { BaseRange, createEditor, NodeEntry, Text } from 'slate';
+import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
-import { CRITERIA_TYPE, InlineIssue } from '../../services/paper.service';
 import { useAssistantStore } from '../../stores/useAssistantStore';
 import { usePaperStore } from '../../stores/usePaperStore';
+import { useDecorate } from './useDecorate';
 import { deserialize } from './deserialize';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
@@ -11,11 +11,6 @@ import { serialize } from './serialize';
 
 interface BodyEditorProps {
   className?: string;
-}
-
-export interface IssueRange extends BaseRange {
-  id: string;
-  affects: CRITERIA_TYPE;
 }
 
 const isSystemKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
@@ -57,48 +52,7 @@ const BodyEditor = (props: BodyEditorProps) => {
   const renderElement = useCallback(props => <Element {...props} />, []);
 
   // decorate function depends on the language selected
-  const decorate = useCallback(
-    ([node, path]: NodeEntry) => {
-      const ranges: IssueRange[] = [];
-
-      if (!Text.isText(node) || !issues) {
-        return ranges;
-      }
-
-      const paragraphRanges: Array<[number, number]> = [];
-      let offset = 0;
-      paper!.body.split('\n').map((p: string) => {
-        const start = offset;
-        const end = offset + p.length + '\n'.length;
-        paragraphRanges.push([start, end]);
-        offset = offset + p.length + '\n'.length;
-      });
-      const currentTextRange = paragraphRanges[path[0]];
-
-      for (const issue of issues.filter(h => {
-        return (
-          h.isInline &&
-          h.offset < currentTextRange[1] &&
-          h.offset >= currentTextRange[0]
-        );
-      }) as Array<InlineIssue>) {
-        const length = issue.length;
-        const start = issue.offset - currentTextRange[0];
-        const end = start + length;
-
-        ranges.push({
-          id: issue.id,
-          anchor: { path, offset: start },
-          focus: { path, offset: end },
-          affects: issue.affects
-        });
-      }
-
-      return ranges;
-    },
-
-    [issues]
-  );
+  const decorate = useDecorate();
 
   useEffect(() => {
     setHasMounted(true);
