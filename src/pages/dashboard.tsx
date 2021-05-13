@@ -9,7 +9,7 @@ import { useForceAuth } from '../hooks/useForceAuth';
 import paperService from '../services/paper.service';
 
 export function Edit() {
-  const { isAuthenticating, isAuthenticated } = useForceAuth({
+  const { isAuthenticating } = useForceAuth({
     redirectTo: '/signin'
   });
 

@@ -4,6 +4,8 @@ import Link from 'next/link';
 import React from 'react';
 import { FormButton } from '../components/FormButton';
 import { FormInput } from '../components/FormInput';
+import { Spinner } from '../components/Spinner';
+import { useForceUnauth } from '../hooks/useForceUnauth';
 import { useUserStore } from '../stores/useUserStore';
 
 interface SigninFormProps {
@@ -89,6 +91,19 @@ const SigninForm = (props: SigninFormProps) => {
 };
 
 function Signup() {
+  const { isLoading, isAuthenticated, isAuthenticating } = useForceUnauth({
+    redirectTo: '/dashboard'
+  });
+
+  console.log(isLoading, isAuthenticating, isAuthenticated);
+
+  if (isLoading)
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <Spinner />
+      </div>
+    );
+
   return (
     <div className="flex bg-gray-50 min-h-screen flex-col justify-center">
       <div className="bg-white px-20 py-16 rounded-xl mx-auto shadow-md border border-gray-100 w-full max-w-xl">
