@@ -21,7 +21,7 @@ export function Edit() {
 
   const router = useRouter();
   const { id } = router.query;
-  const { paper, setPaper, undefinePaper } = usePaperStore();
+  const { paper, setPaper, isFetching, setIsFetching } = usePaperStore();
 
   const { setIssues, setBands, bands } = useGraderResultStore();
 
@@ -29,18 +29,19 @@ export function Edit() {
     if (router.isReady && isAuthenticated) {
       paperService.getPaper(id as string).then(r => {
         setPaper(r.data);
+        setIsFetching(false);
       });
     }
     return () => {
-      undefinePaper();
       setIssues(null);
+      setIsFetching(true);
     }; // clear paper on editor exit
   }, [router.isReady, isAuthenticated]);
 
   const debouncedPaperValue = useDebounce(paper, 500);
 
   useEffect(() => {
-    if (debouncedPaperValue) {
+    if (debouncedPaperValue && !isFetching) {
       if (router.isReady) {
         paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
           setIssues(r.data.issues);

@@ -1,13 +1,16 @@
 import create, { State } from 'zustand';
 
 interface PaperStoreProps extends State {
-  paper: { question: string; body: string } | null;
+  paper: { question: string; body: string };
   setPaper: (paper: { question: string; body: string }) => void;
-  undefinePaper: () => void;
+  isFetching: boolean;
+  setIsFetching: (value: boolean) => void;
 }
 
 export const usePaperStore = create<PaperStoreProps>(set => ({
-  paper: null,
-  undefinePaper: () => set({ paper: null }),
-  setPaper: (paper: { question: string; body: string }) => set({ paper: paper })
+  paper: { question: '', body: '' },
+  setPaper: (paper: { question: string; body: string }) =>
+    set({ paper: paper }),
+  isFetching: true,
+  setIsFetching: (value: boolean) => set({ isFetching: value })
 }));
