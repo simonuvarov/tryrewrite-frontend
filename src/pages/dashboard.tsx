@@ -1,11 +1,12 @@
 import { useRouter } from 'next/dist/client/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from 'react-query';
 import { Logo } from '../components/Logo';
 import { PaperCardList } from '../components/PaperCardList';
 import { Spinner } from '../components/Spinner';
 import { VerticalMenu } from '../components/VerticalMenu';
 import { useForceAuth } from '../hooks/useForceAuth';
-import paperService, { Paper } from '../services/paper.service';
+import paperService from '../services/paper.service';
 
 export function Edit() {
   const { isAuthenticating, isAuthenticated } = useForceAuth({
@@ -13,19 +14,13 @@ export function Edit() {
   });
 
   const router = useRouter();
-
-  const [papers, setPapers] = useState<Array<Paper> | undefined>();
+  const query = useQuery('papers', paperService.getAllPapers);
 
   const handleNewPaperClick = () => {
     paperService
       .createNewPaper()
       .then(res => router.push(`/paper/${res.data.id}`));
   };
-
-  useEffect(() => {
-    if (isAuthenticated)
-      paperService.getAllPapers().then(res => setPapers(res.data));
-  }, [isAuthenticated]);
 
   if (isAuthenticating)
     return (
@@ -52,7 +47,7 @@ export function Edit() {
               New paper
             </button>
           </div>
-          <PaperCardList papers={papers} />
+          <PaperCardList papers={query.data} />
         </div>
       </main>
     </div>

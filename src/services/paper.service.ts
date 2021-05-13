@@ -51,9 +51,14 @@ const getPaper = (id: string) => {
   });
 };
 
-const getAllPapers = () => {
-  return axios.get<Array<Paper>>(`/api/papers`, {
-    headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
+const getAllPapers = (): Promise<Array<Paper>> => {
+  return new Promise((resolve, reject) => {
+    return axios
+      .get<Array<Paper>>(`/api/papers`, {
+        headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
+      })
+      .then(res => resolve(res.data))
+      .catch(reject);
   });
 };
 
