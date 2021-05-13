@@ -66,7 +66,7 @@ export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
               )
             : ''
         } ${
-          expanded && isShowing
+          expanded && shouldBeHighlighted
             ? getBackgroundColorFromCriteria(leaf.affects as CRITERIA_TYPE)
             : 'bg-white'
         }`}
