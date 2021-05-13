@@ -13,30 +13,10 @@ interface BodyEditorProps {
   className?: string;
 }
 
-const isSystemKeyPress = (e: React.KeyboardEvent<HTMLDivElement>): boolean => {
-  if (e.ctrlKey || e.altKey || e.metaKey) return true;
-  if (
-    e.code === 'ArrowLeft' ||
-    e.code === 'ArrowRight' ||
-    e.code === 'ArrowUp' ||
-    e.code === 'ArrowDown' ||
-    e.code === 'MetaLeft' ||
-    e.code === 'MetaRight' ||
-    e.code === 'AltLeft' ||
-    e.code === 'AltRight' ||
-    e.code === 'ShiftLeft' ||
-    e.code === 'ShiftRight' ||
-    e.code === 'Tab' ||
-    e.code === 'CapsLock'
-  )
-    return true;
-  return false;
-};
-
 const BodyEditor = (props: BodyEditorProps) => {
   const [hasMounted, setHasMounted] = useState(false);
 
-  const { issues, setIssues, setIsResultFetching } = useAssistantStore();
+  const { issues, setIsResultFetching } = useAssistantStore();
 
   const { paper, setPaper } = usePaperStore();
 
@@ -69,6 +49,7 @@ const BodyEditor = (props: BodyEditorProps) => {
       onChange={value => {
         if (paper.body != serialize(value)) {
           setPaper({ question: paper.question, body: serialize(value) });
+          setIsResultFetching(true);
         }
       }}
     >
@@ -79,10 +60,6 @@ const BodyEditor = (props: BodyEditorProps) => {
         decorate={decorate}
         renderLeaf={renderLeaf}
         renderElement={renderElement}
-        onKeyDown={e => {
-          if (isSystemKeyPress(e)) return;
-          setIsResultFetching(true);
-        }}
       />
     </Slate>
   );

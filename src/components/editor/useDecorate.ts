@@ -23,7 +23,7 @@ export const useDecorate = () => {
 
       const paragraphRanges: Array<[number, number]> = [];
       let offset = 0;
-      paper!.body.split('\n').map((p: string) => {
+      paper.body.split('\n').map((p: string) => {
         const start = offset;
         const end = offset + p.length + '\n'.length;
         paragraphRanges.push([start, end]);
