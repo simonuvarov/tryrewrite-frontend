@@ -1,9 +1,9 @@
-import { Transition } from '@headlessui/react';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
+import { BandCard } from '../../components/BandCard';
 import BodyEditor from '../../components/editor/BodyEditor';
 import { QuestionEditor } from '../../components/editor/QuestionEditor';
-import { Sidebar } from '../../components/Sidebar';
+import { IssueList } from '../../components/IssueList';
 import { Spinner } from '../../components/Spinner';
 import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
@@ -23,7 +23,7 @@ export function Edit() {
   const { id } = router.query;
   const { paper, setPaper, undefinePaper } = usePaperStore();
 
-  const { setIssues, setBands } = useGraderResultStore();
+  const { setIssues, setBands, bands } = useGraderResultStore();
 
   useEffect(() => {
     if (router.isReady && isAuthenticated) {
@@ -57,8 +57,17 @@ export function Edit() {
       </div>
     );
   return (
-    <div className="flex min-h-full px-4">
-      <div className="w-full overflow-y-scroll no-scrollbar h-screen">
+    <div className="flex min-h-full">
+      <button
+        className="absolute right-4 top-4 bg-white shadow-lg border border-gray-50 hover:bg-gray-50 text-gray-500 px-4 py-2 rounded-full text-sm outline-none focus:outline-none"
+        onClick={toggleShowing}
+      >
+        Toggle Assistant
+      </button>
+      <div
+        className="flex flex-grow flex-shrink-0 px-6 overflow-y-scroll h-screen no-scrollbar"
+        id="left"
+      >
         <div className="max-w-3xl w-full mt-20 px-2 mx-auto">
           <QuestionEditor
             className="text-xl leading-loose font-medium text-gray-800"
@@ -69,27 +78,19 @@ export function Edit() {
           <BodyEditor className="min-h-full space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
         </div>
       </div>
-      <button
-        className="absolute right-4 top-4 bg-white shadow-lg border border-gray-50 hover:bg-gray-50 text-gray-500 px-4 py-2 rounded-full text-sm outline-none focus:outline-none"
-        onClick={toggleShowing}
-      >
-        Toggle Assistant
-      </button>
-      <Transition
-        show={isShowing}
-        enter="transition-transform duration-300"
-        enterFrom="translate-x-full transform"
-        enterTo="translate-x-0"
-        leave="transition-transform duration-300"
-        leaveFrom="translate-0"
-        leaveTo="translate-x-full transform"
-      >
-        <div className="w-full overflow-y-scroll no-scrollbar h-screen">
-          <aside className="flex mt-20 pb-32 justify-end">
-            <Sidebar />
+
+      {isShowing && (
+        <div
+          className="px-8 overflow-y-scroll h-screen no-scrollbar"
+          id="right"
+        >
+          <aside className="mt-20 pb-32">
+            <BandCard band={bands?.overall} />
+            <IssueList className="" />
           </aside>
         </div>
-      </Transition>
+      )}
+
       <style jsx>{`
         /* Chrome, Safari and Opera */
         .no-scrollbar::-webkit-scrollbar {
