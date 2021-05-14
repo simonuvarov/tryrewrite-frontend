@@ -16,7 +16,7 @@ interface BodyEditorProps {
 const BodyEditor = (props: BodyEditorProps) => {
   const { issues, setIsResultFetching } = useAssistantStore();
 
-  const { paper, setPaper, isPaperFetching } = usePaperStore();
+  const { paper, setPaper, isLoading } = usePaperStore();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 
@@ -32,7 +32,7 @@ const BodyEditor = (props: BodyEditorProps) => {
   // decorate function depends on the language selected
   const decorate = useDecorate();
 
-  if (isPaperFetching)
+  if (isLoading)
     return (
       <div className={`space-y-2 animate-pulse ${props.className || ''}`}>
         <div className="h-5 bg-gray-100 rounded w-full"></div>

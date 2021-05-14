@@ -28,23 +28,13 @@ export function Edit() {
 
   const router = useRouter();
   const { id } = router.query;
-  const {
-    paper,
-    setPaper,
-    isPaperFetching: isFetching,
-    setIsPaperFetching
-  } = usePaperStore();
+  const { paper, setPaper, isLoading, getPaper } = usePaperStore();
 
   useEffect(() => {
     if (router.isReady && isAuthenticated) {
-      paperService.getPaper(id as string).then(r => {
-        setPaper(r.data);
-        setIsPaperFetching(false);
-      });
+      getPaper(id as string);
     }
     return () => {
-      setIsPaperFetching(true);
-      setIsResultFetching(true);
       hide();
     }; // clear paper on editor exit
   }, [router.isReady, isAuthenticated]);
@@ -52,7 +42,7 @@ export function Edit() {
   const debouncedPaperValue = useDebounce(paper, 500);
 
   useEffect(() => {
-    if (debouncedPaperValue && !isFetching) {
+    if (debouncedPaperValue && !isLoading) {
       if (router.isReady) {
         paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
           setIssues(r.data.issues);

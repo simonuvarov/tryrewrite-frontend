@@ -12,13 +12,13 @@ interface BodyEditorProps {
 }
 
 const QuestionEditor = (props: BodyEditorProps) => {
-  const { paper, setPaper, isPaperFetching } = usePaperStore();
+  const { paper, setPaper, isLoading } = usePaperStore();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 
   const renderElement = useCallback(props => <Element {...props} />, []);
 
-  if (isPaperFetching)
+  if (isLoading)
     return (
       <div className="space-y-2 animate-pulse">
         <div className="h-5 bg-gray-100 rounded w-2/3"></div>
