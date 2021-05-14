@@ -41,7 +41,13 @@ export const isValidSession = (): Promise<void> => {
       .get('/api/auth/session', {
         headers: { Authorization: `Bearer ${accessToken}` }
       })
-      .then(() => resolve())
-      .catch(() => reject());
+      .then(_ => resolve())
+      .catch(e => {
+        // Consider only server side error worth rejecting
+        // Otherwise, "cancelation" of the request is considered error
+        // and user gets signed out
+        if (e.response) reject(e);
+        resolve();
+      });
   });
 };
