@@ -6,7 +6,7 @@ interface IssueListProps {
 }
 
 export const IssueList = (props: IssueListProps) => {
-  const { issues, isResultFetching } = useAssistantStore();
+  const { issues, isChecking } = useAssistantStore();
 
   const skeletons = new Array(10).fill(null).map((_, i) => {
     return <IssueCardSkeleton key={i} />;
@@ -14,7 +14,7 @@ export const IssueList = (props: IssueListProps) => {
 
   return (
     <ul className={`space-y-8 mt-8 ${props.className || ''}`}>
-      {isResultFetching
+      {isChecking
         ? skeletons
         : issues.map(i => <IssueCard issue={i} key={i.id} />)}
     </ul>

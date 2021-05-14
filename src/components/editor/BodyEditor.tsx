@@ -14,7 +14,7 @@ interface BodyEditorProps {
 }
 
 const BodyEditor = (props: BodyEditorProps) => {
-  const { issues, setIsResultFetching } = useAssistantStore();
+  const { issues, setChecking } = useAssistantStore();
 
   const { paper, setPaper, isLoading } = usePaperStore();
 
@@ -49,7 +49,7 @@ const BodyEditor = (props: BodyEditorProps) => {
       onChange={value => {
         if (paper.body != serialize(value)) {
           setPaper({ question: paper.question, body: serialize(value) });
-          setIsResultFetching(true);
+          setChecking(true);
         }
       }}
     >

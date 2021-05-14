@@ -10,23 +10,23 @@ interface Bands {
 }
 
 interface AssistantStoreProps extends State {
-  isShowing: boolean;
-  toggleShowing: () => void;
+  isVisible: boolean;
+  toggleVisible: () => void;
   selected?: string;
   select: (id: string) => void;
   issues: Array<Issue>;
   setIssues: (issues: Array<Issue>) => void;
   bands: Bands;
   setBands: (bands: Bands) => void;
-  isResultFetching: boolean;
-  setIsResultFetching: (value: boolean) => void;
-  hide: () => void;
+  isChecking: boolean;
+  setChecking: (value: boolean) => void;
+  hideAssistant: () => void;
 }
 
 export const useAssistantStore = create<AssistantStoreProps>((set, get) => ({
-  isShowing: false,
+  isVisible: false,
   selected: undefined,
-  toggleShowing: () => set({ isShowing: !get().isShowing }),
+  toggleVisible: () => set({ isVisible: !get().isVisible }),
   select: (id: string) => set({ selected: id }),
   issues: [],
   setIssues: (issues: Array<Issue>) => set({ issues: issues }),
@@ -38,7 +38,7 @@ export const useAssistantStore = create<AssistantStoreProps>((set, get) => ({
     overall: 0
   },
   setBands: (bands: Bands) => set({ bands: bands }),
-  isResultFetching: true,
-  setIsResultFetching: (value: boolean) => set({ isResultFetching: value }),
-  hide: () => set({ isShowing: false })
+  isChecking: true,
+  setChecking: (value: boolean) => set({ isChecking: value }),
+  hideAssistant: () => set({ isVisible: false })
 }));

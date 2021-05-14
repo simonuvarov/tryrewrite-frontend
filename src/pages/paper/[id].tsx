@@ -17,13 +17,13 @@ export function Edit() {
   });
 
   const {
-    toggleShowing,
-    isShowing,
+    toggleVisible,
+    isVisible,
     setIssues,
     setBands,
     bands,
-    setIsResultFetching,
-    hide
+    setChecking,
+    hideAssistant
   } = useAssistantStore();
 
   const router = useRouter();
@@ -35,7 +35,7 @@ export function Edit() {
       getPaper(id as string);
     }
     return () => {
-      hide();
+      hideAssistant();
     }; // clear paper on editor exit
   }, [router.isReady, isAuthenticated]);
 
@@ -47,7 +47,7 @@ export function Edit() {
         paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
           setIssues(r.data.issues);
           setBands(r.data.bands);
-          setIsResultFetching(false);
+          setChecking(false);
         });
       }
     }
@@ -63,7 +63,7 @@ export function Edit() {
     <div className="flex min-h-full">
       <button
         className="absolute right-4 top-4 bg-white shadow-lg border border-gray-50 hover:bg-gray-50 text-gray-500 px-4 py-2 rounded-full text-sm outline-none focus:outline-none"
-        onClick={toggleShowing}
+        onClick={toggleVisible}
       >
         Toggle Assistant
       </button>
@@ -80,7 +80,7 @@ export function Edit() {
         </div>
       </div>
 
-      {isShowing && (
+      {isVisible && (
         <div
           className="px-8 overflow-y-scroll h-screen no-scrollbar"
           id="right"

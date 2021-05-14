@@ -34,10 +34,10 @@ const getBackgroundColorFromCriteria = (criteria: CRITERIA_TYPE): string => {
 };
 
 export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
-  const { isShowing, isResultFetching } = useAssistantStore();
+  const { isVisible, isChecking } = useAssistantStore();
   const { selected, select } = useAssistantStore();
 
-  const shouldBeHighlighted = isShowing && !isResultFetching;
+  const shouldBeHighlighted = isVisible && !isChecking;
 
   const expanded = selected === leaf.id;
 
