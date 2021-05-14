@@ -1,10 +1,8 @@
 import { useFormik } from 'formik';
-import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import React from 'react';
 import { FormButton } from '../components/FormButton';
 import { FormInput } from '../components/FormInput';
-import { Spinner } from '../components/Spinner';
 import { useForceUnauth } from '../hooks/useForceUnauth';
 import { useUserStore } from '../stores/useUserStore';
 
@@ -43,6 +41,10 @@ const validate = (values: FormProps) => {
 const SigninForm = (props: SigninFormProps) => {
   const userStore = useUserStore();
 
+  const { isLoading, isAuthenticated, isAuthenticating } = useForceUnauth({
+    redirectTo: '/dashboard'
+  });
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -50,14 +52,9 @@ const SigninForm = (props: SigninFormProps) => {
     },
     validate,
     onSubmit: values => {
-      userStore
-        .signin(values)
-        .then(() => router.push(props.redirectTo))
-        .catch(e => alert(e.response.data.message));
+      userStore.signin(values).catch(e => alert(e.response.data.message));
     }
   });
-
-  const router = useRouter();
 
   return (
     <form
@@ -85,24 +82,20 @@ const SigninForm = (props: SigninFormProps) => {
           type="password"
         />
       </div>
-      <FormButton className="mt-8">Sign in</FormButton>
+      <FormButton className="mt-8" isLoading={isLoading}>
+        Sign in
+      </FormButton>
     </form>
   );
 };
 
 function Signup() {
-  const { isLoading, isAuthenticated, isAuthenticating } = useForceUnauth({
-    redirectTo: '/dashboard'
-  });
-
-  console.log(isLoading, isAuthenticating, isAuthenticated);
-
-  if (isLoading)
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <Spinner />
-      </div>
-    );
+  // if (isLoading)
+  //   return (
+  //     <div className="flex h-screen items-center justify-center">
+  //       <Spinner />
+  //     </div>
+  //   );
 
   return (
     <div className="flex bg-gray-50 min-h-screen flex-col justify-center">

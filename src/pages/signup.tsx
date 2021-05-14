@@ -1,12 +1,10 @@
 import { useFormik } from 'formik';
-import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import React from 'react';
 import { FormButton } from '../components/FormButton';
 import { FormInput } from '../components/FormInput';
-import { Spinner } from '../components/Spinner';
 import { useForceUnauth } from '../hooks/useForceUnauth';
-import { signup } from '../services/auth.service';
+import { useUserStore } from '../stores/useUserStore';
 
 interface SignupFormProps {
   redirectTo: string;
@@ -41,6 +39,9 @@ const validate = (values: FormProps) => {
 };
 
 const SignupForm = (props: SignupFormProps) => {
+  const { isLoading } = useForceUnauth({ redirectTo: '/dashboard' });
+  const { signup } = useUserStore();
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -48,13 +49,9 @@ const SignupForm = (props: SignupFormProps) => {
     },
     validate,
     onSubmit: values => {
-      signup(values)
-        .then(() => router.push(props.redirectTo))
-        .catch(e => alert(e.response.data.message));
+      signup(values).catch(e => alert(e.response.data.message));
     }
   });
-
-  const router = useRouter();
 
   return (
     <form
@@ -82,21 +79,14 @@ const SignupForm = (props: SignupFormProps) => {
           type="password"
         />
       </div>
-      <FormButton className="mt-8">Sign up</FormButton>
+      <FormButton className="mt-8" isLoading={isLoading}>
+        Sign up
+      </FormButton>
     </form>
   );
 };
 
 function Signup() {
-  const { isLoading } = useForceUnauth({ redirectTo: '/dashboard' });
-
-  if (isLoading)
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <Spinner />
-      </div>
-    );
-
   return (
     <div className="flex bg-gray-50 min-h-screen flex-col justify-center">
       <div className="bg-white px-20 py-16 rounded-xl mx-auto shadow-md border border-gray-100 w-full max-w-xl">
