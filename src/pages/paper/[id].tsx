@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { BandCard } from '../../components/BandCard';
 import BodyEditor from '../../components/editor/BodyEditor';
 import QuestionEditor from '../../components/editor/QuestionEditor';
+import { EditorNav } from '../../components/EditorNav';
 import { IssueList } from '../../components/IssueList';
 import { Spinner } from '../../components/Spinner';
 import useDebounce from '../../hooks/useDebounce';
@@ -16,19 +17,12 @@ export function Edit() {
     redirectTo: '/signin'
   });
 
-  const {
-    toggleVisible,
-    isVisible,
-    setIssues,
-    setBands,
-    bands,
-    setChecking,
-    hideAssistant
-  } = useAssistantStore();
+  const { isVisible, setIssues, setBands, bands, setChecking, hideAssistant } =
+    useAssistantStore();
 
   const router = useRouter();
   const { id } = router.query;
-  const { paper, setPaper, isLoading, getPaper } = usePaperStore();
+  const { paper, isLoading, getPaper } = usePaperStore();
 
   useEffect(() => {
     if (router.isReady && isAuthenticated) {
@@ -60,49 +54,46 @@ export function Edit() {
       </div>
     );
   return (
-    <div className="flex min-h-full">
-      <button
-        className="absolute right-4 top-4 bg-white shadow-lg border border-gray-50 hover:bg-gray-50 text-gray-500 px-4 py-2 rounded-full text-sm outline-none focus:outline-none"
-        onClick={toggleVisible}
-      >
-        Toggle Assistant
-      </button>
-      <div
-        className="flex flex-grow flex-shrink-0 px-6 overflow-y-scroll h-screen no-scrollbar"
-        id="left"
-      >
-        <div className="max-w-3xl w-full mt-20 px-2 mx-auto">
-          <QuestionEditor
-            className="text-xl leading-loose font-medium text-gray-800"
-            placeholder="Question..."
-          />
-          <BodyEditor className="min-h-full space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
-        </div>
-      </div>
-
-      {isVisible && (
+    <div className="h-screen">
+      <EditorNav className="absolute left-0 top-0 right-0" />
+      <div className="flex min-h-full">
         <div
-          className="px-8 overflow-y-scroll h-screen no-scrollbar"
-          id="right"
+          className="flex flex-grow flex-shrink-0 px-6 overflow-y-scroll h-screen no-scrollbar"
+          id="left"
         >
-          <aside className="mt-20 pb-32">
-            <BandCard band={bands?.overall} />
-            <IssueList className="" />
-          </aside>
+          <div className="max-w-3xl w-full mt-20 px-2 mx-auto">
+            <QuestionEditor
+              className="text-xl leading-loose font-medium text-gray-800"
+              placeholder="Question..."
+            />
+            <BodyEditor className="min-h-full space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
+          </div>
         </div>
-      )}
 
-      <style jsx>{`
-        /* Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
+        {isVisible && (
+          <div
+            className="px-8 overflow-y-scroll h-screen no-scrollbar"
+            id="right"
+          >
+            <aside className="mt-20 pb-32">
+              <BandCard band={bands?.overall} />
+              <IssueList className="" />
+            </aside>
+          </div>
+        )}
 
-        .no-scrollbar {
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
-        }
-      `}</style>
+        <style jsx>{`
+          /* Chrome, Safari and Opera */
+          .no-scrollbar::-webkit-scrollbar {
+            display: none;
+          }
+
+          .no-scrollbar {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+          }
+        `}</style>
+      </div>
     </div>
   );
 }
