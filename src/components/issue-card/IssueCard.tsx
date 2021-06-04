@@ -6,6 +6,7 @@ import { Replacement } from './Replacement';
 
 interface IssueCardProps {
   issue: Issue;
+  expanded?: boolean;
 }
 
 export const IssueCardSkeleton = () => {
@@ -31,7 +32,9 @@ export const IssueCardSkeleton = () => {
 
 export const IssueCard = (props: IssueCardProps) => {
   const { select, selected } = useAssistantStore();
-  const expanded = selected === props.issue.id;
+  const expanded = props.expanded
+    ? props.expanded
+    : selected === props.issue.id;
   const setExpanded = () => select(props.issue.id);
 
   return (
