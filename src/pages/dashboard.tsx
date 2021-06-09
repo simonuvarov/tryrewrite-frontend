@@ -1,4 +1,5 @@
 import { useRouter } from 'next/dist/client/router';
+import Head from 'next/head';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Button } from '../components/Button';
@@ -25,29 +26,39 @@ export function Edit() {
 
   if (isAuthenticating)
     return (
-      <div className="flex h-screen items-center justify-center">
-        <Spinner />
-      </div>
+      <>
+        <Head>
+          <title>Dashboard</title>
+        </Head>
+        <div className="flex h-screen items-center justify-center">
+          <Spinner />
+        </div>
+      </>
     );
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      <aside className="w-60 flex flex-shrink-0 flex-col border-r overflow-auto bg-gray-50 px-4">
-        <Logo className="mt-10 px-2" href="/dashboard" />
-        <VerticalMenu className="mt-12" />
-      </aside>
-      <main className="flex flex-col flex-shrink-0 flex-grow bg-white p-10 overflow-y-auto">
-        <div className="flex flex-col flex-grow">
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-semibold text-gray-900">Papers</h1>
-            <Button onClick={handleNewPaperClick} type="primary">
-              New paper
-            </Button>
+    <>
+      <Head>
+        <title>Dashboard</title>
+      </Head>
+      <div className="flex h-screen overflow-hidden">
+        <aside className="w-60 flex flex-shrink-0 flex-col border-r overflow-auto bg-gray-50 px-4">
+          <Logo className="mt-10 px-2" href="/dashboard" />
+          <VerticalMenu className="mt-12" />
+        </aside>
+        <main className="flex flex-col flex-shrink-0 flex-grow bg-white p-10 overflow-y-auto">
+          <div className="flex flex-col flex-grow">
+            <div className="flex justify-between items-center">
+              <h1 className="text-2xl font-semibold text-gray-900">Papers</h1>
+              <Button onClick={handleNewPaperClick} type="primary">
+                New paper
+              </Button>
+            </div>
+            <PaperCardList papers={query.data} />
           </div>
-          <PaperCardList papers={query.data} />
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   );
 }
 
