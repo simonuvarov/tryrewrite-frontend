@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAssistantStore } from '../stores/useAssistantStore';
 import { usePaperStore } from '../stores/usePaperStore';
+import { Button } from './Button';
 import { Logo } from './Logo';
 import { Spinner } from './Spinner';
 
@@ -13,14 +14,7 @@ interface AssistantButtonProps {
 
 const AssistantButton = (props: AssistantButtonProps) => {
   return (
-    <button
-      className={`outline-none focus:outline-none rounded-lg font-semibold text-sm py-2 px-4 flex items-center transition-colors ${
-        props.isVisible
-          ? 'bg-gray-50 text-gray-500'
-          : 'text-blue-600 bg-blue-50'
-      }`}
-      onClick={props.onClick}
-    >
+    <Button type="secondary" onClick={props.onClick}>
       <span>
         {props.isVisible ? 'Hide assistant' : 'Correct with assistant'}
       </span>
@@ -28,14 +22,12 @@ const AssistantButton = (props: AssistantButtonProps) => {
         <Spinner className="ml-3 h-6 w-6" />
       ) : (
         <span
-          className={`ml-3 h-6 w-6 rounded-full text-xs leading-none font-semibold text-blue-50 flex items-center justify-center ${
-            props.isVisible ? 'bg-gray-500' : 'bg-blue-600'
-          }`}
+          className={`ml-3 h-6 w-6 rounded-full text-xs leading-none font-semibold text-blue-50 flex items-center justify-center bg-blue-600`}
         >
           {props.issueCount < 100 ? props.issueCount : '∞'}
         </span>
       )}
-    </button>
+    </Button>
   );
 };
 

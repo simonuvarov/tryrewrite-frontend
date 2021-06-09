@@ -38,7 +38,7 @@
     "slate": "^0.62.1",
     "slate-history": "^0.59.0",
     "slate-react": "^0.59.0",
-    "tailwindcss": "^2.1.2",
+    "tailwindcss": "^2.1.4",
     "zustand": "^3.4.1"
   }
 }

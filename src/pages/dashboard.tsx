@@ -1,6 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
 import { useQuery } from 'react-query';
+import { Button } from '../components/Button';
 import { Logo } from '../components/Logo';
 import { PaperCardList } from '../components/PaperCardList';
 import { Spinner } from '../components/Spinner';
@@ -39,13 +40,9 @@ export function Edit() {
         <div className="flex flex-col flex-grow">
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-semibold text-gray-900">Papers</h1>
-            <button
-              onClick={handleNewPaperClick}
-              type="button"
-              className="relative inline-flex items-center px-4 py-3 shadow-sm text-sm font-medium rounded-md text-white bg-blue-600  hover:bg-blue-500 leading-4 focus:outline-none"
-            >
+            <Button onClick={handleNewPaperClick} type="primary">
               New paper
-            </button>
+            </Button>
           </div>
           <PaperCardList papers={query.data} />
         </div>

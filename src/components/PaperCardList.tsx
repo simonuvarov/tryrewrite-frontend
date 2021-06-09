@@ -2,6 +2,7 @@ import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import { useQuery } from 'react-query';
 import paperService, { Paper } from '../services/paper.service';
+import { Button } from './Button';
 
 const PaperCardSkeleton = () => {
   return (
@@ -76,12 +77,9 @@ export const PaperCardList = ({ papers }: PaperCardListProps) => {
         <h1 className="text-xl font-medium text-gray-700">
           You don't have any papers, yet.
         </h1>
-        <button
-          className="mt-4 items-center shadow-sm hower:shadow-lg text-sm rounded-md px-4 py-3 bg-gray-50 border border-gray-100 hover:border-gray-200 hover:bg-gray-100 text-gray-600 font-medium transition leading-4 focus:outline-none"
-          onClick={handleNewPaperClick}
-        >
-          Write something now
-        </button>
+        <Button onClick={handleNewPaperClick} type="white" className="mt-4">
+          Write something
+        </Button>
       </ul>
     );
 
