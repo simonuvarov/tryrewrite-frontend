@@ -17,14 +17,13 @@ export const Button = (props: ButtonProps) => {
       styles = 'text-blue-700 bg-blue-50 hover:bg-blue-100';
       break;
     case 'white':
-      styles =
-        'shadow-sm border border-gray-300 text-gray-700 bg-white hover:bg-gray-50';
+      styles = 'border border-gray-300 text-gray-700 bg-white hover:bg-gray-50';
       break;
   }
 
   return (
     <button
-      className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-md focus:outline-none ${styles} ${
+      className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-md focus:outline-none shadow-sm ${styles} ${
         props.className || ''
       }`}
       onClick={props.onClick}
