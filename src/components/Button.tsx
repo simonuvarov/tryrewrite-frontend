@@ -12,13 +12,14 @@ export const Button = (props: ButtonProps) => {
   let styles: string;
   switch (props.type) {
     case 'primary':
-      styles = 'text-white bg-blue-600 hover:bg-blue-700';
+      styles = 'text-white bg-blue-600 hover:bg-blue-700 shadow-sm';
       break;
     case 'secondary':
-      styles = 'text-blue-700 bg-blue-50 hover:bg-blue-100';
+      styles = 'text-blue-600 bg-blue-50 hover:text-blue-700';
       break;
     case 'white':
-      styles = 'border border-gray-300 text-gray-700 bg-white hover:bg-gray-50';
+      styles =
+        'border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 shadow-sm';
       break;
   }
 
@@ -34,7 +35,7 @@ export const Button = (props: ButtonProps) => {
 
   return (
     <button
-      className={`inline-flex items-center px-4 py-2 rounded-md focus:outline-none shadow-sm ${styles} ${sizeStyles} ${
+      className={`inline-flex items-center px-4 py-2 rounded-md focus:outline-none  ${styles} ${sizeStyles} ${
         props.className || ''
       }`}
       onClick={props.onClick}

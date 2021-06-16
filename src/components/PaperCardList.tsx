@@ -77,7 +77,12 @@ export const PaperCardList = ({ papers }: PaperCardListProps) => {
         <h1 className="text-xl font-medium text-gray-700">
           You don't have any papers, yet.
         </h1>
-        <Button onClick={handleNewPaperClick} type="white" className="mt-4">
+        <Button
+          onClick={handleNewPaperClick}
+          type="white"
+          className="mt-4"
+          size="medium"
+        >
           Write something
         </Button>
       </ul>
