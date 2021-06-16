@@ -14,7 +14,7 @@ interface AssistantButtonProps {
 
 const AssistantButton = (props: AssistantButtonProps) => {
   return (
-    <Button type="secondary" onClick={props.onClick}>
+    <Button type="secondary" onClick={props.onClick} size="medium">
       <span>
         {props.isVisible ? 'Hide assistant' : 'Correct with assistant'}
       </span>

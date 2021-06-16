@@ -2,6 +2,7 @@ import React from 'react';
 
 interface ButtonProps {
   type: 'primary' | 'secondary' | 'white';
+  size: 'small' | 'medium';
   onClick: () => void;
   children: React.ReactNode;
   className?: string;
@@ -21,9 +22,19 @@ export const Button = (props: ButtonProps) => {
       break;
   }
 
+  let sizeStyles: string;
+  switch (props.size) {
+    case 'small':
+      sizeStyles = 'text-sm font-medium';
+      break;
+    case 'medium':
+      sizeStyles = 'text-base font-medium';
+      break;
+  }
+
   return (
     <button
-      className={`inline-flex items-center px-4 py-2 text-sm font-medium rounded-md focus:outline-none shadow-sm ${styles} ${
+      className={`inline-flex items-center px-4 py-2 rounded-md focus:outline-none shadow-sm ${styles} ${sizeStyles} ${
         props.className || ''
       }`}
       onClick={props.onClick}
