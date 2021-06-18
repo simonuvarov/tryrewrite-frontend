@@ -1,9 +1,9 @@
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
+import { AssistantButton } from '../../components/AssistantButton';
 import { BandCard } from '../../components/BandCard';
 import BodyEditor from '../../components/editor/BodyEditor';
 import QuestionEditor from '../../components/editor/QuestionEditor';
-import { EditorNav } from '../../components/EditorNav';
 import { IssueList } from '../../components/IssueList';
 import { Spinner } from '../../components/Spinner';
 import useDebounce from '../../hooks/useDebounce';
@@ -17,8 +17,17 @@ export function Edit() {
     redirectTo: '/signin'
   });
 
-  const { isVisible, setIssues, setBands, bands, setChecking, hideAssistant } =
-    useAssistantStore();
+  const {
+    isVisible,
+    setIssues,
+    setBands,
+    bands,
+    issues,
+    setChecking,
+    hideAssistant,
+    toggleVisible,
+    isChecking
+  } = useAssistantStore();
 
   const router = useRouter();
   const { id } = router.query;
@@ -55,7 +64,13 @@ export function Edit() {
     );
   return (
     <div className="h-screen">
-      <EditorNav className="absolute left-0 top-0 right-0" />
+      <AssistantButton
+        isVisible={isVisible}
+        issueCount={issues.length}
+        onClick={toggleVisible}
+        isLoading={isChecking}
+        className="absolute right-4 top-4"
+      />
       <div className="flex min-h-full">
         <div
           className="flex flex-grow flex-shrink-0 px-6 overflow-y-scroll h-screen no-scrollbar"
