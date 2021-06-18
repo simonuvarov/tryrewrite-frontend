@@ -72,10 +72,10 @@ export function Edit() {
       />
       <div className="flex min-h-full">
         <div
-          className="flex flex-grow flex-shrink-0 px-6 overflow-y-scroll h-screen no-scrollbar"
+          className="flex flex-grow flex-shrink-0 mx-0 px-6 overflow-y-scroll h-screen no-scrollbar"
           id="left"
         >
-          <div className="mt-20 px-2 mx-auto">
+          <div className="mt-20 px-2 mx-auto w-min">
             <QuestionEditor
               className="text-xl leading-loose font-medium text-gray-800"
               placeholder="Question..."
