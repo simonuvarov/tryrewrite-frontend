@@ -1,3 +1,4 @@
+import { PencilAltIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import React from 'react';
@@ -43,6 +44,7 @@ export function Edit() {
       <header className="flex max-w-7xl justify-between mx-auto py-6">
         <Logo />
         <Button onClick={handleNewPaperClick} type="primary" size="medium">
+          <PencilAltIcon className="h-5 w-5 mr-1" />
           New paper
         </Button>
       </header>
