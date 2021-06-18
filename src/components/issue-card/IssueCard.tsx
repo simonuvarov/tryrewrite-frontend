@@ -11,7 +11,7 @@ interface IssueCardProps {
 
 export const IssueCardSkeleton = () => {
   return (
-    <li className="w-[512px] px-12 py-8 border border-gray-100 bg-white collapsed-shadow rounded-xl animate-pulse">
+    <li className="w-[480px] px-12 py-8 border border-gray-100 bg-white shadow rounded-xl animate-pulse">
       <div className="mt-2 h-4 bg-gray-200 rounded w-2/3"></div>
       <div className="mt-5 space-y-3">
         <h3 className="h-6 bg-gray-200 rounded w-1/2"></h3>
