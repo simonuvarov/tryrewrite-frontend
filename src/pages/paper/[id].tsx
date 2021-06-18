@@ -75,12 +75,12 @@ export function Edit() {
           className="flex flex-grow flex-shrink-0 px-6 overflow-y-scroll h-screen no-scrollbar"
           id="left"
         >
-          <div className="max-w-3xl w-full mt-20 px-2 mx-auto">
+          <div className="mt-20 px-2 mx-auto">
             <QuestionEditor
               className="text-xl leading-loose font-medium text-gray-800"
               placeholder="Question..."
             />
-            <BodyEditor className="min-h-full space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
+            <BodyEditor className="min-h-full w-[55ch] space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
           </div>
         </div>
 
