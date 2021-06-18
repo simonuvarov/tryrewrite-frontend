@@ -1,7 +1,6 @@
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
 import { AssistantButton } from '../../components/AssistantButton';
-import { BandCard } from '../../components/BandCard';
 import BodyEditor from '../../components/editor/BodyEditor';
 import QuestionEditor from '../../components/editor/QuestionEditor';
 import { IssueList } from '../../components/IssueList';
@@ -87,11 +86,10 @@ export function Edit() {
 
         {isVisible && (
           <div
-            className="px-8 overflow-y-scroll h-screen no-scrollbar"
+            className="pl-16 pr-24 overflow-y-scroll h-screen no-scrollbar bg-gray-100"
             id="right"
           >
             <aside className="mt-20 pb-32">
-              <BandCard band={bands?.overall} />
               <IssueList className="" />
             </aside>
           </div>

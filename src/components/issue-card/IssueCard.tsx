@@ -40,8 +40,8 @@ export const IssueCard = (props: IssueCardProps) => {
   return (
     <li
       key={props.issue.id}
-      className={`w-[512px] px-12 py-8 border border-gray-100 bg-white transition-shadow rounded-xl ${
-        expanded ? 'expanded-shadow' : 'collapsed-shadow cursor-pointer'
+      className={`w-[480px] px-12 py-8 border border-gray-100 bg-white transition-shadow rounded-xl ${
+        expanded ? 'shadow-md' : 'shadow cursor-pointer'
       }`}
       onClick={setExpanded}
     >
@@ -72,15 +72,6 @@ export const IssueCard = (props: IssueCardProps) => {
       {props.issue.link && expanded && (
         <LearnMoreButton href={props.issue.link} />
       )}
-      <style jsx>{`
-        .expanded-shadow {
-          box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px;
-        }
-
-        .collapsed-shadow {
-          box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
-        }
-      `}</style>
     </li>
   );
 };
