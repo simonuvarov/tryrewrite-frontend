@@ -1,9 +1,8 @@
+import { AnnotationIcon, XIcon } from '@heroicons/react/outline';
 import React from 'react';
 import { useAssistantStore } from '../stores/useAssistantStore';
 import { usePaperStore } from '../stores/usePaperStore';
-import { Button } from './Button';
 import { Logo } from './Logo';
-import { Spinner } from './Spinner';
 
 interface AssistantButtonProps {
   onClick: () => void;
@@ -14,20 +13,23 @@ interface AssistantButtonProps {
 
 const AssistantButton = (props: AssistantButtonProps) => {
   return (
-    <Button type="secondary" onClick={props.onClick} size="medium">
-      <span>
-        {props.isVisible ? 'Hide assistant' : 'Correct with assistant'}
-      </span>
-      {props.isLoading ? (
-        <Spinner className="ml-3 h-6 w-6" />
+    <button
+      onClick={props.onClick}
+      className="bg-white border p-3 border-gray-200 rounded-full shadow-lg focus:outline-none hover:bg-gray-50 transition-colors relative"
+    >
+      {props.isVisible ? (
+        <XIcon className="h-6 w-6 text-gray-600" />
       ) : (
-        <span
-          className={`ml-3 h-6 w-6 rounded-full text-xs leading-none font-semibold text-blue-50 flex items-center justify-center bg-blue-600`}
-        >
-          {props.issueCount < 100 ? props.issueCount : '∞'}
-        </span>
+        <AnnotationIcon className="h-6 w-6 text-gray-600" />
       )}
-    </Button>
+      <div
+        className={`absolute bg-red-500 rounded-full -right-1 -top-1 h-5 w-5 text-red-100 text-xs flex justify-center items-center font-semibold leading-none ${
+          props.isVisible && 'hidden'
+        }`}
+      >
+        {props.issueCount}
+      </div>
+    </button>
   );
 };
 
