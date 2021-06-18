@@ -85,14 +85,9 @@ export function Edit() {
         </div>
 
         {isVisible && (
-          <div
-            className="pl-16 pr-24 overflow-y-scroll h-screen no-scrollbar bg-gray-100"
-            id="right"
-          >
-            <aside className="mt-20 pb-32">
-              <IssueList className="" />
-            </aside>
-          </div>
+          <aside className="pb-32 pl-16 pr-24 overflow-y-scroll h-screen no-scrollbar bg-gray-100">
+            <IssueList className="mt-20" />
+          </aside>
         )}
 
         <style jsx>{`
