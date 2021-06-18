@@ -12,7 +12,7 @@ export const AssistantButton = (props: AssistantButtonProps) => {
   return (
     <button
       onClick={props.onClick}
-      className={`bg-white border p-3 border-gray-200 rounded-full shadow-lg focus:outline-none hover:bg-gray-50 transition-colors ${
+      className={`bg-white border p-3 border-gray-200 rounded-full shadow-lg focus:outline-none hover:bg-gray-50 transition transform active:scale-95 active:shadow-md ${
         props.className || 'relative'
       }`}
     >
