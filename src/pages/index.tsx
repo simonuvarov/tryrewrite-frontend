@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Banner } from '../components/Banner';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { Spinner } from '../components/Spinner';
@@ -29,6 +30,13 @@ export function Home() {
 
   return (
     <>
+      <Banner>
+        🎉 We are currently in beta. Send us your feedback{' '}
+        <a className="underline ml-1" href="mailto:feedback@tryrewrite.com">
+          here
+        </a>
+        .
+      </Banner>
       <Header className="bg-white" />
       <section className="bg-white w-full px-4 flex flex-col items-center mt-20">
         <h1 className="text-3xl md:text-7xl font-extrabold tracking-tight text-gray-800 max-w-xl text-center ">
@@ -46,7 +54,6 @@ export function Home() {
           height={838}
         />
       </section>
-
       <Footer />
     </>
   );
