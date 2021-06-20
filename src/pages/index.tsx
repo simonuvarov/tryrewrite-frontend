@@ -51,6 +51,9 @@ export function Home() {
             Get started for free
           </a>
         </Link>
+        <small className="text-sm font-medium text-gray-400 mt-4">
+          No credit card is required
+        </small>
       </section>
       <section className="w-full flex-col flex items-center mt-20">
         <Image
