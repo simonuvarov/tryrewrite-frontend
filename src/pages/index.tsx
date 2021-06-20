@@ -63,7 +63,7 @@ export function Home() {
           height={838}
         />
       </section>
-      <Footer />
+      <Footer classname="mt-36" />
     </>
   );
 }
