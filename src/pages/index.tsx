@@ -1,6 +1,6 @@
+import Image from 'next/image';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { IssueCard } from '../components/issue-card/IssueCard';
 import { Spinner } from '../components/Spinner';
 import { useForceUnauth } from '../hooks/useForceUnauth';
 import { CRITERIA_TYPE, Issue } from '../services/paper.service';
@@ -39,9 +39,12 @@ export function Home() {
         </p>
       </section>
       <section className="w-full flex-col flex items-center mt-20">
-        <ul>
-          <IssueCard issue={demoIssue} expanded />
-        </ul>
+        <Image
+          src={'/images/hero-image.png'}
+          alt="Picture of the editor"
+          width={1440}
+          height={838}
+        />
       </section>
 
       <Footer />
