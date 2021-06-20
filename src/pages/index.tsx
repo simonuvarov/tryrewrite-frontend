@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Banner } from '../components/Banner';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -45,6 +46,11 @@ export function Home() {
         <p className="text-lg md:text-2xl mt-6 text-gray-500 max-w-3xl text-center ">
           Get instant feedback and track your progress – all in one place
         </p>
+        <Link href="/signup">
+          <a className="bg-blue-600 shadow-sm text-xl leading-7 font-medium text-white px-6 py-4 rounded-md mt-12">
+            Get started for free
+          </a>
+        </Link>
       </section>
       <section className="w-full flex-col flex items-center mt-20">
         <Image
