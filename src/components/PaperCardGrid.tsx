@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 import { useQuery } from 'react-query';
 import paperService, { Paper } from '../services/paper.service';
@@ -33,7 +34,7 @@ const PaperCard = (props: PaperCardProps) => {
         {props.paper.body}
       </div>
       <footer className="text-xs leading-4 font-normal text-gray-400 mt-6">
-        {props.paper.createdAt}
+        Updated {moment(props.paper.updatedAt).fromNow()}
       </footer>
     </article>
     // </Link>
