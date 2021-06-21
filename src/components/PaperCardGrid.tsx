@@ -21,9 +21,15 @@ interface PaperCardProps {
 }
 
 const PaperCard = (props: PaperCardProps) => {
+  const router = useRouter();
+
   return (
-    // <Link href={`/paper/${props.paper.id}`}>
-    <article className="p-4 shadow-md rounded-lg border border-gray-100 px-10 py-8 bg-white">
+    <article
+      className="p-4 shadow-md rounded-lg border border-gray-100 px-10 py-8 bg-white"
+      onClick={() => {
+        router.push(`/paper/${props.paper.id}`);
+      }}
+    >
       <div className="text-green-700 bg-green-100 text-xs uppercase inline-block font-medium px-2 py-1 rounded">
         Band {parseFloat(props.paper.overallBand.toString()).toFixed(1)}
       </div>
@@ -37,7 +43,6 @@ const PaperCard = (props: PaperCardProps) => {
         Updated {moment(props.paper.updatedAt).fromNow()}
       </footer>
     </article>
-    // </Link>
   );
 };
 
