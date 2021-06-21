@@ -1,5 +1,4 @@
 import { useRouter } from 'next/dist/client/router';
-import Link from 'next/link';
 import { useQuery } from 'react-query';
 import paperService, { Paper } from '../services/paper.service';
 import { Button } from './Button';
@@ -22,31 +21,31 @@ interface PaperCardProps {
 
 const PaperCard = (props: PaperCardProps) => {
   return (
-    <Link href={`/paper/${props.paper.id}`}>
-      <li className="hover:bg-gray-50 hover:cursor-pointer flex justify-between items-center p-4">
-        <div id="left" className="flex flex-col flex-shrink-0 max-w-lg w-full">
-          <div className="font-medium text-lg truncate text-gray-800">
-            {props.paper.question}
-          </div>
-          <div className="truncate text-lg mt-2 text-gray-600">
-            {props.paper.body}
-          </div>
-        </div>
-        <div id="right">
-          <div className="flex font-medium text-xl text-gray-700 px-4">
-            {parseFloat(props.paper.overallBand.toString()).toFixed(1)}
-          </div>
-        </div>
-      </li>
-    </Link>
+    // <Link href={`/paper/${props.paper.id}`}>
+    <article className="p-4 shadow-md rounded-lg border border-gray-100 px-10 py-8 bg-white">
+      <div className="text-green-700 bg-green-100 text-xs uppercase inline-block font-medium px-2 py-1 rounded">
+        Band {parseFloat(props.paper.overallBand.toString()).toFixed(1)}
+      </div>
+      <header className="font-medium text-lg truncate text-gray-800 mt-3">
+        {props.paper.question}
+      </header>
+      <div className="line-clamp-3 text-base leading-6 font-normal mt-2 text-gray-600">
+        {props.paper.body}
+      </div>
+      <footer className="text-xs leading-4 font-normal text-gray-400 mt-6">
+        {props.paper.createdAt}
+      </footer>
+    </article>
+    // </Link>
   );
 };
 
-interface PaperCardListProps {
+interface PaperCardGridProps {
   papers?: Array<Paper>;
+  className?: string;
 }
 
-export const PaperCardList = ({ papers }: PaperCardListProps) => {
+export const PaperCardGrid = ({ papers, className }: PaperCardGridProps) => {
   const query = useQuery('papers', paperService.getAllPapers);
   const router = useRouter();
 
@@ -81,12 +80,16 @@ export const PaperCardList = ({ papers }: PaperCardListProps) => {
     );
 
   return (
-    <ul className="divide-y mt-8">
+    <div
+      className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 ${
+        className || ''
+      }`}
+    >
       {papers
         ? papers.map((paper: Paper) => (
             <PaperCard paper={paper} key={paper.id} />
           ))
         : skeletons}
-    </ul>
+    </div>
   );
 };

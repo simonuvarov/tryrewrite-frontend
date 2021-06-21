@@ -3,9 +3,10 @@ import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import React from 'react';
 import { useQuery } from 'react-query';
+import { Banner } from '../components/Banner';
 import { Button } from '../components/Button';
 import Header from '../components/Header';
-import { PaperCardList } from '../components/PaperCardList';
+import { PaperCardGrid } from '../components/PaperCardGrid';
 import { Spinner } from '../components/Spinner';
 import { useForceAuth } from '../hooks/useForceAuth';
 import paperService from '../services/paper.service';
@@ -41,14 +42,25 @@ export function Edit() {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <Header>
+      <Banner>
+        <div>
+          <span className="inline mr-1">
+            🎉 We are currently in beta. Send us your feedback{' '}
+          </span>
+          <a className="inline underline" href="mailto:feedback@tryrewrite.com">
+            here
+          </a>
+          .
+        </div>
+      </Banner>
+      <Header className="bg-gray-50">
         <Button onClick={handleNewPaperClick} type="primary" size="md">
           <PencilAltIcon className="h-5 w-5 mr-1" />
           New paper
         </Button>
       </Header>
-      <main className="flex flex-col max-w-7xl mx-auto flex-shrink-0 flex-grow bg-white">
-        <PaperCardList papers={query.data} />
+      <main className="h-screen bg-gray-50 pt-10 px-4">
+        <PaperCardGrid papers={query.data} className="max-w-[1440px] mx-auto" />
       </main>
     </>
   );
