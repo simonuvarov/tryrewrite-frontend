@@ -43,7 +43,7 @@ export function Edit() {
       </Head>
       <header className="flex max-w-7xl justify-between mx-auto py-6">
         <Logo />
-        <Button onClick={handleNewPaperClick} type="primary" size="medium">
+        <Button onClick={handleNewPaperClick} type="primary" size="md">
           <PencilAltIcon className="h-5 w-5 mr-1" />
           New paper
         </Button>

@@ -1,46 +1,86 @@
+import Link from 'next/link';
 import React from 'react';
 
-interface ButtonProps {
+interface BaseProps {
   type: 'primary' | 'secondary' | 'white';
-  size: 'small' | 'medium';
-  onClick: () => void;
+  size: 'sm' | 'md' | 'lg' | 'xl';
   children: React.ReactNode;
   className?: string;
 }
 
-export const Button = (props: ButtonProps) => {
-  let styles: string;
+interface LinkProps extends BaseProps {
+  href: string;
+}
+
+interface ButtonProps extends BaseProps {
+  onClick: () => void;
+}
+
+const isButtonProps = (
+  object: LinkProps | ButtonProps
+): object is ButtonProps => {
+  return 'onClick' in object;
+};
+
+export const Button = (props: LinkProps | ButtonProps) => {
+  let styles = [
+    'inline-flex',
+    'items-center',
+    'rounded-md',
+    'focus:outline-none'
+  ];
+
+  if (props.className) styles.push(props.className);
+
   switch (props.type) {
     case 'primary':
-      styles = 'text-white bg-blue-600 hover:bg-blue-700 shadow-sm';
+      styles.push(
+        'text-white',
+        'bg-blue-600',
+        'hover:bg-blue-700',
+        'shadow-sm'
+      );
       break;
     case 'secondary':
-      styles = 'text-blue-600 bg-blue-50 hover:text-blue-700';
+      styles.push('text-blue-600', 'bg-blue-50', 'hover:text-blue-700');
       break;
     case 'white':
-      styles =
-        'border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 shadow-sm';
+      styles.push(
+        'border',
+        'border-gray-300',
+        'text-gray-700',
+        'bg-white',
+        'hover:bg-gray-50',
+        'shadow-sm'
+      );
       break;
   }
 
-  let sizeStyles: string;
   switch (props.size) {
-    case 'small':
-      sizeStyles = 'text-sm font-medium';
+    case 'sm':
+      styles.push('text-sm', 'leading-5', 'font-medium', 'px-4', 'py-2');
       break;
-    case 'medium':
-      sizeStyles = 'text-base font-medium';
+    case 'md':
+      styles.push('text-base', 'leading-6', 'font-medium', 'px-4', 'py-2');
+      break;
+    case 'lg':
+      styles.push('text-base', 'leading-6', 'font-medium', 'px-6', 'py-3');
+      break;
+    case 'xl':
+      styles.push('text-xl', 'leading-7', 'font-medium', 'px-6', 'py-4');
       break;
   }
 
-  return (
-    <button
-      className={`inline-flex items-center px-4 py-2 rounded-md focus:outline-none  ${styles} ${sizeStyles} ${
-        props.className || ''
-      }`}
-      onClick={props.onClick}
-    >
-      {props.children}
-    </button>
-  );
+  if (isButtonProps(props))
+    return (
+      <button className={styles.join(' ')} onClick={props.onClick}>
+        {props.children}
+      </button>
+    );
+  else
+    return (
+      <Link href={props.href}>
+        <a className={styles.join(' ')}>{props.children}</a>
+      </Link>
+    );
 };

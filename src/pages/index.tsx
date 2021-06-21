@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { Banner } from '../components/Banner';
+import { Button } from '../components/Button';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { Spinner } from '../components/Spinner';
@@ -50,11 +50,15 @@ export function Home() {
         <p className="text-lg md:text-2xl mt-6 text-gray-500 max-w-3xl text-center ">
           Get instant feedback and track your progress – all in one place
         </p>
-        <Link href="/signup">
-          <a className="bg-blue-600 shadow-sm text-xl leading-7 font-medium text-white px-6 py-4 rounded-md mt-8 md:mt-12">
-            Get started for free
-          </a>
-        </Link>
+        <Button
+          href="/signup"
+          size="xl"
+          type="primary"
+          className="mt-8 md:mt-12"
+        >
+          Get started for free
+        </Button>
+
         <small className="text-sm font-medium text-gray-400 mt-4">
           No credit card is required
         </small>
