@@ -30,7 +30,7 @@ const PaperCard = (props: PaperCardProps) => {
       <header className="font-medium text-lg truncate text-gray-800 mt-3">
         {props.paper.question}
       </header>
-      <div className="line-clamp-3 text-base leading-6 font-normal mt-2 text-gray-600">
+      <div className="line-clamp-3 text-base leading-6 font-normal mt-2 text-gray-600 h-[72px]">
         {props.paper.body}
       </div>
       <footer className="text-xs leading-4 font-normal text-gray-400 mt-6">
