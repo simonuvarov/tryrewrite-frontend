@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 interface BaseProps {
-  type: 'primary' | 'secondary' | 'white';
+  type: 'primary' | 'secondary' | 'white' | 'ghost';
   size: 'sm' | 'md' | 'lg' | 'xl';
   children: React.ReactNode;
   className?: string;
@@ -27,10 +27,9 @@ export const Button = (props: LinkProps | ButtonProps) => {
     'inline-flex',
     'items-center',
     'rounded-md',
-    'focus:outline-none'
+    'focus:outline-none',
+    'transition'
   ];
-
-  if (props.className) styles.push(props.className);
 
   switch (props.type) {
     case 'primary':
@@ -54,6 +53,9 @@ export const Button = (props: LinkProps | ButtonProps) => {
         'shadow-sm'
       );
       break;
+    case 'ghost':
+      styles.push('text-gray-500 hover:text-gray-600 bg-transparent');
+      break;
   }
 
   switch (props.size) {
@@ -70,6 +72,8 @@ export const Button = (props: LinkProps | ButtonProps) => {
       styles.push('text-xl', 'leading-7', 'font-medium', 'px-6', 'py-4');
       break;
   }
+
+  if (props.className) styles.push(props.className);
 
   if (isButtonProps(props))
     return (
