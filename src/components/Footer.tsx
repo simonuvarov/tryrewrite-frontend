@@ -6,7 +6,7 @@ interface FooterProps {
 
 const Footer = (props: FooterProps) => {
   return (
-    <footer className={`my-10 flex justify-center ${props.classname || ''}`}>
+    <footer className={`py-10 flex justify-center ${props.classname || ''}`}>
       <nav className="space-x-4">
         <Link href="/terms">
           <a className="text-sm leading-5 font-medium text-gray-400 hover:text-gray-500 transition-colors">

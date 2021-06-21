@@ -9,10 +9,8 @@ interface HeaderProps {
 
 export default function Header({ className = '' }: HeaderProps): ReactElement {
   return (
-    <header
-      className={`w-full max-w-[1440px] mx-auto pt-8 pb-4 px-2 ${className}`}
-    >
-      <nav className="flex justify-between items-center">
+    <header className={`w-full pt-8 pb-4 px-2 ${className}`}>
+      <nav className="flex max-w-[1440px] mx-auto justify-between items-center">
         <Logo className="px-2" />
         <ul className="flex space-x-3 items-center">
           <li className="inline">
