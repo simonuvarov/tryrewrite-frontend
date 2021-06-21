@@ -29,7 +29,16 @@ export function Home() {
           .
         </div>
       </Banner>
-      <Header className="bg-gray-100" />
+      <Header className="bg-gray-100">
+        <nav className="flex space-x-3 items-center">
+          <Button href="/signin" type="ghost" size="md">
+            Sign in
+          </Button>
+          <Button href="/signup" type="primary" size="md">
+            Sign up
+          </Button>
+        </nav>
+      </Header>
       <section className="bg-gray-100 w-full px-4 flex flex-col items-center pt-10 md:pt-20">
         <h1 className="text-3xl md:text-7xl font-extrabold tracking-tight text-gray-800 max-w-xl text-center ">
           Write. Check. Correct. Repeat.

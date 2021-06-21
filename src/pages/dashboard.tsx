@@ -4,7 +4,7 @@ import Head from 'next/head';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { Button } from '../components/Button';
-import { Logo } from '../components/Logo';
+import Header from '../components/Header';
 import { PaperCardList } from '../components/PaperCardList';
 import { Spinner } from '../components/Spinner';
 import { useForceAuth } from '../hooks/useForceAuth';
@@ -41,13 +41,12 @@ export function Edit() {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <header className="flex max-w-7xl justify-between mx-auto py-6">
-        <Logo />
+      <Header>
         <Button onClick={handleNewPaperClick} type="primary" size="md">
           <PencilAltIcon className="h-5 w-5 mr-1" />
           New paper
         </Button>
-      </header>
+      </Header>
       <main className="flex flex-col max-w-7xl mx-auto flex-shrink-0 flex-grow bg-white">
         <PaperCardList papers={query.data} />
       </main>
