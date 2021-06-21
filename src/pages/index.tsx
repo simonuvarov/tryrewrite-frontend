@@ -32,14 +32,18 @@ export function Home() {
   return (
     <>
       <Banner>
-        🎉 We are currently in beta. Send us your feedback{' '}
-        <a className="underline ml-1" href="mailto:feedback@tryrewrite.com">
-          here
-        </a>
-        .
+        <div>
+          <span className="inline mr-1">
+            🎉 We are currently in beta. Send us your feedback{' '}
+          </span>
+          <a className="inline underline" href="mailto:feedback@tryrewrite.com">
+            here
+          </a>
+          .
+        </div>
       </Banner>
       <Header className="bg-white" />
-      <section className="bg-white w-full px-4 flex flex-col items-center mt-20">
+      <section className="bg-white w-full px-4 flex flex-col items-center mt-10 md:mt-20">
         <h1 className="text-3xl md:text-7xl font-extrabold tracking-tight text-gray-800 max-w-xl text-center ">
           Write. Check. Correct. Repeat.
         </h1>
@@ -47,7 +51,7 @@ export function Home() {
           Get instant feedback and track your progress – all in one place
         </p>
         <Link href="/signup">
-          <a className="bg-blue-600 shadow-sm text-xl leading-7 font-medium text-white px-6 py-4 rounded-md mt-12">
+          <a className="bg-blue-600 shadow-sm text-xl leading-7 font-medium text-white px-6 py-4 rounded-md mt-8 md:mt-12">
             Get started for free
           </a>
         </Link>
@@ -55,7 +59,7 @@ export function Home() {
           No credit card is required
         </small>
       </section>
-      <section className="w-full flex-col flex items-center mt-20">
+      <section className="w-full flex-col flex items-center mt-10 md:mt-20 px-4">
         <Image
           src={'/images/hero-image.png'}
           alt="Picture of the editor"
@@ -63,7 +67,7 @@ export function Home() {
           height={838}
         />
       </section>
-      <Footer classname="mt-36" />
+      <Footer classname="mt-10 md:mt-36" />
     </>
   );
 }
