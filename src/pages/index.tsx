@@ -5,19 +5,6 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { Spinner } from '../components/Spinner';
 import { useForceUnauth } from '../hooks/useForceUnauth';
-import { CRITERIA_TYPE, Issue } from '../services/paper.service';
-
-const demoIssue: Issue = {
-  id: '',
-  isInline: true,
-  shortMessage: 'Informal word: kids',
-  message:
-    'You are asked to write an academic essay. Avoid using informal words such as “kids” to make your language as formal and academic as possible.',
-  affects: CRITERIA_TYPE.LR,
-  replacements: ['children'],
-  offset: 0,
-  length: 4
-};
 
 export function Home() {
   const { isLoading } = useForceUnauth({ redirectTo: '/dashboard' });
