@@ -73,7 +73,7 @@ export const PaperCardList = ({ papers }: PaperCardListProps) => {
           onClick={handleNewPaperClick}
           type="white"
           className="mt-4"
-          size="medium"
+          size="md"
         >
           Write something
         </Button>
