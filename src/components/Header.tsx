@@ -8,7 +8,9 @@ interface HeaderProps {
 
 export default function Header({ className = '' }: HeaderProps): ReactElement {
   return (
-    <header className={`w-full pt-8 pb-4 px-2 ${className}`}>
+    <header
+      className={`w-full py-6 px-2 border-b border-gray-200 ${className}`}
+    >
       <article className="flex max-w-[1440px] mx-auto justify-between items-center">
         <Logo className="px-2" />
         <nav className="flex space-x-3 items-center">
