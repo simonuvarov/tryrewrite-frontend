@@ -49,6 +49,22 @@ export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
     }
   }, [expanded]);
 
+  let styles = ['transition-colors', 'duration-500'];
+
+  if (shouldBeHighlighted) {
+    styles.push(
+      'border-b-4',
+      getBorderColorFromCriteria(
+        leaf.affects! as CRITERIA_TYPE // TODO: fix types
+      )
+    );
+    if (expanded)
+      styles.push(
+        getBackgroundColorFromCriteria(leaf.affects as CRITERIA_TYPE)
+      );
+    else styles.push('bg-white');
+  }
+
   if (leaf.affects)
     return (
       <span
@@ -57,26 +73,14 @@ export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
           select(leaf.id as string);
         }}
         {...attributes}
-        className={`transition-colors duration-500 ${
-          shouldBeHighlighted
-            ? 'border-b-4' +
-              ' ' +
-              getBorderColorFromCriteria(
-                leaf.affects! as CRITERIA_TYPE // TODO: fix types
-              )
-            : ''
-        } ${
-          expanded && shouldBeHighlighted
-            ? getBackgroundColorFromCriteria(leaf.affects as CRITERIA_TYPE)
-            : 'bg-white'
-        }`}
+        className={styles.join(' ')}
       >
         {children}
       </span>
     );
 
   return (
-    <span {...attributes} className="">
+    <span {...attributes} className="bg-white">
       {children}
     </span>
   );
