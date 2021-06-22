@@ -14,8 +14,10 @@ interface UserInformation {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-const me = (credentials: Credentials) => {
-  return axios.post<UserInformation>(`${API_URL}${'/users/me'}`, credentials);
+const me = () => {
+  return axios.post<UserInformation>(`${API_URL}${'/users/me'}`, {
+    withCredentials: true
+  });
 };
 
 export default { me };

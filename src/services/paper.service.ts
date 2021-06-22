@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getAccessTokenFromStorage } from '../lib/getAccessTokenFromStorage';
 
 export interface InlineIssue {
   id: string;
@@ -46,17 +45,13 @@ export enum CRITERIA_TYPE {
 }
 
 const getPaper = (id: string) => {
-  return axios.get<Paper>(`/api/papers/${id}`, {
-    headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
-  });
+  return axios.get<Paper>(`/api/papers/${id}`);
 };
 
 const getAllPapers = (): Promise<Array<Paper>> => {
   return new Promise((resolve, reject) => {
     return axios
-      .get<Array<Paper>>(`/api/papers`, {
-        headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
-      })
+      .get<Array<Paper>>(`/api/papers`)
       .then(res => resolve(res.data))
       .catch(reject);
   });
@@ -64,7 +59,7 @@ const getAllPapers = (): Promise<Array<Paper>> => {
 
 const createNewPaper = (paper?: Partial<Paper>) => {
   return axios.post<Paper>(`/api/papers`, paper || {}, {
-    headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` }
+    withCredentials: true
   });
 };
 
@@ -72,14 +67,10 @@ const gradePaper = (id: string, input: { question: string; body: string }) => {
   return axios.put<{
     issues: Array<Issue>;
     bands: { ta: number; cc: number; lr: number; gr: number; overall: number };
-  }>(
-    `/api/papers/${id}`,
-    {
-      question: input.question,
-      body: input.body
-    },
-    { headers: { Authorization: `Bearer ${getAccessTokenFromStorage()}` } }
-  );
+  }>(`/api/papers/${id}`, {
+    question: input.question,
+    body: input.body
+  });
 };
 
 export default { createNewPaper, getPaper, getAllPapers, gradePaper };
