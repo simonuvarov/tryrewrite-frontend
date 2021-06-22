@@ -58,9 +58,7 @@ const getAllPapers = (): Promise<Array<Paper>> => {
 };
 
 const createNewPaper = (paper?: Partial<Paper>) => {
-  return axios.post<Paper>(`/api/papers`, paper || {}, {
-    withCredentials: true
-  });
+  return axios.post<Paper>(`/api/papers`, paper || {});
 };
 
 const gradePaper = (id: string, input: { question: string; body: string }) => {

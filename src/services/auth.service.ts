@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { getAccessTokenFromStorage } from '../lib/getAccessTokenFromStorage';
 
 export interface Credentials {
   email: string;
@@ -34,13 +33,8 @@ export const signin = (credentials: Credentials): Promise<Tokens> => {
 
 export const isValidSession = (): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const accessToken = getAccessTokenFromStorage();
-    if (!accessToken) return reject();
-
     axios
-      .get('/api/auth/session', {
-        headers: { Authorization: `Bearer ${accessToken}` }
-      })
+      .get('/api/auth/session')
       .then(_ => resolve())
       .catch(e => {
         // Consider only server side error worth rejecting
