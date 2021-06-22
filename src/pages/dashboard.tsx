@@ -3,7 +3,7 @@ import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
 import React from 'react';
 import { useQuery } from 'react-query';
-import { Banner } from '../components/Banner';
+import { BannerBeta } from '../components/BannerBeta';
 import { Button } from '../components/Button';
 import Header from '../components/Header';
 import { PaperCardGrid } from '../components/PaperCardGrid';
@@ -42,17 +42,7 @@ export function Edit() {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <Banner>
-        <div>
-          <span className="inline mr-1">
-            🎉 We are currently in beta. Send us your feedback{' '}
-          </span>
-          <a className="inline underline" href="mailto:feedback@tryrewrite.com">
-            here
-          </a>
-          .
-        </div>
-      </Banner>
+      <BannerBeta />
       <Header className="bg-gray-50">
         <Button onClick={handleNewPaperClick} type="primary" size="md">
           <PencilAltIcon className="h-5 w-5 mr-1" />

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Banner } from '../components/Banner';
+import { BannerBeta } from '../components/BannerBeta';
 import { Button } from '../components/Button';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -18,17 +18,7 @@ export function Home() {
 
   return (
     <>
-      <Banner>
-        <div>
-          <span className="inline mr-1">
-            🎉 We are currently in beta. Send us your feedback{' '}
-          </span>
-          <a className="inline underline" href="mailto:feedback@tryrewrite.com">
-            here
-          </a>
-          .
-        </div>
-      </Banner>
+      <BannerBeta />
       <Header className="bg-gray-50">
         <nav className="flex space-x-3 items-center">
           <Button href="/signin" type="ghost" size="md">
