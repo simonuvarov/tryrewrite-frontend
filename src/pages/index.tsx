@@ -29,7 +29,7 @@ export function Home() {
           .
         </div>
       </Banner>
-      <Header className="bg-gray-100">
+      <Header className="bg-gray-50">
         <nav className="flex space-x-3 items-center">
           <Button href="/signin" type="ghost" size="md">
             Sign in
@@ -39,7 +39,7 @@ export function Home() {
           </Button>
         </nav>
       </Header>
-      <section className="bg-gray-100 w-full px-4 flex flex-col items-center pt-10 md:pt-20">
+      <section className="bg-gray-50 w-full px-4 flex flex-col items-center pt-10 md:pt-20">
         <h1 className="text-3xl md:text-7xl font-extrabold tracking-tight text-gray-800 max-w-xl text-center ">
           Write. Check. Correct. Repeat.
         </h1>
@@ -59,7 +59,7 @@ export function Home() {
           No credit card is required
         </small>
       </section>
-      <section className="bg-gray-100 w-full flex-col flex items-center pt-10 md:pt-20 px-4">
+      <section className="bg-gray-50 w-full flex-col flex items-center pt-10 md:pt-20 px-4">
         <Image
           src={'/images/hero-image.png'}
           alt="Picture of the editor"
@@ -67,7 +67,7 @@ export function Home() {
           height={838}
         />
       </section>
-      <Footer classname="pt-10 md:pt-36 bg-gray-100" />
+      <Footer classname="pt-10 md:pt-36 bg-gray-50" />
     </>
   );
 }
