@@ -30,7 +30,7 @@ export function Edit() {
 
   const router = useRouter();
   const { id } = router.query;
-  const { paper, isLoading, getPaper } = usePaperStore();
+  const { paper, loading: isLoading, getPaper } = usePaperStore();
 
   useEffect(() => {
     if (router.isReady && isAuthenticated) {

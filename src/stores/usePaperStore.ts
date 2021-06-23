@@ -6,19 +6,20 @@ type PaperData = Pick<Paper, 'question' | 'body'>;
 interface PaperStoreProps extends State {
   paper: PaperData;
   getPaper: (id: string) => void;
-  isLoading: boolean;
+  loading: boolean;
   setPaper: (paper: PaperData) => void;
 }
 
 export const usePaperStore = create<PaperStoreProps>(set => ({
-  isLoading: true,
+  loading: true,
+  paper: { question: '', body: '' },
+
   getPaper: (id: string) => {
-    set({ isLoading: true });
+    set({ loading: true });
     paperService
       .getPaper(id)
       .then(res => set({ paper: res.data }))
-      .finally(() => set({ isLoading: false }));
+      .finally(() => set({ loading: false }));
   },
-  paper: { question: '', body: '' },
   setPaper: (paper: { question: string; body: string }) => set({ paper: paper })
 }));

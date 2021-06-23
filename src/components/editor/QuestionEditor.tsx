@@ -12,7 +12,7 @@ interface BodyEditorProps {
 }
 
 const QuestionEditor = (props: BodyEditorProps) => {
-  const { paper, setPaper, isLoading } = usePaperStore();
+  const { paper, setPaper, loading: isLoading } = usePaperStore();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 

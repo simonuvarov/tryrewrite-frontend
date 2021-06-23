@@ -16,7 +16,7 @@ interface BodyEditorProps {
 const BodyEditor = (props: BodyEditorProps) => {
   const { issues, setChecking } = useAssistantStore();
 
-  const { paper, setPaper, isLoading } = usePaperStore();
+  const { paper, setPaper, loading: isLoading } = usePaperStore();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 
