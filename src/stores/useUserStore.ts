@@ -29,7 +29,7 @@ export const useUserStore = create<UserStoreProps>(set => ({
     return new Promise((resolve, reject) => {
       signup(credentials)
         .then(res => {
-          set({ isAuthenticated: true });
+          set({ isAuthenticated: false });
           resolve();
         })
         .catch(e => {
