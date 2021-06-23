@@ -1,6 +1,5 @@
 import create, { State } from 'zustand';
 import { removeAccessTokenFromStorage } from '../lib/removeAccessTokenFromStorage';
-import { setAccessTokenToStorage } from '../lib/setAccessTokenToStorage';
 import {
   Credentials,
   isValidSession,
@@ -30,7 +29,6 @@ export const useUserStore = create<UserStoreProps>(set => ({
     return new Promise((resolve, reject) => {
       signup(credentials)
         .then(res => {
-          setAccessTokenToStorage(res.accessToken);
           set({ isAuthenticated: true });
           resolve();
         })
@@ -47,7 +45,6 @@ export const useUserStore = create<UserStoreProps>(set => ({
     return new Promise((resolve, reject) => {
       signin(credentials)
         .then(res => {
-          setAccessTokenToStorage(res.accessToken);
           set({ isAuthenticated: true });
           resolve();
         })
