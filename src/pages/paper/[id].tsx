@@ -63,13 +63,7 @@ export function Edit() {
     );
   return (
     <div className="h-screen">
-      <AssistantButton
-        isVisible={isVisible}
-        issueCount={issues.length}
-        onClick={toggleVisible}
-        isLoading={isChecking}
-        className="absolute right-4 top-4"
-      />
+      <AssistantButton className="absolute right-4 top-4" />
       <div className="flex min-h-full">
         <div
           className="flex flex-grow flex-shrink-0 mx-0 px-6 overflow-y-scroll h-screen no-scrollbar"
