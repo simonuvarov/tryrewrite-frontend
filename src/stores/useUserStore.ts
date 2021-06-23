@@ -1,11 +1,7 @@
 import create, { State } from 'zustand';
 import { removeAccessTokenFromStorage } from '../lib/removeAccessTokenFromStorage';
-import {
-  Credentials,
-  isValidSession,
-  signin,
-  signup
-} from '../services/auth.service';
+import { Credentials, signin, signup } from '../services/auth.service';
+import { me } from '../services/users.service';
 
 interface UserStoreProps extends State {
   isAuthenticated: boolean;
@@ -60,7 +56,7 @@ export const useUserStore = create<UserStoreProps>(set => ({
     set({ isAuthenticated: false });
   },
   keepalive: async () => {
-    isValidSession()
+    me()
       .then(() => set({ isAuthenticated: true }))
       .catch(() => {
         set({ isAuthenticated: false });

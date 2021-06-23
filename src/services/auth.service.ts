@@ -31,17 +31,4 @@ export const signin = (credentials: Credentials): Promise<Tokens> => {
   });
 };
 
-export const isValidSession = (): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get('/api/auth/session')
-      .then(_ => resolve())
-      .catch(e => {
-        // Consider only server side error worth rejecting
-        // Otherwise, "cancelation" of the request is considered error
-        // and user gets signed out
-        if (e.response) reject(e);
-        resolve();
-      });
-  });
-};
+export default { signin, signup };
