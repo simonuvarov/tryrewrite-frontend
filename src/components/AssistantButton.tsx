@@ -2,12 +2,14 @@ import { AnnotationIcon, XIcon } from '@heroicons/react/outline';
 import React from 'react';
 import useEditor from '../hooks/useEditor';
 import { useAssistantVisibilityStore } from '../stores/useAssistantVisibilityStore';
+import { Spinner } from './Spinner';
 
 interface AssistantButtonProps {
   className?: string;
 }
 export const AssistantButton = (props: AssistantButtonProps) => {
   const { isVisible, toggleVisible } = useAssistantVisibilityStore();
+  const { checking } = useEditor();
 
   const { issues } = useEditor();
   return (
@@ -27,7 +29,7 @@ export const AssistantButton = (props: AssistantButtonProps) => {
           isVisible && 'hidden'
         }`}
       >
-        {issues && issues.length}
+        {issues && !checking ? issues.length : <Spinner className="h-3 w-3" />}
       </div>
     </button>
   );
