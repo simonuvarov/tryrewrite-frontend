@@ -1,4 +1,4 @@
-import { useAssistantStore } from '../stores/useAssistantStore';
+import { useEditorStore } from '../stores/useEditorStore';
 import { IssueCard, IssueCardSkeleton } from './issue-card/IssueCard';
 
 interface IssueListProps {
@@ -6,7 +6,7 @@ interface IssueListProps {
 }
 
 export const IssueList = (props: IssueListProps) => {
-  const { issues, isChecking } = useAssistantStore();
+  const { issues, isChecking } = useEditorStore();
 
   const skeletons = new Array(10).fill(null).map((_, i) => {
     return <IssueCardSkeleton key={i} />;

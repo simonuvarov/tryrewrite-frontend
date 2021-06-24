@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
-import { usePaperStore } from '../../stores/usePaperStore';
+import { useEditorStore } from '../../stores/useEditorStore';
 import { deserialize } from './deserialize';
 import { Element } from './Element';
 import { serialize } from './serialize';
@@ -19,7 +19,7 @@ const QuestionSkeleton = (
 );
 
 const QuestionEditor = (props: BodyEditorProps) => {
-  const { paper, setPaper, loading: isLoading } = usePaperStore();
+  const { paper, setPaper, loading: isLoading } = useEditorStore();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 

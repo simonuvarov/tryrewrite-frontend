@@ -4,8 +4,7 @@ import {
   InlineIssue,
   Issue
 } from '../../services/paper.service';
-import { useAssistantStore } from '../../stores/useAssistantStore';
-import { usePaperStore } from '../../stores/usePaperStore';
+import { useEditorStore } from '../../stores/useEditorStore';
 
 export interface IssueRange extends BaseRange {
   id: string;
@@ -43,8 +42,7 @@ const extractParagraphIssues = (
 };
 
 export const useDecorate = () => {
-  const { issues } = useAssistantStore();
-  const { paper } = usePaperStore();
+  const { issues, paper } = useEditorStore();
 
   return ([node, path]: NodeEntry) => {
     const ranges: IssueRange[] = [];

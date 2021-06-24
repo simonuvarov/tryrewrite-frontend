@@ -8,8 +8,7 @@ import { Spinner } from '../../components/Spinner';
 import useDebounce from '../../hooks/useDebounce';
 import { useForceAuth } from '../../hooks/useForceAuth';
 import paperService from '../../services/paper.service';
-import { useAssistantStore } from '../../stores/useAssistantStore';
-import { usePaperStore } from '../../stores/usePaperStore';
+import { useEditorStore } from '../../stores/useEditorStore';
 
 export function Edit() {
   const { isAuthenticating, isAuthenticated } = useForceAuth({
@@ -26,11 +25,11 @@ export function Edit() {
     hideAssistant,
     toggleVisible,
     isChecking
-  } = useAssistantStore();
+  } = useEditorStore();
 
   const router = useRouter();
   const { id } = router.query;
-  const { paper, loading: isLoading, getPaper } = usePaperStore();
+  const { paper, loading: isLoading, getPaper } = useEditorStore();
 
   useEffect(() => {
     if (router.isReady && isAuthenticated) {

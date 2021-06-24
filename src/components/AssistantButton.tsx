@@ -1,12 +1,12 @@
 import { AnnotationIcon, XIcon } from '@heroicons/react/outline';
 import React from 'react';
-import { useAssistantStore } from '../stores/useAssistantStore';
+import { useEditorStore } from '../stores/useEditorStore';
 
 interface AssistantButtonProps {
   className?: string;
 }
 export const AssistantButton = (props: AssistantButtonProps) => {
-  const { isVisible, issues, toggleVisible } = useAssistantStore();
+  const { isVisible, issues, toggleVisible } = useEditorStore();
   return (
     <button
       onClick={toggleVisible}

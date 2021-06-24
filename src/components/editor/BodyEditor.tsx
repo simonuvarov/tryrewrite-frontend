@@ -1,8 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
-import { useAssistantStore } from '../../stores/useAssistantStore';
-import { usePaperStore } from '../../stores/usePaperStore';
+import { useEditorStore } from '../../stores/useEditorStore';
 import { deserialize } from './deserialize';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
@@ -23,9 +22,9 @@ const EditorSkeleton = (
 );
 
 const BodyEditor = (props: BodyEditorProps) => {
-  const { issues, setChecking } = useAssistantStore();
+  const { issues, setChecking } = useEditorStore();
 
-  const { paper, setPaper, loading: isLoading } = usePaperStore();
+  const { paper, setPaper, loading: isLoading } = useEditorStore();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 

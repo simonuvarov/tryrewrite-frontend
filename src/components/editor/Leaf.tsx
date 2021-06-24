@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { RenderLeafProps } from 'slate-react';
 import { CRITERIA_TYPE } from '../../services/paper.service';
-import { useAssistantStore } from '../../stores/useAssistantStore';
+import { useEditorStore } from '../../stores/useEditorStore';
 
 export interface LeafProps extends RenderLeafProps {
   leaf: { id: string; affects: CRITERIA_TYPE; text: string };
@@ -34,8 +34,7 @@ const getBackgroundColorFromCriteria = (criteria: CRITERIA_TYPE): string => {
 };
 
 export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
-  const { isVisible, isChecking } = useAssistantStore();
-  const { selected, select } = useAssistantStore();
+  const { selected, select, isVisible, isChecking } = useEditorStore();
 
   const shouldBeHighlighted = isVisible && !isChecking;
 

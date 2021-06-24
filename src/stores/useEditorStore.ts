@@ -1,5 +1,5 @@
 import create, { State } from 'zustand';
-import { Issue } from '../services/paper.service';
+import paperService, { Issue, Paper } from '../services/paper.service';
 
 interface Bands {
   ta: number;
@@ -9,7 +9,13 @@ interface Bands {
   overall: number;
 }
 
-interface AssistantStoreProps extends State {
+type PaperData = Pick<Paper, 'question' | 'body'>;
+
+interface EditorStoreProps extends State {
+  paper: PaperData;
+  getPaper: (id: string) => void;
+  loading: boolean;
+  setPaper: (paper: PaperData) => void;
   isVisible: boolean;
   toggleVisible: () => void;
   selected?: string;
@@ -23,7 +29,19 @@ interface AssistantStoreProps extends State {
   hideAssistant: () => void;
 }
 
-export const useAssistantStore = create<AssistantStoreProps>((set, get) => ({
+export const useEditorStore = create<EditorStoreProps>((set, get) => ({
+  loading: true,
+  paper: { question: '', body: '' },
+
+  getPaper: (id: string) => {
+    set({ loading: true });
+    paperService
+      .getPaper(id)
+      .then(res => set({ paper: res.data }))
+      .finally(() => set({ loading: false }));
+  },
+  setPaper: (paper: { question: string; body: string }) =>
+    set({ paper: paper }),
   isVisible: false,
   selected: undefined,
   toggleVisible: () => set({ isVisible: !get().isVisible }),
