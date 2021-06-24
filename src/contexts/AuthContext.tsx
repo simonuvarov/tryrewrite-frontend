@@ -29,6 +29,24 @@ export const AuthProvider = ({
   // TODO: maybe extract redirections to forms
   const router = useRouter();
 
+  // clear error on route change
+  useEffect(() => {
+    const handleRouteChange = (
+      url: string,
+      { shallow }: { shallow: boolean }
+    ) => {
+      setError(undefined);
+    };
+
+    router.events.on('routeChangeStart', handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method:
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+  }, []);
+
   // Check user on the first render
   useEffect(() => {
     usersService
