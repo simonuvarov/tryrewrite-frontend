@@ -2,6 +2,7 @@ import { BaseRange, NodeEntry, Text } from 'slate';
 import { CRITERIA_TYPE, InlineIssue } from '../../services/paper.service';
 import { useAssistantStore } from '../../stores/useAssistantStore';
 import { usePaperStore } from '../../stores/usePaperStore';
+import { splitTextIntoParagraphRanges } from './splitTextIntoParagraphRanges';
 
 export interface IssueRange extends BaseRange {
   id: string;
@@ -19,14 +20,8 @@ export const useDecorate = () => {
       return ranges;
     }
 
-    const paragraphRanges: Array<[number, number]> = [];
-    let offset = 0;
-    paper.body.split('\n').map((p: string) => {
-      const start = offset;
-      const end = offset + p.length + '\n'.length;
-      paragraphRanges.push([start, end]);
-      offset = offset + p.length + '\n'.length;
-    });
+    const paragraphRanges: Array<[number, number]> =
+      splitTextIntoParagraphRanges(paper.body);
     const currentTextRange = paragraphRanges[path[0]];
 
     for (const issue of issues.filter(h => {
