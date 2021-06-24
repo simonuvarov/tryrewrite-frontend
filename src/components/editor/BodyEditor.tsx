@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
 import useEditor from '../../hooks/useEditor';
-import { useEditorStore } from '../../stores/useEditorStore';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
 import { useDecorate } from './useDecorate';
@@ -21,7 +20,7 @@ const EditorSkeleton = (
 );
 
 const BodyEditor = (props: BodyEditorProps) => {
-  const { issues, setChecking } = useEditorStore();
+  const { issues } = useEditor();
 
   const { body, setBody, initializingPaper } = useEditor();
 
