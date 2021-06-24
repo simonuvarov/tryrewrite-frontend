@@ -6,10 +6,10 @@ import QuestionEditor from '../../components/editor/QuestionEditor';
 import { IssueList } from '../../components/IssueList';
 import { EditorProvider } from '../../contexts/EditorContext';
 import useAuth from '../../hooks/useAuth';
-import { useEditorStore } from '../../stores/useEditorStore';
+import { useAssistantVisibilityStore } from '../../stores/useAssistantVisibilityStore';
 
 export function Edit() {
-  const { isVisible } = useEditorStore();
+  const { isVisible } = useAssistantVisibilityStore();
   const router = useRouter();
   const { id } = router.query;
   const { user } = useAuth();
