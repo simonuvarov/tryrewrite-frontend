@@ -16,7 +16,10 @@ export const signup = (credentials: Credentials): Promise<void> => {
       .then(_ => {
         resolve(undefined);
       })
-      .catch(err => reject(err));
+      .catch(err => {
+        if (err.response) reject(new Error(err.response.data.message));
+        else reject(new Error('Unexpected client side error'));
+      });
   });
 };
 
@@ -27,7 +30,10 @@ export const signin = (credentials: Credentials): Promise<void> => {
       .then(_ => {
         resolve(undefined);
       })
-      .catch(err => reject(err));
+      .catch(err => {
+        if (err.response) reject(new Error(err.response.data.message));
+        else reject(new Error('Unexpected client side error'));
+      });
   });
 };
 
@@ -38,7 +44,10 @@ export const signout = (): Promise<void> => {
       .then(_ => {
         resolve(undefined);
       })
-      .catch(err => reject(err));
+      .catch(err => {
+        if (err.response) reject(new Error(err.response.data.message));
+        else reject(new Error('Unexpected client side error'));
+      });
   });
 };
 
