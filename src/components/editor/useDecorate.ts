@@ -1,5 +1,9 @@
 import { BaseRange, NodeEntry, Text } from 'slate';
-import { CRITERIA_TYPE, InlineIssue } from '../../services/paper.service';
+import {
+  CRITERIA_TYPE,
+  InlineIssue,
+  Issue
+} from '../../services/paper.service';
 import { useAssistantStore } from '../../stores/useAssistantStore';
 import { usePaperStore } from '../../stores/usePaperStore';
 import { splitTextIntoParagraphRanges } from './splitTextIntoParagraphRanges';
@@ -8,6 +12,17 @@ export interface IssueRange extends BaseRange {
   id: string;
   affects: CRITERIA_TYPE;
 }
+
+export const isPartOfParagraph = (
+  issue: Issue,
+  paragraphRange: [number, number]
+) => {
+  return (
+    issue.isInline &&
+    issue.offset < paragraphRange[1] &&
+    issue.offset >= paragraphRange[0]
+  );
+};
 
 export const useDecorate = () => {
   const { issues } = useAssistantStore();
@@ -25,11 +40,7 @@ export const useDecorate = () => {
     const currentTextRange = paragraphRanges[path[0]];
 
     for (const issue of issues.filter(h => {
-      return (
-        h.isInline &&
-        h.offset < currentTextRange[1] &&
-        h.offset >= currentTextRange[0]
-      );
+      return isPartOfParagraph(h, currentTextRange);
     }) as Array<InlineIssue>) {
       const length = issue.length;
       const start = issue.offset - currentTextRange[0];
