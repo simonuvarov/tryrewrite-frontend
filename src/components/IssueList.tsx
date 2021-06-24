@@ -7,8 +7,6 @@ interface IssueListProps {
 
 export const IssueList = (props: IssueListProps) => {
   const { issues, checking } = useEditor();
-  console.log(issues);
-  console.log(checking);
 
   const skeletons = new Array(10).fill(null).map((_, i) => {
     return <IssueCardSkeleton key={i} />;
