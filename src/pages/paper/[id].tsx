@@ -6,57 +6,17 @@ import QuestionEditor from '../../components/editor/QuestionEditor';
 import { IssueList } from '../../components/IssueList';
 import { EditorProvider } from '../../contexts/EditorContext';
 import useAuth from '../../hooks/useAuth';
-import useDebounce from '../../hooks/useDebounce';
-import paperService from '../../services/paper.service';
 import { useEditorStore } from '../../stores/useEditorStore';
 
 export function Edit() {
-  const {
-    isVisible,
-    setIssues,
-    setBands,
-    bands,
-    issues,
-    setChecking,
-    hideAssistant,
-    toggleVisible,
-    isChecking
-  } = useEditorStore();
-
+  const { isVisible } = useEditorStore();
   const router = useRouter();
   const { id } = router.query;
-  const { paper, loading: isLoading, getPaper } = useEditorStore();
-
   const { user } = useAuth();
 
   useEffect(() => {
     if (!user) router.push('/signin');
   }, [user]);
-
-  useEffect(() => {
-    if (router.isReady && user) {
-      getPaper(id as string);
-    }
-    return () => {
-      hideAssistant();
-    }; // clear paper on editor exit
-  }, [router.isReady, user]);
-
-  const debouncedPaperValue = useDebounce(paper, 500);
-
-  useEffect(() => {
-    if (debouncedPaperValue && !isLoading) {
-      if (router.isReady) {
-        paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
-          setIssues(r.issues);
-          setBands(r.bands);
-          setChecking(false);
-        });
-      }
-    }
-  }, [debouncedPaperValue]);
-
-  if (!router.isReady) return null;
 
   return (
     <div className="h-screen">
