@@ -1,12 +1,15 @@
 import { AnnotationIcon, XIcon } from '@heroicons/react/outline';
 import React from 'react';
+import useEditor from '../hooks/useEditor';
 import { useEditorStore } from '../stores/useEditorStore';
 
 interface AssistantButtonProps {
   className?: string;
 }
 export const AssistantButton = (props: AssistantButtonProps) => {
-  const { isVisible, issues, toggleVisible } = useEditorStore();
+  const { isVisible, toggleVisible } = useEditorStore();
+
+  const { issues } = useEditor();
   return (
     <button
       onClick={toggleVisible}
@@ -24,7 +27,7 @@ export const AssistantButton = (props: AssistantButtonProps) => {
           isVisible && 'hidden'
         }`}
       >
-        {issues.length}
+        {issues && issues.length}
       </div>
     </button>
   );
