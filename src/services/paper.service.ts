@@ -37,6 +37,17 @@ export interface Paper {
   authorId: string;
 }
 
+export interface GradeResult {
+  issues: Array<Issue>;
+  bands: {
+    ta: number;
+    cc: number;
+    lr: number;
+    gr: number;
+    overall: number;
+  };
+}
+
 export enum CRITERIA_TYPE {
   TA = 'Task Achievement',
   CC = 'Coherence and Cohesion',
@@ -44,8 +55,13 @@ export enum CRITERIA_TYPE {
   LR = 'Lexical Resource'
 }
 
-const getPaper = (id: string) => {
-  return axios.get<Paper>(`/api/papers/${id}`);
+const getPaper = (id: string): Promise<Paper> => {
+  return new Promise((resolve, reject) => {
+    axios
+      .get<Paper>(`/api/papers/${id}`)
+      .then(res => resolve(res.data))
+      .catch(err => reject(err));
+  });
 };
 
 const getAllPapers = (): Promise<Array<Paper>> => {
@@ -61,13 +77,18 @@ const createNewPaper = (paper?: Partial<Paper>) => {
   return axios.post<Paper>(`/api/papers`, paper || {});
 };
 
-const gradePaper = (id: string, input: { question: string; body: string }) => {
-  return axios.put<{
-    issues: Array<Issue>;
-    bands: { ta: number; cc: number; lr: number; gr: number; overall: number };
-  }>(`/api/papers/${id}`, {
-    question: input.question,
-    body: input.body
+const gradePaper = (
+  id: string,
+  input: { question: string; body: string }
+): Promise<GradeResult> => {
+  return new Promise((resolve, rejejct) => {
+    axios
+      .put<GradeResult>(`/api/papers/${id}`, {
+        question: input.question,
+        body: input.body
+      })
+      .then(res => resolve(res.data))
+      .catch(err => rejejct(err));
   });
 };
 

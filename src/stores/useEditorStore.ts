@@ -37,7 +37,7 @@ export const useEditorStore = create<EditorStoreProps>((set, get) => ({
     set({ loading: true });
     paperService
       .getPaper(id)
-      .then(res => set({ paper: res.data }))
+      .then(res => set({ paper: res }))
       .finally(() => set({ loading: false }));
   },
   setPaper: (paper: { question: string; body: string }) =>

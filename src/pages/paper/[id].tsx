@@ -47,8 +47,8 @@ export function Edit() {
     if (debouncedPaperValue && !isLoading) {
       if (router.isReady) {
         paperService.gradePaper(id as string, debouncedPaperValue).then(r => {
-          setIssues(r.data.issues);
-          setBands(r.data.bands);
+          setIssues(r.issues);
+          setBands(r.bands);
           setChecking(false);
         });
       }
