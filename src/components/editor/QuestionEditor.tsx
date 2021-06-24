@@ -1,10 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
-import { useEditorStore } from '../../stores/useEditorStore';
-import { deserialize } from './deserialize';
+import useEditor from '../../hooks/useEditor';
 import { Element } from './Element';
-import { serialize } from './serialize';
 
 interface BodyEditorProps {
   className?: string;
@@ -19,24 +17,16 @@ const QuestionSkeleton = (
 );
 
 const QuestionEditor = (props: BodyEditorProps) => {
-  const { paper, setPaper, loading: isLoading } = useEditorStore();
+  const { question, setQuestion, initializingPaper } = useEditor();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 
   const renderElement = useCallback(props => <Element {...props} />, []);
 
-  if (isLoading) return QuestionSkeleton;
+  if (initializingPaper) return QuestionSkeleton;
 
   return (
-    <Slate
-      editor={editor}
-      value={deserialize(paper.question)}
-      onChange={value => {
-        if (paper.question != serialize(value)) {
-          setPaper({ question: serialize(value), body: paper.body });
-        }
-      }}
-    >
+    <Slate editor={editor} value={question} onChange={setQuestion}>
       <Editable
         placeholder={props.placeholder}
         spellCheck={false}

@@ -4,6 +4,7 @@ import { AssistantButton } from '../../components/AssistantButton';
 import BodyEditor from '../../components/editor/BodyEditor';
 import QuestionEditor from '../../components/editor/QuestionEditor';
 import { IssueList } from '../../components/IssueList';
+import { EditorProvider } from '../../contexts/EditorContext';
 import useAuth from '../../hooks/useAuth';
 import useDebounce from '../../hooks/useDebounce';
 import paperService from '../../services/paper.service';
@@ -55,41 +56,45 @@ export function Edit() {
     }
   }, [debouncedPaperValue]);
 
+  if (!router.isReady) return null;
+
   return (
     <div className="h-screen">
-      <AssistantButton className="absolute right-4 top-4" />
-      <div className="flex min-h-full">
-        <div
-          className="flex flex-grow flex-shrink-0 mx-0 px-6 overflow-y-scroll h-screen no-scrollbar"
-          id="left"
-        >
-          <div className="mt-20 px-2 mx-auto w-min">
-            <QuestionEditor
-              className="text-xl leading-loose font-medium text-gray-800"
-              placeholder="Question..."
-            />
-            <BodyEditor className="min-h-full w-[55ch] space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
+      <EditorProvider paperId={id as string}>
+        <AssistantButton className="absolute right-4 top-4" />
+        <div className="flex min-h-full">
+          <div
+            className="flex flex-grow flex-shrink-0 mx-0 px-6 overflow-y-scroll h-screen no-scrollbar"
+            id="left"
+          >
+            <div className="mt-20 px-2 mx-auto w-min">
+              <QuestionEditor
+                className="text-xl leading-loose font-medium text-gray-800"
+                placeholder="Question..."
+              />
+              <BodyEditor className="min-h-full w-[55ch] space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose" />
+            </div>
           </div>
+
+          {isVisible && (
+            <aside className="pb-32 pl-16 pr-24 overflow-y-scroll h-screen no-scrollbar bg-gray-100">
+              <IssueList className="mt-20" />
+            </aside>
+          )}
+
+          <style jsx>{`
+            /* Chrome, Safari and Opera */
+            .no-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+
+            .no-scrollbar {
+              -ms-overflow-style: none; /* IE and Edge */
+              scrollbar-width: none; /* Firefox */
+            }
+          `}</style>
         </div>
-
-        {isVisible && (
-          <aside className="pb-32 pl-16 pr-24 overflow-y-scroll h-screen no-scrollbar bg-gray-100">
-            <IssueList className="mt-20" />
-          </aside>
-        )}
-
-        <style jsx>{`
-          /* Chrome, Safari and Opera */
-          .no-scrollbar::-webkit-scrollbar {
-            display: none;
-          }
-
-          .no-scrollbar {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-          }
-        `}</style>
-      </div>
+      </EditorProvider>
     </div>
   );
 }

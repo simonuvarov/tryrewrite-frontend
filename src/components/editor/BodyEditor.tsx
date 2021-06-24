@@ -1,11 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
+import useEditor from '../../hooks/useEditor';
 import { useEditorStore } from '../../stores/useEditorStore';
-import { deserialize } from './deserialize';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
-import { serialize } from './serialize';
 import { useDecorate } from './useDecorate';
 
 interface BodyEditorProps {
@@ -24,7 +23,7 @@ const EditorSkeleton = (
 const BodyEditor = (props: BodyEditorProps) => {
   const { issues, setChecking } = useEditorStore();
 
-  const { paper, setPaper, loading: isLoading } = useEditorStore();
+  const { body, setBody, initializingPaper } = useEditor();
 
   const editor = useMemo(() => withReact(createEditor()), []);
 
@@ -40,19 +39,10 @@ const BodyEditor = (props: BodyEditorProps) => {
   // decorate function depends on the language selected
   const decorate = useDecorate();
 
-  if (isLoading) return EditorSkeleton;
+  if (initializingPaper) return EditorSkeleton;
 
   return (
-    <Slate
-      editor={editor}
-      value={deserialize(paper.body)}
-      onChange={value => {
-        if (paper.body != serialize(value)) {
-          setPaper({ question: paper.question, body: serialize(value) });
-          setChecking(true);
-        }
-      }}
-    >
+    <Slate editor={editor} value={body} onChange={setBody}>
       <Editable
         placeholder="Enter some plain text..."
         spellCheck={false}
