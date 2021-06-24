@@ -1,5 +1,5 @@
+import useEditor from '../../hooks/useEditor';
 import { Issue } from '../../services/paper.service';
-import { useEditorStore } from '../../stores/useEditorStore';
 import { CriteriaLabel } from './CriteriaLabel';
 import { LearnMoreButton } from './LearnMoreButton';
 import { Replacement } from './Replacement';
@@ -31,7 +31,7 @@ export const IssueCardSkeleton = () => {
 };
 
 export const IssueCard = (props: IssueCardProps) => {
-  const { select, selected } = useEditorStore();
+  const { select, selected } = useEditor();
   const expanded = props.expanded
     ? props.expanded
     : selected === props.issue.id;
