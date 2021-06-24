@@ -19,6 +19,8 @@ interface EditorContextProps {
   body: Descendant[];
   setBody: (b: Descendant[]) => void;
   checking: boolean;
+  selected?: string;
+  select: (id: string) => void;
 }
 
 export const EditorContext = createContext<EditorContextProps>(
@@ -38,6 +40,8 @@ export const EditorProvider = ({
   const [issues, setIssues] = useState<Array<Issue>>();
   const [question, setQuestion] = useState<Descendant[]>(stringToSlate('\n'));
   const [body, setBody] = useState<Descendant[]>(stringToSlate('\n'));
+
+  const [selected, setSelected] = useState<string>();
 
   // initalize paper
   useEffect(() => {
@@ -86,7 +90,9 @@ export const EditorProvider = ({
     setQuestion,
     body,
     setBody,
-    checking
+    checking,
+    selected,
+    select: setSelected
   };
 
   return (

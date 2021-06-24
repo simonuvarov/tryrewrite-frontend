@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { RenderLeafProps } from 'slate-react';
+import useEditor from '../../hooks/useEditor';
 import { CRITERIA_TYPE } from '../../services/paper.service';
-import { useEditorStore } from '../../stores/useEditorStore';
 
 export interface LeafProps extends RenderLeafProps {
   leaf: { id: string; affects: CRITERIA_TYPE; text: string };
@@ -34,10 +34,8 @@ const getBackgroundColorFromCriteria = (criteria: CRITERIA_TYPE): string => {
 };
 
 export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
-  const { selected, select, isVisible, isChecking } = useEditorStore();
-
-  const shouldBeHighlighted = isVisible && !isChecking;
-
+  const { checking, selected, select } = useEditor();
+  const shouldBeHighlighted = !checking;
   const expanded = selected === leaf.id;
 
   const ref = React.useRef<HTMLSpanElement>(null);
@@ -48,7 +46,7 @@ export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
     }
   }, [expanded]);
 
-  let styles = ['transition-colors', 'duration-500'];
+  let styles = ['transition-colors', 'duration-250'];
 
   if (shouldBeHighlighted) {
     styles.push(

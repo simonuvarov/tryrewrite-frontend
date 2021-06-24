@@ -1,10 +1,11 @@
 import { BaseRange, NodeEntry, Text } from 'slate';
+import { slateToString } from '../../contexts/EditorContext';
+import useEditor from '../../hooks/useEditor';
 import {
   CRITERIA_TYPE,
   InlineIssue,
   Issue
 } from '../../services/paper.service';
-import { useEditorStore } from '../../stores/useEditorStore';
 
 export interface IssueRange extends BaseRange {
   id: string;
@@ -42,7 +43,7 @@ const extractParagraphIssues = (
 };
 
 export const useDecorate = () => {
-  const { issues, paper } = useEditorStore();
+  const { issues, body } = useEditor();
 
   return ([node, path]: NodeEntry) => {
     const ranges: IssueRange[] = [];
@@ -52,7 +53,7 @@ export const useDecorate = () => {
     }
 
     const paragraphRanges: Array<[number, number]> =
-      splitTextIntoParagraphRanges(paper.body);
+      splitTextIntoParagraphRanges(slateToString(body));
     const currentTextRange = paragraphRanges[path[0]];
 
     const relatedIssues = extractParagraphIssues(issues, currentTextRange);
