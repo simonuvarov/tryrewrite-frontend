@@ -13,6 +13,15 @@ interface BodyEditorProps {
   className?: string;
 }
 
+const EditorSkeleton = (
+  <div className={`space-y-2 animate-pulse`}>
+    <div className="h-5 bg-gray-100 rounded w-full"></div>
+    <div className="h-5 bg-gray-100 rounded w-full"></div>
+    <div className="h-5 bg-gray-100 rounded w-full"></div>
+    <div className="h-5 bg-gray-100 rounded w-1/2"></div>
+  </div>
+);
+
 const BodyEditor = (props: BodyEditorProps) => {
   const { issues, setChecking } = useAssistantStore();
 
@@ -32,15 +41,7 @@ const BodyEditor = (props: BodyEditorProps) => {
   // decorate function depends on the language selected
   const decorate = useDecorate();
 
-  if (isLoading)
-    return (
-      <div className={`space-y-2 animate-pulse ${props.className || ''}`}>
-        <div className="h-5 bg-gray-100 rounded w-full"></div>
-        <div className="h-5 bg-gray-100 rounded w-full"></div>
-        <div className="h-5 bg-gray-100 rounded w-full"></div>
-        <div className="h-5 bg-gray-100 rounded w-1/2"></div>
-      </div>
-    );
+  if (isLoading) return EditorSkeleton;
 
   return (
     <Slate

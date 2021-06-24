@@ -11,6 +11,13 @@ interface BodyEditorProps {
   placeholder: string;
 }
 
+const QuestionSkeleton = (
+  <div className="space-y-2 animate-pulse">
+    <div className="h-5 bg-gray-100 rounded w-2/3"></div>
+    <div className="h-5 bg-gray-100 rounded w-1/2"></div>
+  </div>
+);
+
 const QuestionEditor = (props: BodyEditorProps) => {
   const { paper, setPaper, loading: isLoading } = usePaperStore();
 
@@ -18,13 +25,7 @@ const QuestionEditor = (props: BodyEditorProps) => {
 
   const renderElement = useCallback(props => <Element {...props} />, []);
 
-  if (isLoading)
-    return (
-      <div className="space-y-2 animate-pulse">
-        <div className="h-5 bg-gray-100 rounded w-2/3"></div>
-        <div className="h-5 bg-gray-100 rounded w-1/2"></div>
-      </div>
-    );
+  if (isLoading) return QuestionSkeleton;
 
   return (
     <Slate
