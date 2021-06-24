@@ -40,8 +40,8 @@ export const IssueCard = (props: IssueCardProps) => {
   return (
     <li
       key={props.issue.id}
-      className={`w-[480px] px-12 py-8 border border-gray-100 bg-white transition-shadow rounded-xl ${
-        expanded ? 'shadow-md' : 'shadow cursor-pointer'
+      className={`w-[480px] px-12 py-8 border border-gray-200 bg-white transition-shadow rounded-xl ${
+        expanded ? 'shadow-lg' : 'shadow-sm cursor-pointer'
       }`}
       onClick={setExpanded}
     >
