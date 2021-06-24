@@ -5,7 +5,7 @@ interface Credentials {
   password: string;
 }
 
-interface UserInformation {
+export interface UserInformation {
   id: string;
   email: string;
   createdAt: Date;
@@ -14,8 +14,13 @@ interface UserInformation {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const me = () => {
-  return axios.get<UserInformation>('/api/users/me');
+export const me = (): Promise<UserInformation> => {
+  return new Promise((resolve, reject) =>
+    axios
+      .get<UserInformation>('/api/users/me')
+      .then(res => resolve(res.data))
+      .catch(err => reject(err))
+  );
 };
 
 export default { me };

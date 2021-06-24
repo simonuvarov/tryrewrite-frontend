@@ -9,26 +9,37 @@ export interface Tokens {
   accessToken: string;
 }
 
-export const signup = (credentials: Credentials): Promise<Tokens> => {
+export const signup = (credentials: Credentials): Promise<void> => {
   return new Promise((resolve, reject) => {
     axios
       .post<Tokens>('/api/auth/signup', credentials)
-      .then(r => {
-        resolve(r.data);
+      .then(_ => {
+        resolve(undefined);
       })
-      .catch(r => reject(r));
+      .catch(err => reject(err));
   });
 };
 
-export const signin = (credentials: Credentials): Promise<Tokens> => {
+export const signin = (credentials: Credentials): Promise<void> => {
   return new Promise((resolve, reject) => {
     axios
       .post<Tokens>('/api/auth/signin', credentials)
-      .then(r => {
-        resolve(r.data);
+      .then(_ => {
+        resolve(undefined);
       })
-      .catch(r => reject(r));
+      .catch(err => reject(err));
   });
 };
 
-export default { signin, signup };
+export const signout = (): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post<Tokens>('/api/auth/signout')
+      .then(_ => {
+        resolve(undefined);
+      })
+      .catch(err => reject(err));
+  });
+};
+
+export default { signin, signup, signout };

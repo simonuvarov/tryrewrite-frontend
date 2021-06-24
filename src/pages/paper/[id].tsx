@@ -4,17 +4,12 @@ import { AssistantButton } from '../../components/AssistantButton';
 import BodyEditor from '../../components/editor/BodyEditor';
 import QuestionEditor from '../../components/editor/QuestionEditor';
 import { IssueList } from '../../components/IssueList';
-import { Spinner } from '../../components/Spinner';
+import useAuth from '../../hooks/useAuth';
 import useDebounce from '../../hooks/useDebounce';
-import { useForceAuth } from '../../hooks/useForceAuth';
 import paperService from '../../services/paper.service';
 import { useEditorStore } from '../../stores/useEditorStore';
 
 export function Edit() {
-  const { isAuthenticating, isAuthenticated } = useForceAuth({
-    redirectTo: '/signin'
-  });
-
   const {
     isVisible,
     setIssues,
@@ -31,14 +26,20 @@ export function Edit() {
   const { id } = router.query;
   const { paper, loading: isLoading, getPaper } = useEditorStore();
 
+  const { user } = useAuth();
+
   useEffect(() => {
-    if (router.isReady && isAuthenticated) {
+    if (!user) router.push('/signin');
+  }, [user]);
+
+  useEffect(() => {
+    if (router.isReady && user) {
       getPaper(id as string);
     }
     return () => {
       hideAssistant();
     }; // clear paper on editor exit
-  }, [router.isReady, isAuthenticated]);
+  }, [router.isReady, user]);
 
   const debouncedPaperValue = useDebounce(paper, 500);
 
@@ -54,12 +55,6 @@ export function Edit() {
     }
   }, [debouncedPaperValue]);
 
-  if (isAuthenticating)
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <Spinner />
-      </div>
-    );
   return (
     <div className="h-screen">
       <AssistantButton className="absolute right-4 top-4" />

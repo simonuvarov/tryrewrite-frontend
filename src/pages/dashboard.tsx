@@ -1,20 +1,21 @@
 import { PencilAltIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { BannerBeta } from '../components/BannerBeta';
 import { Button } from '../components/Button';
 import Header from '../components/Header';
 import { PaperCardGrid } from '../components/PaperCardGrid';
-import { Spinner } from '../components/Spinner';
-import { useForceAuth } from '../hooks/useForceAuth';
+import useAuth from '../hooks/useAuth';
 import paperService from '../services/paper.service';
 
 export function Edit() {
-  const { isAuthenticating } = useForceAuth({
-    redirectTo: '/signin'
-  });
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user) router.push('/signin');
+  }, [user]);
 
   const router = useRouter();
   const query = useQuery('papers', paperService.getAllPapers);
@@ -24,18 +25,6 @@ export function Edit() {
       .createNewPaper()
       .then(res => router.push(`/paper/${res.data.id}`));
   };
-
-  if (isAuthenticating)
-    return (
-      <>
-        <Head>
-          <title>Dashboard</title>
-        </Head>
-        <div className="flex h-screen items-center justify-center">
-          <Spinner />
-        </div>
-      </>
-    );
 
   return (
     <>

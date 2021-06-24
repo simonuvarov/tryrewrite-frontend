@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormButton } from '../components/FormButton';
 import { FormInput } from '../components/FormInput';
-import { useForceUnauth } from '../hooks/useForceUnauth';
-import { useUserStore } from '../stores/useUserStore';
+import useAuth from '../hooks/useAuth';
 
 interface SignupFormProps {
   redirectTo: string;
@@ -39,8 +39,7 @@ const validate = (values: FormProps) => {
 };
 
 const SignupForm = (props: SignupFormProps) => {
-  const { isLoading } = useForceUnauth({ redirectTo: '/dashboard' });
-  const { signup } = useUserStore();
+  const { signup, error, loading } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -49,9 +48,13 @@ const SignupForm = (props: SignupFormProps) => {
     },
     validate,
     onSubmit: values => {
-      signup(values).catch(e => alert(e.response.data.message));
+      signup(values);
     }
   });
+
+  useEffect(() => {
+    if (error) alert(error);
+  }, [error]);
 
   return (
     <form
@@ -79,7 +82,7 @@ const SignupForm = (props: SignupFormProps) => {
           type="password"
         />
       </div>
-      <FormButton className="mt-8" isLoading={isLoading}>
+      <FormButton className="mt-8" isLoading={loading}>
         Sign up
       </FormButton>
     </form>
@@ -87,6 +90,16 @@ const SignupForm = (props: SignupFormProps) => {
 };
 
 function Signup() {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) router.push('/dashboard');
+  }, [user]);
+
+  // prevent form blinking
+  if (user) return null;
+
   return (
     <div className="flex bg-gray-50 min-h-screen flex-col justify-center">
       <div className="bg-white px-20 py-16 rounded-xl mx-auto shadow-md border border-gray-100 w-full max-w-xl">

@@ -3,19 +3,8 @@ import { BannerBeta } from '../components/BannerBeta';
 import { Button } from '../components/Button';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { Spinner } from '../components/Spinner';
-import { useForceUnauth } from '../hooks/useForceUnauth';
 
 export function Home() {
-  const { isLoading } = useForceUnauth({ redirectTo: '/dashboard' });
-
-  if (isLoading)
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <Spinner />
-      </div>
-    );
-
   return (
     <>
       <BannerBeta />

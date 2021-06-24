@@ -1,10 +1,10 @@
 import { useFormik } from 'formik';
+import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormButton } from '../components/FormButton';
 import { FormInput } from '../components/FormInput';
-import { useForceUnauth } from '../hooks/useForceUnauth';
-import { useUserStore } from '../stores/useUserStore';
+import useAuth from '../hooks/useAuth';
 
 interface SigninFormProps {
   redirectTo: string;
@@ -39,11 +39,7 @@ const validate = (values: FormProps) => {
 };
 
 const SigninForm = (props: SigninFormProps) => {
-  const userStore = useUserStore();
-
-  const { isLoading, isAuthenticated, isAuthenticating } = useForceUnauth({
-    redirectTo: '/dashboard'
-  });
+  const { signin, error, user, loading } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -52,9 +48,13 @@ const SigninForm = (props: SigninFormProps) => {
     },
     validate,
     onSubmit: values => {
-      userStore.signin(values).catch(e => alert(e.response.data.message));
+      signin(values);
     }
   });
+
+  useEffect(() => {
+    if (error) alert(error);
+  }, [error]);
 
   return (
     <form
@@ -82,7 +82,7 @@ const SigninForm = (props: SigninFormProps) => {
           type="password"
         />
       </div>
-      <FormButton className="mt-8" isLoading={isLoading}>
+      <FormButton className="mt-8" isLoading={loading}>
         Sign in
       </FormButton>
     </form>
@@ -90,12 +90,15 @@ const SigninForm = (props: SigninFormProps) => {
 };
 
 function Signup() {
-  // if (isLoading)
-  //   return (
-  //     <div className="flex h-screen items-center justify-center">
-  //       <Spinner />
-  //     </div>
-  //   );
+  const { user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) router.push('/dashboard');
+  }, [user]);
+
+  // prevent form blinking
+  if (user) return null;
 
   return (
     <div className="flex bg-gray-50 min-h-screen flex-col justify-center">
