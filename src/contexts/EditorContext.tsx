@@ -57,6 +57,8 @@ export const EditorProvider = ({
 
   // start checking paper only after initialization
   useEffect(() => {
+    setChecking(true);
+
     if (initializingPaper) return; // check question and body are not undefined to make typescript happy
     console.log('Setting timeout');
     const handler = setTimeout(() => {
@@ -68,9 +70,9 @@ export const EditorProvider = ({
         })
         .then(res => {
           setIssues(res.issues);
-          setChecking(false);
         })
-        .catch(err => setError(err));
+        .catch(err => setError(err))
+        .finally(() => setChecking(false));
     }, 500);
     // clear timeout when value changes, on unmount, etc.
     return () => clearTimeout(handler);
