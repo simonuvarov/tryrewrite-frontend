@@ -3,8 +3,9 @@ import { DotsHorizontalIcon, TrashIcon } from '@heroicons/react/outline';
 import moment from 'moment';
 import { useRouter } from 'next/dist/client/router';
 import React from 'react';
+import usePapers from '../hooks/usePapers';
 import { joinClassNames } from '../lib/joinClassNames';
-import paperService, { Paper } from '../services/paper.service';
+import { Paper } from '../services/paper.service';
 
 interface PaperCardProps {
   paper: Paper;
@@ -79,9 +80,10 @@ const Body = ({ text, className }: { text: string; className?: string }) => {
 
 export const PaperCard = (props: PaperCardProps) => {
   const router = useRouter();
+  const { deletePaper } = usePapers();
 
   const onDeleteHandler = () => {
-    paperService.deletePaper(props.paper.id);
+    deletePaper(props.paper.id);
   };
 
   return (

@@ -1,5 +1,5 @@
 import { useRouter } from 'next/dist/client/router';
-import { useQuery } from 'react-query';
+import usePapers from '../hooks/usePapers';
 import paperService, { Paper } from '../services/paper.service';
 import { Button } from './Button';
 import { PaperCard } from './PaperCard';
@@ -17,12 +17,11 @@ const PaperCardSkeleton = () => {
 };
 
 interface PaperCardGridProps {
-  papers?: Array<Paper>;
   className?: string;
 }
 
-export const PaperCardGrid = ({ papers, className }: PaperCardGridProps) => {
-  const query = useQuery('papers', paperService.getAllPapers);
+export const PaperCardGrid = ({ className }: PaperCardGridProps) => {
+  const { papers } = usePapers();
   const router = useRouter();
 
   const handleNewPaperClick = () => {
@@ -35,8 +34,7 @@ export const PaperCardGrid = ({ papers, className }: PaperCardGridProps) => {
     return <PaperCardSkeleton key={i} />;
   });
 
-  if (papers === undefined)
-    return <ul className="divide-y mt-8">{skeletons}</ul>;
+  if (!papers) return null;
 
   if (papers && papers.length === 0)
     return (
