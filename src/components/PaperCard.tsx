@@ -10,6 +10,73 @@ interface PaperCardProps {
   paper: Paper;
 }
 
+const Datetime = ({ datetime }: { datetime: Date }) => {
+  return (
+    <time dateTime={moment(datetime).toString()}>
+      {moment(datetime).fromNow()}
+    </time>
+  );
+};
+
+const BandLabel = ({
+  score,
+  className
+}: {
+  score: number;
+  className?: string;
+}) => {
+  const styles = [
+    'text-green-700',
+    'bg-green-100',
+    'text-xs',
+    'uppercase',
+    'inline-block',
+    'font-medium',
+    'px-2',
+    'py-1',
+    'rounded'
+  ];
+  if (className) styles.push(className);
+  return (
+    <div className={styles.join(' ')}>
+      Band {parseFloat(score.toString()).toFixed(1)}
+    </div>
+  );
+};
+
+const Question = ({
+  text,
+  className
+}: {
+  text: string;
+  className?: string;
+}) => {
+  const styles = [
+    'font-medium',
+    'text-lg',
+    'leading-6',
+    'truncate',
+    'text-gray-800',
+    'hover:text-blue-800',
+    'hover:cursor-pointer'
+  ];
+  if (className) styles.push(className);
+  return <header className={styles.join(' ')}>{text}</header>;
+};
+
+const Body = ({ text, className }: { text: string; className?: string }) => {
+  const styles = [
+    'line-clamp-3',
+    'text-base',
+    'leading-6',
+    'font-normal',
+    'text-gray-600',
+    'h-[72px]'
+  ];
+  if (className) styles.push(className);
+  return <p className={styles.join(' ')}>{text}</p>;
+};
+
 export const PaperCard = (props: PaperCardProps) => {
   const router = useRouter();
 
@@ -19,25 +86,14 @@ export const PaperCard = (props: PaperCardProps) => {
 
   return (
     <article className="pl-10 pr-8 pt-8 pb-5 shadow-sm rounded-lg border border-gray-200 bg-white transition-shadow duration-250">
-      <div className="text-green-700 bg-green-100 text-xs uppercase inline-block font-medium px-2 py-1 rounded">
-        Band {parseFloat(props.paper.overallBand.toString()).toFixed(1)}
-      </div>
-      <header
-        className="font-medium text-lg leading-6 truncate text-gray-800 mt-3 hover:text-blue-800 hover:cursor-pointer"
-        onClick={() => {
-          router.push(`/paper/${props.paper.id}`);
-        }}
-      >
-        {props.paper.question}
-      </header>
-      <div className="line-clamp-3 text-base leading-6 font-normal mt-2 text-gray-600 h-[72px]">
-        {props.paper.body}
-      </div>
+      <BandLabel score={props.paper.overallBand} />
+      <Question text={props.paper.question} className="mt-3" />
+      <Body text={props.paper.body} className="mt-2" />
       <footer className="flex justify-between items-center mt-4">
         <article className="text-xs leading-4 font-normal text-gray-400 select-text">
-          Updated {moment(props.paper.updatedAt).fromNow()}
+          Updated <Datetime datetime={props.paper.updatedAt} />
           <span className="mx-1">{'•'}</span>
-          Created {moment(props.paper.createdAt).fromNow()}
+          Created <Datetime datetime={props.paper.createdAt} />
         </article>
         <Menu as="div" className="relative inline-block text-left">
           {({ open }) => (
