@@ -77,6 +77,10 @@ const createNewPaper = (paper?: Partial<Paper>) => {
   return axios.post<Paper>(`/api/papers`, paper || {});
 };
 
+const deletePaper = (paperId?: string) => {
+  return axios.delete<Paper>(`/api/papers/${paperId}`);
+};
+
 const gradePaper = (
   id: string,
   input: { question: string; body: string }
@@ -92,4 +96,10 @@ const gradePaper = (
   });
 };
 
-export default { createNewPaper, getPaper, getAllPapers, gradePaper };
+export default {
+  createNewPaper,
+  getPaper,
+  getAllPapers,
+  gradePaper,
+  deletePaper
+};
