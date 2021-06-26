@@ -30,18 +30,20 @@ export function Edit() {
       <Head>
         <title>Dashboard</title>
       </Head>
-      <BannerBeta />
-      <Header className="bg-gray-50">
-        <Button onClick={handleNewPaperClick} type="primary" size="md">
-          <PencilAltIcon className="h-5 w-5 mr-1" />
-          New paper
-        </Button>
-      </Header>
-      <main className="h-screen bg-gray-50 pt-10 px-4">
-        <PaperProvider>
-          <PaperCardGrid className="max-w-[1440px] mx-auto" />
-        </PaperProvider>
-      </main>
+      <div className="flex flex-col h-screen">
+        <BannerBeta />
+        <Header className="bg-gray-50">
+          <Button onClick={handleNewPaperClick} type="primary" size="md">
+            <PencilAltIcon className="h-5 w-5 mr-1" />
+            New paper
+          </Button>
+        </Header>
+        <main className="flex-1 bg-gray-50 py-10 px-4">
+          <PaperProvider>
+            <PaperCardGrid className="max-w-[1440px] mx-auto" />
+          </PaperProvider>
+        </main>
+      </div>
     </>
   );
 }
