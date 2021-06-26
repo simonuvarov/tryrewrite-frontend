@@ -102,7 +102,7 @@ function Signup() {
 
   return (
     <div className="flex bg-gray-50 min-h-screen flex-col justify-center">
-      <div className="bg-white px-20 py-16 rounded-xl mx-auto shadow-md border border-gray-100 w-full max-w-xl">
+      <div className="bg-white px-20 py-16 rounded-xl mx-auto shadow-md border border-gray-200 w-full max-w-xl">
         <div className="w-auto">
           <h2 className="text-left text-2xl font-semibold text-gray-700">
             Create your Rewrite account

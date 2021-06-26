@@ -9,7 +9,7 @@ function EmailSent() {
         <meta name="robots" content="noindex" />
       </Head>
       <div className="flex bg-gray-50 min-h-screen flex-col justify-center">
-        <section className="bg-white px-20 py-16 rounded-xl mx-auto shadow-md border border-gray-100 w-full max-w-xl">
+        <section className="bg-white px-20 py-16 rounded-xl mx-auto shadow-md border border-gray-200 w-full max-w-xl">
           <h2 className="text-left text-2xl font-semibold text-gray-700">
             Please confirm your email address
           </h2>
