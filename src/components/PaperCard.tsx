@@ -1,10 +1,7 @@
-import { Menu, Transition } from '@headlessui/react';
-import { DotsHorizontalIcon, TrashIcon } from '@heroicons/react/outline';
+import { XIcon } from '@heroicons/react/solid';
 import moment from 'moment';
-import { useRouter } from 'next/dist/client/router';
-import React from 'react';
+import React, { useState } from 'react';
 import usePapers from '../hooks/usePapers';
-import { joinClassNames } from '../lib/joinClassNames';
 import { Paper } from '../services/paper.service';
 
 interface PaperCardProps {
@@ -85,16 +82,42 @@ const Body = ({ text, className }: { text: string; className?: string }) => {
   return <p className={styles.join(' ')}>{text}</p>;
 };
 
+const DeleteButton = ({
+  onClick,
+  show
+}: {
+  onClick: () => void;
+  show: boolean;
+}) => {
+  return (
+    <button
+      className={`absolute p-1 -top-3 -right-3 bg-gray-300 hover:bg-gray-400 inline-flex justify-center rounded-full bg-tranparent text-sm font-medium text-gray-300 hover:text-gray-400 transition-colors ${
+        !show && 'hidden'
+      }`}
+      onClick={onClick}
+    >
+      <XIcon className="text-white w-5 h-5" />
+    </button>
+  );
+};
+
 export const PaperCard = (props: PaperCardProps) => {
-  const router = useRouter();
   const { deletePaper } = usePapers();
+  const [hovered, setHovered] = useState(false);
 
   const onDeleteHandler = () => {
     deletePaper(props.paper.id);
   };
 
   return (
-    <article className="pl-10 pr-8 pt-8 pb-5 shadow-sm rounded-lg border border-gray-200 bg-white transition-shadow duration-250">
+    <article
+      className="relative pl-10 pr-8 pt-8 pb-5 shadow-sm rounded-lg border border-gray-200 bg-white transition-shadow duration-250 hover:cursor-pointer hover:shadow-md"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => {
+        setHovered(false);
+      }}
+    >
+      <DeleteButton onClick={onDeleteHandler} show={hovered} />
       <BandLabel score={props.paper.overallBand} className="-ml-0.5" />
       <Question text={props.paper.question} className="mt-3" />
       <Body text={props.paper.body} className="mt-2" />
@@ -104,50 +127,6 @@ export const PaperCard = (props: PaperCardProps) => {
           <span className="mx-1">{'•'}</span>
           Created <Datetime datetime={props.paper.createdAt} />
         </article>
-        <Menu as="div" className="relative inline-block text-left">
-          {({ open }) => (
-            <>
-              <div>
-                <Menu.Button className="inline-flex justify-center rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none p-2">
-                  <DotsHorizontalIcon className="text-gray-400 w-6 h-6" />
-                </Menu.Button>
-              </div>
-
-              <Transition
-                show={open}
-                as={React.Fragment}
-                enter="transition ease-out duration-100"
-                enterFrom="transform opacity-0 scale-95"
-                enterTo="transform opacity-100 scale-100"
-                leave="transition ease-in duration-75"
-                leaveFrom="transform opacity-100 scale-100"
-                leaveTo="transform opacity-0 scale-95"
-              >
-                <Menu.Items
-                  static
-                  className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                >
-                  <div className="py-1">
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={onDeleteHandler}
-                          className={joinClassNames(
-                            active ? 'bg-red-50 text-red-600' : 'text-red-600',
-                            'inline-flex w-full px-4 py-2 text-sm focus:outline-none'
-                          )}
-                        >
-                          <TrashIcon className="w-5 h-5 mr-2" />
-                          Delete
-                        </button>
-                      )}
-                    </Menu.Item>
-                  </div>
-                </Menu.Items>
-              </Transition>
-            </>
-          )}
-        </Menu>
       </footer>
     </article>
   );
