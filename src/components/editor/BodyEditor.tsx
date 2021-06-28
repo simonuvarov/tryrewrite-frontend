@@ -8,6 +8,7 @@ import { useDecorate } from './useDecorate';
 
 interface BodyEditorProps {
   className?: string;
+  placeholder: string;
 }
 
 const EditorSkeleton = (
@@ -43,7 +44,7 @@ const BodyEditor = (props: BodyEditorProps) => {
   return (
     <Slate editor={editor} value={body} onChange={setBody}>
       <Editable
-        placeholder="Enter some plain text..."
+        placeholder={props.placeholder}
         spellCheck={false}
         className={props.className}
         decorate={decorate}
