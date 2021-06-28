@@ -62,7 +62,13 @@ const Question = ({
     'hover:cursor-pointer'
   ];
   if (className) styles.push(className);
-  return <header className={styles.join(' ')}>{text}</header>;
+  const isEmpty = text.length === 0;
+
+  return (
+    <header className={styles.join(' ')}>
+      {isEmpty ? 'Empty question' : text}
+    </header>
+  );
 };
 
 const Body = ({ text, className }: { text: string; className?: string }) => {
