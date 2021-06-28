@@ -111,7 +111,7 @@ export const PaperCard = (props: PaperCardProps) => {
 
   return (
     <article
-      className="relative pl-10 pr-8 pt-8 pb-5 shadow-sm rounded-lg border border-gray-200 bg-white transition-shadow duration-250 hover:cursor-pointer hover:shadow-md"
+      className="relative px-10 py-8 shadow-sm rounded-lg border border-gray-200 bg-white transition-shadow duration-250 hover:cursor-pointer hover:shadow-md"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => {
         setHovered(false);
