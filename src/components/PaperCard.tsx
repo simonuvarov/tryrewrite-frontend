@@ -27,8 +27,6 @@ const BandLabel = ({
   className?: string;
 }) => {
   const styles = [
-    'text-green-700',
-    'bg-green-100',
     'text-xs',
     'uppercase',
     'inline-block',
@@ -37,7 +35,10 @@ const BandLabel = ({
     'py-1',
     'rounded'
   ];
+
   if (className) styles.push(className);
+
+  styles.push('bg-gray-100', 'text-gray-700');
   return (
     <div className={styles.join(' ')}>
       Band {parseFloat(score.toString()).toFixed(1)}
@@ -94,7 +95,7 @@ export const PaperCard = (props: PaperCardProps) => {
 
   return (
     <article className="pl-10 pr-8 pt-8 pb-5 shadow-sm rounded-lg border border-gray-200 bg-white transition-shadow duration-250">
-      <BandLabel score={props.paper.overallBand} />
+      <BandLabel score={props.paper.overallBand} className="-ml-0.5" />
       <Question text={props.paper.question} className="mt-3" />
       <Body text={props.paper.body} className="mt-2" />
       <footer className="flex justify-between items-center mt-4">
