@@ -1,5 +1,6 @@
 import { XIcon } from '@heroicons/react/solid';
 import moment from 'moment';
+import { useRouter } from 'next/dist/client/router';
 import React, { useState } from 'react';
 import usePapers from '../hooks/usePapers';
 import { Paper } from '../services/paper.service';
@@ -55,9 +56,7 @@ const Question = ({
     'text-lg',
     'leading-6',
     'truncate',
-    'text-gray-800',
-    'hover:text-blue-800',
-    'hover:cursor-pointer'
+    'text-gray-800'
   ];
   if (className) styles.push(className);
   const isEmpty = text.length === 0;
@@ -104,6 +103,7 @@ const DeleteButton = ({
 export const PaperCard = (props: PaperCardProps) => {
   const { deletePaper } = usePapers();
   const [hovered, setHovered] = useState(false);
+  const router = useRouter();
 
   const onDeleteHandler = () => {
     deletePaper(props.paper.id);
@@ -116,6 +116,7 @@ export const PaperCard = (props: PaperCardProps) => {
       onMouseLeave={() => {
         setHovered(false);
       }}
+      onClick={() => router.push(`/paper/${props.paper.id}`)}
     >
       <DeleteButton onClick={onDeleteHandler} show={hovered} />
       <BandLabel score={props.paper.overallBand} className="-ml-0.5" />
