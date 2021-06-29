@@ -45,7 +45,6 @@ export const EditorProvider = ({
 
   // initalize paper
   useEffect(() => {
-    console.log('Initializing paper...');
     if (paperId)
       paperService
         .getPaper(paperId)
@@ -54,7 +53,6 @@ export const EditorProvider = ({
           setBody(stringToSlate(res.body));
 
           setInitializingPaper(false);
-          console.log('Finished initializing paper...');
         })
         .catch(err => setError(err));
   }, []);
@@ -64,9 +62,7 @@ export const EditorProvider = ({
     setChecking(true);
 
     if (initializingPaper) return; // check question and body are not undefined to make typescript happy
-    console.log('Setting timeout');
     const handler = setTimeout(() => {
-      console.log('Grading paper...');
       paperService
         .gradePaper(paperId, {
           question: slateToString(question),
