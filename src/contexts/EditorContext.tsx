@@ -21,6 +21,7 @@ interface EditorContextProps {
   checking: boolean;
   selected?: string;
   select: (id: string) => void;
+  replaceText: (offset: number, length: number, replacement: string) => void;
 }
 
 export const EditorContext = createContext<EditorContextProps>(
@@ -42,6 +43,16 @@ export const EditorProvider = ({
   const [body, setBody] = useState<Descendant[]>(stringToSlate('\n'));
 
   const [selected, setSelected] = useState<string>();
+
+  const replaceText = (offset: number, length: number, replacement: string) => {
+    const text = slateToString(body);
+    const newText =
+      text.substring(0, offset) +
+      replacement +
+      text.substring(offset + length, text.length);
+
+    setBody(stringToSlate(newText));
+  };
 
   // initalize paper
   useEffect(() => {
@@ -88,7 +99,8 @@ export const EditorProvider = ({
     setBody,
     checking,
     selected,
-    select: setSelected
+    select: setSelected,
+    replaceText
   };
 
   return (
@@ -97,7 +109,7 @@ export const EditorProvider = ({
 };
 
 // Define a serializing function that takes a value and returns a string.
-export const slateToString = (value: any) => {
+export const slateToString = (value: any): string => {
   return (
     value
       // Return the string content of each paragraph in the value's children.

@@ -1,5 +1,5 @@
 import useEditor from '../../hooks/useEditor';
-import { Issue } from '../../services/paper.service';
+import { InlineIssue, Issue } from '../../services/paper.service';
 import { CriteriaLabel } from './CriteriaLabel';
 import { LearnMoreButton } from './LearnMoreButton';
 import { Replacement } from './Replacement';
@@ -31,7 +31,7 @@ export const IssueCardSkeleton = () => {
 };
 
 export const IssueCard = (props: IssueCardProps) => {
-  const { select, selected } = useEditor();
+  const { select, selected, replaceText } = useEditor();
   const expanded = props.expanded
     ? props.expanded
     : selected === props.issue.id;
@@ -65,7 +65,15 @@ export const IssueCard = (props: IssueCardProps) => {
       {props.issue.isInline && props.issue.replacements && expanded && (
         <ul className="flex space-x-2 mt-4">
           {props.issue.replacements.map(r => (
-            <Replacement value={r} type={props.issue.affects} />
+            <Replacement
+              value={r}
+              type={props.issue.affects}
+              onClick={() => {
+                console.log(r);
+                const issue: InlineIssue = props.issue as InlineIssue; // for some reason TS does not perform type check correctly
+                replaceText(issue.offset, issue.length, r);
+              }}
+            />
           ))}
         </ul>
       )}

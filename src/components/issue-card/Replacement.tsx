@@ -3,8 +3,9 @@ import { CRITERIA_TYPE } from '../../services/paper.service';
 interface ReplacementProps {
   type: CRITERIA_TYPE;
   value: string;
+  onClick: () => void;
 }
-export const Replacement = ({ type, value }: ReplacementProps) => {
+export const Replacement = ({ type, value, onClick }: ReplacementProps) => {
   let colors: string;
 
   switch (type) {
@@ -25,6 +26,7 @@ export const Replacement = ({ type, value }: ReplacementProps) => {
   return (
     <li
       className={`inline rounded py-2 px-3 cursor-pointer text-base lieading-6 font-medium transition-shadow duration-75 hover:shadow-md ${colors}`}
+      onClick={onClick}
     >
       {value}
     </li>
