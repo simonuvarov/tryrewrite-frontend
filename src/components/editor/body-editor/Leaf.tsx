@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { RenderLeafProps } from 'slate-react';
-import useEditor from '../../hooks/useEditor';
-import { CRITERIA_TYPE } from '../../services/paper.service';
-import { useAssistantVisibilityStore } from '../../stores/useAssistantVisibilityStore';
+import useEditor from '../../../hooks/useEditor';
+import { CRITERIA_TYPE } from '../../../services/paper.service';
+import { useAssistantVisibilityStore } from '../../../stores/useAssistantVisibilityStore';
 
 export interface LeafProps extends RenderLeafProps {
   leaf: { id: string; affects: CRITERIA_TYPE; text: string };

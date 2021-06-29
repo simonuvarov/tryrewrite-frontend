@@ -1,11 +1,11 @@
 import { BaseRange, NodeEntry, Text } from 'slate';
-import { slateToString } from '../../contexts/EditorContext';
-import useEditor from '../../hooks/useEditor';
+import { slateToString } from '../../../contexts/EditorContext';
+import useEditor from '../../../hooks/useEditor';
 import {
   CRITERIA_TYPE,
   InlineIssue,
   Issue
-} from '../../services/paper.service';
+} from '../../../services/paper.service';
 
 export interface IssueRange extends BaseRange {
   id: string;

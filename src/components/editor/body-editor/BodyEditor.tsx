@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
-import useEditor from '../../hooks/useEditor';
+import useEditor from '../../../hooks/useEditor';
 import { Element } from './Element';
 import { Leaf } from './Leaf';
 import { useDecorate } from './useDecorate';
