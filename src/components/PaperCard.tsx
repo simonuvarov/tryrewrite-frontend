@@ -90,7 +90,7 @@ const DeleteButton = ({
 }) => {
   return (
     <button
-      className={`absolute p-1 -top-3 -right-3 bg-gray-300 hover:bg-gray-400 inline-flex justify-center rounded-full bg-tranparent text-sm font-medium text-gray-300 hover:text-gray-400 transition-colors ${
+      className={`absolute p-1 -top-2 -right-2 bg-gray-300 hover:bg-gray-400 inline-flex justify-center rounded-full bg-tranparent text-sm font-medium text-gray-300 hover:text-gray-400 transition-colors ${
         !show && 'hidden'
       }`}
       onClick={onClick}
