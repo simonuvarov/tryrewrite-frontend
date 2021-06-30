@@ -5,7 +5,7 @@ function EmailSent() {
   return (
     <>
       <Head>
-        <title>Pleae confirm your email address</title>
+        <title>Please confirm your email address</title>
         <meta name="robots" content="noindex" />
       </Head>
       <div className="flex bg-gray-50 min-h-screen flex-col justify-center">
