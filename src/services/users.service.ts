@@ -10,6 +10,7 @@ export interface UserInformation {
   email: string;
   createdAt: Date;
   updatedAt: Date;
+  emailVerified: boolean;
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;

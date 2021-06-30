@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { UserInformation } from './users.service';
 
 export interface Credentials {
   email: string;
@@ -9,12 +10,12 @@ export interface Tokens {
   accessToken: string;
 }
 
-export const signup = (credentials: Credentials): Promise<void> => {
+export const signup = (credentials: Credentials): Promise<UserInformation> => {
   return new Promise((resolve, reject) => {
     axios
-      .post<Tokens>('/api/auth/signup', credentials)
-      .then(_ => {
-        resolve(undefined);
+      .post<UserInformation>('/api/auth/signup', credentials)
+      .then(res => {
+        resolve(res.data);
       })
       .catch(err => {
         if (err.response) reject(new Error(err.response.data.message));
@@ -23,12 +24,12 @@ export const signup = (credentials: Credentials): Promise<void> => {
   });
 };
 
-export const signin = (credentials: Credentials): Promise<void> => {
+export const signin = (credentials: Credentials): Promise<UserInformation> => {
   return new Promise((resolve, reject) => {
     axios
-      .post<Tokens>('/api/auth/signin', credentials)
-      .then(_ => {
-        resolve(undefined);
+      .post<UserInformation>('/api/auth/signin', credentials)
+      .then(res => {
+        resolve(res.data);
       })
       .catch(err => {
         if (err.response) reject(new Error(err.response.data.message));
@@ -40,7 +41,7 @@ export const signin = (credentials: Credentials): Promise<void> => {
 export const signout = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     axios
-      .post<Tokens>('/api/auth/signout')
+      .post<void>('/api/auth/signout')
       .then(_ => {
         resolve(undefined);
       })
