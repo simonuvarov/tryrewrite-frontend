@@ -8,14 +8,13 @@ const Terms = () => {
         <h1>Terms of Service</h1>
         <p>We may update these Terms of Service in the future.</p>
         <p>
-          Our guiding principle is to collect only what we need. Here’s what
-          that means in practice. When you use our Services, now or in the
-          future, you are agreeing to the latest Terms of Service. That's true
-          for any of our existing and future products and all features that we
-          add to our Services over time. There may be times where we do not
-          exercise or enforce any right or provision of the Terms of Service; in
-          doing so, we are not waiving that right or provision. These terms do
-          contain a limitation of our liability.
+          When you use our Services, now or in the future, you are agreeing to
+          the latest Terms of Service. That's true for any of our existing and
+          future products and all features that we add to our Services over
+          time. There may be times where we do not exercise or enforce any right
+          or provision of the Terms of Service; in doing so, we are not waiving
+          that right or provision. These terms do contain a limitation of our
+          liability.
         </p>
         <p>
           If you violate any of the terms, we may terminate your account. That's
