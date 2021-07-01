@@ -1,7 +1,7 @@
 import { DefaultSeo as DefaultNextSeo, NextSeoProps } from 'next-seo';
 
 export default function DefaultSeo() {
-  const TITLE = 'Rewrite: The essay writing toolkit';
+  const TITLE = 'Rewrite';
   const DESCRIPTON =
     'Find topics, check grammar, and see your progress – all in one place.';
 
