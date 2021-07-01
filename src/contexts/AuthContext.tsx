@@ -9,6 +9,7 @@ interface AuthContextProps {
   signin: (credentials: Credentials) => void;
   signup: (credentials: Credentials) => void;
   signout: () => void;
+  verifyEmail: (token: string) => void;
   error?: any;
   loading: boolean;
 }
@@ -75,7 +76,7 @@ export const AuthProvider = ({
       .signup(credentials)
       .then(res => {
         analyticsService.trackSignedUp(res.id);
-        router.push('/email-sent');
+        router.push('/verify');
       })
       .catch(err => setError(err))
       .finally(() => setLoading(false));
@@ -88,6 +89,17 @@ export const AuthProvider = ({
       .catch(err => setError(error));
   };
 
+  const verifyEmail = (token: string) => {
+    authService
+      .verifyEmail(token)
+      .then(res => {
+        setUser(res);
+        analyticsService.trackSignedIn(res.id);
+      })
+      .catch(err => setError(err))
+      .finally(() => setLoading(false));
+  };
+
   const memoedValue = useMemo(
     () => ({
       user,
@@ -95,7 +107,8 @@ export const AuthProvider = ({
       error,
       signin,
       signup,
-      signout
+      signout,
+      verifyEmail
     }),
     [user, loading, error]
   );

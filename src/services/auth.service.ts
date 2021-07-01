@@ -52,4 +52,18 @@ export const signout = (): Promise<void> => {
   });
 };
 
-export default { signin, signup, signout };
+export const verifyEmail = (token: string): Promise<UserInformation> => {
+  return new Promise((resolve, reject) => {
+    axios
+      .post<UserInformation>(`/api/auth/verify/${token}`)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        if (err.response) reject(new Error(err.response.data.message));
+        else reject(new Error('Unexpected client side error'));
+      });
+  });
+};
+
+export default { signin, signup, signout, verifyEmail };
