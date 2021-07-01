@@ -1,7 +1,19 @@
+import { useRouter } from 'next/dist/client/router';
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 function EmailSent() {
+  const router = useRouter();
+
+  const { user, verifyEmail: confirmEmail, error } = useAuth();
+
+  useEffect(() => {
+    if (user) router.push('/dashboard');
+  }, [user]);
+
+  if (user) return null;
+
   return (
     <>
       <Head>

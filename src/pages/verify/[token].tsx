@@ -15,12 +15,14 @@ function EmailConfirmation() {
   }, [user]);
 
   useEffect(() => {
-    confirmEmail(token as string);
+    if (!user) confirmEmail(token as string);
   }, []);
 
   useEffect(() => {
     if (error) alert('We were not able to confirm your email');
   }, [error]);
+
+  if (user) return null;
 
   return (
     <Head>
