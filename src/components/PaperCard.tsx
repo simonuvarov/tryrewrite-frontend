@@ -90,7 +90,7 @@ const DeleteButton = ({
 }) => {
   return (
     <button
-      className={`absolute p-1 -top-2 -right-2 bg-gray-300 hover:bg-gray-400 inline-flex justify-center rounded-full bg-tranparent text-sm font-medium text-gray-300 hover:text-gray-400 transition-colors focus:outline-none ${
+      className={`absolute p-1 -top-2 -right-2 border border-gray-200 hover:bg-gray-50 shadow bg-white inline-flex justify-center rounded-full bg-tranparent text-sm font-medium transition-colors focus:outline-none ${
         !show && 'hidden'
       }`}
       onClick={e => {
@@ -98,7 +98,7 @@ const DeleteButton = ({
         onClick();
       }}
     >
-      <XIcon className="text-white w-5 h-5" />
+      <XIcon className="text-gray-400 w-5 h-5" />
     </button>
   );
 };
