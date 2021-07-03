@@ -1,10 +1,10 @@
 import { useRouter } from 'next/dist/client/router';
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 import authService, { Credentials } from '../services/auth.service';
-import usersService, { UserInformation } from '../services/users.service';
+import usersService, { Profile } from '../services/profile';
 
 interface AuthContextProps {
-  user?: UserInformation;
+  user?: Profile;
   signin: (credentials: Credentials) => void;
   signup: (credentials: Credentials) => void;
   signout: () => void;
@@ -22,7 +22,7 @@ export const AuthProvider = ({
 }: {
   children: ReactNode;
 }): JSX.Element => {
-  const [user, setUser] = useState<UserInformation>();
+  const [user, setUser] = useState<Profile>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>();
   const [initializing, setInitializing] = useState(true);

@@ -1,11 +1,6 @@
 import axios from 'axios';
 
-interface Credentials {
-  email: string;
-  password: string;
-}
-
-export interface UserInformation {
+export interface Profile {
   id: string;
   email: string;
   createdAt: Date;
@@ -15,13 +10,13 @@ export interface UserInformation {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const me = (): Promise<UserInformation> => {
+export const getMyProfile = (): Promise<Profile> => {
   return new Promise((resolve, reject) =>
     axios
-      .get<UserInformation>('/api/users/me')
+      .get<Profile>('/api/profile')
       .then(res => resolve(res.data))
       .catch(err => reject(err))
   );
 };
 
-export default { me };
+export default { me: getMyProfile };
