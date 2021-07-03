@@ -1,6 +1,5 @@
 import { useRouter } from 'next/dist/client/router';
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
-import analyticsService from '../services/analytics.service';
 import authService, { Credentials } from '../services/auth.service';
 import usersService, { UserInformation } from '../services/users.service';
 
@@ -64,7 +63,6 @@ export const AuthProvider = ({
       .signin(credentials)
       .then(res => {
         setUser(res);
-        analyticsService.trackSignedIn(res.id);
       })
       .catch(err => setError(err))
       .finally(() => setLoading(false));
@@ -75,7 +73,6 @@ export const AuthProvider = ({
     authService
       .signup(credentials)
       .then(res => {
-        analyticsService.trackSignedUp(res.id);
         router.push('/verify');
       })
       .catch(err => setError(err))
@@ -94,7 +91,6 @@ export const AuthProvider = ({
       .verifyEmail(token)
       .then(res => {
         setUser(res);
-        analyticsService.trackSignedIn(res.id);
       })
       .catch(err => setError(err))
       .finally(() => setLoading(false));
