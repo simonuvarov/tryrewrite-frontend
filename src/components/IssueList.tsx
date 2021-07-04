@@ -1,3 +1,4 @@
+import React, { useEffect, useMemo } from 'react';
 import useEditor from '../hooks/useEditor';
 import { IssueCard, IssueCardSkeleton } from './issue-card/IssueCard';
 
@@ -12,11 +13,40 @@ export const IssueList = (props: IssueListProps) => {
     return <IssueCardSkeleton key={i} />;
   });
 
+  const cardRefs: React.RefObject<HTMLLIElement>[] = useMemo(
+    () =>
+      Array(issues?.length || 0)
+        .fill(0)
+        .map(_ => React.createRef<HTMLLIElement>()),
+    [issues]
+  );
+
+  const containerRef = React.createRef<HTMLUListElement>();
+
+  const scrollToElement = (index: number) => {
+    const scrollToOffset = cardRefs[index].current?.offsetTop;
+    containerRef.current?.scrollTo({
+      top: scrollToOffset! - 200,
+      behavior: 'smooth'
+    });
+  };
+
+  useEffect(() => {
+    scrollToElement(0);
+  }, []);
+
   return (
-    <ul className={`space-y-8 mt-8 ${props.className || ''}`}>
+    <ul className={`space-y-8 ${props.className || ''}`} ref={containerRef}>
       {checking || !issues
         ? skeletons
-        : issues.map(i => <IssueCard issue={i} key={i.id} />)}
+        : issues.map((issue, index) => (
+            <IssueCard
+              issue={issue}
+              key={issue.id}
+              ref={cardRefs[index]}
+              scrollTo={() => scrollToElement(index)}
+            />
+          ))}
     </ul>
   );
 };

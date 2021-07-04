@@ -47,9 +47,7 @@ export function Edit() {
           </div>
 
           {isVisible && (
-            <aside className="pb-32 pl-16 pr-24 overflow-y-scroll h-screen no-scrollbar bg-gray-100">
-              <IssueList className="mt-20" />
-            </aside>
+            <IssueList className="py-64 pl-16 pr-24 overflow-y-scroll h-screen no-scrollbar bg-gray-100" />
           )}
 
           <style jsx>{`
