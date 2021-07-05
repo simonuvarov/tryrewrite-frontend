@@ -41,7 +41,6 @@ export const IssueCard = React.forwardRef<HTMLLIElement, IssueCardProps>(
     const setExpanded = () => select(props.issue.id);
 
     useEffect(() => {
-      console.log(expanded);
       if (expanded) props.scrollTo();
     }, [expanded]);
 
