@@ -2,7 +2,7 @@ import { ArrowLeftIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
 import { AssistantButton } from '../../components/AssistantButton';
-import { BodyEditor, QuestionEditor } from '../../components/editor';
+import { Editor } from '../../components/editor';
 import { IssueList } from '../../components/IssueList';
 import { EditorProvider } from '../../contexts/EditorContext';
 import useAuth from '../../hooks/useAuth';
@@ -29,38 +29,17 @@ export function Edit() {
       </button>
       <EditorProvider paperId={id as string}>
         <AssistantButton className="absolute right-4 top-4" />
-        <div className="flex min-h-full">
+        <div className="flex h-full">
           <div
-            className="flex flex-grow flex-shrink-0 mx-0 px-6 overflow-y-scroll h-screen no-scrollbar"
-            id="left"
+            className="flex flex-grow flex-shrink-0 mx-0 px-6 overflow-y-scroll h-full no-scrollbar"
+            id="editor-container"
           >
-            <div className="mt-20 px-2 mx-auto w-min">
-              <QuestionEditor
-                className="text-xl leading-loose font-medium text-gray-800"
-                placeholder="Question..."
-              />
-              <BodyEditor
-                className="min-h-full w-[55ch] space-y-5 mt-8 text-gray-800 pb-32 text-xl leading-loose"
-                placeholder="Start writing here..."
-              />
-            </div>
+            <Editor className="py-48 overflow-y-scroll no-scrollbar mx-auto" />
           </div>
 
           {isVisible && (
             <IssueList className="py-64 pl-16 pr-24 overflow-y-scroll h-screen no-scrollbar bg-gray-100" />
           )}
-
-          <style jsx>{`
-            /* Chrome, Safari and Opera */
-            .no-scrollbar::-webkit-scrollbar {
-              display: none;
-            }
-
-            .no-scrollbar {
-              -ms-overflow-style: none; /* IE and Edge */
-              scrollbar-width: none; /* Firefox */
-            }
-          `}</style>
         </div>
       </EditorProvider>
     </div>
