@@ -21,7 +21,7 @@ export const IssueList = (props: IssueListProps) => {
     [issues]
   );
 
-  const containerRef = React.createRef<HTMLUListElement>();
+  const containerRef = React.useRef<HTMLUListElement>(null);
 
   const scrollToElement = (index: number) => {
     const scrollToOffset = cardRefs[index].current?.offsetTop;
