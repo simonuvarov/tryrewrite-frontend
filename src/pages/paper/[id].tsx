@@ -20,24 +20,32 @@ export function Edit() {
 
   return (
     <div className="h-screen w-screen">
-      <button
-        className="absolute flex items-center top-7 left-8 text-gray-400 font-medium pl-4 pr-5 py-2 hover:bg-gray-100 rounded transition-colors duration-300 focus:outline-none"
-        onClick={() => router.back()}
-      >
-        <ArrowLeftIcon className="h-5 w-5 mr-1" />
-        Back
-      </button>
       <EditorProvider paperId={id as string}>
-        <AssistantButton className="absolute right-4 top-4" />
         <div className="flex h-full">
+          <div className="flex flex-col justify-between py-7 pl-4">
+            <button
+              className="flex items-center top-7 left-8 text-gray-400 font-medium pl-4 pr-5 py-2 hover:bg-gray-100 rounded transition-colors duration-300 focus:outline-none"
+              onClick={() => router.back()}
+            >
+              <ArrowLeftIcon className="h-5 w-5 mr-1" />
+              Back
+            </button>
+          </div>
           <div className="overflow-y-scroll no-scrollbar h-full min-w-max px-4 mx-auto py-48">
             <Editor />
           </div>
           <IssueList
-            className={`flex flex-col py-48 pl-16 pr-24 overflow-y-scroll h-full no-scrollbar bg-gray-100 ${
+            className={`flex flex-col py-48 px-16 overflow-y-scroll h-full min-w-max no-scrollbar bg-gray-100 ${
               !isVisible && 'hidden'
             }`}
           />
+          <div
+            className={`flex flex-col justify-between py-7 pr-4 ${
+              isVisible && 'bg-gray-100'
+            }`}
+          >
+            <AssistantButton />
+          </div>
         </div>
       </EditorProvider>
     </div>
