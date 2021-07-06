@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import scrollIntoViewIfNeeded from 'scroll-into-view-if-needed';
 import useEditor from '../../hooks/useEditor';
 import { InlineIssue, Issue } from '../../services/paper.service';
 import { CriteriaLabel } from './CriteriaLabel';
@@ -8,7 +9,6 @@ import { Replacement } from './Replacement';
 interface IssueCardProps {
   issue: Issue;
   expanded?: boolean;
-  scrollTo: (offset: number) => void;
 }
 
 export const IssueCardSkeleton = () => {
@@ -43,7 +43,12 @@ export const IssueCard = (props: IssueCardProps) => {
   const setExpanded = () => select(props.issue.id);
 
   useEffect(() => {
-    if (expanded && ref.current) props.scrollTo(ref.current.offsetTop - 200);
+    if (expanded && ref.current)
+      scrollIntoViewIfNeeded(ref.current, {
+        scrollMode: 'if-needed',
+        behavior: 'smooth',
+        block: 'center'
+      });
   }, [expanded]);
 
   return (

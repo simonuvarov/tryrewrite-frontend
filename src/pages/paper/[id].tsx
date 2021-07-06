@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import { AssistantButton } from '../../components/AssistantButton';
 import { Editor } from '../../components/editor';
 import { IssueList } from '../../components/IssueList';
-import { ScrollArea } from '../../components/ScrollArea';
 import { EditorProvider } from '../../contexts/EditorContext';
 import useAuth from '../../hooks/useAuth';
 import { useAssistantVisibilityStore } from '../../stores/useAssistantVisibilityStore';
@@ -31,10 +30,9 @@ export function Edit() {
       <EditorProvider paperId={id as string}>
         <AssistantButton className="absolute right-4 top-4" />
         <div className="flex h-full">
-          <ScrollArea className="overflow-y-scroll no-scrollbar h-full min-w-max px-4 mx-auto py-48">
+          <div className="overflow-y-scroll no-scrollbar h-full min-w-max px-4 mx-auto py-48">
             <Editor />
-          </ScrollArea>
-
+          </div>
           <IssueList
             className={`flex flex-col py-48 pl-16 pr-24 overflow-y-scroll h-full no-scrollbar bg-gray-100 ${
               !isVisible && 'hidden'
