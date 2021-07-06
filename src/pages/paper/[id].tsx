@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { AssistantButton } from '../../components/AssistantButton';
 import { Editor } from '../../components/editor';
 import { IssueList } from '../../components/IssueList';
+import { ScrollArea } from '../../components/ScrollArea';
 import { EditorProvider } from '../../contexts/EditorContext';
 import useAuth from '../../hooks/useAuth';
 import { useAssistantVisibilityStore } from '../../stores/useAssistantVisibilityStore';
@@ -19,7 +20,7 @@ export function Edit() {
   }, [user]);
 
   return (
-    <div className="h-screen">
+    <div className="h-screen w-screen">
       <button
         className="absolute flex items-center top-7 left-8 text-gray-400 font-medium pl-4 pr-5 py-2 hover:bg-gray-100 rounded transition-colors duration-300 focus:outline-none"
         onClick={() => router.back()}
@@ -30,16 +31,15 @@ export function Edit() {
       <EditorProvider paperId={id as string}>
         <AssistantButton className="absolute right-4 top-4" />
         <div className="flex h-full">
-          <div
-            className="flex flex-grow flex-shrink-0 mx-0 px-6 overflow-y-scroll h-full no-scrollbar"
-            id="editor-container"
-          >
-            <Editor className="py-48 overflow-y-scroll no-scrollbar mx-auto" />
-          </div>
+          <ScrollArea className="overflow-y-scroll no-scrollbar h-full min-w-max px-4 mx-auto py-48">
+            <Editor />
+          </ScrollArea>
 
-          {isVisible && (
-            <IssueList className="py-64 pl-16 pr-24 overflow-y-scroll h-screen no-scrollbar bg-gray-100" />
-          )}
+          <IssueList
+            className={`flex flex-col py-48 pl-16 pr-24 overflow-y-scroll h-full no-scrollbar bg-gray-100 ${
+              !isVisible && 'hidden'
+            }`}
+          />
         </div>
       </EditorProvider>
     </div>

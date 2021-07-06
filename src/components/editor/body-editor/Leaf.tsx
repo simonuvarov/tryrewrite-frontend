@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { RenderLeafProps } from 'slate-react';
+import { EditorScrollContext } from '../../../contexts/EditorScrollContext';
 import useEditor from '../../../hooks/useEditor';
 import { CRITERIA_TYPE } from '../../../services/paper.service';
 import { useAssistantVisibilityStore } from '../../../stores/useAssistantVisibilityStore';
@@ -37,14 +38,19 @@ const getBackgroundColorFromCriteria = (criteria: CRITERIA_TYPE): string => {
 export const Leaf = ({ children, leaf, attributes }: LeafProps) => {
   const { checking, selected, select } = useEditor();
   const { isVisible } = useAssistantVisibilityStore();
+  const { scrollTo } = useContext(EditorScrollContext);
   const shouldBeHighlighted = !checking && isVisible;
-  const expanded = selected === leaf.id;
+  const expanded =
+    selected !== undefined && leaf.id !== undefined && selected === leaf.id;
 
   const ref = React.useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (expanded) {
-      ref.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (expanded && ref.current) {
+      const topOffset = ref.current.offsetTop;
+
+      console.log('scrolling to', topOffset);
+      scrollTo(topOffset);
     }
   }, [expanded]);
 
