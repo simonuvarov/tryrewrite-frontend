@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import useEditor from '../../hooks/useEditor';
 import { InlineIssue, Issue } from '../../services/paper.service';
 import { CriteriaLabel } from './CriteriaLabel';
@@ -8,7 +8,7 @@ import { Replacement } from './Replacement';
 interface IssueCardProps {
   issue: Issue;
   expanded?: boolean;
-  scrollTo: () => void;
+  scrollTo: (offset: number) => void;
 }
 
 export const IssueCardSkeleton = () => {
@@ -32,62 +32,63 @@ export const IssueCardSkeleton = () => {
   );
 };
 
-export const IssueCard = React.forwardRef<HTMLLIElement, IssueCardProps>(
-  (props: IssueCardProps, ref) => {
-    const { select, selected, replaceText } = useEditor();
-    const expanded = props.expanded
-      ? props.expanded
-      : selected === props.issue.id;
-    const setExpanded = () => select(props.issue.id);
+export const IssueCard = (props: IssueCardProps) => {
+  const { select, selected, replaceText } = useEditor();
 
-    useEffect(() => {
-      if (expanded) props.scrollTo();
-    }, [expanded]);
+  const ref = useRef<HTMLLIElement>(null);
 
-    return (
-      <li
-        key={props.issue.id}
-        className={`w-[480px] px-12 py-8 border border-gray-200 bg-white transition-shadow rounded-xl ${
-          expanded ? 'shadow-lg' : 'shadow-sm cursor-pointer'
-        }`}
-        onClick={setExpanded}
-        ref={ref}
-      >
-        <CriteriaLabel type={props.issue.affects} />
-        <div className="mt-4 space-y-1">
-          <h3
-            className={`text-lg leading-7 font-medium text-gray-800 ${
-              expanded ? '' : 'line-clamp-1'
-            }`}
-          >
-            {props.issue.shortMessage}
-          </h3>
-          <p
-            className={`text-base leading-7 font-normal text-gray-700 ${
-              expanded ? '' : 'line-clamp-1'
-            }`}
-          >
-            {props.issue.message}
-          </p>
-        </div>
-        {props.issue.isInline && props.issue.replacements && expanded && (
-          <ul className="flex space-x-2 mt-4">
-            {props.issue.replacements.map(r => (
-              <Replacement
-                value={r}
-                type={props.issue.affects}
-                onClick={() => {
-                  const issue: InlineIssue = props.issue as InlineIssue; // for some reason TS does not perform type check correctly
-                  replaceText(issue.offset, issue.length, r);
-                }}
-              />
-            ))}
-          </ul>
-        )}
-        {props.issue.link && expanded && (
-          <LearnMoreButton href={props.issue.link} />
-        )}
-      </li>
-    );
-  }
-);
+  const expanded = props.expanded
+    ? props.expanded
+    : selected === props.issue.id;
+  const setExpanded = () => select(props.issue.id);
+
+  useEffect(() => {
+    if (expanded && ref.current) props.scrollTo(ref.current.offsetTop - 200);
+  }, [expanded]);
+
+  return (
+    <li
+      key={props.issue.id}
+      className={`w-[480px] px-12 py-8 border border-gray-200 bg-white transition-shadow rounded-xl ${
+        expanded ? 'shadow-lg' : 'shadow-sm cursor-pointer'
+      }`}
+      onClick={setExpanded}
+      ref={ref}
+    >
+      <CriteriaLabel type={props.issue.affects} />
+      <div className="mt-4 space-y-1">
+        <h3
+          className={`text-lg leading-7 font-medium text-gray-800 ${
+            expanded ? '' : 'line-clamp-1'
+          }`}
+        >
+          {props.issue.shortMessage}
+        </h3>
+        <p
+          className={`text-base leading-7 font-normal text-gray-700 ${
+            expanded ? '' : 'line-clamp-1'
+          }`}
+        >
+          {props.issue.message}
+        </p>
+      </div>
+      {props.issue.isInline && props.issue.replacements && expanded && (
+        <ul className="flex space-x-2 mt-4">
+          {props.issue.replacements.map(r => (
+            <Replacement
+              value={r}
+              type={props.issue.affects}
+              onClick={() => {
+                const issue: InlineIssue = props.issue as InlineIssue; // for some reason TS does not perform type check correctly
+                replaceText(issue.offset, issue.length, r);
+              }}
+            />
+          ))}
+        </ul>
+      )}
+      {props.issue.link && expanded && (
+        <LearnMoreButton href={props.issue.link} />
+      )}
+    </li>
+  );
+};

@@ -23,16 +23,16 @@ export const IssueList = (props: IssueListProps) => {
 
   const containerRef = React.useRef<HTMLUListElement>(null);
 
-  const scrollToElement = (index: number) => {
-    const scrollToOffset = cardRefs[index].current?.offsetTop;
-    containerRef.current?.scrollTo({
-      top: scrollToOffset! - 200,
-      behavior: 'smooth'
-    });
+  const scrollTo = (offset: number) => {
+    if (containerRef.current)
+      containerRef.current?.scrollTo({
+        top: offset,
+        behavior: 'smooth'
+      });
   };
 
   useEffect(() => {
-    scrollToElement(0);
+    scrollTo(0);
   }, []);
 
   return (
@@ -43,8 +43,7 @@ export const IssueList = (props: IssueListProps) => {
             <IssueCard
               issue={issue}
               key={issue.id}
-              ref={cardRefs[index]}
-              scrollTo={() => scrollToElement(index)}
+              scrollTo={(offset: number) => scrollTo(offset)}
             />
           ))}
     </ul>
