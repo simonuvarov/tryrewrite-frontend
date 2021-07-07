@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import { BannerBeta } from '../components/BannerBeta';
 import { Button } from '../components/Button';
 import Header from '../components/Header';
+import { Logo } from '../components/Logo';
 import { PaperCardGrid } from '../components/PaperCardGrid';
 import { PaperProvider } from '../contexts/PaperContext';
 import useAuth from '../hooks/useAuth';
@@ -33,6 +34,7 @@ export function Edit() {
       <div className="flex flex-col h-screen">
         <BannerBeta />
         <Header className="bg-gray-50">
+          <Logo href="/dashboard" />
           <Button onClick={handleNewPaperClick} type="primary" size="md">
             <PencilAltIcon className="h-5 w-5 mr-1" />
             New paper
