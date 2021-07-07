@@ -31,11 +31,11 @@ export function Edit() {
               Back
             </button>
           </div>
-          <div className="overflow-y-scroll no-scrollbar h-full min-w-max px-4 mx-auto py-48">
+          <div className="overflow-y-scroll no-scrollbar h-full min-w-max px-4 mx-auto pt-24 pb-[40vh]">
             <Editor />
           </div>
           <IssueList
-            className={`flex flex-col py-48 px-16 overflow-y-scroll h-full min-w-max no-scrollbar bg-gray-100 ${
+            className={`flex flex-col pt-24 pb-[40vh] px-16 overflow-y-scroll h-full min-w-max no-scrollbar bg-gray-100 ${
               !isVisible && 'hidden'
             }`}
           />
