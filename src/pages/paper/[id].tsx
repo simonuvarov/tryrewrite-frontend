@@ -37,8 +37,8 @@ export function Edit() {
               <WordCounter className="mt-2" />
             </div>
           </div>
-          <div className="overflow-y-scroll no-scrollbar h-full min-w-max px-4 mx-auto pt-24 pb-[40vh]">
-            <Editor />
+          <div className="overflow-y-scroll no-scrollbar h-full min-w-max  px-4 mx-auto pt-24 pb-[40vh]">
+            <Editor className="w-full max-w-[60ch] text-lg" />
           </div>
           <IssueList
             className={`flex flex-col pt-24 pb-[40vh] px-16 overflow-y-scroll h-full min-w-max no-scrollbar bg-gray-100 ${
