@@ -8,7 +8,7 @@ export const Editor = ({ className }: { className?: string }) => {
         placeholder="Question..."
       />
       <BodyEditor
-        className="w-full space-y-5 mt-8 text-gray-800 text-xl leading-loose"
+        className="w-full space-y-5 mt-8 text-gray-800 text-xl leading-loose min-h-[30vh]"
         placeholder="Start writing here..."
       />
     </div>
