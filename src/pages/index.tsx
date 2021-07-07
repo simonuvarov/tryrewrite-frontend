@@ -3,12 +3,14 @@ import { BannerBeta } from '../components/BannerBeta';
 import { Button } from '../components/Button';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import { Logo } from '../components/Logo';
 
 export function Home() {
   return (
     <>
       <BannerBeta />
       <Header className="bg-gray-50">
+        <Logo />
         <nav className="flex space-x-3 items-center">
           <Button href="/signin" type="ghost" size="md">
             Sign in
