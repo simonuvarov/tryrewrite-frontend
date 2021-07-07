@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
-import { createEditor } from 'slate';
+import { createEditor, Descendant } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
-import useEditor from '../../../hooks/useEditor';
 import { Element } from './Element';
 import { renderLeaf } from './renderLeaf';
 import { useDecorate } from './useDecorate';
@@ -9,11 +8,11 @@ import { useDecorate } from './useDecorate';
 interface BodyEditorProps {
   className?: string;
   placeholder: string;
+  value: Descendant[];
+  onChange: (value: Descendant[]) => void;
 }
 
 const BodyEditor = (props: BodyEditorProps) => {
-  const { body, setBody } = useEditor();
-
   const editor = useMemo(() => withReact(createEditor()), []);
 
   const renderElement = useCallback(props => <Element {...props} />, []);
@@ -21,7 +20,7 @@ const BodyEditor = (props: BodyEditorProps) => {
   const decorate = useDecorate();
 
   return (
-    <Slate editor={editor} value={body} onChange={setBody}>
+    <Slate editor={editor} value={props.value} onChange={props.onChange}>
       <Editable
         placeholder={props.placeholder}
         spellCheck={false}
