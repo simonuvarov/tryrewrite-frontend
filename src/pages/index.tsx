@@ -19,11 +19,12 @@ export function Home() {
         </nav>
       </Header>
       <section className="bg-gray-50 w-full px-4 flex flex-col items-center pt-10 md:pt-20">
-        <h1 className="text-3xl md:text-7xl font-extrabold tracking-tight text-gray-800 max-w-xl text-center ">
+        <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight text-gray-800 max-w-xl text-center ">
           Write. Check. Correct. Repeat.
         </h1>
-        <p className="text-lg md:text-2xl mt-6 text-gray-500 max-w-3xl text-center ">
-          Get instant feedback and track your progress – all in one place
+        <p className="text-lg md:text-2xl mt-6 text-gray-500 max-w-2xl text-center ">
+          Rewrite is an app that analyzes your IELTS essays and helps you
+          improve your writing
         </p>
         <Button
           href="/signup"
