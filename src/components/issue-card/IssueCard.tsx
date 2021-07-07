@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import scrollIntoViewIfNeeded from 'scroll-into-view-if-needed';
+import scrollIntoViewIfNeeded from 'smooth-scroll-into-view-if-needed';
 import useEditor from '../../hooks/useEditor';
 import { InlineIssue, Issue } from '../../services/paper.service';
 import { CriteriaLabel } from './CriteriaLabel';

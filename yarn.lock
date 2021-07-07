@@ -2908,6 +2908,13 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+smooth-scroll-into-view-if-needed@^1.1.32:
+  version "1.1.32"
+  resolved "https://registry.yarnpkg.com/smooth-scroll-into-view-if-needed/-/smooth-scroll-into-view-if-needed-1.1.32.tgz#57718cb2caa5265ade3e96006dfcf28b2fdcfca0"
+  integrity sha512-1/Ui1kD/9U4E6B6gYvJ6qhEiZPHMT9ZHi/OKJVEiCFhmcMqPm7y4G15pIl/NhuPTkDF/u57eEOK4Frh4721V/w==
+  dependencies:
+    scroll-into-view-if-needed "^2.2.28"
+
 source-map@0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.3.tgz#5302f8169031735226544092e64981f751750383"

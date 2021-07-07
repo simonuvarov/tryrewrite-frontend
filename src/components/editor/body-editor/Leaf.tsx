@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import scrollIntoViewIfNeeded from 'scroll-into-view-if-needed';
 import { RenderLeafProps } from 'slate-react';
+import scrollIntoViewIfNeeded from 'smooth-scroll-into-view-if-needed';
 import useEditor from '../../../hooks/useEditor';
 import { CRITERIA_TYPE } from '../../../services/paper.service';
 import { useAssistantVisibilityStore } from '../../../stores/useAssistantVisibilityStore';
