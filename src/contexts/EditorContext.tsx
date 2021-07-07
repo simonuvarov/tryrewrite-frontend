@@ -2,14 +2,6 @@ import { createContext, ReactNode, useEffect, useState } from 'react';
 import { Descendant, Node } from 'slate';
 import paperService, { Issue } from '../services/paper.service';
 
-interface Bands {
-  ta: number;
-  cc: number;
-  lr: number;
-  gr: number;
-  overall: number;
-}
-
 interface EditorContextProps {
   initializingPaper: boolean;
   issues?: Array<Issue>;
@@ -22,6 +14,8 @@ interface EditorContextProps {
   selected?: string;
   select: (id: string) => void;
   replaceText: (offset: number, length: number, replacement: string) => void;
+  band?: number;
+  wordCount?: number;
 }
 
 export const EditorContext = createContext<EditorContextProps>(
@@ -41,6 +35,8 @@ export const EditorProvider = ({
   const [issues, setIssues] = useState<Array<Issue>>();
   const [question, setQuestion] = useState<Descendant[]>(stringToSlate('\n'));
   const [body, setBody] = useState<Descendant[]>(stringToSlate('\n'));
+  const [band, setBand] = useState<number>();
+  const [wordCount, setWordCount] = useState<number>();
 
   const [selected, setSelected] = useState<string>();
 
@@ -62,7 +58,7 @@ export const EditorProvider = ({
         .then(res => {
           setQuestion(stringToSlate(res.question));
           setBody(stringToSlate(res.body));
-
+          setBand(res.overallBand);
           setInitializingPaper(false);
         })
         .catch(err => setError(err));
@@ -81,6 +77,7 @@ export const EditorProvider = ({
         })
         .then(res => {
           setIssues(res.issues);
+          setBand(res.bands.overall);
         })
         .catch(err => setError(err))
         .finally(() => setChecking(false));
@@ -88,6 +85,17 @@ export const EditorProvider = ({
     // clear timeout when value changes, on unmount, etc.
     return () => clearTimeout(handler);
   }, [initializingPaper, question, body]);
+
+  useEffect(() => {
+    const text = slateToString(body);
+    if (text.length === 0) {
+      setWordCount(0);
+      return;
+    }
+    var regex = /\s+/gi;
+    var wc = text.trim().split(regex).length;
+    setWordCount(wc);
+  }, [body]);
 
   const value = {
     initializingPaper,
@@ -100,7 +108,9 @@ export const EditorProvider = ({
     checking,
     selected,
     select: setSelected,
-    replaceText
+    replaceText,
+    band,
+    wordCount
   };
 
   return (

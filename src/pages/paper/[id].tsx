@@ -2,8 +2,10 @@ import { ArrowLeftIcon } from '@heroicons/react/solid';
 import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
 import { AssistantButton } from '../../components/AssistantButton';
+import { BandScore } from '../../components/BandScore';
 import { Editor } from '../../components/editor';
 import { IssueList } from '../../components/IssueList';
+import { WordCounter } from '../../components/WordCounter';
 import { EditorProvider } from '../../contexts/EditorContext';
 import useAuth from '../../hooks/useAuth';
 import { useAssistantVisibilityStore } from '../../stores/useAssistantVisibilityStore';
@@ -30,6 +32,10 @@ export function Edit() {
               <ArrowLeftIcon className="h-5 w-5 mr-1" />
               Back
             </button>
+            <div className="ml-4">
+              <BandScore />
+              <WordCounter className="mt-2" />
+            </div>
           </div>
           <div className="overflow-y-scroll no-scrollbar h-full min-w-max px-4 mx-auto pt-24 pb-[40vh]">
             <Editor />
