@@ -81,6 +81,7 @@ export const IssueCard = (props: IssueCardProps) => {
         <ul className="flex space-x-2 mt-4">
           {props.issue.replacements.map(r => (
             <Replacement
+              key={r}
               value={r}
               type={props.issue.affects}
               onClick={() => {
