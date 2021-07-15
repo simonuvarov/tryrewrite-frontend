@@ -15,13 +15,26 @@ export const IssueList = (props: IssueListProps) => {
 
   const containerRef = React.useRef<HTMLUListElement>(null);
 
+  const inlineIssues = issues?.filter(issue => issue.isInline);
+  const generalIssues = issues?.filter(issue => !issue.isInline);
+
+  if (checking || !inlineIssues || !generalIssues)
+    return (
+      <ul className={`space-y-8 ${props.className || ''}`} ref={containerRef}>
+        skeletons
+      </ul>
+    );
+
   return (
     <ul className={`space-y-8 ${props.className || ''}`} ref={containerRef}>
-      {checking || !issues
-        ? skeletons
-        : issues.map((issue, index) => (
-            <IssueCard issue={issue} key={issue.id} />
-          ))}
+      <span className="px-2 text-gray-500">Found problems</span>
+      {inlineIssues.map(issue => (
+        <IssueCard issue={issue} key={issue.id} />
+      ))}
+      <span className="px-2 pt-4 text-gray-500">General recommendations</span>
+      {generalIssues.map(issue => (
+        <IssueCard issue={issue} key={issue.id} />
+      ))}
     </ul>
   );
 };
