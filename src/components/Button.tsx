@@ -6,6 +6,7 @@ interface BaseProps {
   size: 'sm' | 'md' | 'lg' | 'xl'
   children: React.ReactNode
   className?: string
+  id?: string
 }
 
 interface LinkProps extends BaseProps {
@@ -72,7 +73,10 @@ export const Button = (props: LinkProps | ButtonProps) => {
 
   if (isButtonProps(props))
     return (
-      <button className={styles.join(' ')} onClick={props.onClick}>
+      <button
+        className={styles.join(' ')}
+        onClick={props.onClick}
+        id={props.id}>
         {props.children}
       </button>
     )

@@ -1,0 +1,57 @@
+{
+  "issues": [
+    {
+      "id": "20016881-5006-4d7f-ac54-bff9b83861d2",
+      "message": "Generally it's recommended to use four to five paragraphs in your essay. One paragraph for an introduction, one for conclusion and two or three body paragraphs. In most cases such a number of body paragraphs is sufficient to develop your ideas.",
+      "shortMessage": "Insufficient paragraph count",
+      "isInline": false,
+      "affects": "Coherence and Cohesion",
+      "link": "https://ieltsliz.com/how-many-paragraphs-for-an-ielts-essay/"
+    },
+    {
+      "id": "d7c5dd1c-9c88-4dd1-949c-eaa9ea18e328",
+      "affects": "Coherence and Cohesion",
+      "message": "You need to use cohesive devices to get a good score. Usage of such words and phrases will enable you to establish clear connections between your ideas.",
+      "shortMessage": "Insufficient usage of linking words",
+      "isInline": false
+    },
+    {
+      "id": "98b0aac8-28c4-4375-bf87-6d57db8af358",
+      "affects": "Grammatical Range and Accuracy",
+      "message": "You need to use a variety of sentece structures in your essay to get a higher score. Passive voice (e.g. “It is known that...“) seems to be missing. Also, passive voice sounds more formal.",
+      "shortMessage": "Insufficient usage of passive voice",
+      "isInline": false,
+      "link": "https://www.ef.com/wwen/english-resources/english-grammar/passive-voice/"
+    },
+    {
+      "id": "344f1658-54f3-4c39-8b80-786389c2bb3f",
+      "affects": "Lexical Resource",
+      "message": "Your vocabulary can affect your score. Try using more sophisticated words. However, ensure that you understand the full meaning of the word, because using a rare word in the wrong place will lower your score.",
+      "shortMessage": "Lack of vocabulary complexity",
+      "isInline": false,
+      "link": "https://www.wgtn.ac.nz/lals/resources/academicwordlist"
+    },
+    {
+      "id": "3bcfb135-2d50-4150-bd4f-43b412843f91",
+      "affects": "Task Achievement",
+      "message": "You are required to write a conclusion in this type of essay.",
+      "shortMessage": "Missing conclusion",
+      "isInline": false
+    },
+    {
+      "id": "d08ec3a3-490f-46a7-a285-5816f68fc7a3",
+      "affects": "Task Achievement",
+      "message": "IELTS asks you to write at least 250 for Task 2. Aim for about 270 – 290 words. This will mean you are safely over the word limit but without adding too much irrelevant information. However, don’t write too much. Aim for quality rather than quantity. You will not get additional points for additional words. ",
+      "shortMessage": "Insufficient word count",
+      "isInline": false,
+      "link": "https://ieltsliz.com/how-many-words-ielts-writing/"
+    }
+  ],
+  "bands": {
+    "overall": 3.5,
+    "ta": 4,
+    "cc": 1,
+    "lr": 2,
+    "gr": 6
+  }
+}

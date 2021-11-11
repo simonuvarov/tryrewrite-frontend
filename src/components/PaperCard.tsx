@@ -1,7 +1,7 @@
-import { XIcon } from '@heroicons/react/solid'
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import moment from 'moment'
 import { useRouter } from 'next/dist/client/router'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import usePapers from '../hooks/usePapers'
 import { Paper } from '../services/paper.service'
 
@@ -97,7 +97,7 @@ const DeleteButton = ({
         e.stopPropagation()
         onClick()
       }}>
-      <XIcon className="h-5 w-5 text-gray-400" />
+      <XMarkIcon className="h-5 w-5 text-gray-400" />
     </button>
   )
 }

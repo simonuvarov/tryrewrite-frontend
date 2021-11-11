@@ -1,4 +1,4 @@
-import { PencilAltIcon } from '@heroicons/react/outline'
+import { PencilSquareIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/dist/client/router'
 import Head from 'next/head'
 import { useEffect } from 'react'
@@ -35,8 +35,12 @@ export function Edit() {
         <BannerBeta />
         <Header className="bg-gray-50">
           <Logo href="/dashboard" />
-          <Button onClick={handleNewPaperClick} type="primary" size="md">
-            <PencilAltIcon className="mr-1 h-5 w-5" />
+          <Button
+            onClick={handleNewPaperClick}
+            type="primary"
+            size="md"
+            id="new-paper-button">
+            <PencilSquareIcon className="mr-1 h-5 w-5" />
             New paper
           </Button>
         </Header>

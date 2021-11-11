@@ -1,0 +1,54 @@
+[
+  {
+    "id": "IELTS-1234",
+    "question": "Some people believe that technology has made our lives more complicated. Others think that it has made our lives easier. Discuss both views and give your opinion.",
+    "body": "In the past few decades, technology has become an integral part of our lives. While some people argue that technology has complicated our lives, others believe that it has made our lives easier. This essay will discuss both views before offering a personal opinion.",
+    "createdAt": "2021-01-01T12:00:00.000Z",
+    "updatedAt": "2021-01-02T14:30:00.000Z",
+    "overallBand": 7,
+    "taBand": 7,
+    "ccBand": 8,
+    "lrBand": 6,
+    "grBand": 7,
+    "authorId": "IELTS-5678"
+  },
+  {
+    "id": "IELTS-2345",
+    "question": "Some people think that the government should provide free education at all levels. Others believe that it should be the responsibility of individuals to pay for their education. Discuss both views and give your opinion.",
+    "body": "The issue of whether education should be free or not has long been debated. While some argue that the government should provide free education to all, others believe that individuals should be responsible for paying for their education. This essay will discuss both views before offering a personal opinion.",
+    "createdAt": "2021-11-01T08:00:00.000Z",
+    "updatedAt": "2021-11-02T16:30:00.000Z",
+    "overallBand": 6.5,
+    "taBand": 7,
+    "ccBand": 7,
+    "lrBand": 6,
+    "grBand": 6,
+    "authorId": "IELTS-7890"
+  },
+  {
+    "id": "IELTS-3456",
+    "question": "Some people believe that the best way to reduce crime is to give longer prison sentences. Others, however, believe there are better ways to reduce crime. Discuss both views and give your opinion.",
+    "body": "The issue of how to reduce crime has been a topic of debate for many years. While some people believe that longer prison sentences are the best way to reduce crime, others argue that there are more effective ways to achieve this goal. This essay will examine both views before offering a personal opinion.",
+    "createdAt": "2021-12-01T10:00:00.000Z",
+    "updatedAt": "2021-12-02T17:00:00.000Z",
+    "overallBand": 7.5,
+    "taBand": 8,
+    "ccBand": 7,
+    "lrBand": 7,
+    "grBand": 8,
+    "authorId": "IELTS-2345"
+  },
+  {
+    "id": "IELTS-4567",
+    "question": "Some people think that the best way to travel is by car. Others believe that it is better to use public transport. Discuss both views and give your opinion.",
+    "body": "The issue of whether it is better to travel by car or by public transport has been a topic of debate for many years. While some people believe that cars offer the best way to travel, others argue that public transport is a better option. This essay will examine both views before offering a personal opinion.",
+    "createdAt": "2022-02-01T09:00:00.000Z",
+    "updatedAt": "2022-02-02T18:00:00.000Z",
+    "overallBand": 6,
+    "taBand": 6,
+    "ccBand": 7,
+    "lrBand": 6,
+    "grBand": 5.5,
+    "authorId": "IELTS-4567"
+  }
+]

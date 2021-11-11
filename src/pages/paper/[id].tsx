@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from '@heroicons/react/solid'
+import { ArrowLeftIcon } from '@heroicons/react/24/solid'
 import { useRouter } from 'next/dist/client/router'
 import { useEffect } from 'react'
 import { AssistantButton } from '../../components/AssistantButton'
@@ -27,6 +27,7 @@ export function Edit() {
           <div className="flex flex-col justify-between py-7 pl-4">
             <button
               className="top-7 left-8 flex items-center rounded py-2 pl-4 pr-5 font-medium text-gray-400 transition-colors duration-300 hover:bg-gray-100 focus:outline-none"
+              id="back-button"
               onClick={() => router.back()}>
               <ArrowLeftIcon className="mr-1 h-5 w-5" />
               Back

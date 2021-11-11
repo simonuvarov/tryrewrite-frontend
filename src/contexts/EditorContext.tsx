@@ -52,6 +52,7 @@ export const EditorProvider = ({
 
   // initalize paper
   useEffect(() => {
+    console.log('initializing paper')
     if (paperId)
       paperService
         .getPaper(paperId)
