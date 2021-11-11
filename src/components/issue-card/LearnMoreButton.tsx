@@ -1,18 +1,17 @@
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { ChevronRightIcon } from '@heroicons/react/solid'
 
 interface LearnMoreButtonProps {
-  href: string;
+  href: string
 }
 export const LearnMoreButton = (props: LearnMoreButtonProps) => {
   return (
     <a
       href={props.href}
-      className="flex items-center mt-5 text-gray-400 hover:text-gray-500 transition-all"
+      className="mt-5 flex items-center text-gray-400 transition-all hover:text-gray-500"
       target="_blank"
-      rel="noopener noreferrer"
-    >
-      <span className="text-sm leading-4 font-medium">Learn more</span>
+      rel="noopener noreferrer">
+      <span className="text-sm font-medium leading-4">Learn more</span>
       <ChevronRightIcon className="h-6 w-6" />
     </a>
-  );
-};
+  )
+}

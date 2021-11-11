@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import { BannerBeta } from '../components/BannerBeta';
-import { Button } from '../components/Button';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
-import { Logo } from '../components/Logo';
+import Image from 'next/image'
+import { BannerBeta } from '../components/BannerBeta'
+import { Button } from '../components/Button'
+import Footer from '../components/Footer'
+import Header from '../components/Header'
+import { Logo } from '../components/Logo'
 
 export function Home() {
   return (
@@ -11,7 +11,7 @@ export function Home() {
       <BannerBeta />
       <Header className="bg-gray-50">
         <Logo />
-        <nav className="flex space-x-3 items-center">
+        <nav className="flex items-center space-x-3">
           <Button href="/signin" type="ghost" size="md">
             Sign in
           </Button>
@@ -20,11 +20,11 @@ export function Home() {
           </Button>
         </nav>
       </Header>
-      <section className="bg-gray-50 w-full px-4 flex flex-col items-center pt-10 md:pt-20">
-        <h1 className="text-4xl md:text-7xl font-extrabold tracking-tight text-gray-800 max-w-xl text-center ">
+      <section className="flex w-full flex-col items-center bg-gray-50 px-4 pt-10 md:pt-20">
+        <h1 className="max-w-xl text-center text-4xl font-extrabold tracking-tight text-gray-800 md:text-7xl ">
           Write. Check. Correct. Repeat.
         </h1>
-        <p className="text-lg md:text-2xl mt-6 text-gray-500 max-w-2xl text-center ">
+        <p className="mt-6 max-w-2xl text-center text-lg text-gray-500 md:text-2xl ">
           Rewrite is an app that analyzes your IELTS essays and helps you
           improve your writing
         </p>
@@ -32,16 +32,15 @@ export function Home() {
           href="/signup"
           size="xl"
           type="primary"
-          className="mt-8 md:mt-12"
-        >
+          className="mt-8 md:mt-12">
           Get started for free
         </Button>
 
-        <small className="text-sm font-medium text-gray-400 mt-4">
+        <small className="mt-4 text-sm font-medium text-gray-400">
           No credit card is required
         </small>
       </section>
-      <section className="bg-gray-50 w-full flex-col flex items-center pt-10 md:pt-20 px-4">
+      <section className="flex w-full flex-col items-center bg-gray-50 px-4 pt-10 md:pt-20">
         <Image
           src={'/images/hero-image.png'}
           alt="Picture of the editor"
@@ -51,7 +50,7 @@ export function Home() {
       </section>
       <Footer classname="pt-10 md:pt-36 bg-gray-50" />
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home

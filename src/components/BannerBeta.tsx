@@ -1,4 +1,4 @@
-import { Banner } from './Banner';
+import { Banner } from './Banner'
 
 export const BannerBeta = () => {
   return (
@@ -9,12 +9,11 @@ export const BannerBeta = () => {
         </span>
         <a
           className="inline underline hover:no-underline"
-          href="mailto:feedback@tryrewrite.com"
-        >
+          href="mailto:feedback@tryrewrite.com">
           here
         </a>
         .
       </div>
     </Banner>
-  );
-};
+  )
+}

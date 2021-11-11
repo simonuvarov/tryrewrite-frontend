@@ -1,8 +1,8 @@
-import { NextSeo, NextSeoProps } from 'next-seo';
+import { NextSeo, NextSeoProps } from 'next-seo'
 
 interface PageSeoProps {
-  title: string;
-  description: string;
+  title: string
+  description: string
 }
 
 export default function PageSeo(props: PageSeoProps) {
@@ -15,6 +15,6 @@ export default function PageSeo(props: PageSeoProps) {
       site_name: 'tryrewrite.com',
       locale: 'en_US'
     }
-  };
-  return <NextSeo {...seoConfig} />;
+  }
+  return <NextSeo {...seoConfig} />
 }

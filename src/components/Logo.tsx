@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import React from 'react';
-import { joinClassNames } from '../lib/joinClassNames';
+import Link from 'next/link'
+import React from 'react'
+import { joinClassNames } from '../lib/joinClassNames'
 
 interface LogoProps {
-  className?: string;
-  href?: string;
+  className?: string
+  href?: string
 }
 
 export const Logo = (props: LogoProps) => {
@@ -16,8 +16,7 @@ export const Logo = (props: LogoProps) => {
           height="27"
           viewBox="0 0 94 27"
           fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          xmlns="http://www.w3.org/2000/svg">
           <path
             d="M0 22.0071C0 22.5594 0.447715 23.0071 1 23.0071H2.76424C3.31652 23.0071 3.76424 22.5594 3.76424 22.0071V13.6173C3.76424 11.6 5.28241 10.1754 7.24772 10.1754C7.40981 10.1754 7.56173 10.1856 7.70503 10.204C8.28214 10.2781 8.90825 10.0433 9.11176 9.4982L9.6147 8.15103C9.78047 7.707 9.61473 7.19373 9.16757 7.03661C8.75282 6.89088 8.28193 6.80633 7.75724 6.80633C5.93916 6.80633 4.43561 7.82097 3.83794 9.62976C3.8248 9.66955 3.78773 9.6971 3.74582 9.6971C3.69282 9.6971 3.64986 9.65413 3.64986 9.60113V8.03509C3.64986 7.48281 3.20214 7.03509 2.64986 7.03509H1C0.447715 7.03509 0 7.48281 0 8.03509V22.0071Z"
             fill="#111827"
@@ -49,5 +48,5 @@ export const Logo = (props: LogoProps) => {
         </svg>
       </a>
     </Link>
-  );
-};
+  )
+}

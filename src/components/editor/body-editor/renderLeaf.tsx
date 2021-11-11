@@ -1,5 +1,5 @@
-import { Leaf } from './Leaf';
+import { Leaf } from './Leaf'
 
 export const renderLeaf = (props: any) => {
-  return <Leaf {...props} />;
-};
+  return <Leaf {...props} />
+}

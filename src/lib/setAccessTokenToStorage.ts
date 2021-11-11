@@ -1,3 +1,3 @@
 export const setAccessTokenToStorage = (accessToken: string) => {
-  localStorage.setItem('accessToken', accessToken);
-};
+  localStorage.setItem('accessToken', accessToken)
+}

@@ -1,3 +1,3 @@
 export const removeAccessTokenFromStorage = () => {
-  localStorage.removeItem('accessToken');
-};
+  localStorage.removeItem('accessToken')
+}

@@ -1,18 +1,18 @@
-import { useRouter } from 'next/dist/client/router';
-import Head from 'next/head';
-import React, { useEffect } from 'react';
-import useAuth from '../../hooks/useAuth';
+import { useRouter } from 'next/dist/client/router'
+import Head from 'next/head'
+import { useEffect } from 'react'
+import useAuth from '../../hooks/useAuth'
 
 function EmailSent() {
-  const router = useRouter();
+  const router = useRouter()
 
-  const { user, verifyEmail: confirmEmail, error } = useAuth();
+  const { user, verifyEmail: confirmEmail, error } = useAuth()
 
   useEffect(() => {
-    if (user) router.push('/dashboard');
-  }, [user]);
+    if (user) router.push('/dashboard')
+  }, [user])
 
-  if (user) return null;
+  if (user) return null
 
   return (
     <>
@@ -20,12 +20,12 @@ function EmailSent() {
         <title>Please confirm your email address</title>
         <meta name="robots" content="noindex" />
       </Head>
-      <div className="flex bg-gray-50 min-h-screen flex-col justify-center">
-        <section className="bg-white px-20 py-16 rounded-xl mx-auto shadow-md border border-gray-200 w-full max-w-xl">
+      <div className="flex min-h-screen flex-col justify-center bg-gray-50">
+        <section className="mx-auto w-full max-w-xl rounded-xl border border-gray-200 bg-white px-20 py-16 shadow-md">
           <h2 className="text-left text-2xl font-semibold text-gray-700">
             Please confirm your email address
           </h2>
-          <article className="mt-6 text-lg leading-relaxed space-y-5 ">
+          <article className="mt-6 space-y-5 text-lg leading-relaxed ">
             <p className="text-gray-700">
               We have sent an email to the address you've provided. Hopefully,
               it will be delvered to your inbox, or spam folder if you are
@@ -35,8 +35,7 @@ function EmailSent() {
               If it has not arrived in 5-10 minutes then abandon all hope and{' '}
               <a
                 className="text-blue-600 hover:underline"
-                href="mailto:support@tryrewrite.com"
-              >
+                href="mailto:support@tryrewrite.com">
                 contact us
               </a>
               .
@@ -45,7 +44,7 @@ function EmailSent() {
         </section>
       </div>
     </>
-  );
+  )
 }
 
-export default EmailSent;
+export default EmailSent

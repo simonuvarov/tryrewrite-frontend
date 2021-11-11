@@ -1,69 +1,69 @@
-import axios from 'axios';
-import { Profile } from './profile';
+import axios from 'axios'
+import { Profile } from './profile'
 
 export interface Credentials {
-  email: string;
-  password: string;
+  email: string
+  password: string
 }
 
 export interface Tokens {
-  accessToken: string;
+  accessToken: string
 }
 
 export const signup = (credentials: Credentials): Promise<Profile> => {
   return new Promise((resolve, reject) => {
     axios
       .post<Profile>('/api/auth/signup', credentials)
-      .then(res => {
-        resolve(res.data);
+      .then((res) => {
+        resolve(res.data)
       })
-      .catch(err => {
-        if (err.response) reject(new Error(err.response.data.message));
-        else reject(new Error('Unexpected client side error'));
-      });
-  });
-};
+      .catch((err) => {
+        if (err.response) reject(new Error(err.response.data.message))
+        else reject(new Error('Unexpected client side error'))
+      })
+  })
+}
 
 export const signin = (credentials: Credentials): Promise<Profile> => {
   return new Promise((resolve, reject) => {
     axios
       .post<Profile>('/api/auth/signin', credentials)
-      .then(res => {
-        resolve(res.data);
+      .then((res) => {
+        resolve(res.data)
       })
-      .catch(err => {
-        if (err.response) reject(new Error(err.response.data.message));
-        else reject(new Error('Unexpected client side error'));
-      });
-  });
-};
+      .catch((err) => {
+        if (err.response) reject(new Error(err.response.data.message))
+        else reject(new Error('Unexpected client side error'))
+      })
+  })
+}
 
 export const signout = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     axios
       .post<void>('/api/auth/signout')
-      .then(_ => {
-        resolve(undefined);
+      .then((_) => {
+        resolve(undefined)
       })
-      .catch(err => {
-        if (err.response) reject(new Error(err.response.data.message));
-        else reject(new Error('Unexpected client side error'));
-      });
-  });
-};
+      .catch((err) => {
+        if (err.response) reject(new Error(err.response.data.message))
+        else reject(new Error('Unexpected client side error'))
+      })
+  })
+}
 
 export const verifyEmail = (token: string): Promise<Profile> => {
   return new Promise((resolve, reject) => {
     axios
       .post<Profile>(`/api/auth/verify/${token}`)
-      .then(res => {
-        resolve(res.data);
+      .then((res) => {
+        resolve(res.data)
       })
-      .catch(err => {
-        if (err.response) reject(new Error(err.response.data.message));
-        else reject(new Error('Unexpected client side error'));
-      });
-  });
-};
+      .catch((err) => {
+        if (err.response) reject(new Error(err.response.data.message))
+        else reject(new Error('Unexpected client side error'))
+      })
+  })
+}
 
-export default { signin, signup, signout, verifyEmail };
+export default { signin, signup, signout, verifyEmail }

@@ -1,6 +1,6 @@
-import { useContext } from 'react';
-import { PaperContext } from '../contexts/PaperContext';
+import { useContext } from 'react'
+import { PaperContext } from '../contexts/PaperContext'
 
-const usePapers = () => useContext(PaperContext);
+const usePapers = () => useContext(PaperContext)
 
-export default usePapers;
+export default usePapers

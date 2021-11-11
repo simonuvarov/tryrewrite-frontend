@@ -1,51 +1,51 @@
-import axios from 'axios';
+import axios from 'axios'
 
 export interface InlineIssue {
-  id: string;
-  message: string;
-  shortMessage: string;
-  offset: number;
-  length: number;
-  replacements?: Array<string>;
-  affects: CRITERIA_TYPE;
-  isInline: true;
-  link?: string;
+  id: string
+  message: string
+  shortMessage: string
+  offset: number
+  length: number
+  replacements?: Array<string>
+  affects: CRITERIA_TYPE
+  isInline: true
+  link?: string
 }
 
 export interface NotInlineIssue {
-  id: string;
-  message: string;
-  shortMessage: string;
-  affects: CRITERIA_TYPE;
-  isInline: false;
-  link?: string;
+  id: string
+  message: string
+  shortMessage: string
+  affects: CRITERIA_TYPE
+  isInline: false
+  link?: string
 }
 
-export type Issue = InlineIssue | NotInlineIssue;
+export type Issue = InlineIssue | NotInlineIssue
 
 export interface Paper {
-  id: string;
-  question: string;
-  body: string;
-  createdAt: Date;
-  updatedAt: Date;
-  overallBand: number;
-  taBand: number;
-  ccBand: number;
-  lrBand: number;
-  grBand: number;
-  authorId: string;
+  id: string
+  question: string
+  body: string
+  createdAt: Date
+  updatedAt: Date
+  overallBand: number
+  taBand: number
+  ccBand: number
+  lrBand: number
+  grBand: number
+  authorId: string
 }
 
 export interface GradeResult {
-  issues: Array<Issue>;
+  issues: Array<Issue>
   bands: {
-    ta: number;
-    cc: number;
-    lr: number;
-    gr: number;
-    overall: number;
-  };
+    ta: number
+    cc: number
+    lr: number
+    gr: number
+    overall: number
+  }
 }
 
 export enum CRITERIA_TYPE {
@@ -59,27 +59,27 @@ const getPaper = (id: string): Promise<Paper> => {
   return new Promise((resolve, reject) => {
     axios
       .get<Paper>(`/api/papers/${id}`)
-      .then(res => resolve(res.data))
-      .catch(err => reject(err));
-  });
-};
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err))
+  })
+}
 
 const getAllPapers = (): Promise<Array<Paper>> => {
   return new Promise((resolve, reject) => {
     return axios
       .get<Array<Paper>>(`/api/papers`)
-      .then(res => resolve(res.data))
-      .catch(reject);
-  });
-};
+      .then((res) => resolve(res.data))
+      .catch(reject)
+  })
+}
 
 const createNewPaper = (paper?: Partial<Paper>) => {
-  return axios.post<Paper>(`/api/papers`, paper || {});
-};
+  return axios.post<Paper>(`/api/papers`, paper || {})
+}
 
 const deletePaper = (paperId?: string) => {
-  return axios.delete<Paper>(`/api/papers/${paperId}`);
-};
+  return axios.delete<Paper>(`/api/papers/${paperId}`)
+}
 
 const gradePaper = (
   id: string,
@@ -91,10 +91,10 @@ const gradePaper = (
         question: input.question,
         body: input.body
       })
-      .then(res => resolve(res.data))
-      .catch(err => rejejct(err));
-  });
-};
+      .then((res) => resolve(res.data))
+      .catch((err) => rejejct(err))
+  })
+}
 
 export default {
   createNewPaper,
@@ -102,4 +102,4 @@ export default {
   getAllPapers,
   gradePaper,
   deletePaper
-};
+}

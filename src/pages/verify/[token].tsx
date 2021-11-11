@@ -1,35 +1,35 @@
-import { useRouter } from 'next/dist/client/router';
-import Head from 'next/head';
-import React, { useEffect } from 'react';
-import useAuth from '../../hooks/useAuth';
+import { useRouter } from 'next/dist/client/router'
+import Head from 'next/head'
+import { useEffect } from 'react'
+import useAuth from '../../hooks/useAuth'
 
 function EmailConfirmation() {
-  const router = useRouter();
+  const router = useRouter()
 
-  const { user, verifyEmail: confirmEmail, error } = useAuth();
+  const { user, verifyEmail: confirmEmail, error } = useAuth()
 
-  const { token } = router.query;
-
-  useEffect(() => {
-    if (user) router.push('/dashboard');
-  }, [user]);
+  const { token } = router.query
 
   useEffect(() => {
-    if (!user) confirmEmail(token as string);
-  }, []);
+    if (user) router.push('/dashboard')
+  }, [user])
 
   useEffect(() => {
-    if (error) alert('We were not able to confirm your email');
-  }, [error]);
+    if (!user) confirmEmail(token as string)
+  }, [])
 
-  if (user) return null;
+  useEffect(() => {
+    if (error) alert('We were not able to confirm your email')
+  }, [error])
+
+  if (user) return null
 
   return (
     <Head>
       <title>We are confirming your email</title>
       <meta name="robots" content="noindex" />
     </Head>
-  );
+  )
 }
 
-export default EmailConfirmation;
+export default EmailConfirmation

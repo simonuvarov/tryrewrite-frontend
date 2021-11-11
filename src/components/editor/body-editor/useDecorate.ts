@@ -1,76 +1,76 @@
-import { BaseRange, NodeEntry, Text } from 'slate';
-import { slateToString } from '../../../contexts/EditorContext';
-import useEditor from '../../../hooks/useEditor';
+import { BaseRange, NodeEntry, Text } from 'slate'
+import { slateToString } from '../../../contexts/EditorContext'
+import useEditor from '../../../hooks/useEditor'
 import {
   CRITERIA_TYPE,
   InlineIssue,
   Issue
-} from '../../../services/paper.service';
+} from '../../../services/paper.service'
 
 export interface IssueRange extends BaseRange {
-  id: string;
-  affects: CRITERIA_TYPE;
+  id: string
+  affects: CRITERIA_TYPE
 }
 
 export const splitTextIntoParagraphRanges = (text: string) => {
-  const paragraphRanges: Array<[number, number]> = [];
-  let offset = 0;
+  const paragraphRanges: Array<[number, number]> = []
+  let offset = 0
   text.split('\n').map((p: string) => {
-    const start = offset;
-    const end = offset + p.length + '\n'.length;
-    paragraphRanges.push([start, end]);
-    offset = offset + p.length + '\n'.length;
-  });
+    const start = offset
+    const end = offset + p.length + '\n'.length
+    paragraphRanges.push([start, end])
+    offset = offset + p.length + '\n'.length
+  })
 
-  return paragraphRanges;
-};
+  return paragraphRanges
+}
 
 const isPartOfParagraph = (issue: Issue, paragraphRange: [number, number]) => {
   return (
     issue.isInline &&
     issue.offset < paragraphRange[1] &&
     issue.offset >= paragraphRange[0]
-  );
-};
+  )
+}
 
 const extractParagraphIssues = (
   issues: Array<Issue>,
   paragraphRange: [number, number]
 ) => {
-  return issues.filter(h =>
+  return issues.filter((h) =>
     isPartOfParagraph(h, paragraphRange)
-  ) as Array<InlineIssue>;
-};
+  ) as Array<InlineIssue>
+}
 
 export const useDecorate = () => {
-  const { issues, body } = useEditor();
+  const { issues, body } = useEditor()
 
   return ([node, path]: NodeEntry) => {
-    const ranges: IssueRange[] = [];
+    const ranges: IssueRange[] = []
 
     if (!Text.isText(node) || !issues) {
-      return ranges;
+      return ranges
     }
 
     const paragraphRanges: Array<[number, number]> =
-      splitTextIntoParagraphRanges(slateToString(body));
-    const currentTextRange = paragraphRanges[path[0]];
+      splitTextIntoParagraphRanges(slateToString(body))
+    const currentTextRange = paragraphRanges[path[0]]
 
-    const relatedIssues = extractParagraphIssues(issues, currentTextRange);
+    const relatedIssues = extractParagraphIssues(issues, currentTextRange)
 
     for (const issue of relatedIssues) {
-      const length = issue.length;
-      const start = issue.offset - currentTextRange[0];
-      const end = start + length;
+      const length = issue.length
+      const start = issue.offset - currentTextRange[0]
+      const end = start + length
 
       ranges.push({
         id: issue.id,
         anchor: { path, offset: start },
         focus: { path, offset: end },
         affects: issue.affects
-      });
+      })
     }
 
-    return ranges;
-  };
-};
+    return ranges
+  }
+}

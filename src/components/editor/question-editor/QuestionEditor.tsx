@@ -1,18 +1,18 @@
-import React, { useCallback, useMemo } from 'react';
-import { createEditor, Descendant } from 'slate';
-import { Editable, Slate, withReact } from 'slate-react';
-import { Element } from '../body-editor/Element';
+import React, { useCallback, useMemo } from 'react'
+import { createEditor, Descendant } from 'slate'
+import { Editable, Slate, withReact } from 'slate-react'
+import { Element } from '../body-editor/Element'
 
 interface QuestionEditorProps {
-  className?: string;
-  placeholder: string;
-  value: Descendant[];
-  onChange: (value: Descendant[]) => void;
+  className?: string
+  placeholder: string
+  value: Descendant[]
+  onChange: (value: Descendant[]) => void
 }
 const QuestionEditor = (props: QuestionEditorProps) => {
-  const editor = useMemo(() => withReact(createEditor()), []);
+  const editor = useMemo(() => withReact(createEditor()), [])
 
-  const renderElement = useCallback(props => <Element {...props} />, []);
+  const renderElement = useCallback((props) => <Element {...props} />, [])
 
   return (
     <Slate editor={editor} value={props.value} onChange={props.onChange}>
@@ -23,7 +23,7 @@ const QuestionEditor = (props: QuestionEditorProps) => {
         renderElement={renderElement}
       />
     </Slate>
-  );
-};
+  )
+}
 
-export default QuestionEditor;
+export default QuestionEditor

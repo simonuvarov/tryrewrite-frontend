@@ -1,10 +1,10 @@
-import { NextSeo } from 'next-seo';
+import { NextSeo } from 'next-seo'
 
 const Privacy = () => {
   return (
     <>
       <NextSeo title="Privacy Policy" />
-      <article className="prose lg:prose-xl mx-auto py-40 px-4">
+      <article className="prose mx-auto py-40 px-4 lg:prose-xl">
         <h1>Privacy policy</h1>
         <h2>What we collect and why</h2>
         <p>
@@ -103,7 +103,7 @@ const Privacy = () => {
         </p>
       </article>
     </>
-  );
-};
+  )
+}
 
-export default Privacy;
+export default Privacy

@@ -1,10 +1,10 @@
-import { NextSeo } from 'next-seo';
+import { NextSeo } from 'next-seo'
 
 const Terms = () => {
   return (
     <>
       <NextSeo title="Terms of Service" />
-      <article className="prose lg:prose-xl mx-auto py-40 px-4">
+      <article className="prose mx-auto py-40 px-4 lg:prose-xl">
         <h1>Terms of Service</h1>
         <p>We may update these Terms of Service in the future.</p>
         <p>
@@ -140,7 +140,7 @@ const Terms = () => {
         </p>
       </article>
     </>
-  );
-};
+  )
+}
 
-export default Terms;
+export default Terms

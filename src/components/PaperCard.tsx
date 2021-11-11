@@ -1,12 +1,12 @@
-import { XIcon } from '@heroicons/react/solid';
-import moment from 'moment';
-import { useRouter } from 'next/dist/client/router';
-import React, { useState } from 'react';
-import usePapers from '../hooks/usePapers';
-import { Paper } from '../services/paper.service';
+import { XIcon } from '@heroicons/react/solid'
+import moment from 'moment'
+import { useRouter } from 'next/dist/client/router'
+import React, { useState } from 'react'
+import usePapers from '../hooks/usePapers'
+import { Paper } from '../services/paper.service'
 
 interface PaperCardProps {
-  paper: Paper;
+  paper: Paper
 }
 
 const Datetime = ({ datetime }: { datetime: Date }) => {
@@ -14,15 +14,15 @@ const Datetime = ({ datetime }: { datetime: Date }) => {
     <time dateTime={moment(datetime).toString()}>
       {moment(datetime).fromNow()}
     </time>
-  );
-};
+  )
+}
 
 const BandLabel = ({
   score,
   className
 }: {
-  score: number;
-  className?: string;
+  score: number
+  className?: string
 }) => {
   const styles = [
     'text-xs',
@@ -32,24 +32,24 @@ const BandLabel = ({
     'px-2',
     'py-1',
     'rounded'
-  ];
+  ]
 
-  if (className) styles.push(className);
+  if (className) styles.push(className)
 
-  styles.push('bg-gray-100', 'text-gray-700');
+  styles.push('bg-gray-100', 'text-gray-700')
   return (
     <div className={styles.join(' ')}>
       Band {parseFloat(score.toString()).toFixed(1)}
     </div>
-  );
-};
+  )
+}
 
 const Question = ({
   text,
   className
 }: {
-  text: string;
-  className?: string;
+  text: string
+  className?: string
 }) => {
   const styles = [
     'font-medium',
@@ -57,16 +57,16 @@ const Question = ({
     'leading-6',
     'truncate',
     'text-gray-800'
-  ];
-  if (className) styles.push(className);
-  const isEmpty = text.length === 0;
+  ]
+  if (className) styles.push(className)
+  const isEmpty = text.length === 0
 
   return (
     <header className={styles.join(' ')}>
       {isEmpty ? 'Empty question' : text}
     </header>
-  );
-};
+  )
+}
 
 const Body = ({ text, className }: { text: string; className?: string }) => {
   const styles = [
@@ -76,62 +76,60 @@ const Body = ({ text, className }: { text: string; className?: string }) => {
     'font-normal',
     'text-gray-600',
     'h-[72px]'
-  ];
-  if (className) styles.push(className);
-  return <p className={styles.join(' ')}>{text}</p>;
-};
+  ]
+  if (className) styles.push(className)
+  return <p className={styles.join(' ')}>{text}</p>
+}
 
 const DeleteButton = ({
   onClick,
   show
 }: {
-  onClick: () => void;
-  show: boolean;
+  onClick: () => void
+  show: boolean
 }) => {
   return (
     <button
-      className={`absolute p-1 -top-2 -right-2 border border-gray-200 hover:bg-gray-50 shadow bg-white inline-flex justify-center rounded-full bg-tranparent text-sm font-medium transition-colors focus:outline-none ${
+      className={`bg-tranparent absolute -top-2 -right-2 inline-flex justify-center rounded-full border border-gray-200 bg-white p-1 text-sm font-medium shadow transition-colors hover:bg-gray-50 focus:outline-none ${
         !show && 'hidden'
       }`}
-      onClick={e => {
-        e.stopPropagation();
-        onClick();
-      }}
-    >
-      <XIcon className="text-gray-400 w-5 h-5" />
+      onClick={(e) => {
+        e.stopPropagation()
+        onClick()
+      }}>
+      <XIcon className="h-5 w-5 text-gray-400" />
     </button>
-  );
-};
+  )
+}
 
 export const PaperCard = (props: PaperCardProps) => {
-  const { deletePaper } = usePapers();
-  const [hovered, setHovered] = useState(false);
-  const router = useRouter();
+  const { deletePaper } = usePapers()
+  const [hovered, setHovered] = useState(false)
+  const router = useRouter()
 
   const onDeleteHandler = () => {
-    deletePaper(props.paper.id);
-  };
+    deletePaper(props.paper.id)
+  }
 
   return (
     <article
-      className="relative px-10 py-8 shadow-sm rounded-lg border border-gray-200 bg-white transition-shadow duration-250 hover:cursor-pointer hover:shadow-md"
+      className="duration-250 relative rounded-lg border border-gray-200 bg-white px-10 py-8 shadow-sm transition-shadow hover:cursor-pointer hover:shadow-md"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => {
-        setHovered(false);
+        setHovered(false)
       }}
-      onClick={() => router.push(`/paper/${props.paper.id}`)}
-    >
+      onClick={() => router.push(`/paper/${props.paper.id}`)}>
       <DeleteButton onClick={onDeleteHandler} show={hovered} />
       <BandLabel score={props.paper.overallBand} className="-ml-0.5" />
       <Question text={props.paper.question} className="mt-3" />
       <Body text={props.paper.body} className="mt-2" />
-      <footer className="flex justify-between items-center mt-4">
-        <article className="text-xs leading-4 font-normal text-gray-400 select-text">
+      <footer className="mt-4 flex items-center justify-between">
+        <article className="select-text text-xs font-normal leading-4 text-gray-400">
           Updated <Datetime datetime={props.paper.updatedAt} />
           <span className="mx-1">{'•'}</span>
           Created <Datetime datetime={props.paper.createdAt} />
         </article>
       </footer>
     </article>
-  );
-};
+  )
+}

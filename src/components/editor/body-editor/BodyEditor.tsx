@@ -1,23 +1,23 @@
-import React, { useCallback, useMemo } from 'react';
-import { createEditor, Descendant } from 'slate';
-import { Editable, Slate, withReact } from 'slate-react';
-import { Element } from './Element';
-import { renderLeaf } from './renderLeaf';
-import { useDecorate } from './useDecorate';
+import React, { useCallback, useMemo } from 'react'
+import { createEditor, Descendant } from 'slate'
+import { Editable, Slate, withReact } from 'slate-react'
+import { Element } from './Element'
+import { renderLeaf } from './renderLeaf'
+import { useDecorate } from './useDecorate'
 
 interface BodyEditorProps {
-  className?: string;
-  placeholder: string;
-  value: Descendant[];
-  onChange: (value: Descendant[]) => void;
+  className?: string
+  placeholder: string
+  value: Descendant[]
+  onChange: (value: Descendant[]) => void
 }
 
 const BodyEditor = (props: BodyEditorProps) => {
-  const editor = useMemo(() => withReact(createEditor()), []);
+  const editor = useMemo(() => withReact(createEditor()), [])
 
-  const renderElement = useCallback(props => <Element {...props} />, []);
+  const renderElement = useCallback((props) => <Element {...props} />, [])
 
-  const decorate = useDecorate();
+  const decorate = useDecorate()
 
   return (
     <Slate editor={editor} value={props.value} onChange={props.onChange}>
@@ -30,7 +30,7 @@ const BodyEditor = (props: BodyEditorProps) => {
         renderElement={renderElement}
       />
     </Slate>
-  );
-};
+  )
+}
 
-export default BodyEditor;
+export default BodyEditor

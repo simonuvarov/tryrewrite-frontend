@@ -1,9 +1,9 @@
-import create, { State } from 'zustand';
+import create, { State } from 'zustand'
 
 interface AssistantVisibilityStoreProps extends State {
-  isVisible: boolean;
-  toggleVisible: () => void;
-  hideAssistant: () => void;
+  isVisible: boolean
+  toggleVisible: () => void
+  hideAssistant: () => void
 }
 
 export const useAssistantVisibilityStore =
@@ -11,4 +11,4 @@ export const useAssistantVisibilityStore =
     isVisible: false,
     toggleVisible: () => set({ isVisible: !get().isVisible }),
     hideAssistant: () => set({ isVisible: false })
-  }));
+  }))

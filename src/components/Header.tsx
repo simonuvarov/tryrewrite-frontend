@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement } from 'react'
 
 interface HeaderProps {
-  className?: string;
-  children: React.ReactNode;
+  className?: string
+  children: React.ReactNode
 }
 
 export default function Header({
@@ -11,11 +11,10 @@ export default function Header({
 }: HeaderProps): ReactElement {
   return (
     <header
-      className={`w-full py-6 px-4 border-b border-gray-200 ${className}`}
-    >
-      <article className="flex max-w-[1440px] mx-auto justify-between items-center">
+      className={`w-full border-b border-gray-200 py-6 px-4 ${className}`}>
+      <article className="mx-auto flex max-w-[1440px] items-center justify-between">
         {children}
       </article>
     </header>
-  );
+  )
 }

@@ -1,26 +1,26 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 interface FooterProps {
-  classname?: string;
+  classname?: string
 }
 
 const Footer = (props: FooterProps) => {
   return (
-    <footer className={`py-10 flex justify-center ${props.classname || ''}`}>
+    <footer className={`flex justify-center py-10 ${props.classname || ''}`}>
       <nav className="space-x-4">
         <Link href="/terms">
-          <a className="text-sm leading-5 font-medium text-gray-400 hover:text-gray-500 transition-colors">
+          <a className="text-sm font-medium leading-5 text-gray-400 transition-colors hover:text-gray-500">
             Terms of Service
           </a>
         </Link>
         <Link href="/privacy">
-          <a className="text-sm leading-5 font-medium text-gray-400 hover:text-gray-500 transition-colors">
+          <a className="text-sm font-medium leading-5 text-gray-400 transition-colors hover:text-gray-500">
             Privacy Policy
           </a>
         </Link>
       </nav>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
