@@ -27,7 +27,7 @@ export const EditorProvider = ({
   paperId
 }: {
   children: ReactNode
-  paperId: string
+  paperId?: string
 }): JSX.Element => {
   const [initializingPaper, setInitializingPaper] = useState(true)
   const [error, setError] = useState<any>()
@@ -92,8 +92,8 @@ export const EditorProvider = ({
       setWordCount(0)
       return
     }
-    var regex = /\s+/gi
-    var wc = text.trim().split(regex).length
+    const regex = /\s+/gi
+    const wc = text.trim().split(regex).length
     setWordCount(wc)
   }, [body])
 

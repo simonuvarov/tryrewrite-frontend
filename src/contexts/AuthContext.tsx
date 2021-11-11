@@ -9,6 +9,7 @@ interface AuthContextProps {
   signup: (credentials: Credentials) => void
   signout: () => void
   verifyEmail: (token: string) => void
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any
   loading: boolean
 }
@@ -53,7 +54,9 @@ export const AuthProvider = ({
     usersService
       .me()
       .then((user) => setUser(user))
-      .catch((err) => {})
+      .catch(() => {
+        /* do nothing */
+      })
       .finally(() => setInitializing(false))
   }, [])
 
@@ -83,7 +86,7 @@ export const AuthProvider = ({
     authService
       .signout()
       .then((_) => setUser(undefined))
-      .catch((err) => setError(error))
+      .catch((error) => setError(error))
   }
 
   const verifyEmail = (token: string) => {

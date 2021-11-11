@@ -7,7 +7,7 @@ import { PaperCard } from './PaperCard'
 const PaperCardSkeleton = () => {
   return (
     <li className="flex animate-pulse items-center justify-between">
-      <div className="flex w-full max-w-lg flex-shrink-0 flex-col space-y-2 py-4 px-2">
+      <div className="flex w-full max-w-lg shrink-0 flex-col space-y-2 py-4 px-2">
         <div className="h-5 w-2/3 rounded bg-gray-100" />
         <div className="h-5 w-full rounded bg-gray-100 " />
       </div>

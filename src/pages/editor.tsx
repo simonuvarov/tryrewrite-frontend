@@ -16,7 +16,7 @@ export function Edit() {
             <div />
             <WordCounter className="w-20" />
           </div>
-          <div className="no-scrollbar w-content mx-auto h-full overflow-y-scroll pl-12 pr-8 pt-24 pb-[40vh] ">
+          <div className="no-scrollbar mx-auto h-full w-fit overflow-y-scroll pl-12 pr-8 pt-24 pb-[40vh] ">
             <Editor className="w-full min-w-[500px] max-w-[600px] text-xl" />
           </div>
           <IssueList

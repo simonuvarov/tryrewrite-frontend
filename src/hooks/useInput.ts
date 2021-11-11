@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 export type ChangeEvent = React.ChangeEvent<HTMLInputElement>
 export type OnChange = (event: ChangeEvent | string) => void

@@ -115,10 +115,10 @@ function Signup() {
           </div>
           <div className="mt-6 text-sm ">
             <span className="text-gray-500 ">Have an account?</span>
-            <Link href="/signin">
-              <a className="ml-2 font-medium text-blue-600 transition-colors hover:text-blue-500">
-                Sign in
-              </a>
+            <Link
+              href="/signin"
+              className="ml-2 font-medium text-blue-600 transition-colors hover:text-blue-500">
+              Sign in
             </Link>
           </div>
         </div>

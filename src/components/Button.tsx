@@ -23,7 +23,7 @@ const isButtonProps = (
 }
 
 export const Button = (props: LinkProps | ButtonProps) => {
-  let styles = [
+  const styles = [
     'inline-flex',
     'items-center',
     'rounded-md',
@@ -78,8 +78,8 @@ export const Button = (props: LinkProps | ButtonProps) => {
     )
   else
     return (
-      <Link href={props.href}>
-        <a className={styles.join(' ')}>{props.children}</a>
+      <Link href={props.href} className={styles.join(' ')}>
+        {props.children}
       </Link>
     )
 }

@@ -4,6 +4,7 @@ import paperService, { Paper } from '../services/paper.service'
 
 interface PaperContextProps {
   papers?: Array<Paper>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any
   deletePaper: (paperId: string) => void
 }
@@ -19,7 +20,6 @@ export const PaperProvider = ({ children }: { children: React.ReactNode }) => {
   const deleteMutation = useMutation(paperService.deletePaper, {
     onMutate: async (paperId: string) => {
       await queryClient.cancelQueries()
-      const previosPapers = queryClient.getQueryData('papers')
       queryClient.setQueryData<Paper[] | undefined>('papers', (old) => {
         if (old) return old.filter((paper) => paper.id !== paperId)
       })

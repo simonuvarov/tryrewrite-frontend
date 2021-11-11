@@ -1,5 +1,4 @@
 import { AnnotationIcon, XIcon } from '@heroicons/react/outline'
-import React from 'react'
 import useEditor from '../hooks/useEditor'
 import { useAssistantVisibilityStore } from '../stores/useAssistantVisibilityStore'
 import { Spinner } from './Spinner'
@@ -15,7 +14,7 @@ export const AssistantButton = (props: AssistantButtonProps) => {
   return (
     <button
       onClick={toggleVisible}
-      className={`transform rounded-full border border-gray-200 bg-white p-3 shadow-lg transition hover:bg-gray-50 focus:outline-none active:scale-95 active:shadow-md ${
+      className={`rounded-full border border-gray-200 bg-white p-3 shadow-lg transition hover:bg-gray-50 focus:outline-none active:scale-95 active:shadow-md ${
         props.className || 'relative'
       }`}>
       {isVisible ? (
