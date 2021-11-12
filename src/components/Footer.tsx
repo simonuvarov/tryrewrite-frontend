@@ -1,12 +1,12 @@
 import Link from 'next/link'
 
 interface FooterProps {
-  classname?: string
+  className?: string
 }
 
 const Footer = (props: FooterProps) => {
   return (
-    <footer className={`flex justify-center py-10 ${props.classname || ''}`}>
+    <footer className={`flex justify-center py-10 ${props.className || ''}`}>
       <nav className="space-x-4">
         <Link
           href="/terms"
