@@ -12,7 +12,7 @@ export default function Header({
   return (
     <header
       className={`w-full border-b border-gray-200 py-6 px-4 ${className}`}>
-      <article className="mx-auto flex max-w-[1440px] items-center justify-between">
+      <article className="mx-auto flex max-w-[1200px] items-center justify-between">
         {children}
       </article>
     </header>

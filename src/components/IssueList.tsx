@@ -27,15 +27,9 @@ export const IssueList = (props: IssueListProps) => {
 
   return (
     <ul className={`space-y-8 ${props.className || ''}`} ref={containerRef}>
-      {inlineIssues.length > 0 ? (
-        <span className="px-2 text-gray-500">Found problems</span>
-      ) : null}
       {inlineIssues.map((issue) => (
         <IssueCard issue={issue} key={issue.id} />
       ))}
-      {generalIssues.length > 0 ? (
-        <span className="px-2 pt-4 text-gray-500">General recommendations</span>
-      ) : null}
       {generalIssues.map((issue) => (
         <IssueCard issue={issue} key={issue.id} />
       ))}

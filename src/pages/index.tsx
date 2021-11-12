@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { BannerBeta } from '../components/BannerBeta'
 import { Button } from '../components/Button'
 import Footer from '../components/Footer'
@@ -21,31 +20,32 @@ export function Home() {
         </nav>
       </Header>
       <section className="flex w-full flex-col items-center bg-gray-50 px-4 pt-10 md:pt-20">
-        <h1 className="max-w-xl text-center text-4xl font-extrabold tracking-tight text-gray-800 md:text-7xl ">
+        <h1 className="max-w-md text-center text-3xl font-extrabold tracking-tight text-gray-800 md:text-5xl ">
           Write. Check. Correct. Repeat.
         </h1>
-        <p className="mt-6 max-w-2xl text-center text-lg text-gray-500 md:text-2xl ">
+        <p className="mt-6 max-w-md text-center text-lg font-medium text-gray-500 md:text-xl">
           Rewrite is an app that analyzes your IELTS essays and helps you
           improve your writing
         </p>
         <Button
           href="/signup"
-          size="xl"
+          size="lg"
           type="primary"
           className="mt-8 md:mt-12">
           Get started for free
         </Button>
 
-        <small className="mt-4 text-sm font-medium text-gray-400">
+        <small className="mt-2 text-sm font-medium text-gray-400">
           No credit card is required
         </small>
       </section>
       <section className="flex w-full flex-col items-center bg-gray-50 px-4 pt-10 md:pt-20">
-        <Image
+        <img
           src={'/images/hero-image.png'}
           alt="Picture of the editor"
           width={1440}
           height={838}
+          className="w-full max-w-5xl"
         />
       </section>
       <Footer classname="pt-10 md:pt-36 bg-gray-50" />

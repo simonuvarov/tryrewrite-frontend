@@ -6,7 +6,7 @@ export const BandScore = ({ className }: { className?: string }) => {
   if (!band) return null
 
   return (
-    <div className={`font-medium text-gray-500 ${className}`}>
+    <div className={`text-sm font-semibold text-gray-500 ${className}`}>
       {parseFloat(band.toString()).toFixed(1)}{' '}
       <span className="text-gray-400">band</span>
     </div>

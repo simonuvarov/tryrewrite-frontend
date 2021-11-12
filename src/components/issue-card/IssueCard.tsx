@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import scrollIntoViewIfNeeded from 'smooth-scroll-into-view-if-needed'
 import useEditor from '../../hooks/useEditor'
 import { InlineIssue, Issue } from '../../services/paper.service'
@@ -13,7 +13,7 @@ interface IssueCardProps {
 
 export const IssueCardSkeleton = () => {
   return (
-    <li className="w-[480px] animate-pulse rounded-xl border border-gray-100 bg-white px-12 py-8 shadow">
+    <li className="w-[384px] animate-pulse rounded-lg border border-gray-100 bg-white px-8 pt-8 pb-6 shadow">
       <div className="mt-2 h-4 w-2/3 rounded bg-gray-200"></div>
       <div className="mt-5 space-y-3">
         <h3 className="h-6 w-1/2 rounded bg-gray-200"></h3>
@@ -23,7 +23,6 @@ export const IssueCardSkeleton = () => {
         .expanded-shadow {
           box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px;
         }
-
         .collapsed-shadow {
           box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
         }
@@ -52,41 +51,45 @@ export const IssueCard = (props: IssueCardProps) => {
   return (
     <li
       key={props.issue.id}
-      className={`w-[480px] rounded-xl border border-gray-200 bg-white px-12 py-8 transition-shadow ${
+      className={`w-[384px] rounded-lg border border-gray-200 bg-white px-8 pt-8 pb-6 transition-shadow ${
         expanded ? 'shadow-lg' : 'cursor-pointer shadow-sm'
       }`}
       onClick={setExpanded}
       ref={ref}>
       <CriteriaLabel type={props.issue.affects} />
-      <div className="mt-4 space-y-1">
+      <div className="mt-3 space-y-2">
         <h3
-          className={`text-lg font-medium leading-7 text-gray-800 ${
+          className={`text-base font-medium text-gray-800 ${
             expanded ? '' : 'line-clamp-1'
           }`}>
-          {props.issue.shortMessage}
+          {props.issue.shortMessage.charAt(0).toUpperCase() +
+            props.issue.shortMessage.slice(1)}
         </h3>
         <p
-          className={`text-base font-normal leading-7 text-gray-700 ${
+          className={`mt-4 text-base font-normal leading-[1.5] text-gray-600 ${
             expanded ? '' : 'line-clamp-1'
           }`}>
           {props.issue.message}
         </p>
       </div>
-      {props.issue.isInline && props.issue.replacements && expanded && (
-        <ul className="mt-4 flex space-x-2">
-          {props.issue.replacements.map((r) => (
-            <Replacement
-              key={r}
-              value={r}
-              type={props.issue.affects}
-              onClick={() => {
-                const issue: InlineIssue = props.issue as InlineIssue // for some reason TS does not perform type check correctly
-                replaceText(issue.offset, issue.length, r)
-              }}
-            />
-          ))}
-        </ul>
-      )}
+      {props.issue.isInline &&
+        props.issue.replacements &&
+        props.issue.replacements.length > 0 &&
+        expanded && (
+          <ul className="mt-3 flex space-x-2">
+            {props.issue.replacements.map((r) => (
+              <Replacement
+                key={r}
+                value={r}
+                type={props.issue.affects}
+                onClick={() => {
+                  const issue: InlineIssue = props.issue as InlineIssue // for some reason TS does not perform type check correctly
+                  replaceText(issue.offset, issue.length, r)
+                }}
+              />
+            ))}
+          </ul>
+        )}
       {props.issue.link && expanded && (
         <LearnMoreButton href={props.issue.link} />
       )}

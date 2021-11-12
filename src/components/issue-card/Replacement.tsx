@@ -25,7 +25,7 @@ export const Replacement = ({ type, value, onClick }: ReplacementProps) => {
 
   return (
     <li
-      className={`lieading-6 inline cursor-pointer rounded py-2 px-3 text-base font-medium transition-shadow duration-75 hover:shadow-md ${colors}`}
+      className={`inline cursor-pointer rounded py-[6px] px-3 text-sm font-medium transition-shadow duration-75 hover:shadow-md ${colors}`}
       onClick={onClick}>
       {value}
     </li>

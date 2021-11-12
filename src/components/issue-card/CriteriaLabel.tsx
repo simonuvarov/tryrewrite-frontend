@@ -22,8 +22,6 @@ export const CriteriaLabel = ({ type }: CriteriaLabelProps) => {
   }
 
   return (
-    <div className={`inline w-full rounded text-sm font-medium ${colors}`}>
-      {type}
-    </div>
+    <div className={`inline w-full rounded text-sm ${colors} `}>{type}</div>
   )
 }

@@ -1,6 +1,4 @@
-/* purgecss start ignore */
 @import 'tailwindcss/base';
-/* purgecss end ignore */
 
 @import 'tailwindcss/components';
 
@@ -15,5 +13,21 @@
   .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+  }
+}
+
+@layer base {
+  :root {
+    font-family: 'Inter', sans-serif;
+  }
+  @supports (font-variation-settings: normal) {
+    :root {
+      font-family: 'Inter var', sans-serif;
+    }
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }

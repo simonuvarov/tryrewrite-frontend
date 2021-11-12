@@ -59,7 +59,7 @@ export const Button = (props: LinkProps | ButtonProps) => {
       styles.push('text-sm', 'leading-5', 'font-medium', 'px-4', 'py-2')
       break
     case 'md':
-      styles.push('text-base', 'leading-6', 'font-medium', 'px-4', 'py-2')
+      styles.push('text-sm', 'leading-6', 'font-medium', 'px-4', 'py-2')
       break
     case 'lg':
       styles.push('text-base', 'leading-6', 'font-medium', 'px-6', 'py-3')

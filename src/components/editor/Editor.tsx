@@ -7,13 +7,13 @@ export const Editor = ({ className }: { className?: string }) => {
   return (
     <div className={className}>
       <QuestionEditor
-        className="w-full text-xl font-medium leading-loose text-gray-800"
+        className="w-full text-lg font-medium leading-8 text-gray-800"
         placeholder="Question..."
         value={question}
         onChange={setQuestion}
       />
       <BodyEditor
-        className="mt-8 min-h-[30vh] w-full space-y-5 text-xl leading-loose text-gray-800"
+        className="mt-8 min-h-[30vh] w-full space-y-5 text-lg leading-8 text-gray-800"
         placeholder="Start writing here..."
         value={body}
         onChange={setBody}

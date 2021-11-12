@@ -46,7 +46,7 @@ export function Edit() {
         </Header>
         <main className="flex-1 bg-gray-50 py-10 px-4">
           <PaperProvider>
-            <PaperCardGrid className="mx-auto max-w-[1440px]" />
+            <PaperCardGrid className="mx-auto max-w-[1200px]" />
           </PaperProvider>
         </main>
       </div>
