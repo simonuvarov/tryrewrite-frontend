@@ -16,6 +16,7 @@ export const AssistantButton = (props: AssistantButtonProps) => {
   const { issues } = useEditor()
   return (
     <button
+      id="assistant-button"
       onClick={toggleVisible}
       className={`rounded-full border border-gray-200 bg-white p-3 shadow-lg transition hover:bg-gray-50 focus:outline-none active:scale-95 active:shadow-md ${
         props.className || 'relative'

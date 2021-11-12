@@ -2,7 +2,7 @@ import { useRouter } from 'next/dist/client/router'
 import usePapers from '../hooks/usePapers'
 import paperService, { Paper } from '../services/paper.service'
 import { Button } from './Button'
-import { PaperCard } from './PaperCard'
+import { DashboardCard } from './dashboard-card/DashboardCard'
 
 const PaperCardSkeleton = () => {
   return (
@@ -59,7 +59,7 @@ export const PaperCardGrid = ({ className }: PaperCardGridProps) => {
       }`}>
       {papers
         ? papers.map((paper: Paper) => (
-            <PaperCard paper={paper} key={paper.id} />
+            <DashboardCard paper={paper} key={paper.id} />
           ))
         : skeletons}
     </div>
